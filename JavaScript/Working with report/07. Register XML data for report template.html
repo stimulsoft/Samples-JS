@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Load report template</title>
+	
+	<!-- Stimusloft Reports.JS -->
+	<script src="../scripts/stimulsoft.reports.js" type="text/javascript"></script>
+</head>
+<body>
+	Load 'SimpleList' report template and render it.
+	<br><br>
+	
+	<script type="text/javascript">
+		// Create a new report instance
+		var report = new Stimulsoft.Report.StiReport();
+		// Load report from url
+		report.loadFile("../reports/SimpleList.mrt");
+		
+		// Create new DataSet object
+		var dataSet = new Stimulsoft.System.Data.DataSet("Demo");
+		// Load XML Shema file from specified URL to the DataSet object
+		dataSet.readXmlSchemaFile("../reports/Demo.xsd");
+		// Load XML data file from specified URL to the DataSet object
+		dataSet.readXmlFile("../reports/Demo.xml");
+		// Remove all connections from the report template
+		report.dictionary.databases.clear();
+		// Register DataSet object
+		report.regData("Demo", "Demo", dataSet);
+		// Render report with registered data
+		report.render();
+		
+		document.write("Complete.<br>");
+		document.write("Rendered pages count: " + report.renderedPages.count);
+	</script>
+</body>
+</html>

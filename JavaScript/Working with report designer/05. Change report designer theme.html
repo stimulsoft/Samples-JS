@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Change report designer theme</title>
+
+	<!-- Report designer Office2013 DarkGray Green style -->
+	<link href="../css/stimulsoft.designer.office2013.darkgray.green.css" rel="stylesheet">
+	<link href="../css/stimulsoft.viewer.office2013.css" rel="stylesheet">
+
+	<!-- Stimusloft Reports.JS -->
+	<script src="../scripts/stimulsoft.reports.js" type="text/javascript"></script>
+	<script src="../scripts/stimulsoft.viewer.js" type="text/javascript"></script>
+	<script src="../scripts/stimulsoft.designer.js" type="text/javascript"></script>
+</head>
+<body>
+	Set the 'Office2007 Blue' theme for the report designer
+	<br><br>
+	
+	<div>
+		<script type="text/javascript">
+			// Create the report designer with default options
+			var designer = new Stimulsoft.Designer.StiDesigner();
+			// Create a new report instance
+			var report = new Stimulsoft.Report.StiReport();
+			// Load report from url
+			report.loadFile("../reports/SimpleList.mrt");
+			// Edit report template in the designer
+			designer.report = report;
+		</script>
+	</div>
+</body>
+</html>

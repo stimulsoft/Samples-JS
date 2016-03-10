@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Export report to HTML</title>
+	
+	<!-- Stimusloft Reports.JS -->
+	<script src="../scripts/stimulsoft.reports.js" type="text/javascript"></script>
+</head>
+<body>
+	Load 'SimpleList' report template, render and export it.
+	<br><br>
+	
+	<script type="text/javascript">
+		// Create a new report instance
+		var report = new Stimulsoft.Report.StiReport();
+		// Load report from url
+		report.loadFile("../reports/SimpleList.mrt");
+		// Render report
+		report.render();
+		
+		// Export report to HTML format and show it
+		function exportReportHtml() {
+			// Create an HTML settings instance. You can change export settings.
+			var settings = new Stimulsoft.Report.Export.StiHtmlExportSettings();
+			// Create an HTML service instance.
+			var service = new Stimulsoft.Report.Export.StiHtmlExportService();
+
+			// Create a text writer objects.
+			var textWriter = new Stimulsoft.System.IO.TextWriter();
+			var htmlTextWriter = new Stimulsoft.Report.Export.StiHtmlTextWriter(textWriter);
+			// Export HTML using text writer.
+			service.exportTo(report, htmlTextWriter, settings);
+
+			// Write HTML text to DIV element.
+			var container = document.getElementById("htmlContainer");
+			container.innerHTML = textWriter.getStringBuilder().toString();
+		}
+		
+		// Export report to HTML format and save to file
+		function saveReportHtml() {
+			// Create an HTML settings instance. You can change export settings.
+			var settings = new Stimulsoft.Report.Export.StiHtmlExportSettings();
+			// Create an HTML service instance.
+			var service = new Stimulsoft.Report.Export.StiHtmlExportService();
+
+			// Create a text writer objects.
+			var textWriter = new Stimulsoft.System.IO.TextWriter();
+			var htmlTextWriter = new Stimulsoft.Report.Export.StiHtmlTextWriter(textWriter);
+			// Export HTML using text writer.
+			service.exportTo(report, htmlTextWriter, settings);
+
+			// Get HTML string from text writer object
+			var html = textWriter.getStringBuilder().toString();
+			// Get report file name
+			var fileName = String.isNullOrEmpty(report.reportAlias) ? report.reportName : report.reportAlias;
+			// Save data to file
+			Object.saveAs(html, fileName + ".html", "text/html;charset=utf-8");
+		}
+	</script>
+	
+	<a href="#" onclick="exportReportHtml()">Show HTML report</a><br>
+	<a href="#" onclick="saveReportHtml()">Save HTML report to file</a><br>
+	<br><br>
+	<div id="htmlContainer"></div>
+</body>
+</html>

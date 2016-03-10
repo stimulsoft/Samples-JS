@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Save rendered report to file</title>
+	
+	<!-- Stimusloft Reports.JS -->
+	<script src="../scripts/stimulsoft.reports.js" type="text/javascript"></script>
+</head>
+<body>
+	Load 'SimpleList' report template and render it.
+	<br><br>
+	
+	<script type="text/javascript">
+		// Create a new report instance
+		var report = new Stimulsoft.Report.StiReport();
+		// Load report from url
+		report.loadFile("../reports/SimpleList.mrt");
+		// Render report
+		report.render();
+		
+		document.write("Complete.<br>");
+		document.write("Rendered page count: " + report.renderedPages.count);
+		
+		// Export report to HTML format and save to file
+		function saveReportDocument() {
+			// Save rendered report to JSON string
+			var json = report.saveDocumentToJsonString();
+			// Get report file name
+			var fileName = String.isNullOrEmpty(report.reportAlias) ? report.reportName : report.reportAlias;
+			// Save data to file
+			Object.saveAs(json, fileName + ".mdc", "application/json;charset=utf-8");
+		}
+	</script>
+	
+	<br><br>
+	<a href="#" onclick="saveReportDocument()">Save rendered report</a><br>
+</body>
+</html>

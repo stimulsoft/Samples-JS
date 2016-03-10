@@ -1,1 +1,1 @@
-# Samples-JS
+# Samples JS

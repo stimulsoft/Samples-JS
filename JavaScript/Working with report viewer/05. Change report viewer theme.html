@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Change report viewer theme</title>
+
+	<!-- Report viewer Office2007 Blue style -->
+	<link href="../css/stimulsoft.viewer.office2007.blue.css" rel="stylesheet">
+
+	<!-- Stimusloft Reports.JS -->
+	<script src="../scripts/stimulsoft.reports.js" type="text/javascript"></script>
+	<script src="../scripts/stimulsoft.viewer.js" type="text/javascript"></script>
+</head>
+<body>
+	Set the 'Office2007 Blue' theme for the report viewer
+	<br><br>
+	
+	<div>
+		<script type="text/javascript">
+			// Create the report viewer with default options
+			var viewer = new Stimulsoft.Viewer.StiViewer();
+			// Create a new report instance
+			var report = new Stimulsoft.Report.StiReport();
+			// Load report from url
+			report.loadFile("../reports/SimpleList.mrt");
+			// Assign report to the viewer, the report will be built automatically after rendering the viewer
+			viewer.report = report;
+		</script>
+	</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Load report template</title>
+	
+	<!-- Stimusloft Reports.JS -->
+	<script src="../scripts/stimulsoft.reports.js" type="text/javascript"></script>
+</head>
+<body>
+	Load 'SimpleList' report template and render it.
+	<br><br>
+	
+	<script type="text/javascript">
+		// Create a new report instance
+		var report = new Stimulsoft.Report.StiReport();
+		// Load report
+		report.loadFile("../reports/SimpleList.mrt");
+		// Render report
+		report.render();
+		
+		document.write("Complete.<br>");
+		document.write("Rendered page count: " + report.renderedPages.count);
+	</script>
+</body>
+</html>

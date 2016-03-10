@@ -1,0 +1,43 @@
+version: "{build}"
+
+environment:
+  matrix:
+    - nodejs_version: "0.10"
+    - nodejs_version: "0.12"
+    - nodejs_version: "1.8"
+    - nodejs_version: "2.0"
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm install
+  - npm install tds
+
+build: off
+
+before_test:
+  - sc config sqlbrowser start= auto
+  - net start sqlbrowser
+
+test_script:
+  - node --version
+  - npm --version
+
+  - cmd: |
+      SET EXITVAL=0
+      
+      powershell %cd%\test\scripts\appveyor.ps1 SQL2008R2SP2
+      npm run-script test-tedious || SET EXITVAL=1
+      npm run-script test-tds || SET EXITVAL=1
+      net stop MSSQL$SQL2008R2SP2
+      
+      powershell %cd%\test\scripts\appveyor.ps1 SQL2012SP1
+      npm run-script test-tedious || SET EXITVAL=1
+      npm run-script test-tds || SET EXITVAL=1
+      net stop MSSQL$SQL2012SP1
+      
+      powershell %cd%\test\scripts\appveyor.ps1 SQL2014
+      npm run-script test-tedious || SET EXITVAL=1
+      npm run-script test-tds || SET EXITVAL=1
+      net stop MSSQL$SQL2014
+      
+      EXIT /B %EXITVAL%

@@ -1,0 +1,60 @@
+{
+    "webexe_settings": {
+        "linux-x32": false, 
+        "export_dir": "output", 
+        "windows-x64": false, 
+        "download_dir": "D:\\Stimulsoft\\Stimulsoft.Reports.JS\\Web2Exe\\files", 
+        "nw_compression_level": 9, 
+        "mac-x32": true, 
+        "windows-x32": true, 
+        "mac-x64": false, 
+        "nw_version": "0.12.3", 
+        "force_download": false, 
+        "linux-x64": true
+    }, 
+    "single-instance": true, 
+    "description": "", 
+    "nodejs": true, 
+    "chromium-args": "", 
+    "additional_trust_anchors": [
+        ""
+    ], 
+    "js-flags": "", 
+    "user-agent": "", 
+    "inject-js-end": "", 
+    "keywords": [], 
+    "window": {
+        "fullscreen": false, 
+        "resizable": true, 
+        "show": true, 
+        "always-on-top": false, 
+        "frame": true, 
+        "title": "Designer", 
+        "kiosk": false, 
+        "kiosk_emulation": false, 
+        "exe_icon": "Designer.png", 
+        "visible": true, 
+        "as_desktop": false, 
+        "mac_icon": "Designer.png", 
+        "position": "", 
+        "width": 1024, 
+        "show_in_taskbar": true, 
+        "height": 600, 
+        "transparent": false, 
+        "toolbar": false, 
+        "icon": "Designer.png"
+    }, 
+    "version": "2015.2.2", 
+    "snapshot": "", 
+    "node-main": "", 
+    "webkit": {
+        "page-cache": false, 
+        "java": false, 
+        "plugin": true
+    }, 
+    "inject-js-start": "", 
+    "node-remote": "", 
+    "main": "Designer.html", 
+    "app_name": "Designer", 
+    "name": "designer"
+}

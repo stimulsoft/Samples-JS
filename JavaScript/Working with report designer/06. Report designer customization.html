@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Report designer customization</title>
+
+	<!-- Report designer Office2013 LightGray Teal style -->
+	<link href="../css/stimulsoft.designer.office2013.lightgray.teal.css" rel="stylesheet">
+	<link href="../css/stimulsoft.viewer.office2013.css" rel="stylesheet">
+
+	<!-- Stimusloft Reports.JS -->
+	<script src="../scripts/stimulsoft.reports.js" type="text/javascript"></script>
+	<script src="../scripts/stimulsoft.viewer.js" type="text/javascript"></script>
+	<script src="../scripts/stimulsoft.designer.js" type="text/javascript"></script>
+	
+	<!-- Report designer scripts, may be external -->
+	<script type="text/javascript">
+		// Change report designer options
+		var options = new Stimulsoft.Designer.StiDesignerOptions();
+		options.appearance.fullScreenMode = true;
+		options.toolbar.showPreviewButton = false;
+		options.toolbar.showFileMenu = false;
+		options.components.showImage = false;
+		options.components.showShape = false;
+		options.components.showPanel = false;
+		options.components.showCheckBox = false;
+		options.components.showSubReport = false;
+		
+		var designer = new Stimulsoft.Designer.StiDesigner(options, "StiDesigner", false);
+		
+		// Create a new report instance
+		var report = new Stimulsoft.Report.StiReport();
+		// Load report from url
+		report.loadFile("../reports/SimpleList.mrt");
+		// Edit report template in the designer
+		designer.report = report;
+	</script>
+</head>
+<body>
+	Report designer customization
+	<br><br>
+	
+	<table>
+		<tr>
+			<td width="200px">Some page content</td>
+			<td><script type="text/javascript">
+				// Show the report designer in this place
+				designer.renderHtml();
+			</script></td>
+		</tr>
+	</table>
+</body>
+</html>

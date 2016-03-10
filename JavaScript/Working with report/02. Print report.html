@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Print report</title>
+	
+	<!-- Stimusloft Reports.JS -->
+	<script src="../scripts/stimulsoft.reports.js" type="text/javascript"></script>
+</head>
+<body>
+	Load 'SimpleList' report template, render and print it.
+	<br><br>
+	
+	<script type="text/javascript">
+		// Create a new report instance
+		var report = new Stimulsoft.Report.StiReport();
+		// Load report from url
+		report.loadFile("../reports/SimpleList.mrt");
+		// Render report
+		report.render();
+		// Print report using web browser
+		report.print();
+		
+		document.write("Complete.");
+	</script>
+</body>
+</html>
