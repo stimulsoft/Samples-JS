@@ -1,0 +1,17 @@
+{
+  "name": "04_start_sql_adapters_from_http_server",
+  "version": "1.0.0",
+  "description": "Start SQL Adapters from Http Server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Stimulsoft",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "repository": { 
+    "type": "git",
+    "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/04.%20Start%20SQL%20Adapters%20from%20Http%20Server"
+  }
+}
