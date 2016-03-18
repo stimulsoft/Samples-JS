@@ -2,7 +2,15 @@
 
 This example illustrates loading of the report, data rendering and storing the result to the mdc-file.
 
-**Key steps for this task:**
+### Installation and runnig
+Use npm to install requred modules:
+
+'''$ npm install'''
+Run Sample:
+
+'''$ node index'''
+
+### Step by step
 
 Stimulsoft Reports module loading:
 
