@@ -2,7 +2,7 @@
 
 This example illustrates loading of the report, data rendering and storing the result to the mdc-file.
 
-### Installation and runnig
+### Installation and running
 Use npm to install requred modules:
 
 '''$ npm install'''
