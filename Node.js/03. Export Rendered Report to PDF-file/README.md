@@ -2,8 +2,15 @@
 
 This example illustrates loading of the report, data rendering and storing the result to the PDF-document.
 
-**Key steps for this task:**
+### Installation and running
+Use npm to install requred modules:
 
+    $ npm install
+Run Sample:
+
+    $ node index
+
+### Step by step
 Stimulsoft Reports module loading:
 
     var Stimulsoft = require('stimulsoft-reports-js');
