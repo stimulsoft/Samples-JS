@@ -2,7 +2,15 @@
 
 This example demonstrates the implementation of connections to different databases (MySQL, Firebird, MSSQL and PostgreSQL). Adapters files are in a directory with an example. You can include adapters into your projects without changes.
 
-**Key steps for this task:**
+### Installation and running
+Use npm to install requred modules:
+
+    $ npm install
+Run Sample:
+
+    $ node index
+
+### Step by step
 
 Loading HTTP-module:
 
