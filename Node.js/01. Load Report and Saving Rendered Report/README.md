@@ -5,10 +5,10 @@ This example illustrates loading of the report, data rendering and storing the r
 ### Installation and running
 Use npm to install requred modules:
 
-```$ npm install
+    $ npm install
 Run Sample:
 
-```$ node index
+    $ node index
 
 ### Step by step
 
