@@ -14,3 +14,13 @@ This example contains code to render a report to a PDF-document.
 
 [04. Start SQL Adapters from Http Server](https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/04.%20Start%20SQL%20Adapters%20from%20Http%20Server)
 This example demonstrates the implementation of connections to different databases (MySQL, Firebird, MSSQL and PostgreSQL). Adapters files are in a directory with an example.
+
+Use npm to install requred modules:
+```sh
+$ npm install
+```
+
+Run Sample:
+```sh
+$ node index
+```
