@@ -1,0 +1,80 @@
+﻿html, body {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  background-color: #e8e8e8;
+  overflow-y: hidden;
+}
+
+table.Main {
+	width: 100%;
+	height: 100%;
+	background: white;
+}
+
+table.LeftPanel {
+	width: 150px;
+	height: 100%;
+	background: white;
+}
+
+table.LeftPanel td {
+	vertical-align: top;
+}
+
+div.Buttons {
+	width: 150px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	position: absolute;
+	top: 70px;
+	bottom: 4px;
+}
+
+a.ReportButton {
+	width: 100%;
+	cursor: pointer;
+	display: block;
+	text-align: center;
+}
+
+a.ReportButton table {
+	margin: 5px auto;
+}
+
+a.ReportButton img {
+	text-align: center;
+	border: 1px solid gray;
+	margin : 3px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+a.ReportButton.Over img {
+	text-align: center;
+	border: 1px solid #7dbbb3;
+	margin : 3px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+a.ReportButton.Selected img {
+	text-align: center;
+	border: 2px solid #7dbbb3;
+	margin : 2px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+a.ReportButton td.Caption {
+	padding: 0 5px 0 5px;
+	font-family: Arial;
+	font-size: 11pt;
+	color: #4a465c;
+	display: block;
+	text-align: center;
+}
+

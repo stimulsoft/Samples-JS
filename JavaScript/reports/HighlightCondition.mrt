@@ -712,7 +712,7 @@
         "Ident": "StiJsonDatabase",
         "Name": "Demo",
         "Alias": "Demo",
-        "PathData": "reports/Demo.json"
+        "PathData": "../reports/Demo.json"
       }
     },
     "Relations": {
