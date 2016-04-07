@@ -1,6 +1,6 @@
 ## This folder contains examples of integration Stimulsoft Reports.JS with the ASP.NET.
 
-#### This repository contains the source code of the examples of usage Stimulsoft Reports.JS with ASP.NET, using C# code and HTML reporting components.
+#### Here is the source code of the examples of usage Stimulsoft Reports.JS with ASP.NET, using C# code and HTML reporting components.
 
 #Overview
 This repository has some examples (Visual Studio Projects) each in different folders:
