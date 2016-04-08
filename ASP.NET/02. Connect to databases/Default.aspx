@@ -28,5 +28,6 @@
             designer.renderHtml("content");
         }
     </script>
+    <div id="content"></div>
 </body>
 </html>
