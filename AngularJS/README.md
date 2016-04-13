@@ -7,10 +7,10 @@ version 0.15.1.
 
 ## Build & development
 
-* Run ``` npm install ``` to install nmp modules
+* run ``` npm install ``` to install nmp modules
 
-* Then run ``` bower install ``` to install bower modules
+* then run ``` bower install ``` to install bower modules
 
-* Then run ``` grunt build ``` to build the project.
+* then run ``` grunt build ``` to build the project.
 
 The "dist" folder contains compiled project. Run any web server from here and open this site in the browser.
