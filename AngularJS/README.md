@@ -2,9 +2,6 @@
 
 This simple demo illustrates integration of Stimulsoft Report.JS into an Angular project.
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.15.1.
-
 ## Build & development
 
 * run ``` npm install ``` to install nmp modules
