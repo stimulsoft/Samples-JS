@@ -1,6 +1,6 @@
-# Stimulsoft Report.JS + Angular Demo
+# Stimulsoft Reports.JS + Angular Demo
 
-This simple demo illustrates integration of Stimulsoft Report.JS into an Angular project.
+This simple demo illustrates integration of Stimulsoft Reports.JS into an Angular project.
 
 ## Build & development
 
