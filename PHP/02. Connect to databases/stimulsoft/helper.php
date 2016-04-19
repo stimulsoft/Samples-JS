@@ -1,309 +1,203 @@
 <?php
+require_once 'classes.php';
 require_once 'adapters/mysql.php';
 require_once 'adapters/mssql.php';
 require_once 'adapters/firebird.php';
-//require_once 'email/class.phpmailer.php';
-//require_once 'email/class.pop3.php';
-//require_once 'email/class.smtp.php';
-//require_once 'email/PHPMailerAutoload.php';
+require_once 'adapters/postgresql.php';
+require_once 'email/class.phpmailer.php';
+require_once 'email/class.pop3.php';
+require_once 'email/class.smtp.php';
+require_once 'email/PHPMailerAutoload.php';
 
 
-//---------- Classes ----------//
+function stiErrorHandler($errNo, $errStr, $errFile, $errLine) {
+	$result = StiResult::error("[".$errNo."] ".$errStr." (".$errFile.", Line ".$errLine.")");
+	StiResponse::json($result);
+}
 
-
-class StiConnectionInfo {
-	public $host = "";
-	public $port = "";
-	public $database = "";
-	public $userId = "";
-	public $password = "";
-	public $charset = "";
-	public $dsn = "";
-	public $privilege = "";
-	public $dataPath = "";
-	public $schemaPath = "";
-	
-	public function parse($obj) {
-		if (isset($obj->host)) $this->host = $obj->host;
-		if (isset($obj->port)) $this->port = $obj->port;
-		if (isset($obj->database)) $this->database = $obj->database;
-		if (isset($obj->userId)) $this->userId = $obj->userId;
-		if (isset($obj->password)) $this->password = $obj->password;
-		if (isset($obj->charset)) $this->charset = $obj->charset;
-		if (isset($obj->dsn)) $this->dsn = $obj->dsn;
-		if (isset($obj->privilege)) $this->privilege = $obj->privilege;
-		if (isset($obj->dataPath)) $this->dataPath = $obj->dataPath;
-		if (isset($obj->schemaPath)) $this->schemaPath = $obj->schemaPath;
+function stiShutdownFunction() {
+	$err = error_get_last();
+	if (($err["type"] & E_COMPILE_ERROR) || ($err["type"] & E_ERROR) || ($err["type"] & E_CORE_ERROR) || ($err["type"] & E_RECOVERABLE_ERROR)) {
+		$result = StiResult::error("[".$err["type"]."] ".$err["message"]." (".$err["file"].", Line ".$err["line"].")");
+		StiResponse::json($result);
 	}
 }
-
-class StiDatabaseType {
-	const MySQL = "MySQL";
-	const MSSQL = "MS SQL";
-	const Firebird = "Firebird";
-}
-
-class StiCommandType {
-	const TestConnection = "TestConnection";
-	const ExecuteQuery = "ExecuteQuery";
-	const SaveReport = "SaveReport";
-	const ExportReport = "ExportReport";
-	const SendEmail = "SendEmail";
-}
-
-class StiRequest {
-	public $command = null;
-	public $connectionInfo = null;
-	public $queryString = null;
-	public $database = null;
-	public $report = null;
-	public $reportFile = null;
-	public $exportFormat = null;
-	public $email = null;
-	public $emailSubject = null;
-	public $emailMessage = null;
-	
-	public function parse() {
-		$data = null;
-		if (isset($HTTP_RAW_POST_DATA)) $data = $HTTP_RAW_POST_DATA;
-		if ($data == null) $data = file_get_contents("php://input");
-		
-		$obj = json_decode($data);
-		if ($obj == null) return StiResult::error("JSON parser error");
-
-		if (isset($obj->command)) $this->command = $obj->command;
-		if (isset($obj->queryString)) $this->queryString = $obj->queryString;
-		if (isset($obj->database)) $this->database = $obj->database;
-		if (isset($obj->connectionStringInfo)) {
-			$this->connectionInfo = new StiConnectionInfo();
-			$this->connectionInfo->parse($obj->connectionStringInfo);
-		}
-		if (isset($obj->report)) $this->report = $obj->report;
-		if (isset($obj->reportFile)) $this->reportFile = $obj->reportFile;
-		if (isset($obj->exportFormat)) $this->exportFormat = $obj->exportFormat;
-		if (isset($obj->email)) $this->email = $obj->email;
-		if (isset($obj->emailSubject)) $this->emailSubject = $obj->emailSubject;
-		if (isset($obj->emailMessage)) $this->emailMessage = $obj->emailMessage;
-		
-		return StiResult::success($this);
-	}
-}
-
-class StiResponse {
-	public static function json($result, $exit = true) {
-		echo json_encode($result);
-		if ($exit) exit;
-	}
-}
-
-class StiResult {
-	public $success = true;
-	public $notice = null;
-	public $object = null;
-	public $columns = null;
-	public $rows = null;
-	
-	public static function success($object = null, $notice = null) {
-		$result = new StiResult();
-		$result->success = true;
-		$result->object = $object;
-		$result->notice = $notice;
-		return $result;
-	}
-	
-	public static function error($notice = null) {
-		$result = new StiResult();
-		$result->success = false;
-		$result->notice = $notice;
-		return $result;
-	}
-}
-
-class StiEmailOptions {
-	/** Email address of the sender */
-	public $from = null;
-	
-	/** Name and surname of the sender */
-	public $name = "John Smith";
-	
-	/** Email address of the recipient */
-	public $to = null;
-	
-	/** Email Subject */
-	public $subject = null;
-	
-	/** Text of the Email */
-	public $message = null;
-	
-	/** Text of the Email */
-	public $attachmentFile = null;
-	
-	/** Charset for the message */
-	public $charset = "UTF-8";
-	
-	/** Set to true if authentication is required */
-	public $auth = false;
-	
-	/** Address of the SMTP server */
-	public $host = "smtp.gmail.com";
-	
-	/** Port of the SMTP server */
-	public $port = 465;
-	
-	/** The secure connection prefix - ssl or tls */
-	public $secure = "ssl";
-	
-	/** Login (Username or Email) */
-	public $login = null;
-	
-	/** Password */
-	public $password = null;
-	
-	/** Show a message when Email is successfully sent */
-	public $successfully = true;
-}
-
-
-//---------- Handler ----------//
-
 
 class StiHandler {
 
+	private function checkEventResult($event, $args) {
+		if (isset($event)) $result = $event($args);
+		if (!isset($result)) $result = StiResult::success();
+		if ($result === true) return StiResult::success();
+		if ($result === false) return StiResult::error();
+		if (gettype($result) == "string") return StiResult::error($result);
+		if (isset($args)) $result->object = $args;
+		return $result;
+	}
+	
 //--- Events
 
-	private function checkEventResult($result) {
-		if (isset($result)) {
-			if ($result === true) return StiResult::success();
-			if ($result === false) return StiResult::error();
-			if (gettype($result) == "string") return StiResult::error($result);
-			return $result;
-		}
-		return StiResult::success();
+	public $onBeginProcessData = null;
+	private function invokeBeginProcessData($request) {
+		$args = new stdClass();
+   		$args->sender = $request->sender;
+   		$args->database = $request->database;
+   		$args->connectionString = $request->connectionString;
+   		$args->queryString = $request->queryString;
+		return $this->checkEventResult($this->onBeginProcessData, $args);
 	}
 	
-	public $onConnect = null;
-	private function invokeConnect($connection) {
-		$event = $this->onConnect;
-		if ($event != null) {
-			$result = $event($connection);
-			return $this->checkEventResult($result);
-		}
-		return StiResult::success($connection);
+	public $onEndProcessData = null;
+	private function invokeEndProcessData($request, $result) {
+		$args = new stdClass();
+		$args->sender = $request->sender;
+		$args->result = $result;
+		return $this->checkEventResult($this->onEndProcessData, $args);
 	}
 	
-	public $onExecuteQuery = null;
-	private function invokeExecuteQuery($queryString) {
-		$event = $this->onExecuteQuery;
-		if ($event != null) {
-			$result = $event($queryString);
-			return $this->checkEventResult($result);
-		}
-		return StiResult::success($queryString);
+	public $onCreateReport = null;
+	private function invokeCreateReport($request) {
+		$args = new stdClass();
+		$args->sender = $request->sender;
+		return $this->checkEventResult($this->onCreateReport, $args);
+	}
+	
+	public $onOpenReport = null;
+	private function invokeOpenReport($request) {
+		$args = new stdClass();
+		$args->sender = $request->sender;
+		return $this->checkEventResult($this->onOpenReport, $args);
 	}
 	
 	public $onSaveReport = null;
-	private function invokeSaveReport($report, $reportFile) {
-		$event = $this->onSaveReport;
-		if ($event != null) {
-			$result = $event($report, $reportFile);
-			return $this->checkEventResult($result);
-		}
-		return StiResult::success();
+	private function invokeSaveReport($request) {
+		$args = new stdClass();
+		$args->sender = $request->sender;
+		$args->report = $request->report;
+		$args->fileName = $request->fileName;
+		return $this->checkEventResult($this->onSaveReport, $args);
 	}
 	
-	public $onExportReport = null;
-	private function invokeExportReport($report, $reportFile, $exportFormat) {
-		$event = $this->onExportReport;
-		if ($event != null) {
-			$result = $event($report, $reportFile, $exportFormat);
-			return $this->checkEventResult($result);
-		}
-		return StiResult::success();
+	public $onSaveAsReport = null;
+	private function invokeSaveAsReport($request) {
+		$args = new stdClass();
+		$args->sender = $request->sender;
+		$args->report = $request->report;
+		$args->fileName = $request->fileName;
+		return $this->checkEventResult($this->onSaveAsReport, $args);
 	}
 	
-	public $onSendEmail = null;
-	private function invokeSendEmail($report, $reportFile, $exportFormat, $email, $emailSubject, $emailMessage) {
-		$event = $this->onExportReport;
-		if ($event != null) {
-			$options = new StiEmailOptions();
-			$options->to = $email;
-			$options->subject = $emailSubject;
-			$options->message = $emailMessage;
-			$options->attachmentFile = $reportFile;
-			
-			$result = $event($report, $exportFormat, $options);
-			$result = $this->checkEventResult($result);
-			
-			if ($result->object != null) {
-				$options = $result->object;
+	public $onPrintReport = null;
+	private function invokePrintReport($request) {
+		$args = new stdClass();
+		$args->sender = $request->sender;
+		$args->fileName = $request->fileName;
+		return $this->checkEventResult($this->onPrintReport, $args);
+	}
+	
+	public $onBeginExportReport = null;
+	private function invokeBeginExportReport($request) {
+		$args = new stdClass();
+		$args->sender = $request->sender;
+		$args->settings = $request->settings;
+		$args->format = $request->format;
+		$args->fileName = $request->fileName;
+		return $this->checkEventResult($this->onBeginExportReport, $args);
+	}
+	
+	public $onEndExportReport = null;
+	private function invokeEndExportReport($request) {
+		$args = new stdClass();
+		$args->sender = $request->sender;
+		$args->format = $request->format;
+		$args->fileName = $request->fileName;
+		$args->data = $request->data;
+		return $this->checkEventResult($this->onEndExportReport, $args);
+	}
+	
+	public $onEmailReport = null;
+	private function invokeEmailReport($request) {
+		$settings = new StiEmailSettings();
+		$settings->to = $request->settings->email;
+		$settings->subject = $request->settings->subject;
+		$settings->message = $request->settings->message;
+		$settings->attachmentName = $request->fileName.'.'.$this->getFileExtension($request->format);
+		
+		$args = new stdClass();
+		$args->sender = $request->sender;
+		$args->settings = $settings;
+		$args->format = $request->format;
+		$args->fileName = $request->fileName;
+		$args->data = base64_decode($request->data);
+		
+		$result = $this->checkEventResult($this->onEmailReport, $args);
+		if (!$result->success) return $result;
+		
+		$guid = substr(md5(uniqid().mt_rand()), 0, 12);
+		if (!file_exists('tmp')) mkdir('tmp');
+		file_put_contents('tmp/'.$guid.'.'.$args->fileName, $args->data);
+		
+		// Detect auth mode
+		$auth = $settings->host != null && $settings->login != null && $settings->password != null;
+
+		$mail = new PHPMailer(true);
+		if ($auth) $mail->IsSMTP();
+		try {
+			$mail->CharSet = $settings->charset;
+			$mail->IsHTML(false);
+			$mail->From = $settings->from;
+			$mail->FromName = $settings->name;
 				
-				$guid = substr(md5(uniqid().mt_rand()), 0, 12);
-				if (!file_exists('tmp')) mkdir('tmp');
-				file_put_contents('tmp/'.$guid.'.'.$options->attachmentFile, $report);
-				
-				$mail = new PHPMailer(true);
-				if ($options->auth) $mail->IsSMTP();
-				try {
-					$mail->CharSet = $options->charset;
-					$mail->IsHTML(false);
-					$mail->From = $options->from;
-					$mail->FromName = $options->name;
-						
-					// Add Emails list
-					$emails = preg_split('/,|;/', $options->to);
-					foreach ($emails as $email) {
-						$mail->AddAddress(trim($email));
-					}
-						
-					$mail->Subject = htmlspecialchars($options->subject);
-					$mail->Body = $options->message;
-					$mail->AddAttachment('tmp/'.$guid.'.'.$options->attachmentFile, $options->attachmentFile);
-						
-					if ($options->auth) {
-						$mail->Host = $options->host;
-						$mail->Port = $options->port;
-						$mail->SMTPAuth = $options->auth;
-						$mail->SMTPSecure = $options->secure;
-						$mail->Username = $options->login;
-						$mail->Password = $options->password;
-					}
-						
-					$mail->Send();
-					$error = $_options['successfully'] ? '0' : '-1';
-				}
-				catch (phpmailerException $e) {
-					$error = strip_tags($e->errorMessage());
-					return StiResult::error($error);
-				}
-				catch (Exception $e) {
-					$error = strip_tags($e->getMessage());
-					
-				}
-				
-				unlink('tmp/'.$guid.'.'.$options->attachmentFile);
-				
-				if (isset($error)) return StiResult::error($error);
-				StiResult::success(null, $options->successfully ? "0" : "-1");
+			// Add Emails list
+			$emails = preg_split('/,|;/', $settings->to);
+			foreach ($emails as $settings->to) {
+				$mail->AddAddress(trim($settings->to));
 			}
+			
+			// Fill email fields
+			$mail->Subject = htmlspecialchars($settings->subject);
+			$mail->Body = $settings->message;
+			$mail->AddAttachment('tmp/'.$guid.'.'.$args->fileName, $settings->attachmentName);
+			
+			// Fill auth fields
+			if ($auth) {
+				$mail->Host = $settings->host;
+				$mail->Port = $settings->port;
+				$mail->SMTPAuth = true;
+				$mail->SMTPSecure = $settings->secure;
+				$mail->Username = $settings->login;
+				$mail->Password = $settings->password;
+			}
+			
+			$mail->Send();
 		}
-		return StiResult::success();
+		catch (phpmailerException $e) {
+			$error = strip_tags($e->errorMessage());
+			return StiResult::error($error);
+		}
+		catch (Exception $e) {
+			$error = strip_tags($e->getMessage());
+		}
+		
+		unlink('tmp/'.$guid.'.'.$args->fileName);
+		
+		if (isset($error)) return StiResult::error($error);
+		return $result;
+	}
+	
+	public $onDesignReport = null;
+	private function invokeDesignReport($request) {
+		$args = new stdClass();
+		$args->sender = $request->sender;
+		$args->fileName = $request->fileName;
+		return $this->checkEventResult($this->onDesignReport, $args);
 	}
 	
 //--- Methods
 	
 	public function registerErrorHandlers() {
-		set_error_handler(function ($errNo, $errStr, $errFile, $errLine) {
-			$result = StiResult::error("[".$errNo."] ".$errStr." (".$errFile.", Line ".$errLine.")");
-			StiResponse::json($result);
-		});
-		
-		register_shutdown_function(function () {
-			$err = error_get_last();
-			if (($err["type"] & E_COMPILE_ERROR) || ($err["type"] & E_ERROR) || ($err["type"] & E_CORE_ERROR) || ($err["type"] & E_RECOVERABLE_ERROR)) {
-				$result = StiResult::error("[".$err["type"]."] ".$err["message"]." (".$err["file"].", Line ".$err["line"].")");
-				StiResponse::json($result);
-			}
-		});
+		set_error_handler("stiErrorHandler");
+		register_shutdown_function("stiShutdownFunction");
 	}
 	
 	public function process($response = true) {
@@ -315,61 +209,170 @@ class StiHandler {
 	
 //--- Private methods
 	
-	private function createConnection($database, $connectionInfo) {
-		switch ($database) {
-			case StiDatabaseType::MySQL:
-				$connection = new StiMySqlAdapter();
-				break;
-				
-			case StiDatabaseType::MSSQL:
-				$connection = new StiMsSqlAdapter();
-				break;
-				
-			case StiDatabaseType::Firebird:
-				$connection = new StiFirebirdAdapter();
-				break;
+	private function createConnection($args) {
+		switch ($args->database) {
+			case StiDatabaseType::MySQL: $connection = new StiMySqlAdapter(); break;
+			case StiDatabaseType::MSSQL: $connection = new StiMsSqlAdapter(); break;
+			case StiDatabaseType::Firebird: $connection = new StiFirebirdAdapter(); break;
+			case StiDatabaseType::PostgreSQL: $connection = new StiPostgreSqlAdapter(); break;
 		}
 		
 		if (isset($connection)) {
-			$connection->connectionInfo = $connectionInfo;
-			return $this->invokeConnect($connection);
+			$connection->parse($args->connectionString);
+			return StiResult::success(null, $connection);
 		}
 		
-		return StiResult::error("Unknown database type [".$database."]");
+		return StiResult::error("Unknown database type [".$args->database."]");
 	}
 	
 	private function innerProcess() {
 		$request = new StiRequest();
 		$result = $request->parse();
 		if ($result->success) {
-			switch ($request->command) {
-				case StiCommandType::TestConnection:
-					$result = $this->createConnection($request->database, $request->connectionInfo);
+			switch ($request->event) {
+				case StiEventType::BeginProcessData:
+					$result = $this->invokeBeginProcessData($request);
 					if (!$result->success) return $result;
-					return $result->object->test();
-			
-				case StiCommandType::ExecuteQuery:
-					$result = $this->createConnection($request->database, $request->connectionInfo);
+					$queryString = $result->object->queryString;
+					$result = $this->createConnection($result->object);
 					if (!$result->success) return $result;
 					$connection = $result->object;
-					$result = $this->invokeExecuteQuery($request->queryString);
+					if (isset($queryString)) $result = $connection->execute($queryString);
+					else $result = $connection->test();
+					$result = $this->invokeEndProcessData($request, $result);
 					if (!$result->success) return $result;
-					return $connection->execute($result->object);
-			
-				case StiCommandType::SaveReport:
-					return $this->invokeSaveReport($request->report, $request->reportFile);
+					if (isset($result->object) && isset($result->object->result)) return $result->object->result;
+					return $result;
 					
-				case StiCommandType::ExportReport:
-					return $this->invokeExportReport($request->report, $request->reportFile, $request->exportFormat);
+				case StiEventType::CreateReport:
+					return $this->invokeCreateReport($request);
+					
+				case StiEventType::OpenReport:
+					return $this->invokeOpenReport($request);
+					
+				case StiEventType::SaveReport:
+					return $this->invokeSaveReport($request);
+					
+				case StiEventType::SaveAsReport:
+					return $this->invokeSaveReport($request);
+					
+				case StiEventType::PrintReport:
+					return $this->invokePrintReport($request);
+					
+				case StiEventType::BeginExportReport:
+					return $this->invokeBeginExportReport($request);
+					
+				case StiEventType::EndExportReport:
+					return $this->invokeEndExportReport($request);
 						
-				case StiCommandType::SendEmail:
-					return $this->invokeSaveReport($request->report, $request->reportFile, $request->exportFormat, $request->email, $request->emailSubject, $request->emailMessage);
+				case StiEventType::EmailReport:
+					return $this->invokeEmailReport($request);
+					
+				case StiEventType::DesignReport;
+					return $this->invokeDesignReport($request);
 			}
 			
-			$result->success = false;
-			$result->notice = "Unknown command [".$request->command."]";
+			$result = StiResult::error("Unknown event [".$request->event."]");
 		}
 		
 		return $result;
+	}
+	
+	private function getFileExtension($format) {
+		switch ($format) {
+			case StiExportFormat::Html:
+			case StiExportFormat::Html5:
+				return "html";
+				
+			case StiExportFormat::Pdf:
+				return "pdf";
+				
+			case StiExportFormat::Excel2007:
+				return "xlsx";
+				
+			case StiExportFormat::Word2007:
+				return "docx";
+		}
+		return "";
+	}
+}
+
+
+//---------- Helper ----------//
+
+
+class StiHelper {
+	public static function initialize($url = "handler.php", $timeout = 30) {
+?>
+	<script type="text/javascript">
+		StiHelper.prototype.process = function (obj, callback) {
+			if (obj != null) {
+				if (obj.event == "BeginProcessData") {
+					obj.preventDefault = true;
+					if (obj.database == "XML" || obj.database == "JSON") return callback(null);
+				}
+				var command = {};
+				for (var p in obj) {
+					if (p == "report" && obj.report != null) command.report = JSON.parse(obj.report.saveToJsonString());
+					else if (p == "settings" && obj.settings != null) command.settings = obj.settings.toJsonObject();
+					else if (p == "data") command.data = Stimulsoft.System.Convert.toBase64String(obj.data);
+					else command[p] = obj[p];
+				}
+				
+				var json = JSON.stringify(command);
+				if (callback == null) callback = function (message) {
+					if (Stimulsoft.System.StiError.errorMessageForm && !String.isNullOrEmpty(message)) {
+						var obj = JSON.parse(message);
+						if (!obj.success || !String.isNullOrEmpty(obj.notice)) {
+							var message = String.isNullOrEmpty(obj.notice) ? "There was some error" : obj.notice;
+							Stimulsoft.System.StiError.errorMessageForm.show(message, obj.success);
+						}
+					}
+				}
+				jsHelper.send(json, callback);
+			}
+		}
+		
+		StiHelper.prototype.send = function (json, callback) {
+			try {
+				var request = new XMLHttpRequest();
+				request.open("post", this.url, true);
+				request.timeout = this.timeout * 1000;
+				request.onload = function () {
+					if (request.status == 200) {
+						var responseText = request.responseText;
+						request.abort();
+						callback(responseText);
+					}
+					else {
+						Stimulsoft.System.StiError.showError("[" + request.status + "] " + request.statusText, false);
+					}
+				};
+				request.onerror = function (e) {
+					var errorMessage = "Connect to remote error: [" + request.status + "] " + request.statusText;
+					Stimulsoft.System.StiError.showError(errorMessage, false);
+				};
+				request.send(json);
+			}
+			catch (e) {
+				var errorMessage = "Connect to remote error: " + e.message;
+				Stimulsoft.System.StiError.showError(errorMessage, false);
+				request.abort();
+			}
+		};
+
+		function StiHelper(url, timeout) {
+			this.url = url;
+			this.timeout = timeout;
+		}
+
+		jsHelper = new StiHelper("<?php echo $url; ?>", <?php echo $timeout; ?>); 
+</script>	
+<?php
+	}
+	
+	public static function createHandler() {
+?>jsHelper.process(typeof args != "undefined" ? args : (typeof event != "undefined" ? event : null), typeof callback != "undefined" ? callback : null);
+<?php
 	}
 }

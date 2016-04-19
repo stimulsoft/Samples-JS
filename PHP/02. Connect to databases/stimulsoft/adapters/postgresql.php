@@ -1,43 +1,45 @@
 <?php
-class StiFirebirdAdapter {
+class StiPostgreSqlAdapter {
 	private $connectionString = null;
 	private $connectionInfo = null;
 	private $link = null;
-	
+
 	private function getLastErrorResult() {
-		$errcode = ibase_errcode();
-		if ($errcode == 0) return StiResult::error("Unknown");
-		return StiResult::error("[".$errcode."] ".ibase_errmsg());
+		$error = pg_last_error();
+		if ($error) return StiResult::error($error);
+		return StiResult::error("Unknown");
 	}
-	
+
 	private function connect() {
-		$this->link = ibase_connect($this->connectionInfo->host."/".$this->connectionInfo->port.":".$this->connectionInfo->database, $this->connectionInfo->userId, $this->connectionInfo->password);
+		$this->link = pg_connect("host='".$this->connectionInfo->host."' port='".$this->connectionInfo->port."' dbname='".$this->connectionInfo->database.
+				"' user='".$this->connectionInfo->userId."' password='".$this->connectionInfo->password."' options='--client_encoding=".$this->connectionInfo->charset."'");
 		if (!$this->link) return $this->getLastErrorResult();
 		return StiResult::success();
 	}
-	
+
 	private function disconnect() {
 		if (!$this->link) return;
-		ibase_close($this->link);
+		pg_close($this->link);
 	}
-	
+
 	public function parse($connectionString) {
 		$info = new stdClass();
 		$info->host = "";
-		$info->port = 3050;
+		$info->port = 5432;
 		$info->database = "";
 		$info->userId = "";
 		$info->password = "";
-		
+		$info->charset = "utf8";
+
 		$parameters = explode(";", $connectionString);
 		foreach($parameters as $parameter)
 		{
 			if (strpos($parameter, "=") < 1) continue;
-		
+
 			$parts = explode("=", $parameter);
 			$name = strtolower(trim($parts[0]));
 			if (count($parts) > 1) $value = $parts[1];
-		
+
 			if (isset($value))
 			{
 				switch ($name)
@@ -47,7 +49,7 @@ class StiFirebirdAdapter {
 					case "location":
 						$info->host = $value;
 						break;
-						
+
 					case "port":
 						$info->port = $value;
 						break;
@@ -59,6 +61,7 @@ class StiFirebirdAdapter {
 							
 					case "uid":
 					case "user":
+					case "userid":
 					case "user id":
 						$info->userId = $value;
 						break;
@@ -67,29 +70,33 @@ class StiFirebirdAdapter {
 					case "password":
 						$info->password = $value;
 						break;
+						
+					case "charset":
+						$info->charset = $value;
+						break;
 				}
 			}
 		}
-		
+
 		$this->connectionString = $connectionString;
 		$this->connectionInfo = $info;
 	}
-	
+
 	public function test() {
 		$result = $this->connect();
 		if ($result->success) $this->disconnect();
 		return $result;
 	}
-	
+
 	public function execute($queryString) {
 		$result = $this->connect();
 		if ($result->success) {
-			$query = ibase_query($this->link, $queryString);
+			$query = pg_query($this->link, $queryString);
 			if (!$query) return $this->getLastErrorResult();
-			
+				
 			$result->columns = array();
 			$result->rows = array();
-			while ($rowItem = ibase_fetch_assoc($query)) {
+			while ($rowItem = pg_fetch_assoc($query)) {
 				$row = array();
 				foreach ($rowItem as $key => $value) {
 					if (count($result->columns) < count($rowItem)) $result->columns[] = $key;
@@ -99,7 +106,7 @@ class StiFirebirdAdapter {
 			}
 			$this->disconnect();
 		}
-	
+
 		return $result;
 	}
 }
