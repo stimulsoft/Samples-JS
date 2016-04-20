@@ -19,7 +19,7 @@ public class MSSQLAdapter
 
             return result;
         }
-        catch (Exception)
+        catch (Exception e)
         {
             return result;
         }
