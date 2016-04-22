@@ -15,15 +15,15 @@ exports.process = function (command, onResult) {
 
     try {
         var connect = function () {
-            client.connect(function(error) {
-                if (error) onError(error);
+            client.connect(function (error) {
+                if (error) onError(error.message);
                 else onConnect();
             });
         }
 
         var query = function (queryString) {
             client.query(queryString, function (error, recordset) {
-                if (error) onError(error);
+                if (error) onError(error.message);
                 else {
                     onQuery(recordset);
                 }
@@ -59,7 +59,7 @@ exports.process = function (command, onResult) {
             for (var propertyIndex in connectionString.split(";")) {
                 var property = connectionString.split(";")[propertyIndex];
                 if (property) {
-                    var match = property.split("=");
+                    var match = property.split(new RegExp('=|:'));
                     if (match && match.length >= 2) {
                         match[0] = match[0].trim().toLowerCase();
                         match[1] = match[1].trim();
