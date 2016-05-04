@@ -77,9 +77,11 @@ public class MSSQLAdapter
             for (var index = 0; index < reader.FieldCount; index++)
             {
                 if (!isColumnsFill) columns.Add(reader.GetName(index));
-                var value = "";
-                if (!reader.IsDBNull(index)) value = reader.GetString(index);
-                row[index] = value;
+                object value = null;
+                if (!reader.IsDBNull(index)) value = reader.GetValue(index);
+                if (value == null) value = "";
+                row[index] = value.ToString();
+
             }
             rows.Add(row);
             isColumnsFill = true;
