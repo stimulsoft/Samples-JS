@@ -54,35 +54,32 @@ class StiMsSqlAdapter {
 		{
 			if (strpos($parameter, "=") < 1) continue;
 		
-			$parts = explode("=", $parameter);
-			$name = strtolower(trim($parts[0]));
-			if (count($parts) > 1) $value = $parts[1];
-		
-			if (isset($value))
+			$spos = strpos($parameter, "=");
+			$name = strtolower(trim(substr($parameter, 0, $spos)));
+			$value = trim(substr($parameter, $spos + 1));
+			
+			switch ($name)
 			{
-				switch ($name)
-				{
-					case "server":
-					case "data source":
-						$info->host = $value;
-						break;
-							
-					case "database":
-					case "initial catalog":
-						$info->database = $value;
-						break;
-							
-					case "uid":
-					case "user":
-					case "user id":
-						$info->userId = $value;
-						break;
-							
-					case "pwd":
-					case "password":
-						$info->password = $value;
-						break;
-				}
+				case "server":
+				case "data source":
+					$info->host = $value;
+					break;
+						
+				case "database":
+				case "initial catalog":
+					$info->database = $value;
+					break;
+						
+				case "uid":
+				case "user":
+				case "user id":
+					$info->userId = $value;
+					break;
+						
+				case "pwd":
+				case "password":
+					$info->password = $value;
+					break;
 			}
 		}
 		

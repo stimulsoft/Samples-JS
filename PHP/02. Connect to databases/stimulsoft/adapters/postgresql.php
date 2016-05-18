@@ -36,45 +36,42 @@ class StiPostgreSqlAdapter {
 		{
 			if (strpos($parameter, "=") < 1) continue;
 
-			$parts = explode("=", $parameter);
-			$name = strtolower(trim($parts[0]));
-			if (count($parts) > 1) $value = $parts[1];
+			$spos = strpos($parameter, "=");
+			$name = strtolower(trim(substr($parameter, 0, $spos)));
+			$value = trim(substr($parameter, $spos + 1));
 
-			if (isset($value))
+			switch ($name)
 			{
-				switch ($name)
-				{
-					case "server":
-					case "host":
-					case "location":
-						$info->host = $value;
-						break;
+				case "server":
+				case "host":
+				case "location":
+					$info->host = $value;
+					break;
 
-					case "port":
-						$info->port = $value;
-						break;
-							
-					case "database":
-					case "data source":
-						$info->database = $value;
-						break;
-							
-					case "uid":
-					case "user":
-					case "userid":
-					case "user id":
-						$info->userId = $value;
-						break;
-							
-					case "pwd":
-					case "password":
-						$info->password = $value;
-						break;
+				case "port":
+					$info->port = $value;
+					break;
 						
-					case "charset":
-						$info->charset = $value;
-						break;
-				}
+				case "database":
+				case "data source":
+					$info->database = $value;
+					break;
+						
+				case "uid":
+				case "user":
+				case "userid":
+				case "user id":
+					$info->userId = $value;
+					break;
+						
+				case "pwd":
+				case "password":
+					$info->password = $value;
+					break;
+					
+				case "charset":
+					$info->charset = $value;
+					break;
 			}
 		}
 

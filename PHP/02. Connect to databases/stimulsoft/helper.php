@@ -4,6 +4,7 @@ require_once 'adapters/mysql.php';
 require_once 'adapters/mssql.php';
 require_once 'adapters/firebird.php';
 require_once 'adapters/postgresql.php';
+require_once 'adapters/oracle.php';
 require_once 'email/class.phpmailer.php';
 require_once 'email/class.pop3.php';
 require_once 'email/class.smtp.php';
@@ -215,6 +216,7 @@ class StiHandler {
 			case StiDatabaseType::MSSQL: $connection = new StiMsSqlAdapter(); break;
 			case StiDatabaseType::Firebird: $connection = new StiFirebirdAdapter(); break;
 			case StiDatabaseType::PostgreSQL: $connection = new StiPostgreSqlAdapter(); break;
+			case StiDatabaseType::Oracle: $connection = new StiOracleAdapter(); break;
 		}
 		
 		if (isset($connection)) {
@@ -231,6 +233,7 @@ class StiHandler {
 		if ($result->success) {
 			switch ($request->event) {
 				case StiEventType::BeginProcessData:
+				case StiEventType::ExecuteQuery:
 					$result = $this->invokeBeginProcessData($request);
 					if (!$result->success) return $result;
 					$queryString = $result->object->queryString;

@@ -15,6 +15,9 @@
 	
 	<!-- Report designer scripts, may be external -->
 	<script type="text/javascript">
+			// Load native UI library
+			var ngui = require('nw.gui');
+			
 			// Set full screen mode for the designer
 			var options = new Stimulsoft.Designer.StiDesignerOptions();
 			options.appearance.fullScreenMode = true;
@@ -24,13 +27,15 @@
 
 				// Create the report designer with specified options
 				var designer = new Stimulsoft.Designer.StiDesigner(options, "StiDesigner", false);
+				
+				designer.onExit = function (e) {
+					ngui.App.quit();
+				}
+				
 				designer.renderHtml("designer");
 				designer.report = new Stimulsoft.Report.StiReport();
 			});
 		
-			// Load native UI library		
-			var ngui = require('nw.gui');
-
 			// Get the current window
 			var nwin = ngui.Window.get();
 
