@@ -1,6 +1,7 @@
 {
 	"description" : "",
 	"nodejs" : true,
+	"version" : "2016.1.12",
 	"main" : "Designer.html",
 	"app_name" : "Designer",
 	"name" : "designer",
