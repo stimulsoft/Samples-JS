@@ -13,8 +13,12 @@
 	
 	<!-- Report viewer scripts, may be external -->
 	<script type="text/javascript">
-		// Create the report viewer with default options
-		var viewer = new Stimulsoft.Viewer.StiViewer(null, "StiViewer", false);
+		// Enable the design button
+		var options = new Stimulsoft.Viewer.StiViewerOptions();
+		options.toolbar.showDesignButton = true;
+		
+		// Create the report viewer
+		var viewer = new Stimulsoft.Viewer.StiViewer(options, "StiViewer", false);
 		
 		// Assign the onGetReportData event function
 		viewer.onGetReportData = function (event) {
@@ -39,7 +43,7 @@
 		
 		// Assign the onReportDesign event function
 		viewer.onDesignReport = function (event) {
-			
+			alert("Design button presed.");
 		}
 		
 		// Create a new report instance

@@ -22,7 +22,7 @@
 		document.write("Complete.<br>");
 		document.write("Rendered page count: " + report.renderedPages.count);
 		
-		// Export report to HTML format and save to file
+		// Store report to JSON format and save to file
 		function saveReportDocument() {
 			// Save rendered report to JSON string
 			var json = report.saveDocumentToJsonString();
