@@ -8,8 +8,8 @@
     <title>Stimulsoft Reports.JS - ASP.NET Demo</title>
 
     <!-- Report Viewer Office2013 style -->
-    <link href="Css/stimulsoft.viewer.office2013.css" rel="stylesheet"/>
-    <link href="Css/stimulsoft.designer.office2013.white.blue.css" rel="stylesheet"/>
+    <link href="Css/stimulsoft.viewer.office2013.whiteblue.css" rel="stylesheet"/>
+    <link href="Css/stimulsoft.designer.office2013.whiteblue.css" rel="stylesheet"/>
 
     <!-- Stimusloft Reports.JS -->
     <script src="Scripts/stimulsoft.reports.js" type="text/javascript"></script>

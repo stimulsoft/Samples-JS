@@ -34,7 +34,7 @@ class StiMySqlAdapter {
 		foreach($parameters as $parameter)
 		{
 			if (strpos($parameter, "=") < 1) continue;
-				
+			
 			$spos = strpos($parameter, "=");
 			$name = strtolower(trim(substr($parameter, 0, $spos)));
 			$value = trim(substr($parameter, $spos + 1));
@@ -79,6 +79,44 @@ class StiMySqlAdapter {
 		$this->connectionInfo = $info;
 	}
 	
+	private function parseType($meta) {
+		switch ($meta->type) {
+			// number
+			case 1:
+			case 2:
+			case 3:
+			case 4:
+			case 5:
+			case 8:
+			case 9:
+			case 16:
+			case 246:
+				return 'number';
+			
+			// datetime
+			case 7:
+			case 10:
+			case 11:
+			case 12:
+			case 13:
+				return 'string';
+				//return 'datetime';
+			
+			// array, string
+			case 249:
+			case 250:
+			case 251:
+			case 252:
+			case 253:
+			case 254:
+				if ($meta->flags & 128) return 'array';
+				return 'string';
+		}
+		
+		// array for unknown
+		return 'array';
+	}
+	
 	public function test() {
 		$result = $this->connect();
 		if ($result->success) $this->disconnect();
@@ -91,16 +129,26 @@ class StiMySqlAdapter {
 			$query = $this->link->query($queryString);
 			if (!$query) return $this->getLastErrorResult();
 			
+			$result->types = array();
 			$result->columns = array();
 			$result->rows = array();
-			while ($rowItem = $query->fetch_assoc()) {
-				$row = array();
-				foreach ($rowItem as $key => $value) {
-					if (count($result->columns) < count($rowItem)) $result->columns[] = $key;
-					$row[] = $value;
-				}
-				$result->rows[] = $row;
+			
+			while ($meta = $query->fetch_field()) {
+				$result->types[] = $this->parseType($meta);
 			}
+			
+			if ($query->num_rows > 0) {
+				while ($rowItem = $query->fetch_assoc()) {
+					$row = array();
+					foreach ($rowItem as $key => $value) {
+						if (count($result->columns) < count($rowItem)) $result->columns[] = $key;
+						$type = $result->types[count($row)];
+						$row[] = ($type == 'array') ? base64_encode($value) : $value;
+					}
+					$result->rows[] = $row;
+				}
+			}
+			
 			$this->disconnect();
 		}
 		

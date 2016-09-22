@@ -6,7 +6,7 @@
 	<title>Stimulsoft Reports.JS - PHP Demo</title>
 
 	<!-- Report Viewer Office2013 style -->
-	<link href="css/stimulsoft.viewer.office2013.css" rel="stylesheet">
+	<link href="css/stimulsoft.viewer.office2013.whiteblue.css" rel="stylesheet">
 
 	<!-- Stimusloft Reports.JS -->
 	<script src="scripts/stimulsoft.reports.js" type="text/javascript"></script>

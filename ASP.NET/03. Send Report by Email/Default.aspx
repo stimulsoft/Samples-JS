@@ -11,7 +11,7 @@
     <script src="Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>
 
     <!-- Report Viewer Office2013 style -->
-    <link href="Css/stimulsoft.viewer.office2013.css" rel="stylesheet"/>
+    <link href="Css/stimulsoft.viewer.office2013.whiteblue.css" rel="stylesheet"/>
 
     <!-- Stimusloft Reports.JS -->
     <script src="Scripts/stimulsoft.reports.js" type="text/javascript"></script>
