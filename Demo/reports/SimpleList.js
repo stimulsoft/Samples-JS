@@ -363,11 +363,7 @@ var SimpleList = {
               "TextOptions": {
                 "WordWrap": true
               },
-              "Type": "Expression",
-              "TextFormat": {
-                "Ident": "StiDateFormatService",
-                "StringFormat": "yyyy, MMMM"
-              }
+              "Type": "Expression"
             }
           }
         },
