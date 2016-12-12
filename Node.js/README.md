@@ -18,6 +18,8 @@ This example demonstrates the implementation of connections to different databas
 [05. Load Report and Load Json-data](https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/02.%20Load%20Report%20and%20Load%20Json-data)
 This simple example shows the steps to download the report and json-data, its rendering and saving in mdc format.
 
+[06. Load Report from Server Side and send to Client](https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/06.%20Load%20Report%20from%20Server%20Side)
+
 Use npm to install requred modules:
 ```sh
 $ npm install
