@@ -1,0 +1,18 @@
+{
+  "name": "06_load_report_from_server_side",
+  "version": "1.0.0",
+  "description": "Load Report from Server Side and send to Client",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Stimulsoft",
+  "license": "MIT",
+  "dependencies": {
+    "stimulsoft-reports-js": "latest"
+  },
+  "repository": { 
+    "type": "git",
+    "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/06.%20Load%20Report%20from%20Server%20Side"
+  }
+}
