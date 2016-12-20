@@ -59,8 +59,8 @@
         }
         
         var getConnectionStringInfo = function (connectionString) {
-            var info = { host: "localhost", port: "3050" };
-            
+            var info = { host: "localhost", port: "3050"};
+            var isCorrect = false;
             for (var propertyIndex in connectionString.split(";")) {
                 var property = connectionString.split(";")[propertyIndex];
                 if (property) {
@@ -73,6 +73,8 @@
                             case "server":
                             case "host":
                             case "location":
+							case "datasource":
+							case "data source":
                                 info["host"] = match[1];
                                 break;
 
@@ -81,8 +83,8 @@
                                 break;
 
                             case "database":
-                            case "data source":
                                 info["database"] = match[1];
+								isCorrect = true;
                                 break;
 
                             case "uid":
@@ -103,25 +105,28 @@
                     }
                 }
             }
-            
+            if (!isCorrect) {
+				onError("Connection String parse error");
+				return null;
+			}
             return info;
         };
         
         var Firebird = require('node-firebird');
         command.connectionStringInfo = getConnectionStringInfo(command.connectionString);
-        
-        var options = {
-            host: command.connectionStringInfo.host,
-            port: command.connectionStringInfo.port,
-            database: command.connectionStringInfo.database,
-            user: command.connectionStringInfo.userId,
-            password: command.connectionStringInfo.password,
-            charset: command.connectionStringInfo.charset,
-        };
+        if (command.connectionStringInfo){
+			var options = {
+				host: command.connectionStringInfo.host,
+				port: command.connectionStringInfo.port,
+				database: command.connectionStringInfo.database,
+				user: command.connectionStringInfo.userId,
+				password: command.connectionStringInfo.password,
+				charset: command.connectionStringInfo.charset,
+			};
 
-        connect();
-        var db;
-        
+			connect();
+			var db;
+		}
     }
     catch (e) {
         onError(e.stack);

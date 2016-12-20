@@ -40,17 +40,17 @@
         var onQuery = function (recordset) {
             var columns = [];
             var rows = [];
+            var types = [];
             var isColumnsFill = false;
             for (var recordIndex in recordset) {
                 var row = [];
                 for (var columnName in recordset[recordIndex]) {
                     if (!isColumnsFill) columns.push(columnName);
+                    var columnIndex = columns.indexOf(columnName);
+                    if (types[columnIndex] != "array") types[columnIndex] = typeof recordset[recordIndex][columnName];
                     if (recordset[recordIndex][columnName] instanceof Uint8Array) {
-                        var value = "";
-                        for (var index = 0; index < recordset[recordIndex][columnName].length; index++) {
-                            value += String.fromCharCode(recordset[recordIndex][columnName][index]);
-                        }
-                        recordset[recordIndex][columnName] = value;
+                        types[columnIndex] = "array";
+                        recordset[recordIndex][columnName] = new Buffer(recordset[recordIndex][columnName]).toString('base64');
                     }
                     row.push(recordset[recordIndex][columnName]);
                 }
@@ -58,7 +58,7 @@
                 rows.push(row);
             }
             
-            end({ success: true, columns: columns, rows: rows });
+            end({ success: true, columns: columns, rows: rows, types: types });
         }
         
         var getConnectionStringInfo = function (connectionString) {
