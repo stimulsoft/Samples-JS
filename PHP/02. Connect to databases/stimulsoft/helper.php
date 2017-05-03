@@ -25,7 +25,7 @@ function stiShutdownFunction() {
 }
 
 class StiHandler {
-
+	
 	private function checkEventResult($event, $args) {
 		if (isset($event)) $result = $event($args);
 		if (!isset($result)) $result = StiResult::success();
@@ -36,16 +36,45 @@ class StiHandler {
 		return $result;
 	}
 	
+	private function getQueryParameters($query) {
+		$result = array();
+		while (strpos($query, "{") !== false) {
+			$query = substr($query, strpos($query, "{") + 1);
+			$parameterName = substr($query, 0, strpos($query, "}"));
+			$result[$parameterName] = null;
+		}
+		
+		return $result;
+	}
+	
+	private function applyQueryParameters($query, $values) {
+		$result = "";
+		while (strpos($query, "{") !== false) {
+			$result .= substr($query, 0, strpos($query, "{"));
+			$query = substr($query, strpos($query, "{") + 1);
+			$parameterName = substr($query, 0, strpos($query, "}"));
+			if (isset($values) && isset($values[$parameterName]) && !is_null($values[$parameterName])) $result .= strval($values[$parameterName]);
+			else $result .= "{".$parameterName."}";
+			$query = substr($query, strpos($query, "}") + 1);
+		}
+		
+		return $result.$query;
+	}
+	
 //--- Events
 
 	public $onBeginProcessData = null;
 	private function invokeBeginProcessData($request) {
 		$args = new stdClass();
-   		$args->sender = $request->sender;
-   		$args->database = $request->database;
-   		$args->connectionString = $request->connectionString;
-   		$args->queryString = $request->queryString;
-		return $this->checkEventResult($this->onBeginProcessData, $args);
+		$args->sender = $request->sender;
+		$args->database = $request->database;
+		$args->connectionString = $request->connectionString;
+		$args->queryString = $request->queryString;
+		$args->parameters = $this->getQueryParameters($request->queryString);
+		
+		$result = $this->checkEventResult($this->onBeginProcessData, $args);
+		$result->object->queryString = $this->applyQueryParameters($result->object->queryString, $args->parameters);
+		return $result;
 	}
 	
 	public $onEndProcessData = null;
@@ -75,6 +104,7 @@ class StiHandler {
 		$args = new stdClass();
 		$args->sender = $request->sender;
 		$args->report = $request->report;
+		$args->reportJson = $request->reportJson;
 		$args->fileName = $request->fileName;
 		return $this->checkEventResult($this->onSaveReport, $args);
 	}
@@ -84,6 +114,7 @@ class StiHandler {
 		$args = new stdClass();
 		$args->sender = $request->sender;
 		$args->report = $request->report;
+		$args->reportJson = $request->reportJson;
 		$args->fileName = $request->fileName;
 		return $this->checkEventResult($this->onSaveAsReport, $args);
 	}
@@ -308,22 +339,22 @@ class StiHelper {
 	public static function initialize($url = "handler.php", $timeout = 30) {
 ?>
 	<script type="text/javascript">
-		StiHelper.prototype.process = function (obj, callback) {
-			if (obj != null) {
-				if (obj.event == "BeginProcessData") {
-					obj.preventDefault = true;
-					if (obj.database == "XML" || obj.database == "JSON") return callback(null);
+		StiHelper.prototype.process = function (args, callback) {
+			if (args) {
+				if (args.event == "BeginProcessData") {
+					args.preventDefault = true;
+					if (args.database == "XML" || args.database == "JSON") return callback(null);
 				}
 				var command = {};
-				for (var p in obj) {
-					if (p == "report" && obj.report != null) command.report = JSON.parse(obj.report.saveToJsonString());
-					else if (p == "settings" && obj.settings != null) command.settings = obj.settings.toJsonObject();
-					else if (p == "data") command.data = Stimulsoft.System.Convert.toBase64String(obj.data);
-					else command[p] = obj[p];
+				for (var p in args) {
+					if (p == "report" && args.report != null) command.report = JSON.parse(args.report.saveToJsonString());
+					else if (p == "settings" && args.settings != null) command.settings = args.settings;
+					else if (p == "data") command.data = Stimulsoft.System.Convert.toBase64String(args.data);
+					else command[p] = args[p];
 				}
 				
 				var json = JSON.stringify(command);
-				if (callback == null) callback = function (message) {
+				if (!callback) callback = function (message) {
 					if (Stimulsoft.System.StiError.errorMessageForm && !String.isNullOrEmpty(message)) {
 						var obj = JSON.parse(message);
 						if (!obj.success || !String.isNullOrEmpty(obj.notice)) {
@@ -363,19 +394,28 @@ class StiHelper {
 				request.abort();
 			}
 		};
-
+		
+		StiHelper.prototype.getUrlVars = function (json, callback) {
+			var vars = {};
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+				function (m, key, value) {
+					vars[key] = value;
+			});
+			return vars;
+		}
+		
 		function StiHelper(url, timeout) {
 			this.url = url;
 			this.timeout = timeout;
 		}
-
-		jsHelper = new StiHelper("<?php echo $url; ?>", <?php echo $timeout; ?>); 
-</script>	
+		
+		jsHelper = new StiHelper("<?php echo $url; ?>", <?php echo $timeout; ?>);
+</script>
 <?php
 	}
 	
 	public static function createHandler() {
-?>jsHelper.process(typeof args != "undefined" ? args : (typeof event != "undefined" ? event : null), typeof callback != "undefined" ? callback : null);
+?>jsHelper.process(arguments[0], arguments[1]);
 <?php
 	}
 }

@@ -23,7 +23,14 @@ class StiMsSqlAdapter {
 		if ($this->isMicrosoftDriver) {
 			$this->link = sqlsrv_connect(
 					$this->connectionInfo->host, 
-					array("UID" => $this->connectionInfo->userId, "PWD" => $this->connectionInfo->password, "Database" => $this->connectionInfo->database, "LoginTimeout" => 10, "ReturnDatesAsStrings" => true));
+					array(
+						"UID" => $this->connectionInfo->userId,
+						"PWD" => $this->connectionInfo->password,
+						"Database" => $this->connectionInfo->database,
+						"LoginTimeout" => 10,
+						"ReturnDatesAsStrings" => true,
+						"CharacterSet" => $this->connectionInfo->charset
+					));
 			if (!$this->link) return $this->getLastErrorResult();
 		}
 		else {
@@ -48,6 +55,7 @@ class StiMsSqlAdapter {
 		$info->database = "";
 		$info->userId = "";
 		$info->password = "";
+		$info->charset = "UTF-8";
 		
 		$parameters = explode(";", $connectionString);
 		foreach($parameters as $parameter)
@@ -79,6 +87,10 @@ class StiMsSqlAdapter {
 				case "pwd":
 				case "password":
 					$info->password = $value;
+					break;
+					
+				case "charset":
+					$info->charset = $value;
 					break;
 			}
 		}

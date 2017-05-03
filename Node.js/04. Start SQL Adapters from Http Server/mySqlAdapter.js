@@ -42,6 +42,7 @@
             var rows = [];
             var types = [];
             var isColumnsFill = false;
+			if (recordset.length > 0 && Array.isArray(recordset[0])) recordset = recordset[0];
             for (var recordIndex in recordset) {
                 var row = [];
                 for (var columnName in recordset[recordIndex]) {
@@ -52,7 +53,9 @@
                         types[columnIndex] = "array";
                         recordset[recordIndex][columnName] = new Buffer(recordset[recordIndex][columnName]).toString('base64');
                     }
-                    row.push(recordset[recordIndex][columnName]);
+					
+					if (recordset[recordIndex][columnName] != null && typeof recordset[recordIndex][columnName].toISOString === "function")	row.push(recordset[recordIndex][columnName].toISOString());
+                    else row.push(recordset[recordIndex][columnName]);
                 }
                 isColumnsFill = true;
                 rows.push(row);

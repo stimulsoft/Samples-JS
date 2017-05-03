@@ -49,7 +49,8 @@
                         }
                         recordset[recordIndex][columnName] = value;
                     }
-                    row.push(recordset[recordIndex][columnName]);
+					if (recordset[recordIndex][columnName] != null && typeof recordset[recordIndex][columnName].toISOString === "function")	row.push(recordset[recordIndex][columnName].toISOString());
+                    else row.push(recordset[recordIndex][columnName]);
                 }
                 isColumnsFill = true;
                 rows.push(row);
