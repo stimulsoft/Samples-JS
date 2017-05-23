@@ -21,6 +21,7 @@
       "prefix": "app",
       "styles": [
         "stimulsoft/stimulsoft.designer.office2013.whiteblue.css",
+        "stimulsoft/stimulsoft.viewer.office2013.whiteblue.css",
         "styles.css"
       ],
       "scripts": [

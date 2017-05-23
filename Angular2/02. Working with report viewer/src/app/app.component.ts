@@ -16,7 +16,8 @@ declare var Stimulsoft: any;
 export class AppComponent {
   viewer: any = new Stimulsoft.Viewer.StiViewer(null, 'StiViewer', false);
   report: any = new Stimulsoft.Report.StiReport();
-  constructor(private http: Http) {
+  
+ngOnInit() {
     console.log('Loading Viewer view');
 
     this.http.request('reports/Report.mdc').subscribe((data: Response) => {
@@ -28,5 +29,9 @@ export class AppComponent {
       console.log('Rendering the viewer to selected element');
       this.viewer.renderHtml('viewer');
     });
+  }
+
+  constructor(private http: Http) {
+    
   }
 }

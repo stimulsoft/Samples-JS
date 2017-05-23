@@ -14,7 +14,7 @@ export class AppComponent {
   options: any;
   designer: any;
 
-  constructor() {
+  ngOnInit() {
     console.log('Loading Designer view');
 
     console.log('Set full screen mode for the designer');
@@ -31,5 +31,8 @@ export class AppComponent {
     this.designer.renderHtml('designer');
 
     console.log('Loading completed successfully!');
+  }
+
+  constructor() {    
   }
 }
