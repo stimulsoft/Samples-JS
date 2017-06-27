@@ -21,22 +21,13 @@
 		
 		// Export report to PDF format and save to file
 		function saveReportPdf() {
-			// Create an PDF settings instance. You can change export settings.
-			var settings = new Stimulsoft.Report.Export.StiPdfExportSettings();
-			// Create an PDF service instance.
-			var service = new Stimulsoft.Report.Export.StiPdfExportService();
-
-			// Create a MemoryStream object.
-			var stream = new Stimulsoft.System.IO.MemoryStream();
-			// Export PDF using MemoryStream.
-			service.exportTo(report, stream, settings);
-
-			// Get PDF data from MemoryStream object
-			var data = stream.toArray();
+			// Export to PDF
+			var pdfData = report.exportDocument(Stimulsoft.Report.StiExportFormat.Pdf);
+			
 			// Get report file name
 			var fileName = String.isNullOrEmpty(report.reportAlias) ? report.reportName : report.reportAlias;
 			// Save data to file
-			Object.saveAs(data, fileName + ".pdf", "application/pdf");
+			Object.saveAs(pdfData, fileName + ".pdf", "application/pdf");
 		}
 	</script>
 	

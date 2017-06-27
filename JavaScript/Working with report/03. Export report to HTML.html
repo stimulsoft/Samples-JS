@@ -21,41 +21,23 @@
 		
 		// Export report to HTML format and show it
 		function exportReportHtml() {
-			// Create an HTML settings instance. You can change export settings.
-			var settings = new Stimulsoft.Report.Export.StiHtmlExportSettings();
-			// Create an HTML service instance.
-			var service = new Stimulsoft.Report.Export.StiHtmlExportService();
-
-			// Create a text writer objects.
-			var textWriter = new Stimulsoft.System.IO.TextWriter();
-			var htmlTextWriter = new Stimulsoft.Report.Export.StiHtmlTextWriter(textWriter);
-			// Export HTML using text writer.
-			service.exportTo(report, htmlTextWriter, settings);
+			// Export to HTML
+			var htmlString = report.exportDocument(Stimulsoft.Report.StiExportFormat.Html);
 
 			// Write HTML text to DIV element.
 			var container = document.getElementById("htmlContainer");
-			container.innerHTML = textWriter.getStringBuilder().toString();
+			container.innerHTML = htmlString;
 		}
 		
 		// Export report to HTML format and save to file
 		function saveReportHtml() {
-			// Create an HTML settings instance. You can change export settings.
-			var settings = new Stimulsoft.Report.Export.StiHtmlExportSettings();
-			// Create an HTML service instance.
-			var service = new Stimulsoft.Report.Export.StiHtmlExportService();
+			// Export to HTML
+			var htmlString = report.exportDocument(Stimulsoft.Report.StiExportFormat.Html);
 
-			// Create a text writer objects.
-			var textWriter = new Stimulsoft.System.IO.TextWriter();
-			var htmlTextWriter = new Stimulsoft.Report.Export.StiHtmlTextWriter(textWriter);
-			// Export HTML using text writer.
-			service.exportTo(report, htmlTextWriter, settings);
-
-			// Get HTML string from text writer object
-			var html = textWriter.getStringBuilder().toString();
 			// Get report file name
 			var fileName = String.isNullOrEmpty(report.reportAlias) ? report.reportName : report.reportAlias;
 			// Save data to file
-			Object.saveAs(html, fileName + ".html", "text/html;charset=utf-8");
+			Object.saveAs(htmlString, fileName + ".html", "text/html;charset=utf-8");
 		}
 	</script>
 	
