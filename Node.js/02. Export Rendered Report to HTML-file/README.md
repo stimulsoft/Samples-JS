@@ -35,29 +35,9 @@ Saving rendered report to mdc-file:
 
     report.saveDocumentFile("SimpleList.mdc");
 
-Creating export settings:
-
-    var settings = new Stimulsoft.Report.Export.StiHtmlExportSettings();
-
-Creating export service:
-
-    var service = new Stimulsoft.Report.Export.StiHtmlExportService();
-
-Creating text writer:
-
-    var textWriter = new Stimulsoft.System.IO.TextWriter();
-
-Creating HTML writer:
-
-    var htmlTextWriter = new Stimulsoft.Report.Export.StiHtmlTextWriter(textWriter);
-
-Exportong report into HTML writer:
-
-    service.exportTo(report, htmlTextWriter, settings);
-
-Set HTML-data to string:
-
-    var resultHtml = textWriter.getStringBuilder().toString();
+Export to HTML
+	
+	var htmlString = report.exportDocument(Stimulsoft.Report.StiExportFormat.Html);
 
 Loading File System module:
 
@@ -65,5 +45,5 @@ Loading File System module:
 
 Saving string with rendered report in HTML form into a file:
 
-    fs.writeFileSync('./SimpleList.html', resultHtml);
+    fs.writeFileSync('./SimpleList.html', htmlString);
 

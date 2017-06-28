@@ -31,29 +31,13 @@ Renreding report:
 
     report.render();
 
-Creating export settings:
+Export to PDF
 
-    var settings = new Stimulsoft.Report.Export.StiPdfExportSettings();
-
-Creating export service:
-
-    var service = new Stimulsoft.Report.Export.StiPdfExportService();
-
-Creating MemoryStream:
-
-    var stream = new Stimulsoft.System.IO.MemoryStream();
-
-Exportong report into the MemoryStream:
-
-    service.exportTo(report, stream, settings);
-
-Converting MemoryStream into Array:
-
-    var data = stream.toArray();
+	var pdfData = report.exportDocument(Stimulsoft.Report.StiExportFormat.Pdf);
 
 Converting Array into buffer:
 
-    var buffer = new Buffer(data, "utf-8")
+    var buffer = new Buffer(pdfData, "utf-8")
 
 Loading File System module:
 
