@@ -81,14 +81,18 @@ class StiMySqlAdapter {
 	
 	private function parseType($meta) {
 		switch ($meta->type) {
-			// number
+			// integer
 			case 1:
 			case 2:
 			case 3:
-			case 4:
-			case 5:
 			case 8:
 			case 9:
+				//return 'int';
+				return 'number';
+			
+			// number (decimal)
+			case 4:
+			case 5:
 			case 16:
 			case 246:
 				return 'number';
@@ -99,8 +103,7 @@ class StiMySqlAdapter {
 			case 11:
 			case 12:
 			case 13:
-				return 'string';
-				//return 'datetime';
+				return 'datetime';
 			
 			// array, string
 			case 249:
@@ -113,7 +116,7 @@ class StiMySqlAdapter {
 				return 'string';
 		}
 		
-		// array for unknown
+		// base64 array for unknown
 		return 'array';
 	}
 	

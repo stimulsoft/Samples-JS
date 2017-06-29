@@ -58,16 +58,14 @@ class StiMsSqlAdapter {
 		$info->charset = "UTF-8";
 		
 		$parameters = explode(";", $connectionString);
-		foreach($parameters as $parameter)
-		{
+		foreach($parameters as $parameter) {
 			if (strpos($parameter, "=") < 1) continue;
 		
 			$spos = strpos($parameter, "=");
 			$name = strtolower(trim(substr($parameter, 0, $spos)));
 			$value = trim(substr($parameter, $spos + 1));
 			
-			switch ($name)
-			{
+			switch ($name) {
 				case "server":
 				case "data source":
 					$info->host = $value;
@@ -99,6 +97,46 @@ class StiMsSqlAdapter {
 		$this->connectionInfo = $info;
 	}
 	
+	private function parseType($meta) {
+		switch ($meta["Type"]) {
+			// integer
+			case -6:
+			case -5:
+			case 4:
+			case 5:
+				//return 'int';
+				return 'number';
+			
+			// number (decimal)
+			case 2:
+			case 3:
+			case 6:
+			case 7:
+				return 'number';
+			
+			// datetime
+			case -155:
+			case -154:
+			case -2:
+			case 91:
+			case 93:
+				return 'datetime';
+			
+			// string
+			case -152:
+			case -10:
+			case -9:
+			case -8:
+			case -1:
+			case 1:
+			case 12:
+				return 'string';
+		}
+		
+		// base64 array for unknown
+		return 'array';
+	}
+	
 	public function test() {
 		$result = $this->connect();
 		if ($result->success) $this->disconnect();
@@ -111,8 +149,16 @@ class StiMsSqlAdapter {
 			$query = $this->isMicrosoftDriver ? sqlsrv_query($this->link, $queryString) : mssql_query($queryString, $this->link);
 			if (!$query) return $this->getLastErrorResult();
 			
+			$result->types = array();
 			$result->columns = array();
 			$result->rows = array();
+			
+			if ($this->isMicrosoftDriver) {
+				foreach (sqlsrv_field_metadata($query) as $meta) {
+					$result->types[] = $this->parseType($meta);
+				}
+			}
+			
 			while ($rowItem = $this->isMicrosoftDriver ? sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC) : mssql_fetch_assoc($query)) {
 				$row = array();
 				foreach ($rowItem as $key => $value) {
