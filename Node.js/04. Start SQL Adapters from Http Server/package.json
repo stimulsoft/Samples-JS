@@ -7,7 +7,6 @@
 	"dependencies" : {
 		"mssql" : "^3.1.2",
 		"mysql" : "^2.10.2",
-		"node-firebird" : "^0.7.2",
 		"pg" : "^4.5.1"
 	},
 	"maintainers" : [{

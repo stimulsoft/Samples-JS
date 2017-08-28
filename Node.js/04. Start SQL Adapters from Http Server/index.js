@@ -9,8 +9,11 @@ var connectionStringBuilder;
 var response;
 function accept(req, res) {
     response = res;
-    response.setHeader("Access-Control-Allow-Origin", "*");
-    response.setHeader("Cache-Control", "no-cache");
+    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    response.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
+    response.header("Cache-Control", "no-cache");
+    
     var data = "";
     req.on('data', function (buffer) {
         data += buffer;
