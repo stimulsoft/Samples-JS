@@ -64,7 +64,7 @@ Stimulsoft.Report.dll
 Stimulsoft.Report.Check.dll  
 Stimulsoft.Report.Design.dll  
 Stimulsoft.Report.Helper.dll  
-Stimulsoft.Report.WebViewer.dll  
+Stimulsoft.Report.Web.dll  
 Stimulsoft.Report.Win.dll
 
 **NetCore**  
