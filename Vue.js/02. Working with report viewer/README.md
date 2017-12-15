@@ -1,4 +1,4 @@
-# Stimulsoft Reports.JS + Angular 2
+# Stimulsoft Reports.JS + Vue.js
 
 This simple demo illustrates integration of Stimulsoft Reports.JS into an Vue.js project.
 
