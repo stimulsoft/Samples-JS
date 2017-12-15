@@ -1,4 +1,4 @@
-#Vue.js samples for Stimulsoft Reports.JS
+# Vue.js samples for Stimulsoft Reports.JS
 
 In this folder are available examples of using Stimulsoft Reports.JS + Vue.js
 
