@@ -15,17 +15,17 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
+        templateUrl: '../views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
       .when('/viewer', {
-        templateUrl: 'views/viewer.html',
+        templateUrl: '../views/viewer.html',
         controller: 'ViewerCtrl',
         controllerAs: 'Viewer'
       })
       .when('/designer', {
-        templateUrl: 'views/designer.html',
+        templateUrl: '../views/designer.html',
         controller: 'DesignerCtrl',
         controllerAs: 'Designer'
       })

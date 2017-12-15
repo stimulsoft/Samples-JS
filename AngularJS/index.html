@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon"/>
+
+    <!--AngularJS-->
+    <script type="text/javascript" src="lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="lib/angular/angular-route.min.js"></script>
+
+    <!--Stimulsoft-->
+    <script type="text/javascript" src="lib/stimulsoft/stimulsoft.reports.js"></script>
+    <script type="text/javascript" src="lib/stimulsoft/stimulsoft.viewer.js"></script>
+    <script type="text/javascript" src="lib/stimulsoft/stimulsoft.designer.js"></script>
+    <link rel="stylesheet" href="lib/stimulsoft/stimulsoft.designer.office2013.whiteblue.css" />
+    <link rel="stylesheet" href="lib/stimulsoft/stimulsoft.viewer.office2013.whiteblue.css" />
+
+
+    <link rel="stylesheet" href="css/main.css" />
+
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/controllers/main.js"></script>
+    <script type="text/javascript" src="js/controllers/designer.js"></script>
+    <script type="text/javascript" src="js/controllers/viewer.js"></script>
+
+    
+</head>
+
+<body ng-app="angularDemoApp">
+    <div class="header">
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <h1>Stimulsoft Report.JS Angular Demo</h1>
+                </div>
+
+                <div class="collapse">
+
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="#/">Home</a>
+                        </li>
+                        <li>
+                            <a ng-href="#/viewer">Viewer</a>
+                        </li>
+                        <li>
+                            <a ng-href="#/designer">Designer</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div ng-view=""></div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <p>
+                <span class="glyphicon glyphicon-heart"></span>Stimulsoft Reports.JS + Angular.JS</p>
+        </div>
+    </div>
+
+</html>

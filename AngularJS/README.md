@@ -6,8 +6,4 @@ This simple demo illustrates integration of Stimulsoft Reports.JS into an Angula
 
 * run ``` npm install ``` to install nmp modules
 
-* then run ``` bower install ``` to install bower modules
-
-* then run ``` grunt build ``` to build the project.
-
-The "dist" folder contains compiled project. Run any web server from here and open this site in the browser.
+* then run ``` npm start ``` and navigate to ``` http://localhost:8080/ ```.
