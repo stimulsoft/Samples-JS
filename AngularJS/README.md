@@ -6,4 +6,4 @@ This simple demo illustrates integration of Stimulsoft Reports.JS into an Angula
 
 * run ``` npm install ``` to install nmp modules
 
-* then run ``` npm start ``` and navigate to ``` http://localhost:8080/ ```.
+* then run ``` npm start ``` and navigate to ``` http://localhost:3000/ ```.
