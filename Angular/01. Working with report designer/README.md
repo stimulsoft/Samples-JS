@@ -1,6 +1,6 @@
-# Stimulsoft Reports.JS + Angular 2
+# Stimulsoft Reports.JS + Angular
 
-This simple demo illustrates integration of Stimulsoft Reports.JS into an Angular 2 project.
+This simple demo illustrates integration of Stimulsoft Reports.JS into an Angular project.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.1.
 
