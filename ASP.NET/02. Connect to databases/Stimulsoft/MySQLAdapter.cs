@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -66,23 +67,72 @@ public class MySQLAdapter
     {
         var columns = new List<string>();
         var rows = new List<string[]>();
-        var isColumnsFill = false;
- 
+        var types = new List<string>();
+
+        for (var index = 0; index < reader.FieldCount; index++)
+        {
+            var columnName = reader.GetName(index);
+            var columnType = MySQLAdapter.GetType(reader.GetFieldType(index));
+
+            columns.Add(columnName);
+            types.Add(columnType);
+        }
+
         while (reader.Read())
         {
             var row = new string[reader.FieldCount];
             for (var index = 0; index < reader.FieldCount; index++)
             {
-                if (!isColumnsFill) columns.Add(reader.GetName(index));
-                var value = "";
-                if (!reader.IsDBNull(index)) value = reader.GetString(index);
-                row[index] = value;
+                var columnName = reader.GetName(index);
+                var columnType = MySQLAdapter.GetType(reader.GetFieldType(index));
+
+                var columnIndex = columns.IndexOf(columnName);
+                if (types[columnIndex] != "array") types[columnIndex] = columnType;
+                object value = null;
+                if (!reader.IsDBNull(index))
+                {
+                    if (columnType == "array")
+                    {
+                        value = MySQLAdapter.GetBytes(index);
+                    }
+                    else value = reader.GetValue(index);
+                }
+
+                if (value == null) value = "";
+                row[index] = value.ToString();
             }
             rows.Add(row);
-            isColumnsFill = true;
         }
 
-        return End(new Result { Success = true, Columns = columns.ToArray(), Rows = rows.ToArray() });
+        return End(new Result { Success = true, Columns = columns.ToArray(), Rows = rows.ToArray(), Types = types.ToArray() });
+    }
+
+    private static string GetBytes(int index)
+    {
+        var size = reader.GetBytes(index, 0, null, 0, 0);
+        var destination = new MemoryStream();
+        var buffer = new byte[8040];
+        long offset = 0;
+        long read;
+
+        while ((read = reader.GetBytes(index, offset, buffer, 0, buffer.Length)) > 0)
+        {
+            offset += read;
+            destination.Write(buffer, 0, (int)read);
+            if (size == offset) break;
+        }
+
+        return System.Convert.ToBase64String(destination.ToArray());
+    }
+
+    private static string GetType(Type columnType)
+    {
+        var typeCode = Type.GetTypeCode(columnType);
+
+        if ((int)typeCode >= 5 && (int)typeCode <= 15) return "number";
+        if ((int)typeCode == 1) return "array";
+
+        return "string";
     }
 
     public static Result Process(CommandJson command)

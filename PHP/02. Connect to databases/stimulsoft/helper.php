@@ -70,10 +70,10 @@ class StiHandler {
 		$args->database = $request->database;
 		$args->connectionString = $request->connectionString;
 		$args->queryString = $request->queryString;
-		if (isset($request->queryString)) $args->parameters = $this->getQueryParameters($request->queryString);
+		$args->parameters = $this->getQueryParameters($request->queryString);
 		
 		$result = $this->checkEventResult($this->onBeginProcessData, $args);
-		if (isset($result->object->queryString) && isset($args->parameters)) $result->object->queryString = $this->applyQueryParameters($result->object->queryString, $args->parameters);
+		$result->object->queryString = $this->applyQueryParameters($result->object->queryString, $args->parameters);
 		return $result;
 	}
 	

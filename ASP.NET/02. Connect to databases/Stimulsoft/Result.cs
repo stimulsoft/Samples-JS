@@ -18,4 +18,7 @@ public class Result
 
     [DataMember(Name = "rows")]
     public string[][] Rows { get; set; }
+
+    [DataMember(Name = "types")]
+    public string[] Types { get; set; }
 }

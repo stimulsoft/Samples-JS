@@ -59,7 +59,7 @@
                 var dataColumn = data.columns.list[index];
                 //Create text on header
                 var headerText = new Stimulsoft.Report.Components.StiText();
-                headerText.clientRectangle = new Stimulsoft.Base.Drawing.RectangleD(pos, 0, columnWidth, 0.5);
+                headerText.clientRectangle = new Stimulsoft.System.Drawing.Rectangle(pos, 0, columnWidth, 0.5);
                 headerText.text = dataColumn.caption;
                 headerText.horAlignment = Stimulsoft.Base.Drawing.StiTextHorAlignment.Center;
                 headerText.name = "HeaderText" + nameIndex.toString();
@@ -69,7 +69,7 @@
 
                 //Create text on Data Band
                 var dataText = new Stimulsoft.Report.Components.StiText();
-                dataText.clientRectangle = new Stimulsoft.Base.Drawing.RectangleD(pos, 0, columnWidth, 0.5)
+                dataText.clientRectangle = new Stimulsoft.System.Drawing.Rectangle(pos, 0, columnWidth, 0.5)
                 dataText.text = String.stiFormat("{{0}.{1}}", data.tableName, dataColumn.columnName);
                 dataText.name = "DataText" + nameIndex.toString();
                 dataText.border.side = Stimulsoft.Base.Drawing.StiBorderSides.All;
@@ -97,7 +97,7 @@
 
             //Create text on footer
             var footerText = new Stimulsoft.Report.Components.StiText();
-            footerText.clientRectangle = new Stimulsoft.Base.Drawing.RectangleD(0, 0, page.width, 0.5);
+            footerText.clientRectangle = new Stimulsoft.System.Drawing.Rectangle(0, 0, page.width, 0.5);
             footerText.text = "Count - {Count()}";
             footerText.horAlignment = Stimulsoft.Base.Drawing.StiTextHorAlignment.Right;
             footerText.name = "FooterText";

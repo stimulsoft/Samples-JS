@@ -69,14 +69,17 @@ public class MSSQLAdapter
     {
         var columns = new List<string>();
         var rows = new List<string[]>();
-        var isColumnsFill = false;
+
+        for (var index = 0; index < reader.FieldCount; index++)
+        {
+            columns.Add(reader.GetName(index));
+        }
 
         while (reader.Read())
         {
             var row = new string[reader.FieldCount];
             for (var index = 0; index < reader.FieldCount; index++)
             {
-                if (!isColumnsFill) columns.Add(reader.GetName(index));
                 object value = null;
                 if (!reader.IsDBNull(index)) value = reader.GetValue(index);
                 if (value == null) value = "";
@@ -84,7 +87,6 @@ public class MSSQLAdapter
 
             }
             rows.Add(row);
-            isColumnsFill = true;
         }
 
         return End(new Result { Success = true, Columns = columns.ToArray(), Rows = rows.ToArray() });

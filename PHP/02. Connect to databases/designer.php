@@ -9,8 +9,8 @@ require_once 'stimulsoft/helper.php';
 	<title>Stimulsoft Reports.PHP - JS Report Designer</title>
 
 	<!-- Report Office2013 style -->
-	<link href="css/stimulsoft.viewer.office2013.whiteteal.css" rel="stylesheet">
-	<link href="css/stimulsoft.designer.office2013.lightgrayteal.css" rel="stylesheet">
+	<link href="css/stimulsoft.viewer.office2013.whiteblue.css" rel="stylesheet">
+	<link href="css/stimulsoft.designer.office2013.whiteblue.css" rel="stylesheet">
 
 	<!-- Stimusloft Reports.JS -->
 	<script src="scripts/stimulsoft.reports.js" type="text/javascript"></script>

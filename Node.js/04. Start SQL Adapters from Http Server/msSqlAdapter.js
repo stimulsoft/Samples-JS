@@ -15,7 +15,7 @@
     
     try {
         var connect = function () {
-            connection = new sql.Connection(config, function (error) {
+            connection = new sql.ConnectionPool(config, function (error) {
                 if (error) onError(error.message);
                 else onConnect();
             });
@@ -37,13 +37,22 @@
         }
         
         var onQuery = function (recordset) {
+			recordset = recordset.recordset;
             var columns = [];
             var rows = [];
+			var types = [];
             var isColumnsFill = false;
+			if (recordset.length > 0 && Array.isArray(recordset[0])) recordset = recordset[0];
             for (var recordIndex in recordset) {
                 var row = [];
                 for (var columnName in recordset[recordIndex]) {
-                    if (!isColumnsFill) columns.push(columnName);
+                    if (!isColumnsFill) columns.push(columnName);	
+					var columnIndex = columns.indexOf(columnName);
+                    if (types[columnIndex] != "array") types[columnIndex] = typeof recordset[recordIndex][columnName];
+                    if (recordset[recordIndex][columnName] instanceof Uint8Array) {
+                        types[columnIndex] = "array";
+                        recordset[recordIndex][columnName] = new Buffer(recordset[recordIndex][columnName]).toString('base64');
+                    }
 					
                     if (recordset[recordIndex][columnName] != null && typeof recordset[recordIndex][columnName].toISOString === "function")	row.push(recordset[recordIndex][columnName].toISOString());
                     else row.push(recordset[recordIndex][columnName]);
@@ -52,7 +61,7 @@
                 rows.push(row);
             }
             
-            end({ success: true, columns: columns, rows: rows });
+            end({ success: true, columns: columns, rows: rows, types: types });
         }
         
         var getConnectionStringInfo = function (connectionString) {

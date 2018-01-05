@@ -22,7 +22,15 @@
 		// Create the report designer with specified options
 		var designer = new Stimulsoft.Designer.StiDesigner(options, "StiDesigner", false);
 		
-		
+		Stimulsoft.Report.Dictionary.StiCustomDatabase.registerCustomDatabase({
+			serviceName: "MyDatabase",
+			sampleConnectionString: "123",
+			process: function (command, callback) {
+				if (command.command == "TestConnection") callback({ success: false, notice: "Error" });
+				if (command.command == "RetrieveSchema") callback({ success: true, data: demoData });
+				if (command.command == "RetrieveData") callback({ success: true, data: demoData[command.queryString]});
+			}
+		});
 		
 		// Create a new report instance
 		var report = new Stimulsoft.Report.StiReport();
@@ -58,16 +66,6 @@
                 }
                 ]
             };
-			
-		Stimulsoft.Report.Dictionary.StiCustomDatabase.registerCustomDatabase({
-			serviceName: "MyDatabase",
-			sampleConnectionString: "123",
-			process: function (command, callback) {
-				if (command.command == "TestConnection") callback({ success: false, notice: "Error" });
-				if (command.command == "RetrieveSchema") callback({ success: true, data: demoData });
-				if (command.command == "RetrieveData") callback({ success: true, data: demoData[command.queryString]});
-			}
-		});
 			
 	</script>
 </head>

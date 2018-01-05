@@ -43,5 +43,7 @@ function accept(req, res) {
 	}
 }
 
-//The HTTP server run on port 9615
-http.createServer(accept).listen(9615);
+console.log("Static file server running at http://localhost:" + 8888 + "/\nCTRL + C to shutdown");
+//The HTTP server run on port 8888
+http.createServer(accept).listen(8888);
+

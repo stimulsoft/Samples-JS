@@ -27,6 +27,9 @@ export class AppComponent {
     console.log('Edit report template in the designer');
     this.designer.report = new Stimulsoft.Report.StiReport();
 
+    console.log('Load report from url');
+    this.designer.report.loadFile('/reports/SimpleList.mrt');
+
     console.log('Rendering the designer to selected element');
     this.designer.renderHtml('designer');
 
