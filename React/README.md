@@ -1,4 +1,4 @@
-#React samples for Stimulsoft Reports.JS
+# React samples for Stimulsoft Reports.JS
 
 In this folder are available examples of using Stimulsoft Reports.JS + React
 
