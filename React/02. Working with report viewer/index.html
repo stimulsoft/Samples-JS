@@ -16,7 +16,7 @@
     <script src="stimulsoft/stimulsoft.reports.js"></script>
     <script src="stimulsoft/stimulsoft.viewer.js"></script>
     <script type="text/babel">
-        class Designer extends React.Component {
+        class Viewer extends React.Component {
             render() {
                 return <div id="viewer"></div>;
             }          
@@ -38,12 +38,10 @@
 
                 console.log('Rendering the viewer to selected element');
                 viewer.renderHtml('viewer');
-    
-                var report = new window.Stimulsoft.Report.StiReport();
           }
         }
         ReactDOM.render(
-            <Designer />,
+            <Viewer />,
             document.getElementById("main")
         )        
     </script>
