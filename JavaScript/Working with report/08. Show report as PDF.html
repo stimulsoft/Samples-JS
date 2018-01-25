@@ -33,7 +33,7 @@
 				window.navigator.msSaveOrOpenBlob(blob, fileName + ".pdf");
 			} else {
 				// Show the new tab with the blob data
-				let fileURL = URL.createObjectURL(blob);
+				var fileURL = URL.createObjectURL(blob);
 				window.open(fileURL);
 			};
 		}
