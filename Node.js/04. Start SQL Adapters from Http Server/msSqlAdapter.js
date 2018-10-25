@@ -54,8 +54,12 @@
                         recordset[recordIndex][columnName] = new Buffer(recordset[recordIndex][columnName]).toString('base64');
                     }
 					
-                    if (recordset[recordIndex][columnName] != null && typeof recordset[recordIndex][columnName].toISOString === "function")	row.push(recordset[recordIndex][columnName].toISOString());
-                    else row.push(recordset[recordIndex][columnName]);
+                    if (recordset[recordIndex][columnName] != null && typeof recordset[recordIndex][columnName].toISOString === "function") {
+                        recordset[recordIndex][columnName] = recordset[recordIndex][columnName].toISOString();
+                        types[columnIndex] = "datetime";
+                    }
+
+                    row.push(recordset[recordIndex][columnName]);
                 }
                 isColumnsFill = true;
                 rows.push(row);
@@ -63,9 +67,28 @@
             
             end({ success: true, columns: columns, rows: rows, types: types });
         }
-        
-        var getConnectionStringInfo = function (connectionString) {
-            var info = {};
+
+        var getHostInfo = function (host) {
+            const regexFull = /.*:(.*)/;
+            const regexHostPort = /(.*),([0-9]+)/;
+            const matchFull = regexFull.exec(host);
+
+            if (matchFull) {
+                const matchHostPort1 = regexHostPort.exec(matchFull[1]);
+                if (matchHostPort1) return { host: matchHostPort1[1].trim(), port: matchHostPort1[2].trim() };
+                return { host: matchFull[1].trim() };
+            }
+            else {
+                const matchHostPort2 = regexHostPort.exec(dataSource);
+                if (matchHostPort2) return { host: matchHostPort2[1].trim(), port: matchHostPort2[2].trim() };
+                return { host: host };
+            }
+        }
+
+        var getConnectionStringConfig = function (connectionString) {
+            var config = {
+                options: {}
+            };
             
             for (var propertyIndex in connectionString.split(";")) {
                 var property = connectionString.split(";")[propertyIndex];
@@ -78,41 +101,40 @@
                         switch (match[0]) {
                             case "data source":
                             case "server":
-                                info["host"] = match[1];
+                                var hostInfo = getHostInfo(match[1]);
+                                config["server"] = hostInfo.host;
+                                if ("port" in hostInfo) config["port"] = hostInfo.port;
                                 break;
 
                             case "database":
                             case "initial catalog":
-                                info["database"] = match[1];
+                                config["database"] = match[1];
                                 break;
 
                             case "uid":
                             case "user":
                             case "user id":
-                                info["userId"] = match[1];
+                                config["user"] = match[1];
                                 break;
 
                             case "pwd":
                             case "password":
-                                info["password"] = match[1];
+                                config["password"] = match[1];
+                                break;
+
+                            case "encrypt":
+                                config.options["encrypt"] = match[1];
                                 break;
                         }
                     }
                 }
             }
             
-            return info;
+            return config;
         };
         
         var sql = require('mssql');
-        command.connectionStringInfo = getConnectionStringInfo(command.connectionString);
-        
-        var config = {
-            user: command.connectionStringInfo.userId,
-            password: command.connectionStringInfo.password,
-            server: command.connectionStringInfo.host,
-            database: command.connectionStringInfo.database
-        };
+        var config = getConnectionStringConfig(command.connectionString);
         
         connect();
     }

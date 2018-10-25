@@ -38,19 +38,32 @@ exports.process = function (command, onResult) {
         var onQuery = function (recordset) {
             var columns = [];
             var rows = [];
-            for (var recordIndex in recordset.fields) {
-              columns.push(recordset.fields[recordIndex].name);
-            }
-
+            var types = [];
+            var isColumnsFill = false;
+            if (recordset.rows.length > 0 && Array.isArray(recordset.rows[0])) recordset.rows = recordset.rows[0];
             for (var recordIndex in recordset.rows) {
                 var row = [];
-                for (var columnNameIndex in columns) {
-                    row[columnNameIndex] = recordset.rows[recordIndex][columns[columnNameIndex]];
+                for (var columnName in recordset.rows[recordIndex]) {
+                    if (!isColumnsFill) columns.push(columnName);
+                    var columnIndex = columns.indexOf(columnName);
+                    if (types[columnIndex] != "array") types[columnIndex] = typeof recordset.rows[recordIndex][columnName];
+                    if (recordset.rows[recordIndex][columnName] instanceof Uint8Array) {
+                        types[columnIndex] = "array";
+                        recordset.rows[recordIndex][columnName] = new Buffer(recordset.rows[recordIndex][columnName]).toString('base64');
+                    }
+
+                    if (recordset.rows[recordIndex][columnName] != null && typeof recordset.rows[recordIndex][columnName].toISOString === "function") {
+                        recordset.rows[recordIndex][columnName] = recordset.rows[recordIndex][columnName].toISOString();
+                        types[columnIndex] = "datetime";
+                    }
+
+                    row.push(recordset.rows[recordIndex][columnName]);
                 }
+                isColumnsFill = true;
                 rows.push(row);
             }
 
-            end({ success: true, columns: columns, rows: rows });
+            end({ success: true, columns: columns, rows: rows, types: types });
         }
 
         var getConnectionStringInfo = function (connectionString) {
