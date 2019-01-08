@@ -34,12 +34,12 @@ function accept(req, res) {
 		// Loading report template
 		report.loadFile("report/SimpleList.mrt");
 		// Renreding report
-		report.render();
-		// Saving rendered report to JSON string
-		var reportJson = report.saveDocumentToJsonString();
-		
-		//Send report
-		res.end(reportJson);
+		report.renderAsync(function() {
+			// Saving rendered report to JSON string
+    			var reportJson = report.saveDocumentToJsonString();
+			// Send report
+    			res.end(reportJson);
+  		});
 	}
 }
 
