@@ -1,9 +1,9 @@
-﻿html, body {
+html, body {
   margin: 0px;
   padding: 0px;
   height: 100%;
   background-color: #e8e8e8;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 table.Main {
@@ -15,7 +15,7 @@ table.Main {
 table.LeftPanel {
 	width: 150px;
 	height: 100%;
-	background: white;
+	background: #19478a;
 }
 
 table.LeftPanel td {
@@ -36,6 +36,7 @@ a.ReportButton {
 	cursor: pointer;
 	display: block;
 	text-align: center;
+	margin: 15px 0 15px 0;
 }
 
 a.ReportButton table {
@@ -44,36 +45,27 @@ a.ReportButton table {
 
 a.ReportButton img {
 	text-align: center;
-	border: 1px solid gray;
+	border: 1px solid #ffffff;
 	margin : 3px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
 }
 
 a.ReportButton.Over img {
 	text-align: center;
 	border: 1px solid #7dbbb3;
 	margin : 3px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
 }
 
 a.ReportButton.Selected img {
 	text-align: center;
 	border: 2px solid #7dbbb3;
 	margin : 2px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
 }
 
 a.ReportButton td.Caption {
 	padding: 0 5px 0 5px;
 	font-family: Arial;
-	font-size: 11pt;
-	color: #4a465c;
+	font-size: 9pt;
+	color: #ffffff;
 	display: block;
 	text-align: center;
 }
