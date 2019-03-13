@@ -11,7 +11,7 @@
   "dependencies": {
     "stimulsoft-reports-js": "latest"
   },
-  "repository": { 
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/03.%20Export%20Rendered%20Report%20to%20PDF-file"
   }

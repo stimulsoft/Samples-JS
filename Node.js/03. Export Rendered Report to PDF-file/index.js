@@ -20,9 +20,9 @@ console.log("Report rendered. Pages count: ", report.renderedPages.count);
 
 // Export to PDF
 var pdfData = report.exportDocument(Stimulsoft.Report.StiExportFormat.Pdf);
-			
+
 // Converting Array into buffer
-var buffer = new Buffer(pdfData, "utf-8")
+var buffer = Buffer.from(pdfData)
 
 // File System module
 var fs = require('fs');

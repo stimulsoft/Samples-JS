@@ -1,5 +1,5 @@
 ﻿exports.process = function (command, onResult) {
-    
+
     var end = function (result) {
         try {
             if (connection) connection.close();
@@ -8,11 +8,11 @@
         catch (e) {
         }
     }
-    
+
     var onError = function (message) {
         end({ success: false, notice: message });
     }
-    
+
     try {
         var connect = function () {
             connection = new sql.ConnectionPool(config, function (error) {
@@ -20,7 +20,7 @@
                 else onConnect();
             });
         }
-        
+
         var query = function (queryString) {
             var request = connection.request();
             request.query(queryString, function (error, recordset) {
@@ -30,30 +30,30 @@
                 }
             });
         }
-        
+
         var onConnect = function () {
             if (command.queryString) query(command.queryString);
             else end({ success: true });
         }
-        
+
         var onQuery = function (recordset) {
-			recordset = recordset.recordset;
+            recordset = recordset.recordset;
             var columns = [];
             var rows = [];
-			var types = [];
+            var types = [];
             var isColumnsFill = false;
-			if (recordset.length > 0 && Array.isArray(recordset[0])) recordset = recordset[0];
+            if (recordset.length > 0 && Array.isArray(recordset[0])) recordset = recordset[0];
             for (var recordIndex in recordset) {
                 var row = [];
                 for (var columnName in recordset[recordIndex]) {
-                    if (!isColumnsFill) columns.push(columnName);	
-					var columnIndex = columns.indexOf(columnName);
+                    if (!isColumnsFill) columns.push(columnName);
+                    var columnIndex = columns.indexOf(columnName);
                     if (types[columnIndex] != "array") types[columnIndex] = typeof recordset[recordIndex][columnName];
                     if (recordset[recordIndex][columnName] instanceof Uint8Array) {
                         types[columnIndex] = "array";
-                        recordset[recordIndex][columnName] = new Buffer(recordset[recordIndex][columnName]).toString('base64');
+                        recordset[recordIndex][columnName] = Buffer.from(recordset[recordIndex][columnName]).toString('base64');
                     }
-					
+
                     if (recordset[recordIndex][columnName] != null && typeof recordset[recordIndex][columnName].toISOString === "function") {
                         recordset[recordIndex][columnName] = recordset[recordIndex][columnName].toISOString();
                         types[columnIndex] = "datetime";
@@ -64,7 +64,7 @@
                 isColumnsFill = true;
                 rows.push(row);
             }
-            
+
             end({ success: true, columns: columns, rows: rows, types: types });
         }
 
@@ -89,7 +89,7 @@
             var config = {
                 options: {}
             };
-            
+
             for (var propertyIndex in connectionString.split(";")) {
                 var property = connectionString.split(";")[propertyIndex];
                 if (property) {
@@ -97,7 +97,7 @@
                     if (match && match.length >= 2) {
                         match[0] = match[0].trim().toLowerCase();
                         match[1] = match[1].trim();
-                        
+
                         switch (match[0]) {
                             case "data source":
                             case "server":
@@ -129,13 +129,13 @@
                     }
                 }
             }
-            
+
             return config;
         };
-        
+
         var sql = require('mssql');
         var config = getConnectionStringConfig(command.connectionString);
-        
+
         connect();
     }
     catch (e) {

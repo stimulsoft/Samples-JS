@@ -1,5 +1,5 @@
 ﻿exports.process = function (command, onResult) {
-    
+
     var end = function (result) {
         try {
             if (connection) connection.end();
@@ -8,11 +8,11 @@
         catch (e) {
         }
     }
-    
+
     var onError = function (message) {
         end({ success: false, notice: message });
     }
-    
+
     try {
         var connect = function () {
             connection.connect(function (error) {
@@ -20,7 +20,7 @@
                 else onConnect();
             });
         }
-        
+
         var query = function (queryString) {
             connection.query("USE " + command.connectionStringInfo.database);
             //queryString = queryString.replace(/\'/gi, "\"");
@@ -31,12 +31,12 @@
                 }
             });
         }
-        
+
         var onConnect = function () {
             if (command.queryString) query(command.queryString);
             else end({ success: true });
         }
-        
+
         var onQuery = function (recordset, fields) {
             var columns = [];
             var rows = [];
@@ -46,7 +46,7 @@
             for (var columnIndex in fields) {
                 var column = fields[columnIndex]
                 columns.push(column.name);
-                
+
 
                 switch (column.type) {
                     case 0x01: // aka TINYINT, 1 byte
@@ -96,7 +96,7 @@
                 }
             }
 
-			if (recordset.length > 0 && Array.isArray(recordset[0])) recordset = recordset[0];
+            if (recordset.length > 0 && Array.isArray(recordset[0])) recordset = recordset[0];
             for (var recordIndex in recordset) {
                 var row = [];
                 for (var columnName in recordset[recordIndex]) {
@@ -105,9 +105,9 @@
                     if (types[columnIndex1] != "array") types[columnIndex1] = typeof recordset[recordIndex][columnName];
                     if (recordset[recordIndex][columnName] instanceof Uint8Array) {
                         types[columnIndex1] = "array";
-                        recordset[recordIndex][columnName] = new Buffer(recordset[recordIndex][columnName]).toString('base64');
+                        recordset[recordIndex][columnName] = Buffer.from(recordset[recordIndex][columnName]).toString('base64');
                     }
-					
+
                     if (recordset[recordIndex][columnName] != null && typeof recordset[recordIndex][columnName].toISOString === "function") {
                         recordset[recordIndex][columnName] = recordset[recordIndex][columnName].toISOString();
                         types[columnIndex1] = "datetime";
@@ -118,13 +118,13 @@
                 //isColumnsFill = true;
                 rows.push(row);
             }
-            
+
             end({ success: true, columns: columns, rows: rows, types: types });
         }
-        
+
         var getConnectionStringInfo = function (connectionString) {
             var info = { host: "localhost", port: "3306", charset: "utf8" };
-            
+
             for (var propertyIndex in connectionString.split(";")) {
                 var property = connectionString.split(";")[propertyIndex];
                 if (property) {
@@ -132,7 +132,7 @@
                     if (match && match.length >= 2) {
                         match[0] = match[0].trim().toLowerCase();
                         match[1] = match[1].trim();
-                        
+
                         switch (match[0]) {
                             case "server":
                             case "host":
@@ -169,7 +169,7 @@
                     }
                 }
             }
-            
+
             return info;
         };
 
@@ -184,10 +184,10 @@
             charset: command.connectionStringInfo.charset,
             database: command.connectionStringInfo.database
         });
-        
+
         connect();
-        
-        
+
+
     }
     catch (e) {
         onError(e.stack);

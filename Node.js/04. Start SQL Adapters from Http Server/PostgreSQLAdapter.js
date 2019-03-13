@@ -49,7 +49,7 @@ exports.process = function (command, onResult) {
                     if (types[columnIndex] != "array") types[columnIndex] = typeof recordset.rows[recordIndex][columnName];
                     if (recordset.rows[recordIndex][columnName] instanceof Uint8Array) {
                         types[columnIndex] = "array";
-                        recordset.rows[recordIndex][columnName] = new Buffer(recordset.rows[recordIndex][columnName]).toString('base64');
+                        recordset.rows[recordIndex][columnName] = Buffer.from(recordset.rows[recordIndex][columnName]).toString('base64');
                     }
 
                     if (recordset.rows[recordIndex][columnName] != null && typeof recordset.rows[recordIndex][columnName].toISOString === "function") {
@@ -114,9 +114,9 @@ exports.process = function (command, onResult) {
         var pg = require('pg');
         command.connectionStringInfo = getConnectionStringInfo(command.connectionString);
 
-        command.postgreConnectionString = "postgres://"+command.connectionStringInfo.userId+":"+command.connectionStringInfo.password+"@"+command.connectionStringInfo.host;
-        if (command.connectionStringInfo.port != null) command.postgreConnectionString += ":"+command.connectionStringInfo.port;
-        command.postgreConnectionString += "/"+command.connectionStringInfo.database;
+        command.postgreConnectionString = "postgres://" + command.connectionStringInfo.userId + ":" + command.connectionStringInfo.password + "@" + command.connectionStringInfo.host;
+        if (command.connectionStringInfo.port != null) command.postgreConnectionString += ":" + command.connectionStringInfo.port;
+        command.postgreConnectionString += "/" + command.connectionStringInfo.database;
 
         var client = new pg.Client(command.postgreConnectionString);
 
