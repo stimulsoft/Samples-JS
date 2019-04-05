@@ -109,6 +109,8 @@ Stimulsoft.Base.dll
 Stimulsoft.Client.Designer.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Database.Wpf.dll  
+Stimulsoft.Dashboard.Drawing.Wpf.dll  
+Stimulsoft.Dashboard.Viewer.Wpf.dll  
 Stimulsoft.Editor.Wpf.dll  
 Stimulsoft.Map.dll  
 Stimulsoft.Report.dll  
@@ -139,6 +141,7 @@ stimulsoft.reports.maps.js
 stimulsoft.reports.maps.pack.js  
 stimulsoft.viewer.js  
 stimulsoft.viewer.pack.js  
+stimulsoft.reports.d.ts  
 All .css styles files  
 All .xml localization files  
 
@@ -259,6 +262,7 @@ stimulsoft.reports.maps.js
 stimulsoft.reports.maps.pack.js  
 stimulsoft.viewer.js  
 stimulsoft.viewer.pack.js  
+stimulsoft.reports.d.ts  
 All .css styles files  
 All .xml localization files  
 
@@ -289,6 +293,21 @@ Stimulsoft_ViewerFx.swc
 Stimulsoft_ViewerFx_Debug.swc  
 All .xml localization files  
 
+#### Stimulsoft Dashboards.JS
+stimulsoft.dashboards.js  
+stimulsoft.dashboards.pack.js  
+stimulsoft.designer.js  
+stimulsoft.designer.pack.js  
+stimulsoft.reports.js  
+stimulsoft.reports.pack.js  
+stimulsoft.reports.maps.js  
+stimulsoft.reports.maps.pack.js  
+stimulsoft.viewer.js  
+stimulsoft.viewer.pack.js  
+stimulsoft.reports.d.ts  
+All .css styles files  
+All .xml localization files  
+
 #### Stimulsoft Dashboards.WEB
 Stimulsoft.Base.dll  
 Stimulsoft.Dashboard.dll  
@@ -313,8 +332,10 @@ Stimulsoft.Controls.Win.dll
 Stimulsoft.Dashboard.dll  
 Stimulsoft.Dashboard.Design.dll  
 Stimulsoft.Dashboard.Drawing.dll  
+Stimulsoft.Dashboard.Drawing.Wpf.dll  
 Stimulsoft.Dashboard.Export.dll  
 Stimulsoft.Dashboard.Viewer.dll  
+Stimulsoft.Dashboard.Viewer.Wpf.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Database.dll  
 Stimulsoft.Design.dll  
@@ -366,4 +387,4 @@ This license is subject to change without notice in future updates to the SOFTWA
 
 YOU ACKNOWLEDGE THAT YOU HAVE READ THIS AGREEMENT, UNDERSTAND IT AND AGREE TO BE BOUND BY ITS TERMS AND CONDITIONS. YOU FURTHER AGREE THAT IT IS THE COMPLETE AND EXCLUSIVE STATEMENT OF THE AGREEMENT BETWEEN US, WHICH SUPERSEDES ANY PROPOSAL OR PRIOR AGREEMENT, ORAL OR WRITTEN, AND ANY OTHER COMMUNICATIONS BETWEEN US RELATING TO THE SUBJECT MATTER OF THIS AGREEMENT.
 
-#### Copyright (C) 2003-2018 Stimulsoft, All rights reserved.
+#### Copyright (C) 2003-2019 Stimulsoft, All rights reserved.
