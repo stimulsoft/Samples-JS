@@ -15,19 +15,21 @@ report.loadFile("SimpleList.mrt");
 console.log("Report template loaded");
 
 // Renreding report
-report.render();
-console.log("Report rendered. Pages count: ", report.renderedPages.count);
+report.renderAsync(() => {
+    console.log("Report rendered. Pages count: ", report.renderedPages.count);
 
-// Export to PDF
-report.exportDocumentAsync((pdfData) => {
-    // Converting Array into buffer
-    var buffer = Buffer.from(pdfData)
+    // Export to PDF
+    report.exportDocumentAsync((pdfData) => {
+        // Converting Array into buffer
+        var buffer = Buffer.from(pdfData)
+    
+        // File System module
+        var fs = require('fs');
+    
+        // Saving string with rendered report in PDF into a file
+        fs.writeFileSync('./SimpleList.pdf', buffer);
+        console.log("Rendered report saved into PDF-file.");
+    }, Stimulsoft.Report.StiExportFormat.Pdf);
+});
 
-    // File System module
-    var fs = require('fs');
-
-    // Saving string with rendered report in PDF into a file
-    fs.writeFileSync('./SimpleList.pdf', buffer);
-    console.log("Rendered report saved into PDF-file.");
-}, Stimulsoft.Report.StiExportFormat.Pdf);
 
