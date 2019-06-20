@@ -6,7 +6,8 @@ var http = require('http'),
 var mimeTypes = {
     "html": "text/html",
     "js": "text/javascript",
-    "css": "text/css"
+    "css": "text/css",
+    "json": "application/json"
 };
 
 http.createServer(function (req, res) {
