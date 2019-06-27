@@ -79,7 +79,7 @@
                 return { host: matchFull[1].trim() };
             }
             else {
-                const matchHostPort2 = regexHostPort.exec(dataSource);
+                const matchHostPort2 = regexHostPort.exec(host);
                 if (matchHostPort2) return { host: matchHostPort2[1].trim(), port: matchHostPort2[2].trim() };
                 return { host: host };
             }

@@ -88,11 +88,11 @@
                     case 0xff: // aka GEOMETRY
                         types[columnIndex] = "string"; break;
 
-                    case 0xf9: // aka TINYBLOB, TINYTEXT
+                    /*case 0xf9: // aka TINYBLOB, TINYTEXT
                     case 0xfa: // aka MEDIUMBLOB, MEDIUMTEXT
                     case 0xfb: // aka LONGBLOG, LONGTEXT
                     case 0xfc: // aka BLOB, TEXT
-                        types[columnIndex] = "array"; break;
+                        types[columnIndex] = "array"; break;*/
                 }
             }
 

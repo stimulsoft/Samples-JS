@@ -1,30 +1,32 @@
 {
-	"name" : "NodejsDataAdapters",
-	"version" : "0.0.2",
-	"description" : "NodejsDataAdapters",
-	"main" : "app.js",
-	"author" : "Stimulsoft (http://www.stimulsoft.com)",
-	"dependencies" : {
-		"mssql" : "^3.1.2",
-		"mysql" : "^2.10.2",
-		"pg" : "^4.5.1"
+	"name": "NodejsDataAdapters",
+	"version": "0.0.2",
+	"description": "NodejsDataAdapters",
+	"main": "app.js",
+	"author": "Stimulsoft (http://www.stimulsoft.com)",
+	"dependencies": {
+		"mssql": "^3.1.2",
+		"mysql": "^2.10.2",
+		"pg": "^4.5.1"
 	},
-	"maintainers" : [{
-			"name" : "Stimulsoft",
-			"email" : "info@stimulsoft.com",
-			"url" : "http://www.stimulsoft.com"
+	"maintainers": [
+		{
+			"name": "Stimulsoft",
+			"email": "info@stimulsoft.com",
+			"url": "http://www.stimulsoft.com"
 		}
 	],
-	"contributors" : [{
-			"name" : "Stimulsoft",
-			"email" : "info@stimulsoft.com",
-			"url" : "http://www.stimulsoft.com"
+	"contributors": [
+		{
+			"name": "Stimulsoft",
+			"email": "info@stimulsoft.com",
+			"url": "http://www.stimulsoft.com"
 		}
 	],
-	"license" : "Closed Source",
-	"bugs" : {
-		"url" : "https://github.com/stimulsoft/Reports.JS/issues"
+	"license": "Closed Source",
+	"bugs": {
+		"url": "https://github.com/stimulsoft/Reports.JS/issues"
 	},
-	"homepage" : "https://github.com/stimulsoft/Reports.JS#readme",
-	"devDependencies" : {}
+	"homepage": "https://github.com/stimulsoft/Reports.JS#readme",
+	"devDependencies": {}
 }
