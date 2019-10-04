@@ -1,36 +1,40 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Set variable value from code</title>
-	
-	<!-- Stimusloft Reports.JS -->
-	<script src="../scripts/stimulsoft.reports.js" type="text/javascript"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Set variable value from code</title>
+
+    <!-- Stimusloft Reports.JS -->
+    <script src="../scripts/stimulsoft.reports.js" type="text/javascript"></script>
 </head>
+
 <body>
-	Load 'ReportWithVariable' report template, change value of the "Variable1" and show the report as HTML.
-	<br><br><br>
-	
-	<div id="reportContainer">Rendering...</div>
-	
-	<script type="text/javascript">
-		// Create a new report instance
-		var report = new Stimulsoft.Report.StiReport();
-		// Load report
-		report.loadFile("../reports/ReportWithVariable.mrt");
-		
-		// Get variable by name
-		var variable = report.dictionary.variables.getByName("Variable1");
-		// Set variable value
-		variable.value = "test";
-		// Render report
-		report.render();
-		
-		// Export report to HTML string
-		var htmlString = report.exportDocument(Stimulsoft.Report.StiExportFormat.Html);
-		// Show the report
-		var container = document.getElementById("reportContainer");
-		container.innerHTML = htmlString;
-	</script>
+    Load 'ReportWithVariable' report template, change value of the "Variable1" and show the report as HTML.
+    <br><br><br>
+
+    <div id="reportContainer">Rendering...</div>
+
+    <script type="text/javascript">
+        // Create a new report instance
+        var report = new Stimulsoft.Report.StiReport();
+        // Load report
+        report.loadFile("../reports/ReportWithVariable.mrt");
+
+        // Get variable by name
+        var variable = report.dictionary.variables.getByName("Variable1");
+        // Set variable value
+        variable.value = "test";
+        // Render report
+        report.renderAsync(function () {
+            // Export report to HTML string
+            var htmlString = report.exportDocument(Stimulsoft.Report.StiExportFormat.Html);
+            // Show the report
+            var container = document.getElementById("reportContainer");
+            container.innerHTML = htmlString;
+        });
+
+    </script>
 </body>
+
 </html>

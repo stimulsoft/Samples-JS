@@ -20,9 +20,10 @@ dataText.border.side = Stimulsoft.Base.Drawing.StiBorderSides.All;
 page.components.add(dataText);
 
 // Renreding report
-report.render();
-console.log("Report rendered. Pages count: ", report.renderedPages.count);
+report.renderAsync(function () {
+    console.log("Report rendered. Pages count: ", report.renderedPages.count);
 
-// Saving rendered report to file
-report.saveDocumentFile("Report.mdc");
-console.log("Rendered report saved");
+    // Saving rendered report to file
+    report.saveDocumentFile("Report.mdc");
+    console.log("Rendered report saved");
+});

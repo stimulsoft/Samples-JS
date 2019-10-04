@@ -15,9 +15,10 @@ report.loadFile("SimpleList.mrt");
 console.log("Report template loaded");
 
 // Renreding report
-report.render();
-console.log("Report rendered. Pages count: ", report.renderedPages.count);
+report.renderAsync(function () {
+    console.log("Report rendered. Pages count: ", report.renderedPages.count);
 
-// Saving rendered report to file
-report.saveDocumentFile("SimpleList.mdc");
-console.log("Rendered report saved");
+    // Saving rendered report to file
+    report.saveDocumentFile("SimpleList.mdc");
+    console.log("Rendered report saved");
+});

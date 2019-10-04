@@ -34,7 +34,7 @@ Creating text component:
 
 Renreding report:
 
-    report.render();
+    report.renderAsync();
 
 Saving rendered report to mdc-file:
 

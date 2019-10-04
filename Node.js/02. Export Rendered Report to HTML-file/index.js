@@ -15,15 +15,16 @@ report.loadFile("SimpleList.mrt");
 console.log("Report template loaded");
 
 // Renreding report
-report.render();
-console.log("Report rendered. Pages count: ", report.renderedPages.count);
+report.renderAsync(() => {
+    console.log("Report rendered. Pages count: ", report.renderedPages.count);
 
-// Export to HTML
-var htmlString = report.exportDocument(Stimulsoft.Report.StiExportFormat.Html);
+    // Export to HTML
+    var htmlString = report.exportDocument(Stimulsoft.Report.StiExportFormat.Html);
 
-// File System module
-var fs = require('fs');
+    // File System module
+    var fs = require('fs');
 
-// Saving string with rendered report in HTML into a file
-fs.writeFileSync('./SimpleList.html', htmlString);
-console.log("Rendered report saved into HTML-file.");
+    // Saving string with rendered report in HTML into a file
+    fs.writeFileSync('./SimpleList.html', htmlString);
+    console.log("Rendered report saved into HTML-file.");
+});

@@ -29,7 +29,7 @@ Loading sample report template:
 
 Renreding report:
 
-    report.render();
+    report.renderAsync();
 
 Export to PDF
 

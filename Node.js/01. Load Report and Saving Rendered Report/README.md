@@ -30,7 +30,7 @@ Loading sample report template:
 
 Renreding report:
 
-    report.render();
+    report.renderAsync();
 
 Saving rendered report to mdc-file:
 
