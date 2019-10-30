@@ -16,7 +16,7 @@ export default {
     
     }
   },
-  created: function() {
+  mounted: function() {
     console.log('Loading Designer view');
 
     console.log('Set full screen mode for the designer');
