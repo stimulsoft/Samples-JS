@@ -19,7 +19,14 @@
 	
 	<script type="text/javascript">
 		// Create the report designer with default options and show it in this place
-		var designer = new Stimulsoft.Designer.StiDesigner();
+        var designer = new Stimulsoft.Designer.StiDesigner();
+        
+        // Create a new report instance
+		var report = new Stimulsoft.Report.StiReport();
+		// Load report from url
+		report.loadFile("../reports/SimpleList.mrt");
+		// Assign report to the designer
+		designer.report = report;
 	</script>
 </body>
 </html>
