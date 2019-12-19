@@ -29,7 +29,7 @@
             // Save rendered report to JSON string
             var json = report.saveDocumentToJsonString();
             // Get report file name
-            var fileName = String.isNullOrEmpty(report.reportAlias) ? report.reportName : report.reportAlias;
+            var fileName = report.reportAlias;
             // Save data to file
             Object.saveAs(json, fileName + ".mdc", "application/json;charset=utf-8");
         }

@@ -355,10 +355,10 @@ class StiHelper {
 				
 				var json = JSON.stringify(command);
 				if (!callback) callback = function (message) {
-					if (Stimulsoft.System.StiError.errorMessageForm && !String.isNullOrEmpty(message)) {
+					if (Stimulsoft.System.StiError.errorMessageForm && message) {
 						var obj = JSON.parse(message);
-						if (!obj.success || !String.isNullOrEmpty(obj.notice)) {
-							var message = String.isNullOrEmpty(obj.notice) ? "There was some error" : obj.notice;
+						if (!obj.success || obj.notice) {
+							var message = !obj.notice ? "There was some error" : obj.notice;
 							Stimulsoft.System.StiError.errorMessageForm.show(message, obj.success);
 						}
 					}

@@ -35,7 +35,7 @@
 			var htmlString = report.exportDocument(Stimulsoft.Report.StiExportFormat.Html);
 
 			// Get report file name
-			var fileName = String.isNullOrEmpty(report.reportAlias) ? report.reportName : report.reportAlias;
+			var fileName = report.reportAlias;
 			// Save data to file
 			Object.saveAs(htmlString, fileName + ".html", "text/html;charset=utf-8");
 		}

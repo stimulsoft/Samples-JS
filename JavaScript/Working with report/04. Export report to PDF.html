@@ -25,7 +25,7 @@
 			var pdfData = report.exportDocument(Stimulsoft.Report.StiExportFormat.Pdf);
 			
 			// Get report file name
-			var fileName = String.isNullOrEmpty(report.reportAlias) ? report.reportName : report.reportAlias;
+			var fileName = report.reportAlias;
 			// Save data to file
 			Object.saveAs(pdfData, fileName + ".pdf", "application/pdf");
 		}

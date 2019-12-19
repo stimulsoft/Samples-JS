@@ -29,7 +29,7 @@
 			
 			if (window.navigator && window.navigator.msSaveOrOpenBlob) {
 				// Internet Explorer does not support the output of blob data, only save as PDF file
-				var fileName = String.isNullOrEmpty(report.reportAlias) ? report.reportName : report.reportAlias;
+				var fileName = report.reportAlias;
 				window.navigator.msSaveOrOpenBlob(blob, fileName + ".pdf");
 			} else {
 				// Show the new tab with the blob data
