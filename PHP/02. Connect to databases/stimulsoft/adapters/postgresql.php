@@ -11,6 +11,7 @@ class StiPostgreSqlAdapter {
 	}
 
 	private function connect() {
+		if (!function_exists("pg_connect")) return StiResult::error("PostgreSQL driver not found. Please configure your PHP server to work with PostgreSQL.");
 		$this->link = pg_connect("host='".$this->connectionInfo->host."' port='".$this->connectionInfo->port."' dbname='".$this->connectionInfo->database.
 				"' user='".$this->connectionInfo->userId."' password='".$this->connectionInfo->password."' options='--client_encoding=".$this->connectionInfo->charset."'");
 		if (!$this->link) return $this->getLastErrorResult();

@@ -5,11 +5,19 @@ require_once 'adapters/mssql.php';
 require_once 'adapters/firebird.php';
 require_once 'adapters/postgresql.php';
 require_once 'adapters/oracle.php';
-require_once 'email/class.phpmailer.php';
-require_once 'email/class.pop3.php';
-require_once 'email/class.smtp.php';
-require_once 'email/PHPMailerAutoload.php';
 
+if (substr(PHP_VERSION, 0, 1) == '5') {
+	require_once 'phpmailer/v5/class.phpmailer.php';
+	require_once 'phpmailer/v5/class.pop3.php';
+	require_once 'phpmailer/v5/class.smtp.php';
+	require_once 'phpmailer/v5/PHPMailerAutoload.php';
+}
+else {
+	require_once 'phpmailer/v6/PHPMailer.php';
+	require_once 'phpmailer/v6/SMTP.php';
+	require_once 'phpmailer/v6/POP3.php';
+	require_once 'phpmailer/v6/Exception.php';
+}
 
 function stiErrorHandler($errNo, $errStr, $errFile, $errLine) {
 	$result = StiResult::error("[".$errNo."] ".$errStr." (".$errFile.", Line ".$errLine.")");
@@ -18,7 +26,7 @@ function stiErrorHandler($errNo, $errStr, $errFile, $errLine) {
 
 function stiShutdownFunction() {
 	$err = error_get_last();
-	if (($err["type"] & E_COMPILE_ERROR) || ($err["type"] & E_ERROR) || ($err["type"] & E_CORE_ERROR) || ($err["type"] & E_RECOVERABLE_ERROR)) {
+	if ($err != null && (($err["type"] & E_COMPILE_ERROR) || ($err["type"] & E_ERROR) || ($err["type"] & E_CORE_ERROR) || ($err["type"] & E_RECOVERABLE_ERROR))) {
 		$result = StiResult::error("[".$err["type"]."] ".$err["message"]." (".$err["file"].", Line ".$err["line"].")");
 		StiResponse::json($result);
 	}
@@ -68,12 +76,14 @@ class StiHandler {
 		$args = new stdClass();
 		$args->sender = $request->sender;
 		$args->database = $request->database;
-		$args->connectionString = $request->connectionString;
-		$args->queryString = $request->queryString;
-		$args->parameters = $this->getQueryParameters($request->queryString);
+		$args->connectionString = isset($request->connectionString) ? $request->connectionString : null;
+		$args->queryString = isset($request->queryString) ? $request->queryString : null;
+		$args->dataSource = isset($request->dataSource) ? $request->dataSource : null;
+		$args->connection = isset($request->connection) ? $request->connection : null;
+		if (isset($request->queryString)) $args->parameters = $this->getQueryParameters($request->queryString);
 		
 		$result = $this->checkEventResult($this->onBeginProcessData, $args);
-		$result->object->queryString = $this->applyQueryParameters($result->object->queryString, $args->parameters);
+		if (isset($result->object->queryString) && isset($args->parameters)) $result->object->queryString = $this->applyQueryParameters($result->object->queryString, $args->parameters);
 		return $result;
 	}
 	
@@ -171,8 +181,8 @@ class StiHandler {
 		
 		// Detect auth mode
 		$auth = $settings->host != null && $settings->login != null && $settings->password != null;
-
-		$mail = new PHPMailer(true);
+		
+		$mail = substr(PHP_VERSION, 0, 1) == '5' ? new PHPMailer(true) : new PHPMailer\PHPMailer\PHPMailer(true);
 		if ($auth) $mail->IsSMTP();
 		try {
 			$mail->CharSet = $settings->charset;
@@ -326,6 +336,9 @@ class StiHandler {
 				
 			case StiExportFormat::Word2007:
 				return "docx";
+				
+			case StiExportFormat::Csv:
+				return "csv";
 		}
 		return "";
 	}
@@ -336,14 +349,23 @@ class StiHandler {
 
 
 class StiHelper {
-	public static function initialize($url = "handler.php", $timeout = 30) {
+	public static function createOptions() {
+		$options = new stdClasS();
+		$options->handler = "handler.php";
+		$options->timeout = 30;
+		
+		return $options;
+	}
+	
+	public static function initialize($options) {
+		if (!isset($options)) $options = StiHelper::createOptions();
 ?>
 	<script type="text/javascript">
 		StiHelper.prototype.process = function (args, callback) {
 			if (args) {
 				if (args.event == "BeginProcessData") {
 					args.preventDefault = true;
-					if (args.database == "XML" || args.database == "JSON") return callback(null);
+					if (args.database == "XML" || args.database == "JSON" || args.database == "Excel") return callback(null);
 				}
 				var command = {};
 				for (var p in args) {
@@ -353,12 +375,15 @@ class StiHelper {
 					else command[p] = args[p];
 				}
 				
+				var isNullOrEmpty = function (value) {
+					return value == null || value === "" || value === undefined;
+				}
 				var json = JSON.stringify(command);
 				if (!callback) callback = function (message) {
-					if (Stimulsoft.System.StiError.errorMessageForm && message) {
+					if (Stimulsoft.System.StiError.errorMessageForm && !isNullOrEmpty(message)) {
 						var obj = JSON.parse(message);
-						if (!obj.success || obj.notice) {
-							var message = !obj.notice ? "There was some error" : obj.notice;
+						if (!obj.success || !isNullOrEmpty(obj.notice)) {
+							var message = isNullOrEmpty(obj.notice) ? "There was some error" : obj.notice;
 							Stimulsoft.System.StiError.errorMessageForm.show(message, obj.success);
 						}
 					}
@@ -371,6 +396,9 @@ class StiHelper {
 			try {
 				var request = new XMLHttpRequest();
 				request.open("post", this.url, true);
+				request.setRequestHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+				request.setRequestHeader('Cache-Control', 'max-age=0');
+				request.setRequestHeader('Pragma', 'no-cache');
 				request.timeout = this.timeout * 1000;
 				request.onload = function () {
 					if (request.status == 200) {
@@ -409,7 +437,7 @@ class StiHelper {
 			this.timeout = timeout;
 		}
 		
-		jsHelper = new StiHelper("<?php echo $url; ?>", <?php echo $timeout; ?>);
+		jsHelper = new StiHelper("<?php echo $options->handler; ?>", <?php echo $options->timeout; ?>);
 </script>
 <?php
 	}

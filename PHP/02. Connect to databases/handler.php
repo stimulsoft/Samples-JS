@@ -14,12 +14,33 @@ $handler->registerErrorHandlers();
 
 
 $handler->onBeginProcessData = function ($event) {
+	// Current database type: 'XML', 'JSON', 'MySQL', 'MS SQL', 'PostgreSQL', 'Firebird', 'Oracle'
 	$database = $event->database;
+	// Current connection name
+	$connection = $event->connection;
+	// Current data source name
+	$dataSource = $event->dataSource;
+	// Connection string for the current data source
 	$connectionString = $event->connectionString;
+	// SQL query string for the current data source
 	$queryString = $event->queryString;
-	//$event->parameters["Variable1"] = 10;
-	//$event->parameters["Variable2"] = "text value";
+	
+	// You can change the connection string
+	//if ($connection == "MyConnectionName")
+	//	$event->connectionString = "Server=localhost;Database=test;Port=3306;";
+	
+	// You can change the SQL query
+	//if ($dataSource == "MyDataSource")
+	//	$event->queryString = "SELECT * FROM MyTable";
+	
+	// You can replace the SQL query parameters with the required values
+	// For example: SELECT * FROM {Variable1} WHERE Id={Variable2}
+	// If the report contains a variable with this name, its value will be used instead of the specified value
+	//$event->parameters["Variable1"] = "TableName";
+	//$event->parameters["Variable2"] = 10;
+	
 	return StiResult::success();
+	//return StiResult::error("Message for some connection error.");
 };
 
 $handler->onPrintReport = function ($event) {
@@ -36,6 +57,8 @@ $handler->onEndExportReport = function ($event) {
 	$format = $event->format; // Export format
 	$data = $event->data; // Base64 export data
 	$fileName = $event->fileName; // Report file name
+	
+	file_put_contents('reports/'.$fileName.'.'.strtolower($format), base64_decode($data));
 	
 	//return StiResult::success();
 	return StiResult::success("Export OK. Message from server side.");

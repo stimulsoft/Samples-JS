@@ -49,6 +49,7 @@ class StiExportFormat {
 	const Pdf = "Pdf";
 	const Excel2007 = "Excel2007";
 	const Word2007 = "Word2007";
+	const Csv = "Csv";
 }
 
 class StiRequest {
@@ -75,6 +76,8 @@ class StiRequest {
 		if (isset($obj->connectionString)) $this->connectionString = $obj->connectionString;
 		if (isset($obj->queryString)) $this->queryString = $obj->queryString;
 		if (isset($obj->database)) $this->database = $obj->database;
+		if (isset($obj->dataSource)) $this->dataSource = $obj->dataSource;
+		if (isset($obj->connection)) $this->connection = $obj->connection;
 		if (isset($obj->data)) $this->data = $obj->data;
 		if (isset($obj->fileName)) $this->fileName = $obj->fileName;
 		if (isset($obj->format)) $this->format = $obj->format;

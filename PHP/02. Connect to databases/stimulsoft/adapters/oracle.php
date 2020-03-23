@@ -11,6 +11,7 @@ class StiOracleAdapter {
 	}
 	
 	private function connect() {
+		if (!function_exists("oci_connect")) return StiResult::error("Oracle driver not found. Please configure your PHP server to work with Oracle.");
 		if ($this->connectionInfo->privilege == "") $this->link = oci_connect($this->connectionInfo->userId, $this->connectionInfo->password, $this->connectionInfo->database, $this->connectionInfo->charset);
 		else $this->link = oci_pconnect($this->connectionInfo->userId, $this->connectionInfo->password, $this->connectionInfo->database, $this->connectionInfo->charset, $this->connectionInfo->privilege);
 		if (!$this->link) return $this->getLastErrorResult();
