@@ -80,6 +80,43 @@ class StiPostgreSqlAdapter {
 		$this->connectionInfo = $info;
 	}
 
+	private function parseType($typeName) {
+		switch ($typeName) {
+			// boolean
+			case 'bit':
+			case 'bool':
+				return 'boolean';
+			
+			// integer
+			case 'int2':
+			case 'int4':
+			case 'int8':
+				return 'int';
+			
+			// number (decimal)
+			case 'float4':
+			case 'float8':
+			case 'numeric':
+				return 'number';
+			
+			// datetime
+			case 'date':
+			case 'time':
+			case 'timestamp':
+				return 'datetime';
+			
+			// array, string
+			case 'json':
+			case 'text':
+			case 'varchar':
+			case 'xml':
+				return 'string';
+		}
+		
+		// base64 array for unknown
+		return 'array';
+	}
+
 	public function test() {
 		$result = $this->connect();
 		if ($result->success) $this->disconnect();
@@ -93,11 +130,19 @@ class StiPostgreSqlAdapter {
 			if (!$query) return $this->getLastErrorResult();
 				
 			$result->columns = array();
+			$result->types = array();
+			$count = pg_num_fields($query);
+			for ($i = 0; $i < $count; $i++) {
+				$result->columns[] = pg_field_name($query, $i);
+				
+				$typeName = pg_field_type($query, $i);
+				$result->types[] = $this->parseType($typeName);
+			}
+			
 			$result->rows = array();
 			while ($rowItem = pg_fetch_assoc($query)) {
 				$row = array();
 				foreach ($rowItem as $key => $value) {
-					if (count($result->columns) < count($rowItem)) $result->columns[] = $key;
 					$row[] = $value;
 				}
 				$result->rows[] = $row;
