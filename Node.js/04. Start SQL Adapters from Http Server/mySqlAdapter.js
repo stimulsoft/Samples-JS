@@ -42,11 +42,11 @@
             var rows = [];
             var types = [];
             //var isColumnsFill = false;
+            if (fields.length > 0 && Array.isArray(fields[0])) fields = fields[0];
 
             for (var columnIndex in fields) {
                 var column = fields[columnIndex]
                 columns.push(column.name);
-
 
                 switch (column.type) {
                     case 0x01: // aka TINYINT, 1 byte
@@ -101,19 +101,19 @@
                 var row = [];
                 for (var columnName in recordset[recordIndex]) {
                     //if (!isColumnsFill) columns.push(columnName);
-                    var columnIndex1 = columns.indexOf(columnName);
-                    if (types[columnIndex1] != "array") types[columnIndex1] = typeof recordset[recordIndex][columnName];
+                    var columnIndex = columns.indexOf(columnName);
+                    if (types[columnIndex] != "array") types[columnIndex] = typeof recordset[recordIndex][columnName];
                     if (recordset[recordIndex][columnName] instanceof Uint8Array) {
-                        types[columnIndex1] = "array";
+                        types[columnIndex] = "array";
                         recordset[recordIndex][columnName] = Buffer.from(recordset[recordIndex][columnName]).toString('base64');
                     }
 
                     if (recordset[recordIndex][columnName] != null && typeof recordset[recordIndex][columnName].toISOString === "function") {
                         recordset[recordIndex][columnName] = recordset[recordIndex][columnName].toISOString();
-                        types[columnIndex1] = "datetime";
+                        types[columnIndex] = "datetime";
                     }
 
-                    row.push(recordset[recordIndex][columnName]);
+                    row[columnIndex] = recordset[recordIndex][columnName];
                 }
                 //isColumnsFill = true;
                 rows.push(row);

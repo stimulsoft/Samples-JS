@@ -41,12 +41,68 @@
             var columns = [];
             var rows = [];
             var types = [];
-            var isColumnsFill = false;
+            if (recordset.length > 0 && Array.isArray(recordset[0])) recordset = recordset[0];
+            for (var columnName in recordset.columns) {
+                var column = recordset.columns[columnName]
+                var columnIndex = column.index;
+                columns.push(column.name);
+
+                switch (column.type) {
+                    case sql.Bit:
+                    case sql.SmallInt:
+                    case sql.Int:
+                    case sql.BigInt:
+                        types[columnIndex] = "int"; break;
+
+                    case sql.Decimal:
+                    case sql.Float:
+                    case sql.Money:
+                    case sql.Numeric:
+                    case sql.SmallMoney:
+                    case sql.Real:
+                        types[columnIndex] = "number"; break;
+
+                    case sql.TinyInt:
+                        types[columnIndex] = "boolean"; break;
+
+                    case sql.Char:
+                    case sql.NChar:
+                    case sql.Text:
+                    case sql.NText:
+                    case sql.VarChar:
+                    case sql.NVarChar:
+                    case sql.Xml:
+                        types[columnIndex] = "string"; break;
+
+                    case sql.Time:
+                    case sql.Date:
+                    case sql.DateTime:
+                    case sql.DateTime2:
+                    case sql.DateTimeOffset:
+                    case sql.SmallDateTime:
+                        types[columnIndex] = "datetime"; break;
+
+                    case sql.UniqueIdentifier:
+                        types[columnIndex] = "string"; break;
+                    case sql.Variant:
+                        types[columnIndex] = "string"; break;
+
+                    case sql.Binary:
+                    case sql.VarBinary:
+                    case sql.Image:
+                        types[columnIndex] = "string"; break;
+
+                    case sql.UDT:
+                    case sql.Geography:
+                    case sql.Geometry:
+                        types[columnIndex] = "string"; break;
+                }
+            }
+
             if (recordset.length > 0 && Array.isArray(recordset[0])) recordset = recordset[0];
             for (var recordIndex in recordset) {
                 var row = [];
                 for (var columnName in recordset[recordIndex]) {
-                    if (!isColumnsFill) columns.push(columnName);
                     var columnIndex = columns.indexOf(columnName);
                     if (types[columnIndex] != "array") types[columnIndex] = typeof recordset[recordIndex][columnName];
                     if (recordset[recordIndex][columnName] instanceof Uint8Array) {
@@ -59,9 +115,8 @@
                         types[columnIndex] = "datetime";
                     }
 
-                    row.push(recordset[recordIndex][columnName]);
+                    row[columnIndex] = recordset[recordIndex][columnName];
                 }
-                isColumnsFill = true;
                 rows.push(row);
             }
 
@@ -69,20 +124,24 @@
         }
 
         var getHostInfo = function (host) {
-            const regexFull = /.*:(.*)/;
-            const regexHostPort = /(.*),([0-9]+)/;
-            const matchFull = regexFull.exec(host);
+            const info = {};
+            const regexPort = /(.*),([0-9]+)/;
+            const matchPort = regexPort.exec(host);
 
-            if (matchFull) {
-                const matchHostPort1 = regexHostPort.exec(matchFull[1]);
-                if (matchHostPort1) return { host: matchHostPort1[1].trim(), port: matchHostPort1[2].trim() };
-                return { host: matchFull[1].trim() };
+            if (matchPort) {
+                info.port = matchPort[2].trim();
+                host = matchPort[1].trim();
             }
-            else {
-                const matchHostPort2 = regexHostPort.exec(host);
-                if (matchHostPort2) return { host: matchHostPort2[1].trim(), port: matchHostPort2[2].trim() };
-                return { host: host };
+
+            const regexInstanceName = /(.*)\\(.*)/;
+            const matchInstanceName = regexInstanceName.exec(host);
+            if (matchInstanceName) {
+                info.instanceName = matchInstanceName[2].trim();
+                host = matchInstanceName[1].trim();
             }
+
+            info.host = host;
+            return info;
         }
 
         var getConnectionStringConfig = function (connectionString) {
@@ -103,7 +162,8 @@
                             case "server":
                                 var hostInfo = getHostInfo(match[1]);
                                 config["server"] = hostInfo.host;
-                                if ("port" in hostInfo) config["port"] = hostInfo.port;
+                                if ("port" in hostInfo) config["port"] = +hostInfo.port;
+                                if ("instanceName" in hostInfo) config.options["instanceName"] = hostInfo.instanceName;
                                 break;
 
                             case "database":

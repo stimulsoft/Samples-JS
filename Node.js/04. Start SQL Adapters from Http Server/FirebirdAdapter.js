@@ -55,7 +55,7 @@
                         types[columnIndex] = "datetime";
                     }
 
-                    row.push(recordset[recordIndex][columnName]);
+                    row[columnIndex] = recordset[recordIndex][columnName];
                 }
                 isColumnsFill = true;
                 rows.push(row);
