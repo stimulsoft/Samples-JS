@@ -28,12 +28,12 @@
         // Render report
         report.renderAsync(function () {
             // Export report to HTML string
-            var htmlString = report.exportDocument(Stimulsoft.Report.StiExportFormat.Html);
-            // Show the report
-            var container = document.getElementById("reportContainer");
-            container.innerHTML = htmlString;
+            report.exportDocumentAsync(function (htmlString) {
+                // Show the report
+                var container = document.getElementById("reportContainer");
+                container.innerHTML = htmlString;
+            }, Stimulsoft.Report.StiExportFormat.Html);
         });
-
     </script>
 </body>
 

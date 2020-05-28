@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Create report designer and show it immediately</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Create report designer and show it immediately</title>
 
-	<!-- Report designer Office2013 White Blue style -->
-	<link href="../css/stimulsoft.designer.office2013.whiteblue.css" rel="stylesheet">
-	<link href="../css/stimulsoft.viewer.office2013.whiteblue.css" rel="stylesheet">
+    <!-- Report designer Office2013 White Blue style -->
+    <link href="../css/stimulsoft.designer.office2013.whiteblue.css" rel="stylesheet">
+    <link href="../css/stimulsoft.viewer.office2013.whiteblue.css" rel="stylesheet">
 
-	<!-- Stimusloft Reports.JS -->
-	<script src="../scripts/stimulsoft.reports.js" type="text/javascript"></script>
-	<script src="../scripts/stimulsoft.viewer.js" type="text/javascript"></script>
-	<script src="../scripts/stimulsoft.designer.js" type="text/javascript"></script>
+    <!-- Stimusloft Reports.JS -->
+    <script src="../scripts/stimulsoft.reports.js" type="text/javascript"></script>
+    <script src="../scripts/stimulsoft.viewer.js" type="text/javascript"></script>
+    <script src="../scripts/stimulsoft.designer.js" type="text/javascript"></script>
 </head>
+
 <body>
-	Create report designer and show it immediately
-	<br><br>
-	
-	<script type="text/javascript">
-		// Create the report designer with default options and show it in this place
+    Create report designer and show it immediately
+    <br><br>
+
+    <script type="text/javascript">
+        // Create the report designer with default options and show it in this place
         var designer = new Stimulsoft.Designer.StiDesigner();
-        
+
         // Create a new report instance
-		var report = new Stimulsoft.Report.StiReport();
-		// Load report from url
-		report.loadFile("../reports/SimpleList.mrt");
-		// Assign report to the designer
-		designer.report = report;
-	</script>
+        var report = new Stimulsoft.Report.StiReport();
+        // Load report from url
+        report.loadFile("../reports/SimpleList.mrt");
+        // Assign report to the designer
+        designer.report = report;
+    </script>
 </body>
+
 </html>

@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Export report to HTML</title>
-	
-	<!-- Stimusloft Reports.JS -->
-	<script src="../scripts/stimulsoft.reports.js" type="text/javascript"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Export report to HTML</title>
+
+    <!-- Stimusloft Reports.JS -->
+    <script src="../scripts/stimulsoft.reports.js" type="text/javascript"></script>
 </head>
+
 <body>
-	Load 'SimpleList' report template, render and export it.
-	<br><br>
-	
-	<script type="text/javascript">
-		// Create a new report instance
-		var report = new Stimulsoft.Report.StiReport();
-		// Load report from url
-		report.loadFile("../reports/SimpleList.mrt");
-		// Render report
-		report.renderAsync();
-		
-		// Export report to HTML format and show it
-		function exportReportHtml() {
-			// Export to HTML
-			var htmlString = report.exportDocument(Stimulsoft.Report.StiExportFormat.Html);
+    Load 'SimpleList' report template, render and export it.
+    <br><br>
 
-			// Write HTML text to DIV element.
-			var container = document.getElementById("htmlContainer");
-			container.innerHTML = htmlString;
-		}
-		
-		// Export report to HTML format and save to file
-		function saveReportHtml() {
-			// Export to HTML
-			var htmlString = report.exportDocument(Stimulsoft.Report.StiExportFormat.Html);
+    <script type="text/javascript">
+        // Create a new report instance
+        var report = new Stimulsoft.Report.StiReport();
+        // Load report from url
+        report.loadFile("../reports/SimpleList.mrt");
+        // Render report
+        report.renderAsync();
 
-			// Get report file name
-			var fileName = report.reportAlias;
-			// Save data to file
-			Object.saveAs(htmlString, fileName + ".html", "text/html;charset=utf-8");
-		}
-	</script>
-	
-	<a href="#" onclick="exportReportHtml()">Show HTML report</a><br>
-	<a href="#" onclick="saveReportHtml()">Save HTML report to file</a><br>
-	<br><br>
-	<div id="htmlContainer"></div>
+        // Export report to HTML format and show it
+        function exportReportHtml() {
+            // Export to HTML
+            report.exportDocumentAsync(function (htmlString) {
+                // Write HTML text to DIV element.
+                var container = document.getElementById("htmlContainer");
+                container.innerHTML = htmlString;
+            }, Stimulsoft.Report.StiExportFormat.Html);
+        }
+
+        // Export report to HTML format and save to file
+        function saveReportHtml() {
+            // Export to HTML
+            var htmlString = report.exportDocumentAsync(function (htmlString) {
+                // Get report file name
+                var fileName = report.reportAlias;
+                // Save data to file
+                Stimulsoft.System.StiObject.saveAs(htmlString, fileName + ".html", "text/html;charset=utf-8");
+            }, Stimulsoft.Report.StiExportFormat.Html);
+        }
+    </script>
+
+    <a href="#" onclick="exportReportHtml()">Show HTML report</a><br>
+    <a href="#" onclick="saveReportHtml()">Save HTML report to file</a><br>
+    <br><br>
+    <div id="htmlContainer"></div>
 </body>
+
 </html>
