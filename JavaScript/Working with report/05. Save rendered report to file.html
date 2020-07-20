@@ -19,7 +19,9 @@
         // Load report from url
         report.loadFile("../reports/SimpleList.mrt");
         // Render report
-        report.renderAsync();
+        report.renderAsync(function () {
+            document.getElementById("saveDocument").disabled = false;
+        });
 
         // Store report to JSON format and save to file
         function saveReportDocument() {
@@ -36,7 +38,7 @@
     </script>
 
     <br><br>
-    <a href="#" onclick="saveReportDocument()">Save rendered report</a><br>
+    <button id="saveDocument" onclick="saveReportDocument()" disabled>Save rendered report</button><br>
 </body>
 
 </html>

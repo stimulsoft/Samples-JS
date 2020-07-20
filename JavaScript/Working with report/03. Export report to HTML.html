@@ -19,7 +19,10 @@
         // Load report from url
         report.loadFile("../reports/SimpleList.mrt");
         // Render report
-        report.renderAsync();
+        report.renderAsync(function () {
+            document.getElementById("showHtml").disabled = false;
+            document.getElementById("saveHtml").disabled = false;
+        });
 
         // Export report to HTML format and show it
         function exportReportHtml() {
@@ -43,8 +46,8 @@
         }
     </script>
 
-    <a href="#" onclick="exportReportHtml()">Show HTML report</a><br>
-    <a href="#" onclick="saveReportHtml()">Save HTML report to file</a><br>
+    <button id="showHtml" onclick="exportReportHtml()" disabled>Show HTML report</button><br>
+    <button id="saveHtml" onclick="saveReportHtml()" disabled>Save HTML report to file</button><br>
     <br><br>
     <div id="htmlContainer"></div>
 </body>

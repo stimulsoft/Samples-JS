@@ -19,7 +19,9 @@
         // Load report from url
         report.loadFile("../reports/SimpleList.mrt");
         // Render report
-        report.renderAsync();
+        report.renderAsync(function () {
+            document.getElementById("savePdf").disabled = false;
+        });
 
         // Export report to PDF format and save to file
         function saveReportPdf() {
@@ -33,7 +35,7 @@
         }
     </script>
 
-    <a href="#" onclick="saveReportPdf()">Save PDF report to file</a><br>
+    <button id="savePdf" onclick="saveReportPdf()" disabled>Save PDF report to file</button><br>
     <br><br>
     <div id="htmlContainer"></div>
 </body>
