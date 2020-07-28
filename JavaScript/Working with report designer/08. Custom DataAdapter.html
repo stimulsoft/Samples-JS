@@ -31,6 +31,9 @@
                 if (command.command == "RetrieveSchema") callback({ success: true, data: demoData, types: demoDataTypes });
                 if (command.command == "RetrieveData") callback({ success: true, data: demoData[command.queryString], types: demoDataTypes[command.queryString] });
             }
+            // data is only needed to specify the column types; it is enough to pass only the first line
+            // if there is no data, then types are taken from types
+            // and vice versa, if there are no types, the types are taken from data
         });
 
         // Create a new report instance
