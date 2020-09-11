@@ -1,7 +1,7 @@
 /*
-Stimulsoft.Reports.JS ES5
-Version: 2020.4.1
-Build date: 2020.08.07
+Stimulsoft.Reports.JS
+Version: 2020.4.2
+Build date: 2020.09.09
 License: https://www.stimulsoft.com/en/licensing/reports
 */
 /*! xlsx.js (C) 2013-present SheetJS -- http://sheetjs.com */
