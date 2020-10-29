@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "stimulsoft-angular2"
+    "name": "stimulsoft-angular"
   },
   "apps": [
     {
@@ -20,14 +20,11 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "stimulsoft/stimulsoft.designer.office2013.whiteblue.css",
-        "stimulsoft/stimulsoft.viewer.office2013.whiteblue.css",
+        "../node_modules/stimulsoft-reports-js/css/stimulsoft.designer.office2013.whiteblue.css",
+        "../node_modules/stimulsoft-reports-js/css/stimulsoft.viewer.office2013.whiteblue.css",
         "styles.css"
       ],
-      "scripts": [
-        "stimulsoft/stimulsoft.reports.js",
-        "stimulsoft/stimulsoft.viewer.js",
-        "stimulsoft/stimulsoft.designer.js"],
+      "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
@@ -42,13 +39,16 @@
   },
   "lint": [
     {
-      "project": "src/tsconfig.app.json"
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
     },
     {
-      "project": "src/tsconfig.spec.json"
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
     },
     {
-      "project": "e2e/tsconfig.e2e.json"
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
     }
   ],
   "test": {

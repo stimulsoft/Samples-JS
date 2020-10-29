@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
-
-declare var Stimulsoft: any;
+import { Stimulsoft } from 'stimulsoft-reports-js/Scripts/stimulsoft.designer'
 
 @Component({
   selector: 'app-root',
@@ -36,6 +35,6 @@ export class AppComponent {
     console.log('Loading completed successfully!');
   }
 
-  constructor() {    
+  constructor() {
   }
 }

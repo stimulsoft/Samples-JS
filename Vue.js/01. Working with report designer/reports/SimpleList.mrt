@@ -224,18 +224,6 @@
         "Name": "Demo",
         "Alias": "Demo",
         "PathData": "/reports/Demo.json"
-      },
-      "1": {
-        "Ident": "StiJsonDatabase",
-        "Name": "Demo",
-        "Alias": "Demo",
-        "PathData": "/reports/Demo.json"
-      },
-      "2": {
-        "Ident": "StiJsonDatabase",
-        "Name": "Demo",
-        "Alias": "Demo",
-        "PathData": "/reports/Demo.json"
       }
     }
   },

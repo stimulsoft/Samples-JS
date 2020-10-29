@@ -1,14 +1,14 @@
-import { StimulsoftAngular2Page } from './app.po';
+import { AppPage } from './app.po';
 
-describe('stimulsoft-angular2 App', () => {
-  let page: StimulsoftAngular2Page;
+describe('angular App', () => {
+  let page: AppPage;
 
   beforeEach(() => {
-    page = new StimulsoftAngular2Page();
+    page = new AppPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getParagraphText()).toEqual('Welcome to app!');
   });
 });
