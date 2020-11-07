@@ -11,7 +11,7 @@
   "dependencies": {
     "stimulsoft-reports-js": "latest"
   },
-  "repository": { 
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/06.%20Load%20Report%20from%20Server%20Side"
   }
