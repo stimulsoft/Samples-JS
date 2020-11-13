@@ -182,8 +182,28 @@
                                 config["password"] = match[1];
                                 break;
 
+                            case "domain":
+                                config["domain"] = match[1];
+                                break;
+
                             case "encrypt":
                                 config.options["encrypt"] = match[1];
+                                break;
+
+                            case "connectiontimeout":
+                                config.options["connectionTimeout"] = match[1];
+                                break;
+
+                            case "requesttimeout":
+                                config.options["requestTimeout"] = match[1];
+                                break;
+
+                            case "tdsversion":
+                                config.options["tdsVersion"] = match[1];
+                                break;
+
+                            case "trustservercertificate":
+                                config.options["trustServerCertificate"] = match[1];
                                 break;
                         }
                     }
@@ -195,6 +215,8 @@
 
         var sql = require('mssql');
         var config = getConnectionStringConfig(command.connectionString);
+        if (!("connectionTimeout" in config) && "timeout" in command) config.connectionTimeout = command.timeout;
+        if (!("requestTimeout" in config) && "timeout" in command) config.requestTimeout = command.timeout;
 
         connect();
     }

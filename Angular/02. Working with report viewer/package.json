@@ -23,7 +23,7 @@
     "@angular/router": "^5.2.0",
     "core-js": "^2.4.1",
     "rxjs": "^5.5.6",
-    "stimulsoft-reports-js": "^2020.5.1",
+    "stimulsoft-reports-js": "latest",
     "zone.js": "^0.10.2"
   },
   "devDependencies": {

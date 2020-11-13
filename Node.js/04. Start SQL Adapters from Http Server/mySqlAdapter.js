@@ -2,7 +2,9 @@
 
     var end = function (result) {
         try {
-            if (connection) connection.end();
+            if (connection) {
+                connection.end();
+            }
             onResult(result);
         }
         catch (e) {
@@ -21,10 +23,10 @@
             });
         }
 
-        var query = function (queryString) {
+        var query = function (queryString, timeout) {
             connection.query("USE " + command.connectionStringInfo.database);
             //queryString = queryString.replace(/\'/gi, "\"");
-            connection.query(queryString, function (error, rows, fields) {
+            connection.query({ sql: queryString, timeout: timeout }, function (error, rows, fields) {
                 if (error) onError(error.message);
                 else {
                     onQuery(rows, fields);
@@ -33,7 +35,7 @@
         }
 
         var onConnect = function () {
-            if (command.queryString) query(command.queryString);
+            if (command.queryString) query(command.queryString, command.timeout);
             else end({ success: true });
         }
 
