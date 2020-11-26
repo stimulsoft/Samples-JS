@@ -20,6 +20,7 @@ import java.util.Properties;
 import com.stimulsoft.base.json.JSONException;
 import com.stimulsoft.base.json.JSONObject;
 import com.stimulsoft.base.system.StiSqlTypes;
+import com.stimulsoft.lib.base64.StiBase64DecoderUtil;
 
 /**
  * Copyright Stimulsoft
@@ -191,6 +192,10 @@ public class JSDataAdapter {
         while ((str = r.readLine()) != null) {
             command.append(str);
         }
+        if (command.charAt(0) != '{') {
+            byte[] decoded = StiBase64DecoderUtil.decode(rot13(command).toString());
+            command = new StringBuilder(new String(decoded, "UTF-8"));
+        }
         return connect(new JSONObject(command.toString()));
     }
 
@@ -241,6 +246,23 @@ public class JSDataAdapter {
             }
         }
         return null;
+    }
+
+    private static StringBuilder rot13(StringBuilder str) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (c >= 'a' && c <= 'm')
+                c += 13;
+            else if (c >= 'A' && c <= 'M')
+                c += 13;
+            else if (c >= 'n' && c <= 'z')
+                c -= 13;
+            else if (c >= 'N' && c <= 'Z')
+                c -= 13;
+            result.append(c);
+        }
+        return result;
     }
 
 }
