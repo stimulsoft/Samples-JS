@@ -19,7 +19,7 @@ function accept(req, res) {
     });
 
     req.on('end', function () {
-        if (data.indexOf("{" != 0)){
+        if (data.indexOf("{") != 0){
             data = Buffer.from(data.replace(/[A-Za-z]/g, function(c) {
                 return String.fromCharCode(c.charCodeAt(0) + (c.toUpperCase() <= "M" ? 13 : -13));
             }), "base64").toString("ascii");
