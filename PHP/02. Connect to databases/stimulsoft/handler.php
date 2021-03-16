@@ -27,6 +27,7 @@ require_once 'mssql.php';
 require_once 'firebird.php';
 require_once 'postgresql.php';
 require_once 'oracle.php';
+require_once 'odbc.php';
 
 
 // You can configure the security level as you required.
@@ -118,6 +119,7 @@ function getDataAdapter($request) {
 		case 'Firebird': $dataAdapter = new StiFirebirdAdapter(); break;
 		case 'PostgreSQL': $dataAdapter = new StiPostgreSqlAdapter(); break;
 		case 'Oracle': $dataAdapter = new StiOracleAdapter(); break;
+		case 'ODBC': $dataAdapter = new StiOdbcAdapter(); break;
 	}
 	
 	if (isset($dataAdapter)) {
