@@ -15,9 +15,9 @@ public partial class Handler : System.Web.UI.Page
             var command = (CommandJson)new DataContractJsonSerializer(typeof(CommandJson)).ReadObject(HttpContext.Current.Request.InputStream);
             Result result = new Result();
             if (command.Database == "MySQL") result = MySQLAdapter.Process(command);
-            if (command.Database == "Firebird") result = FirebirdAdapter.Process(command);
-            if (command.Database == "MS SQL") result = MSSQLAdapter.Process(command);
-            if (command.Database == "PostgreSQL") result = PostgreSQLAdapter.Process(command);
+            else if (command.Database == "Firebird") result = FirebirdAdapter.Process(command);
+            else if (command.Database == "MS SQL") result = MSSQLAdapter.Process(command);
+            else if (command.Database == "PostgreSQL") result = PostgreSQLAdapter.Process(command);
 
             var serializer = new DataContractJsonSerializer(typeof(Result));
 
