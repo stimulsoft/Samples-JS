@@ -1,5 +1,5 @@
 {
-    "name": "NodejsDataAdapters",
+    "name": "nodejsdataadapters",
     "version": "0.0.2",
     "description": "NodejsDataAdapters",
     "main": "app.js",
