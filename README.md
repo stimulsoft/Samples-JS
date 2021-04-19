@@ -1,4 +1,4 @@
-## This repository contains samples for Stimulsoft Reports.JS - a reporting tool for Node.js, JavaScript, ASP.NET, PHP, Angular, Angular, React and Vue.js applications.
+## This repository contains samples for Stimulsoft Reports.JS - a reporting tool for Node.js, JavaScript, ASP.NET, PHP, AngularJS, Angular, React and Vue.js applications.
 
 * In the [ASP.NET folder](https://github.com/stimulsoft/Samples-JS/tree/master/ASP.NET) you can find examples of using Stimulsoft Reports.JS with ASP.NET applications.
 * The [AngularJS folder](https://github.com/stimulsoft/Samples-JS/tree/master/AngularJS) contains examples of integration the Stimulsoft Reports.JS into simple Angular.JS project.

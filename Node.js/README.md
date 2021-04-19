@@ -20,6 +20,9 @@ This simple example shows the steps to download the report and json-data, its re
 
 [06. Load Report from Server Side and send to Client](https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/06.%20Load%20Report%20from%20Server%20Side)
 
+
+[07. Add Font to Resource] (https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/07.%20Add%20Font%20to%20Resource)
+
 Use npm to install requred modules:
 ```sh
 $ npm install

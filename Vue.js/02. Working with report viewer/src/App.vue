@@ -16,7 +16,7 @@ export default {
     
     }
   },
-  created: function() {
+  mounted: function() {
     console.log('Loading Viewer view');
     
     console.log('Creating the report viewer with default options');

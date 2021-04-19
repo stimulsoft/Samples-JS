@@ -1,0 +1,18 @@
+{
+  "name": "07_add_font_to_resource",
+  "version": "1.0.0",
+  "description": "Add Font to Resource",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Stimulsoft",
+  "license": "MIT",
+  "dependencies": {
+    "stimulsoft-reports-js": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/07.%20Add%20Font%20to%20Resource"
+  }
+}

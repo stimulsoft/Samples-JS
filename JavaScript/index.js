@@ -6,7 +6,8 @@ var http = require('http'),
 var mimeTypes = {
     "html": "text/html",
     "js": "text/javascript",
-    "css": "text/css"
+    "css": "text/css",
+    "json": "application/json"
 };
 
 http.createServer(function (req, res) {
@@ -35,7 +36,7 @@ http.createServer(function (req, res) {
     catch (e) {
         return;
     }
-}).listen(8888);
+}).listen(8889);
 
 
-console.log("Static file server running at http://localhost:" + 8888 + "/\nCTRL + C to shutdown");
+console.log("Static file server running at http://localhost:" + 8889 + "/\nCTRL + C to shutdown");

@@ -29,7 +29,7 @@ Loading sample report template:
 
 Renreding report:
 
-    report.render();
+    report.renderAsync();
 
 Export to PDF
 
@@ -37,7 +37,7 @@ Export to PDF
 
 Converting Array into buffer:
 
-    var buffer = new Buffer(pdfData, "utf-8")
+    var buffer = Buffer.from(pdfData)
 
 Loading File System module:
 

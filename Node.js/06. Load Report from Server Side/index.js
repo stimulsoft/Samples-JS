@@ -41,6 +41,7 @@ function accept(req, res) {
     			res.end(reportJson);
   		});
 	}
+
 }
 
 console.log("Static file server running at http://localhost:" + 8888 + "/\nCTRL + C to shutdown");

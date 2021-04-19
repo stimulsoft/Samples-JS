@@ -50,7 +50,7 @@ Register DataSet object
 
 Renreding report:
 
-    report.render();
+    report.renderAsync();
 
 Saving rendered report to mdc-file:
 
