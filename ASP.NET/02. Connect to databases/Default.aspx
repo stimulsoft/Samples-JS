@@ -19,13 +19,15 @@
 <body onload="onLoad()">
     <script type="text/javascript">
         function onLoad() {
-            StiOptions.WebServer.url = "handler.aspx";
+            StiOptions.WebServer.url = "handler.ashx";
 
             var options = new Stimulsoft.Designer.StiDesignerOptions();
             options.appearance.fullScreenMode = true;
 
             var designer = new Stimulsoft.Designer.StiDesigner(options, "StiDesigner", false);
             designer.renderHtml("content");
+
+            designer.report = new Stimulsoft.Report.StiReport();
         }
     </script>
     <div id="content"></div>
