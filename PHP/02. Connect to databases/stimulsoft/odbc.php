@@ -170,7 +170,10 @@ class StiOdbcAdapter {
 				for ($i = 1; $i <= $result->count; $i++) {
 					$type = $result->types[$i - 1];
 					$value = odbc_result($query, $i);
-					$row[] = $type == 'array' ? base64_encode($value) : $value;
+					
+					if ($type == 'array') $row[] = base64_encode($value);
+					else if ($type == 'datetime') $row[] = gmdate("Y-m-d\TH:i:s.v\Z", strtotime($value));
+					else $row[] = $value;
 				}
 				
 				$result->rows[] = $row;

@@ -213,7 +213,10 @@ class StiOracleAdapter {
 							if (count($result->columns) < $index) $result->columns[] = $key;
 							if (count($result->types) < $index) $result->types[] = $this->detectType($value);
 							$type = $result->types[$index - 1];
-							$row[] = $type == 'array' ? base64_encode($value) : $value;
+							
+							if ($type == 'array') $row[] = base64_encode($value);
+							else if ($type == 'datetime') $row[] = gmdate("Y-m-d\TH:i:s.v\Z", strtotime($value));
+							else $row[] = $value;
 						}
 					}
 					
@@ -236,7 +239,10 @@ class StiOracleAdapter {
 					foreach ($rowItem as $key => $value) {
 						if (count($result->columns) < count($rowItem)) $result->columns[] = $key;
 						$type = $result->types[count($row)];
-						$row[] = $type == 'array' ? base64_encode($value) : $value;
+						
+						if ($type == 'array') $row[] = base64_encode($value);
+						else if ($type == 'datetime') $row[] = gmdate("Y-m-d\TH:i:s.v\Z", strtotime($value));
+						else $row[] = $value;
 					}
 					$result->rows[] = $row;
 				}

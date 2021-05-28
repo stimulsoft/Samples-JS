@@ -62,7 +62,7 @@ class StiResult {
 }
 
 class StiRequest {
-	public $event = null;
+	public $command = null;
 	public $connectionString = null;
 	public $queryString = null;
 	public $database = null;
@@ -85,9 +85,9 @@ class StiRequest {
 			return StiResult::error($message);
 		}
 		
-		if (isset($obj->command)) $this->event = $obj->command;
-		if ($this->event != 'TestConnection' && $this->event != 'ExecuteQuery')
-			return StiResult::error('Unknown event ['.$this->event.']');
+		if (isset($obj->command)) $this->command = $obj->command;
+		if ($this->command != 'TestConnection' && $this->command != 'ExecuteQuery')
+			return StiResult::error('Unknown command ['.$this->command.']');
 		
 		if (isset($obj->connectionString)) $this->connectionString = $obj->connectionString;
 		if (isset($obj->queryString)) $this->queryString = $obj->queryString;
@@ -138,7 +138,7 @@ $result = $request->parse();
 if ($result->success) {
 	$result = getDataAdapter($request);
 	if ($result->success) {
-		$result = $request->event == 'TestConnection'
+		$result = $request->command == 'TestConnection'
 			? $result->object->test()
 			: $result->object->execute($request->queryString);
 	}

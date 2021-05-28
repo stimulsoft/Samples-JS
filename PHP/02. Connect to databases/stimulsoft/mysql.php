@@ -253,7 +253,10 @@ class StiMySqlAdapter {
 					$row = array();
 					for ($i = 0; $i < $result->count; $i++) {
 						$type = count($result->types) >= $i + 1 ? $result->types[$i] : 'string';
-						$row[] = $type == 'array' ? base64_encode($rowItem[$i]) : $rowItem[$i];
+						
+						if ($type == 'array') $row[] = base64_encode($rowItem[$i]);
+						else if ($type == 'datetime') $row[] = gmdate("Y-m-d\TH:i:s.v\Z", strtotime($rowItem[$i]));
+						else $row[] = $rowItem[$i];
 					}
 					$result->rows[] = $row;
 				}
@@ -273,7 +276,10 @@ class StiMySqlAdapter {
 						foreach ($rowItem as $key => $value) {
 							if ($isColumnsEmpty && count($result->columns) < count($rowItem)) $result->columns[] = $key;
 							$type = count($result->types) >= count($row) + 1 ? $result->types[count($row)] : 'string';
-							$row[] = $type == 'array' ? base64_encode($value) : $value;
+							
+							if ($type == 'array') $row[] = base64_encode($value);
+							else if ($type == 'datetime') $row[] = gmdate("Y-m-d\TH:i:s.v\Z", strtotime($value));
+							else $row[] = $value;
 						}
 						$result->rows[] = $row;
 					}

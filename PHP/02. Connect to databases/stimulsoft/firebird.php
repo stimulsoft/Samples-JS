@@ -208,7 +208,10 @@ class StiFirebirdAdapter {
 							if (count($result->columns) < $index) $result->columns[] = $key;
 							if (count($result->types) < $index) $result->types[] = $this->detectType($value);
 							$type = $result->types[$index - 1];
-							$row[] = $type == 'array' ? base64_encode($value) : $value;
+							
+							if ($type == 'array') $row[] = base64_encode($value);
+							else if ($type == 'datetime') $row[] = gmdate("Y-m-d\TH:i:s.v\Z", strtotime($value));
+							else $row[] = $value;
 						}
 					}
 					
@@ -228,7 +231,11 @@ class StiFirebirdAdapter {
 					$row = array();
 					foreach ($rowItem as $key => $value) {
 						$type = count($result->types) >= count($row) + 1 ? $result->types[count($row)] : 'string';
-						$row[] = $type == 'array' ? base64_encode($value) : ($type == 'string' ? utf8_encode($value) : $value);
+						
+						if ($type == 'array') $row[] = base64_encode($value);
+						else if ($type == 'datetime') $row[] = gmdate("Y-m-d\TH:i:s.v\Z", strtotime($value));
+						else if ($type == 'string') $row[] = utf8_encode($value);
+						else $row[] = $value;
 					}
 					$result->rows[] = $row;
 				}
