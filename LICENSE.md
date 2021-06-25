@@ -78,6 +78,7 @@ Stimulsoft.Report.Mvc.NetCore.dll
 Stimulsoft.Report.Web.dll  
 Stimulsoft.Report.WebDesign.dll  
 Stimulsoft.System.dll  
+Stimulsoft.System.Web.dll  
 All .xml localization files
 
 **ASP.NET, ASP.NET MVC**  
@@ -94,6 +95,19 @@ Stimulsoft.Report.Helper.dll
 Stimulsoft.Report.Mvc.dll  
 Stimulsoft.Report.Web.dll  
 Stimulsoft.Report.WebDesign.dll  
+All .xml localization files
+
+**Blazor**  
+Stimulsoft.Base.dll  
+Stimulsoft.Data.dll  
+Stimulsoft.Report.dll  
+Stimulsoft.Report.Blazor.dll  
+Stimulsoft.Report.Check.dll  
+Stimulsoft.Report.Helper.dll  
+Stimulsoft.Report.Web.dll  
+Stimulsoft.Report.WebDesign.dll  
+Stimulsoft.System.dll  
+Stimulsoft.System.Web.dll  
 All .xml localization files
 
 **WPF**  
@@ -135,18 +149,10 @@ All stimulsoft-\*.jar product files
 All .xml localization files
 
 **PHP**  
-designer.html  
-viewer.html  
-DesignerFx_PHP.swf  
-ViewerFx_PHP.swf  
 All stimulsoft.\*.js scripts files  
 All stimulsoft.\*.ts definitions files  
 All stimulsoft.\*.css styles files  
 All .php product files  
-All .xml localization files
-
-**Flex**  
-All Stimulsoft_\*.swc flex files  
 All .xml localization files
 
 #### Stimulsoft Reports.Web
@@ -162,6 +168,20 @@ Stimulsoft.Report.Mvc.NetCore.dll
 Stimulsoft.Report.Web.dll  
 Stimulsoft.Report.WebDesign.dll  
 Stimulsoft.System.dll  
+Stimulsoft.System.Web.dll  
+All .xml localization files
+
+#### Stimulsoft Reports.Blazor
+Stimulsoft.Base.dll  
+Stimulsoft.Data.dll  
+Stimulsoft.Report.dll  
+Stimulsoft.Report.Blazor.dll  
+Stimulsoft.Report.Check.dll  
+Stimulsoft.Report.Helper.dll  
+Stimulsoft.Report.Web.dll  
+Stimulsoft.Report.WebDesign.dll  
+Stimulsoft.System.dll  
+Stimulsoft.System.Web.dll  
 All .xml localization files
 
 #### Stimulsoft Reports.Net
@@ -242,18 +262,10 @@ All stimulsoft-\*.jar product files
 All .xml localization files
 
 #### Stimulsoft Reports.PHP
-designer.html  
-viewer.html  
-DesignerFx_PHP.swf  
-ViewerFx_PHP.swf  
 All stimulsoft.\*.js scripts files  
 All stimulsoft.\*.ts definitions files  
 All stimulsoft.\*.css styles files  
 All .php product files  
-All .xml localization files
-
-#### Stimulsoft Reports.Flex
-All Stimulsoft_\*.swc flex files  
 All .xml localization files
 
 #### Stimulsoft Dashboards.JS
@@ -277,6 +289,7 @@ Stimulsoft.Report.Mvc.NetCore.dll
 Stimulsoft.Report.Web.dll  
 Stimulsoft.Report.WebDesign.dll  
 Stimulsoft.System.dll  
+Stimulsoft.System.Web.dll  
 All .xml localization files
 
 #### Stimulsoft Dashboards.WIN
