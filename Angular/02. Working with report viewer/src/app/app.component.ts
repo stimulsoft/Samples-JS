@@ -22,7 +22,7 @@ export class AppComponent {
     this.http.request('reports/Report.mdc').subscribe((data: Response) => {
 
       console.log('Load report from url');
-      this.report.loadDocument(data.json());
+      this.report.loadDocument(data.text());
       this.viewer.report = this.report;
 
       console.log('Rendering the viewer to selected element');
