@@ -1,144 +1,388 @@
 var Shapes = {
-  "ReportVersion": "2019.1.1.0",
-  "ReportGuid": "d7460560477743409a7701b053c3fff8",
+  "ReportVersion": "2021.3.4.0",
+  "ReportGuid": "e54e645a164d47aa98ee831e136ed236",
   "ReportName": "Report",
   "ReportAlias": "Shapes",
-  "ReportDescription": "The sample demonstrates how to create a report with shapes.",
-  "ReportCreated": "/Date(1085828340000+0000)/",
-  "ReportChanged": "/Date(1522752756000+0000)/",
+  "ReportAuthor": "Stimulsoft",
+  "ReportDescription": "This example demonstrates how to use shapes.",
+  "ReportCreated": "/Date(1085813940000+0400)/",
+  "ReportChanged": "/Date(1550335822000+0300)/",
   "EngineVersion": "EngineV2",
   "CalculationMode": "Interpretation",
+  "ReportUnit": "HundredthsOfInch",
   "PreviewMode": "StandardAndDotMatrix",
-  "PreviewSettings": 33538047,
+  "PreviewSettings": 25149439,
   "Script": "using System;\r\nusing System.Drawing;\r\nusing System.Windows.Forms;\r\nusing System.Data;\r\nusing Stimulsoft.Report;\r\nusing Stimulsoft.Report.Components;\r\nusing Stimulsoft.Base.Drawing;\r\n\r\nnamespace StiReports\r\n{\r\n    \r\n    public class Report : Stimulsoft.Report.StiReport\r\n    {\r\n        \r\n        public Report()\r\n        {\r\n            this.InitializeComponent();\r\n        }\r\n        \r\n        #region StiReport Designer generated code - do not modify\r\n\t\t#endregion StiReport Designer generated code - do not modify\r\n    }\r\n}",
   "Styles": {
     "0": {
       "Ident": "StiStyle",
-      "CollectionName": "Style",
-      "Name": "Title1",
-      "HorAlignment": "Right",
+      "CollectionName": "Green",
+      "Name": "Green1",
       "VertAlignment": "Center",
-      "Font": ";19;;",
-      "Border": ";0,0,0,0;;;;;;solid:Black",
-      "Brush": "solid:96,125,139",
-      "TextBrush": "solid:255,255,255",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:115,172,142",
+      "TextBrush": "solid:White",
       "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
       "AllowUseBorderFormatting": false,
       "AllowUseBorderSides": false
     },
     "1": {
       "Ident": "StiStyle",
-      "CollectionName": "Style",
-      "Name": "Title2",
+      "CollectionName": "Green",
+      "Name": "Green2",
       "VertAlignment": "Center",
-      "Font": ";9;;",
-      "Border": ";0,0,0;;;;;;solid:Black",
-      "Brush": "solid:0,0,0,0",
-      "TextBrush": "solid:69,90,100",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:97,129,112",
+      "TextBrush": "solid:White",
       "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
       "AllowUseBorderFormatting": false,
       "AllowUseBorderSides": false
     },
     "2": {
       "Ident": "StiStyle",
-      "CollectionName": "Style",
-      "Name": "Header1",
+      "CollectionName": "Green",
+      "Name": "Green3",
       "VertAlignment": "Center",
-      "Font": ";19;;",
-      "Border": ";0,0,0;;;;;;solid:Black",
-      "Brush": "solid:",
-      "TextBrush": "solid:0,0,0",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:37,112,72",
+      "TextBrush": "solid:White",
       "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
       "AllowUseBorderSides": false
     },
     "3": {
       "Ident": "StiStyle",
-      "CollectionName": "Style",
-      "Name": "Header2",
-      "HorAlignment": "Center",
+      "CollectionName": "Green",
+      "Name": "Green4",
       "VertAlignment": "Center",
-      "Font": ";14.25;Bold;",
-      "Border": ";0,0,0;;;;;;solid:Black",
-      "Brush": "solid:",
-      "TextBrush": "solid:158,158,158",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:160,214,185",
+      "TextBrush": "solid:White",
       "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
       "AllowUseBorderSides": false
     },
     "4": {
       "Ident": "StiStyle",
-      "CollectionName": "Style",
-      "Name": "Header3",
-      "HorAlignment": "Center",
+      "CollectionName": "Green",
+      "Name": "Green5",
       "VertAlignment": "Center",
-      "Font": ";16;;",
-      "Border": "All;182,182,182;;;;;;solid:Black",
-      "Brush": "solid:26,160,148",
-      "TextBrush": "solid:255,255,255",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:175,214,193",
+      "TextBrush": "solid:White",
       "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
       "AllowUseBorderSides": false
     },
     "5": {
       "Ident": "StiStyle",
-      "CollectionName": "Style",
-      "Name": "Data1",
+      "CollectionName": "Red",
+      "Name": "Red1",
       "VertAlignment": "Center",
-      "Font": ";10;;",
+      "Font": "Segoe UI;9.75;;",
       "Border": ";182,182,182;;;;;;solid:Black",
-      "Brush": "solid:0,0,0,0",
-      "TextBrush": "solid:74,74,74",
+      "Brush": "solid:201,63,66",
+      "TextBrush": "solid:White",
       "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
       "AllowUseBorderSides": false
     },
     "6": {
       "Ident": "StiStyle",
-      "CollectionName": "Style",
-      "Name": "Data2",
-      "Font": ";9;;",
-      "Border": ";255,255,255;;;;;;solid:Black",
-      "Brush": "solid:178,223,219",
-      "TextBrush": "solid:0,0,0",
+      "CollectionName": "Red",
+      "Name": "Red2",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:151,73,75",
+      "TextBrush": "solid:White",
       "NegativeTextBrush": "solid:Red",
       "AllowUseFont": false,
       "AllowUseBorderFormatting": false,
-      "AllowUseBorderSides": false,
-      "AllowUseTextBrush": false
+      "AllowUseBorderSides": false
     },
     "7": {
       "Ident": "StiStyle",
-      "CollectionName": "Style",
-      "Name": "Data3",
+      "CollectionName": "Red",
+      "Name": "Red3",
       "VertAlignment": "Center",
-      "Font": ";9;;",
-      "Border": ";255,255,255;;;;;;solid:Black",
-      "Brush": "solid:178,223,219",
-      "TextBrush": "solid:0,0,0",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:131,20,23",
+      "TextBrush": "solid:White",
       "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
       "AllowUseBorderSides": false
     },
     "8": {
       "Ident": "StiStyle",
-      "CollectionName": "Style",
-      "Name": "Footer1",
+      "CollectionName": "Red",
+      "Name": "Red4",
       "VertAlignment": "Center",
-      "Font": ";9;;",
-      "Border": "Top;58,78,94;;;;;;solid:Black",
-      "Brush": "solid:",
-      "TextBrush": "solid:0,0,0",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:228,111,114",
+      "TextBrush": "solid:White",
       "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
       "AllowUseBorderSides": false
     },
     "9": {
       "Ident": "StiStyle",
-      "CollectionName": "Style",
-      "Name": "Footer2",
-      "HorAlignment": "Right",
+      "CollectionName": "Red",
+      "Name": "Red5",
       "VertAlignment": "Center",
-      "Font": ";12;Bold;",
-      "Border": ";158,158,158;;;;;;solid:Black",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:228,142,144",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
+      "AllowUseBorderSides": false
+    },
+    "10": {
+      "Ident": "StiStyle",
+      "CollectionName": "Yellow",
+      "Name": "Yellow1",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:226,189,90",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
+      "AllowUseBorderSides": false
+    },
+    "11": {
+      "Ident": "StiStyle",
+      "CollectionName": "Yellow",
+      "Name": "Yellow2",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:170,149,93",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
+      "AllowUseBorderSides": false
+    },
+    "12": {
+      "Ident": "StiStyle",
+      "CollectionName": "Yellow",
+      "Name": "Yellow3",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:147,115,29",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
+      "AllowUseBorderSides": false
+    },
+    "13": {
+      "Ident": "StiStyle",
+      "CollectionName": "Yellow",
+      "Name": "Yellow4",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:241,211,132",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
+      "AllowUseBorderSides": false
+    },
+    "14": {
+      "Ident": "StiStyle",
+      "CollectionName": "Yellow",
+      "Name": "Yellow5",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:241,219,161",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
+      "AllowUseBorderSides": false
+    },
+    "15": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue",
+      "Name": "Blue1",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:68,160,208",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
+      "AllowUseBorderSides": false
+    },
+    "16": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue",
+      "Name": "Blue2",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:77,128,156",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
+      "AllowUseBorderSides": false
+    },
+    "17": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue",
+      "Name": "Blue3",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:22,96,135",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
+      "AllowUseBorderSides": false
+    },
+    "18": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue",
+      "Name": "Blue4",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:115,191,232",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
+      "AllowUseBorderSides": false
+    },
+    "19": {
+      "Ident": "StiStyle",
+      "CollectionName": "Blue",
+      "Name": "Blue5",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:146,202,232",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
+      "AllowUseBorderSides": false
+    },
+    "20": {
+      "Ident": "StiStyle",
+      "CollectionName": "Violet",
+      "Name": "Violet1",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:147,119,175",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
+      "AllowUseBorderSides": false
+    },
+    "21": {
+      "Ident": "StiStyle",
+      "CollectionName": "Violet",
+      "Name": "Violet2",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:115,100,131",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
+      "AllowUseBorderSides": false
+    },
+    "22": {
+      "Ident": "StiStyle",
+      "CollectionName": "Violet",
+      "Name": "Violet3",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:76,39,114",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
+      "AllowUseBorderSides": false
+    },
+    "23": {
+      "Ident": "StiStyle",
+      "CollectionName": "Violet",
+      "Name": "Violet4",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:189,163,215",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
+      "AllowUseBorderSides": false
+    },
+    "24": {
+      "Ident": "StiStyle",
+      "CollectionName": "Violet",
+      "Name": "Violet5",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";182,182,182;;;;;;solid:Black",
+      "Brush": "solid:196,177,215",
+      "TextBrush": "solid:White",
+      "NegativeTextBrush": "solid:Red",
+      "AllowUseFont": false,
+      "AllowUseBorderFormatting": false,
+      "AllowUseBorderSides": false
+    },
+    "25": {
+      "Ident": "StiStyle",
+      "Name": "Header2",
+      "HorAlignment": "Center",
+      "VertAlignment": "Center",
+      "Font": "Segoe UI;21.75;Bold;",
+      "Border": "Bottom;158,158,158;;;;;;solid:Black",
       "Brush": "solid:",
       "TextBrush": "solid:158,158,158",
-      "NegativeTextBrush": "solid:Red",
-      "AllowUseBorderSides": false
+      "NegativeTextBrush": "solid:Red"
+    },
+    "26": {
+      "Ident": "StiStyle",
+      "Name": "Footer",
+      "Font": "Segoe UI;9.75;;",
+      "Border": ";58,78,94;;;;;;solid:Black",
+      "Brush": "solid:",
+      "TextBrush": "solid:158,158,158",
+      "NegativeTextBrush": "solid:Red"
     }
   },
   "ReferencedAssemblies": {
@@ -165,502 +409,8 @@ var Shapes = {
         "0": {
           "Ident": "StiPageFooterBand",
           "Name": "PageFooterBand1",
-          "ClientRectangle": "0,26.9,19,0.8",
-          "ComponentStyle": "Footer2",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Border": "Top;158,158,158;;;;;;solid:Black",
-          "Brush": "solid:",
-          "Components": {
-            "0": {
-              "Ident": "StiText",
-              "Name": "Text1",
-              "Guid": "75dfccbeae7543e1ab7fed675b02df83",
-              "MinSize": "0,0",
-              "MaxSize": "0,0",
-              "ClientRectangle": "0,0,19,0.8",
-              "ComponentStyle": "Footer2",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "{PageNofM}"
-              },
-              "HorAlignment": "Right",
-              "VertAlignment": "Center",
-              "Font": ";12;Bold;",
-              "Border": ";158,158,158;;;;;;solid:Black",
-              "Brush": "solid:",
-              "TextBrush": "solid:158,158,158",
-              "Type": "Expression"
-            }
-          }
-        },
-        "1": {
-          "Ident": "StiShape",
-          "Name": "Shape1",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "0.2,4,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:178,235,242",
-          "BorderColor": "Transparent",
-          "Size": 3.0,
-          "ShapeType": {
-            "Ident": "StiRectangleShapeType"
-          }
-        },
-        "2": {
-          "Ident": "StiShape",
-          "Name": "Shape3",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "3.6,4,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:128,222,234",
-          "BorderColor": "Transparent",
-          "Size": 3.0,
-          "ShapeType": {
-            "Ident": "StiRoundedRectangleShapeType"
-          }
-        },
-        "3": {
-          "Ident": "StiShape",
-          "Name": "Shape2",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "6.8,4,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:77,208,225",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiSnipSameSideCornerRectangleShapeType"
-          }
-        },
-        "4": {
-          "Ident": "StiShape",
-          "Name": "Shape4",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "10,4,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:38,198,218",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiFlowchartCardShapeType"
-          }
-        },
-        "5": {
-          "Ident": "StiShape",
-          "Name": "Shape19",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "13.2,4,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:0,188,212",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiSnipDiagonalSideCornerRectangleShapeType"
-          }
-        },
-        "6": {
-          "Ident": "StiShape",
-          "Name": "Shape5",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "0.2,7.4,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:229,57,53",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiOvalShapeType"
-          }
-        },
-        "7": {
-          "Ident": "StiShape",
-          "Name": "Shape6",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "3.6,7.4,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:244,67,54",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiTriangleShapeType"
-          }
-        },
-        "8": {
-          "Ident": "StiShape",
-          "Name": "Shape7",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "6.8,7.4,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:239,83,80",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiFlowchartDecisionShapeType"
-          }
-        },
-        "9": {
-          "Ident": "StiShape",
-          "Name": "Shape8",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "16.4,4,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:0,172,193",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiFlowchartManualInputShapeType"
-          }
-        },
-        "10": {
-          "Ident": "StiShape",
-          "Name": "Shape9",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "10,7.4,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:229,115,115",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiTriangleShapeType",
-            "Direction": "Down"
-          }
-        },
-        "11": {
-          "Ident": "StiShape",
-          "Name": "Shape10",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "0.2,11,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:220,237,200",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiFlowchartOffPageConnectorShapeType",
-            "Direction": "Down"
-          }
-        },
-        "12": {
-          "Ident": "StiShape",
-          "Name": "Shape11",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "3.6,11,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:197,225,165",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiFlowchartPreparationShapeType"
-          }
-        },
-        "13": {
-          "Ident": "StiShape",
-          "Name": "Shape12",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "6.8,11,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:174,213,129",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiRegularPentagonShapeType"
-          }
-        },
-        "14": {
-          "Ident": "StiShape",
-          "Name": "Shape13",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "10,11,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:156,204,101",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiTrapezoidShapeType"
-          }
-        },
-        "15": {
-          "Ident": "StiShape",
-          "Name": "Shape14",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "13.2,11,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:139,195,74",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiFlowchartSortShapeType"
-          }
-        },
-        "16": {
-          "Ident": "StiShape",
-          "Name": "Shape15",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "16.4,7.4,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:255,205,210",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiFrameShapeType"
-          }
-        },
-        "17": {
-          "Ident": "StiShape",
-          "Name": "Shape16",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "13.2,7.4,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:239,154,154",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiParallelogramShapeType"
-          }
-        },
-        "18": {
-          "Ident": "StiShape",
-          "Name": "Shape17",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "16.4,11,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:124,179,66",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiFlowchartCollateShapeType",
-            "Direction": "Down"
-          }
-        },
-        "19": {
-          "Ident": "StiShape",
-          "Name": "Shape18",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "0.2,14.2,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:142,36,170",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiArrowShapeType",
-            "Direction": "Left"
-          }
-        },
-        "20": {
-          "Ident": "StiShape",
-          "Name": "Shape20",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "3.6,14.2,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:156,39,176",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiArrowShapeType"
-          }
-        },
-        "21": {
-          "Ident": "StiShape",
-          "Name": "Shape21",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "6.8,14.2,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:171,71,188",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiArrowShapeType",
-            "Direction": "Right"
-          }
-        },
-        "22": {
-          "Ident": "StiShape",
-          "Name": "Shape22",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "9.8,14.2,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:186,104,200",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiArrowShapeType",
-            "Direction": "Down"
-          }
-        },
-        "23": {
-          "Ident": "StiShape",
-          "Name": "Shape24",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "16.4,14.2,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:225,190,231",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiComplexArrowShapeType",
-            "Direction": "Up"
-          }
-        },
-        "24": {
-          "Ident": "StiShape",
-          "Name": "Shape25",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "0.2,17.8,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:250,206,170",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiPlusShapeType"
-          }
-        },
-        "25": {
-          "Ident": "StiShape",
-          "Name": "Shape26",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "3.6,17.8,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:250,206,170",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiMinusShapeType"
-          }
-        },
-        "26": {
-          "Ident": "StiShape",
-          "Name": "Shape27",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "6.8,17.8,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:247,181,128",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiMultiplyShapeType"
-          }
-        },
-        "27": {
-          "Ident": "StiShape",
-          "Name": "Shape28",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "10,17.8,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:247,181,128",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiDivisionShapeType"
-          }
-        },
-        "28": {
-          "Ident": "StiShape",
-          "Name": "Shape29",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "13.2,17.8,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:183,117,64",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiEqualShapeType"
-          }
-        },
-        "29": {
-          "Ident": "StiShape",
-          "Name": "Shape30",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "16.4,17.8,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:183,117,64",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiBentArrowShapeType"
-          }
-        },
-        "30": {
-          "Ident": "StiShape",
-          "Name": "Shape31",
-          "MinSize": "0,0",
-          "MaxSize": "0,0",
-          "ClientRectangle": "13.2,14.2,2.6,2.6",
-          "Interaction": {
-            "Ident": "StiInteraction"
-          },
-          "Brush": "solid:206,147,216",
-          "BorderColor": "Transparent",
-          "ShapeType": {
-            "Ident": "StiChevronShapeType"
-          }
-        },
-        "31": {
-          "Ident": "StiReportTitleBand",
-          "Name": "ReportTitleBand2",
-          "Guid": "1127d071d9be434e80a3ea6e1dbf542e",
-          "ClientRectangle": "0,0.4,19,2.6",
+          "Guid": "88310e77518043bc9e4b0fac9aa4c91d",
+          "ClientRectangle": "0,1071,749,20",
           "Interaction": {
             "Ident": "StiInteraction"
           },
@@ -669,63 +419,470 @@ var Shapes = {
           "Components": {
             "0": {
               "Ident": "StiText",
-              "Name": "Text17",
-              "Guid": "c8f457d430be4bd1af6565fa99f4cde5",
-              "CanGrow": true,
-              "MinSize": "0,0",
-              "MaxSize": "0,0",
-              "ClientRectangle": "0,1.6,14.2,0.8",
-              "ComponentStyle": "Title2",
+              "Name": "Text6",
+              "Guid": "27df6ecd8ec849c2bb2653dcbf60a510",
+              "ClientRectangle": "0,0,749,20",
+              "ComponentStyle": "Footer",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
               "Text": {
-                "Value": "{ReportDescription}"
-              },
-              "VertAlignment": "Center",
-              "Font": ";9;;",
-              "Border": ";0,0,0;;;;;;solid:Black",
-              "Brush": "solid:0,0,0,0",
-              "TextBrush": "solid:69,90,100",
-              "TextOptions": {
-                "WordWrap": true
-              },
-              "Type": "Expression"
-            },
-            "1": {
-              "Ident": "StiText",
-              "Name": "Text18",
-              "Guid": "4f76817837374685b9df1f5421bb4cda",
-              "CanGrow": true,
-              "MinSize": "0,0",
-              "MaxSize": "0,0",
-              "ClientRectangle": "14.2,1.6,4.8,0.8",
-              "ComponentStyle": "Title2",
-              "Interaction": {
-                "Ident": "StiInteraction"
-              },
-              "Text": {
-                "Value": "Date: {Today.ToString(\"Y\")}"
+                "Value": "{PageNofM}"
               },
               "HorAlignment": "Right",
               "VertAlignment": "Center",
-              "Font": ";9;;",
-              "Border": ";0,0,0;;;;;;solid:Black",
-              "Brush": "solid:0,0,0,0",
-              "TextBrush": "solid:69,90,100",
-              "TextOptions": {
-                "WordWrap": true
-              },
-              "Type": "Expression"
-            },
-            "2": {
+              "Font": "Segoe UI;9.75;;",
+              "Border": ";58,78,94;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:158,158,158"
+            }
+          }
+        },
+        "1": {
+          "Ident": "StiShape",
+          "Name": "Shape5",
+          "ClientRectangle": "10,220,100,100",
+          "ComponentStyle": "Red1",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:201,63,66",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiOvalShapeType"
+          }
+        },
+        "2": {
+          "Ident": "StiShape",
+          "Name": "Shape6",
+          "ClientRectangle": "130,220,100,100",
+          "ComponentStyle": "Red4",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:228,111,114",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiTriangleShapeType"
+          }
+        },
+        "3": {
+          "Ident": "StiShape",
+          "Name": "Shape7",
+          "ClientRectangle": "260,220,100,100",
+          "ComponentStyle": "Red2",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:151,73,75",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiFlowchartDecisionShapeType"
+          }
+        },
+        "4": {
+          "Ident": "StiShape",
+          "Name": "Shape9",
+          "ClientRectangle": "390,220,100,100",
+          "ComponentStyle": "Red5",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:228,142,144",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiTriangleShapeType",
+            "Direction": "Down"
+          }
+        },
+        "5": {
+          "Ident": "StiShape",
+          "Name": "Shape10",
+          "ClientRectangle": "10,360,100,100",
+          "ComponentStyle": "Yellow1",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:226,189,90",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiFlowchartOffPageConnectorShapeType",
+            "Direction": "Down"
+          }
+        },
+        "6": {
+          "Ident": "StiShape",
+          "Name": "Shape11",
+          "ClientRectangle": "130,360,100,100",
+          "ComponentStyle": "Yellow2",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:170,149,93",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiFlowchartPreparationShapeType"
+          }
+        },
+        "7": {
+          "Ident": "StiShape",
+          "Name": "Shape12",
+          "ClientRectangle": "260,360,100,100",
+          "ComponentStyle": "Yellow4",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:241,211,132",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiRegularPentagonShapeType"
+          }
+        },
+        "8": {
+          "Ident": "StiShape",
+          "Name": "Shape13",
+          "ClientRectangle": "390,360,100,100",
+          "ComponentStyle": "Yellow3",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:147,115,29",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiTrapezoidShapeType"
+          }
+        },
+        "9": {
+          "Ident": "StiShape",
+          "Name": "Shape14",
+          "ClientRectangle": "510,360,100,100",
+          "ComponentStyle": "Yellow5",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:241,219,161",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiFlowchartSortShapeType"
+          }
+        },
+        "10": {
+          "Ident": "StiShape",
+          "Name": "Shape15",
+          "ClientRectangle": "640,220,100,100",
+          "ComponentStyle": "Red1",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:201,63,66",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiFrameShapeType"
+          }
+        },
+        "11": {
+          "Ident": "StiShape",
+          "Name": "Shape16",
+          "ClientRectangle": "510,220,100,100",
+          "ComponentStyle": "Red3",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:131,20,23",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiParallelogramShapeType"
+          }
+        },
+        "12": {
+          "Ident": "StiShape",
+          "Name": "Shape17",
+          "ClientRectangle": "640,360,100,100",
+          "ComponentStyle": "Yellow1",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:226,189,90",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiFlowchartCollateShapeType",
+            "Direction": "Down"
+          }
+        },
+        "13": {
+          "Ident": "StiShape",
+          "Name": "Shape18",
+          "ClientRectangle": "10,500,100,100",
+          "ComponentStyle": "Blue1",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:68,160,208",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiArrowShapeType",
+            "Direction": "Left"
+          }
+        },
+        "14": {
+          "Ident": "StiShape",
+          "Name": "Shape20",
+          "ClientRectangle": "130,500,100,100",
+          "ComponentStyle": "Blue2",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:77,128,156",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiArrowShapeType"
+          }
+        },
+        "15": {
+          "Ident": "StiShape",
+          "Name": "Shape21",
+          "ClientRectangle": "260,500,100,100",
+          "ComponentStyle": "Blue4",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:115,191,232",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiArrowShapeType",
+            "Direction": "Right"
+          }
+        },
+        "16": {
+          "Ident": "StiShape",
+          "Name": "Shape22",
+          "ClientRectangle": "390,500,100,100",
+          "ComponentStyle": "Blue3",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:22,96,135",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiArrowShapeType",
+            "Direction": "Down"
+          }
+        },
+        "17": {
+          "Ident": "StiShape",
+          "Name": "Shape24",
+          "ClientRectangle": "630,500,120,100",
+          "ComponentStyle": "Blue1",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:68,160,208",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiComplexArrowShapeType"
+          }
+        },
+        "18": {
+          "Ident": "StiShape",
+          "Name": "Shape25",
+          "ClientRectangle": "10,640,100,100",
+          "ComponentStyle": "Violet1",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:147,119,175",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiPlusShapeType"
+          }
+        },
+        "19": {
+          "Ident": "StiShape",
+          "Name": "Shape26",
+          "ClientRectangle": "130,640,100,100",
+          "ComponentStyle": "Violet2",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:115,100,131",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiMinusShapeType"
+          }
+        },
+        "20": {
+          "Ident": "StiShape",
+          "Name": "Shape27",
+          "ClientRectangle": "260,640,100,100",
+          "ComponentStyle": "Violet4",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:189,163,215",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiMultiplyShapeType"
+          }
+        },
+        "21": {
+          "Ident": "StiShape",
+          "Name": "Shape28",
+          "ClientRectangle": "390,640,100,100",
+          "ComponentStyle": "Violet3",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:76,39,114",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiDivisionShapeType"
+          }
+        },
+        "22": {
+          "Ident": "StiShape",
+          "Name": "Shape29",
+          "ClientRectangle": "510,640,100,100",
+          "ComponentStyle": "Violet5",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:196,177,215",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiEqualShapeType"
+          }
+        },
+        "23": {
+          "Ident": "StiShape",
+          "Name": "Shape30",
+          "ClientRectangle": "640,640,100,100",
+          "ComponentStyle": "Violet1",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:147,119,175",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiBentArrowShapeType"
+          }
+        },
+        "24": {
+          "Ident": "StiShape",
+          "Name": "Shape31",
+          "ClientRectangle": "510,500,100,100",
+          "ComponentStyle": "Blue5",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:146,202,232",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiChevronShapeType"
+          }
+        },
+        "25": {
+          "Ident": "StiShape",
+          "Name": "Shape1",
+          "ClientRectangle": "10,90,100,100",
+          "ComponentStyle": "Green1",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:115,172,142",
+          "BorderColor": "Transparent",
+          "Size": 3.0,
+          "ShapeType": {
+            "Ident": "StiRectangleShapeType"
+          }
+        },
+        "26": {
+          "Ident": "StiShape",
+          "Name": "Shape3",
+          "ClientRectangle": "130,90,100,100",
+          "ComponentStyle": "Green2",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:97,129,112",
+          "BorderColor": "Transparent",
+          "Size": 3.0,
+          "ShapeType": {
+            "Ident": "StiRoundedRectangleShapeType"
+          }
+        },
+        "27": {
+          "Ident": "StiShape",
+          "Name": "Shape2",
+          "ClientRectangle": "260,90,100,100",
+          "ComponentStyle": "Green4",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:160,214,185",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiSnipSameSideCornerRectangleShapeType"
+          }
+        },
+        "28": {
+          "Ident": "StiShape",
+          "Name": "Shape4",
+          "ClientRectangle": "390,90,100,100",
+          "ComponentStyle": "Green3",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:37,112,72",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiFlowchartCardShapeType"
+          }
+        },
+        "29": {
+          "Ident": "StiShape",
+          "Name": "Shape19",
+          "ClientRectangle": "510,90,100,100",
+          "ComponentStyle": "Green5",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:175,214,193",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiSnipDiagonalSideCornerRectangleShapeType"
+          }
+        },
+        "30": {
+          "Ident": "StiShape",
+          "Name": "Shape8",
+          "ClientRectangle": "640,90,100,100",
+          "ComponentStyle": "Green1",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Brush": "solid:115,172,142",
+          "BorderColor": "Transparent",
+          "ShapeType": {
+            "Ident": "StiFlowchartManualInputShapeType"
+          }
+        },
+        "31": {
+          "Ident": "StiReportTitleBand",
+          "Name": "ReportTitleBand2",
+          "Guid": "1127d071d9be434e80a3ea6e1dbf542e",
+          "ClientRectangle": "0,20,749,60",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
               "Ident": "StiText",
               "Name": "Text20",
-              "Guid": "718236e7024c44edaa517cc8aec0eefb",
-              "MinSize": "0,0",
-              "MaxSize": "0,0",
-              "ClientRectangle": "0,0,19,1.6",
-              "ComponentStyle": "Title1",
+              "Guid": "c5e150d59a81471788ac67e868919bde",
+              "ClientRectangle": "570,0,179,40",
+              "ComponentStyle": "Header2",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -734,26 +891,18 @@ var Shapes = {
               },
               "HorAlignment": "Right",
               "VertAlignment": "Center",
-              "Font": ";19;;",
-              "Border": ";0,0,0,0;;;;;;solid:Black",
-              "Brush": "solid:96,125,139",
-              "TextBrush": "solid:255,255,255",
-              "Margins": {
-                "Left": 0.0,
-                "Right": 10.0,
-                "Top": 0.0,
-                "Bottom": 0.0
-              },
+              "Font": "Segoe UI;21.75;Bold;",
+              "Border": "Bottom;158,158,158;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:158,158,158",
               "Type": "Expression"
             },
-            "3": {
+            "1": {
               "Ident": "StiText",
               "Name": "Text23",
-              "Guid": "4beff844a0b8434c8e52dc3897d07cff",
-              "MinSize": "0,0",
-              "MaxSize": "0,0",
-              "ClientRectangle": "0.6,0.2,9.4,1",
-              "ComponentStyle": "Title1",
+              "Guid": "df68c258ca7841dc8a0ac5641b5a28b9",
+              "ClientRectangle": "0,0,570,40",
+              "ComponentStyle": "Header2",
               "Interaction": {
                 "Ident": "StiInteraction"
               },
@@ -761,15 +910,54 @@ var Shapes = {
                 "Value": "Shapes"
               },
               "VertAlignment": "Center",
-              "Font": ";19;;",
-              "Border": "Left;178,223,219;5;;;;;solid:0,0,0",
-              "Brush": "solid:96,125,139",
-              "TextBrush": "solid:255,255,255",
-              "Margins": {
-                "Left": 10.0,
-                "Right": 0.0,
-                "Top": 0.0,
-                "Bottom": 0.0
+              "Font": "Segoe UI;21.75;Bold;",
+              "Border": "Bottom;158,158,158;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:158,158,158",
+              "Type": "Expression"
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Text17",
+              "Guid": "18d08c97bc274503bc727e82e0814fae",
+              "CanGrow": true,
+              "ClientRectangle": "0,40,570,20",
+              "ComponentStyle": "Footer",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{ReportDescription}"
+              },
+              "Font": "Segoe UI;9.75;;",
+              "Border": ";58,78,94;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:158,158,158",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Type": "Expression"
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Text18",
+              "Guid": "8499eda182e74a5ab2015fdf8af8b4a7",
+              "CanGrow": true,
+              "ClientRectangle": "570,40,179,20",
+              "ComponentStyle": "Footer",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Date: {Today.ToString(\"Y\")}"
+              },
+              "HorAlignment": "Right",
+              "Font": "Segoe UI;9.75;;",
+              "Border": ";58,78,94;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:158,158,158",
+              "TextOptions": {
+                "WordWrap": true
               },
               "Type": "Expression"
             }
@@ -777,16 +965,8 @@ var Shapes = {
         }
       },
       "PaperSize": "A4",
-      "PageWidth": 21.0,
-      "PageHeight": 29.7,
       "Watermark": {
         "TextBrush": "solid:50,0,0,0"
-      },
-      "Margins": {
-        "Left": 1.0,
-        "Right": 1.0,
-        "Top": 1.0,
-        "Bottom": 1.0
       }
     }
   }
