@@ -1,6 +1,12 @@
-﻿using System;
+﻿using FirebirdSql.Data.FirebirdClient;
+using MySql.Data.MySqlClient;
+using Npgsql;
+using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Common;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -77,7 +83,7 @@ namespace AspNetDataAdapters
             for (var index = 0; index < reader.FieldCount; index++)
             {
                 var columnName = reader.GetName(index);
-                var columnType = GetType(reader.GetFieldType(index));
+                var columnType = GetType(reader.GetDataTypeName(index));
 
                 columns.Add(columnName);
                 types.Add(columnType);
@@ -88,26 +94,35 @@ namespace AspNetDataAdapters
                 var row = new string[reader.FieldCount];
                 for (var index = 0; index < reader.FieldCount; index++)
                 {
-                    var columnName = reader.GetName(index);
-                    var columnType = GetType(reader.GetFieldType(index));
-
-                    var columnIndex = columns.IndexOf(columnName);
-                    if (types[columnIndex] != "array") types[columnIndex] = columnType;
                     object value = null;
                     if (!reader.IsDBNull(index))
                     {
-                        if (columnType == "array")
-                        {
-                            value = GetBytes(index);
-                        }
-                        else value = reader.GetValue(index);
+                        value = reader.GetValue(index);
                     }
 
                     if (value == null) value = "";
-                    if (columnType == "datetime" && value is DateTime)
-                        row[index] = ((DateTime)value).ToUniversalTime().ToString("yyyy-MM-dd'T'HH:mm:ss.fffK");
+                    if (value is DateTime)
+                    {
+                        row[index] = ((DateTime)value).ToString("yyyy-MM-dd'T'HH:mm:ss.fff");
+                        types[index] = "datetime";
+                    }
+                    else if (value is DateTimeOffset)
+                    {
+                        row[index] = ((DateTimeOffset)value).ToString("yyyy-MM-dd'T'HH:mm:ss.fffK");
+                        types[index] = "datetimeoffset";
+                    }
+                    else if (value is TimeSpan)
+                    {
+                        row[index] = Math.Truncate(((TimeSpan)value).TotalHours) + ":" + ((TimeSpan)value).Minutes + ":" + ((TimeSpan)value).Seconds;
+                        types[index] = "time";
+                    }
                     else
+                    {
+                        if (types[index] == "array")
+                            value = GetBytes(index);
+
                         row[index] = value.ToString();
+                    }
                 }
                 rows.Add(row);
             }
@@ -133,32 +148,193 @@ namespace AspNetDataAdapters
             return System.Convert.ToBase64String(destination.ToArray());
         }
 
-        private static string GetType(Type columnType)
+        private static string GetType(string dbType)
         {
-            var typeCode = Type.GetTypeCode(columnType);
-
-            switch (typeCode)
+            if (connection is MySqlConnection)
             {
-                case TypeCode.Boolean: return "boolean";
-                case TypeCode.DateTime: return "datetime";
+                switch (dbType.ToLowerInvariant())
+                {
+                    case "uniqueidentifier":
+                    case "bigint":
+                    case "int64":
+                    case "year":
+                    case "int32":
+                    case "int24":
+                    case "int":
+                    case "int16":
+                    case "smallint":
+                    case "byte":
+                    case "ubyte":
+                    case "uint32":
+                    case "uint24":
+                    case "uint16":
+                    case "tinyint":
+                    case "uint64":
+                    case "decimal":
+                    case "newdecimal":
+                    case "money":
+                    case "smallmoney":
+                    case "float":
+                    case "real":
+                    case "double":
+                        return "number";
 
-                case TypeCode.Decimal:
-                case TypeCode.Double:
-                case TypeCode.Single: return "float";
+                    case "bit":
+                        return "boolean";
 
-                case TypeCode.Int16:
-                case TypeCode.Int32:
-                case TypeCode.Int64:
-                case TypeCode.UInt16:
-                case TypeCode.UInt32:
-                case TypeCode.UInt64:
-                case TypeCode.SByte:
-                case TypeCode.Byte: return "int";
+                    case "newdatetime":
+                    case "smalldatetime":
+                    case "datetime":
+                    case "date":
+                    case "timestamp":
+                        return "datetime";
 
-                case TypeCode.Object: return "array";
+                    case "time":
+                        return "time";
+                }
+            }
+            else if (connection is FbConnection)
+            {
+                switch (dbType.ToLowerInvariant())
+                {
+                    case "bigint":
+                    case "numeric":
+                    case "uniqueidentifier":
+                    case "int":
+                    case "integer":
+                    case "smallint":
+                        return "int";
 
-                case TypeCode.Char:
-                case TypeCode.String: return "string";
+                    case "decimal":
+                    case "money":
+                    case "smallmoney":
+                    case "float":
+                    case "real":
+                    case "double":
+                        return "number";
+
+                    case "datetime":
+                    case "date":
+                    case "smalldatetime":
+                    case "timestamp":
+                        return "datetime";
+
+                    case "time":
+                        return "time";
+
+                    case "boolean":
+                        return "boolean";
+
+                }
+            }
+            else if (connection is SqlConnection)
+            {
+                switch (dbType.ToLowerInvariant())
+                {
+                    case "uniqueidentifier":
+                    case "bigint":
+                    case "timestamp":
+                    case "int":
+                    case "smallint":
+                    case "tinyint":
+                        return "int";
+
+                    case "decimal":
+                    case "money":
+                    case "smallmoney":
+                    case "float":
+                    case "real":
+                        return "number";
+
+                    case "datetime":
+                    case "date":
+                    case "datetime2":
+                    case "smalldatetime":
+                        return "datetime";
+
+                    case "time":
+                        return "time";
+
+                    case "datetimeoffset":
+                        return "datetime";
+
+                    case "bit":
+                        return "boolean";
+
+                    case "binary":
+                    case "image":
+                        return "array";
+                }
+            }
+            else if (connection is NpgsqlConnection)
+            {
+                switch (dbType.ToLowerInvariant())
+                {
+                    case "bigint":
+                    case "int":
+                    case "int4":
+                    case "int8":
+                    case "integer":
+                    case "numeric":
+                    case "uniqueidentifier":
+                    case "smallint":
+                    case "tinyint":
+                        return "int";
+
+                    case "decimal":
+                    case "money":
+                    case "smallmoney":
+                    case "float":
+                    case "real":
+                    case "double":
+                        return "number";
+
+                    case "abstime":
+                    case "date":
+                    case "datetime":
+                    case "smalldatetime":
+                    case "timestamp":
+                    case "timestamptz":
+                        return "dateTime";
+
+                    case "time":
+                        return "time";
+
+                    case "timetz":
+                        return "datetime";
+
+                    case "boolean":
+                        return "boolean";
+                }
+            }
+            else if (connection is OracleConnection)
+            {
+                switch (dbType.ToLowerInvariant())
+                {
+                    case "BFILE":
+                    case "BLOB":
+                    case "LONGRAW":
+                    case "RAW":
+                        return "array";
+
+                    case "DATE":
+                    case "TIMESTAMP":
+                    case "TIMESTAMPWITHLOCALTIMEZONE":
+                    case "TIMESTAMPWITHTIMEZONE":
+                        return "datetime";
+
+                    case "INTERVALDAYTOSECOND":
+                        return "time";
+
+                    case "INTERVALYEARTOMONTH":
+                        return "int";
+
+                    case "NUMBER":
+                    case "BINARY_DOUBLE":
+                    case "BINARY_FLOAT":
+                    case "BINARY_INTEGER":
+                        return "number";
+                }
             }
 
             return "string";
@@ -168,6 +344,7 @@ namespace AspNetDataAdapters
         {
             SQLAdapter.connection = connection;
             SQLAdapter.command = command;
+            return Connect();
             return Connect();
         }
     }
