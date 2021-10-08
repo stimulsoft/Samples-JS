@@ -1,5 +1,8 @@
 <?php
 class StiOdbcAdapter {
+	public $version = '2021.4.1';
+	public $checkVersion = true;
+	
 	private $info = null;
 	private $link = null;
 	
@@ -85,6 +88,7 @@ class StiOdbcAdapter {
 			case 'tinyint':
 			case 'byte':
 			case 'counter':
+			case 'year':
 				return 'int';
 				
 			case 'bit':
@@ -120,10 +124,11 @@ class StiOdbcAdapter {
 			case 'datetime2':
 			case 'datetimeoffset':
 			case 'smalldatetime':
+				return 'datetime';
+				
 			case 'time':
 			case 'timestamp':
-			case 'year':
-				return 'datetime';
+				return 'time';
 			
 			case 'blob':
 			case 'geometry':
@@ -144,6 +149,21 @@ class StiOdbcAdapter {
 		$result = $this->connect();
 		if ($result->success) $this->disconnect();
 		return $result;
+	}
+	
+	public function getValue($type, $value) {
+		switch ($type) {
+			case 'array':
+				return base64_encode($value);
+			
+			case 'datetime':
+				return date("Y-m-d\TH:i:s.v", strtotime($value));
+			
+			case 'time':
+				return date("H:i:s.v", strtotime($value));
+		}
+		
+		return $value;
 	}
 	
 	public function execute($queryString) {
@@ -170,10 +190,7 @@ class StiOdbcAdapter {
 				for ($i = 1; $i <= $result->count; $i++) {
 					$type = $result->types[$i - 1];
 					$value = odbc_result($query, $i);
-					
-					if ($type == 'array') $row[] = base64_encode($value);
-					else if ($type == 'datetime') $row[] = gmdate("Y-m-d\TH:i:s.v\Z", strtotime($value));
-					else $row[] = $value;
+					$row[] = $this->getValue($type, $value);
 				}
 				
 				$result->rows[] = $row;

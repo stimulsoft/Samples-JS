@@ -1,5 +1,8 @@
 <?php
 class StiPostgreSqlAdapter {
+	public $version = '2021.4.1';
+	public $checkVersion = true;
+	
 	private $info = null;
 	private $link = null;
 
@@ -131,22 +134,45 @@ class StiPostgreSqlAdapter {
 		if (substr($type, 0, 1) == '_') $type = 'array';
 		
 		switch ($type) {
+			case "int":
 			case 'int2':
 			case 'int4':
 			case 'int8':
+			case "smallint":
+			case "bigint":
+			case "tinyint":
+			case "integer":
+			case 'numeric':
+			case "uniqueidentifier":
 				return 'int';
-				
+			
+			case "float":
 			case 'float4':
 			case 'float8':
-			case 'numeric':
+			case "real":
+			case "double":
+			case "decimal":
+			case "smallmoney":
+			case "money":
 				return 'number';
 				
 			case 'bool':
+			case "boolean":
 				return 'boolean';
 			
-			case 'date':
-			case 'time':
+			case "abstime":
+			case "date":
+			case "datetime":
+			case "smalldatetime":
+			case "timestamp":
 				return 'datetime';
+			
+			case 'timetz':
+			case 'timestamptz':
+				return 'datetimeoffset';
+				
+			case 'time':
+				return 'time';
 			
 			case 'bytea':
 			case 'array':
@@ -160,6 +186,32 @@ class StiPostgreSqlAdapter {
 		$result = $this->connect();
 		if ($result->success) $this->disconnect();
 		return $result;
+	}
+	
+	public function getValue($type, $value) {
+		switch ($type) {
+			case 'array':
+				return base64_encode($value);
+			
+			case 'datetime':
+				return date("Y-m-d\TH:i:s.v", strtotime($value));
+			
+			case 'datetimeoffset':
+				if (strlen($value) <= 15) {
+					$offset = substr($value, strpos($value, '+'));
+					if (strlen($offset) == 3) $offset = $offset.':00';
+					$value = substr($value, 0, strpos($value, '+'));
+					$value = '0001-01-01 '.$value;
+					return date("Y-m-d\TH:i:s.v", strtotime($value)).$offset;
+				}
+				
+				return gmdate("Y-m-d\TH:i:s.v\Z", strtotime($value));
+			
+			case 'time':
+				return date("H:i:s.v", strtotime($value));
+		}
+		
+		return $value;
 	}
 
 	public function execute($queryString) {
@@ -186,10 +238,7 @@ class StiPostgreSqlAdapter {
 					$row = array();
 					for ($i = 0; $i < $result->count; $i++) {
 						$type = count($result->types) >= $i + 1 ? $result->types[$i] : 'string';
-						
-						if ($type == 'array') $row[] = base64_encode($rowItem[$i]);
-						else if ($type == 'datetime') $row[] = gmdate("Y-m-d\TH:i:s.v\Z", strtotime($rowItem[$i]));
-						else $row[] = $rowItem[$i];
+						$row[] = $this->getValue($type, $rowItem[$i]);
 					}
 					$result->rows[] = $row;
 				}
@@ -207,10 +256,7 @@ class StiPostgreSqlAdapter {
 					$row = array();
 					foreach ($rowItem as $key => $value) {
 						$type = count($result->types) >= count($row) + 1 ? $result->types[count($row)] : 'string';
-						
-						if ($type == 'array') $row[] = base64_encode($value);
-						else if ($type == 'datetime') $row[] = gmdate("Y-m-d\TH:i:s.v\Z", strtotime($value));
-						else $row[] = $value;
+						$row[] = $this->getValue($type, $value);
 					}
 					$result->rows[] = $row;
 				}

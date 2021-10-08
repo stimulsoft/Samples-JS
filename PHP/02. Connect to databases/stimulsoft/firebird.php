@@ -1,5 +1,8 @@
 <?php
 class StiFirebirdAdapter {
+	public $version = '2021.4.1';
+	public $checkVersion = true;
+	
 	private $info = null;
 	private $link = null;
 	
@@ -166,9 +169,11 @@ class StiFirebirdAdapter {
 				return 'number';
 			
 			case 'DATE':
-			case 'TIME':
 			case 'TIMESTAMP':
 				return 'datetime';
+				
+			case 'TIME':
+				return 'time';
 			
 			case 'CHAR':
 			case 'VARCHAR':
@@ -179,6 +184,24 @@ class StiFirebirdAdapter {
 		}
 		
 		return 'string';
+	}
+	
+	public function getValue($type, $value) {
+		switch ($type) {
+			case 'array':
+				return base64_encode($value);
+			
+			case 'datetime':
+				return date("Y-m-d\TH:i:s.v", strtotime($value));
+			
+			case 'time':
+				return date("H:i:s.v", strtotime($value));
+				
+			case 'string':
+				return utf8_encode($value);
+		}
+		
+		return $value;
 	}
 	
 	public function execute($queryString) {
@@ -208,10 +231,7 @@ class StiFirebirdAdapter {
 							if (count($result->columns) < $index) $result->columns[] = $key;
 							if (count($result->types) < $index) $result->types[] = $this->detectType($value);
 							$type = $result->types[$index - 1];
-							
-							if ($type == 'array') $row[] = base64_encode($value);
-							else if ($type == 'datetime') $row[] = gmdate("Y-m-d\TH:i:s.v\Z", strtotime($value));
-							else $row[] = $value;
+							$row[] = $this->getValue($type, $value);
 						}
 					}
 					
@@ -231,11 +251,7 @@ class StiFirebirdAdapter {
 					$row = array();
 					foreach ($rowItem as $key => $value) {
 						$type = count($result->types) >= count($row) + 1 ? $result->types[count($row)] : 'string';
-						
-						if ($type == 'array') $row[] = base64_encode($value);
-						else if ($type == 'datetime') $row[] = gmdate("Y-m-d\TH:i:s.v\Z", strtotime($value));
-						else if ($type == 'string') $row[] = utf8_encode($value);
-						else $row[] = $value;
+						$row[] = $this->getValue($type, $value);
 					}
 					$result->rows[] = $row;
 				}

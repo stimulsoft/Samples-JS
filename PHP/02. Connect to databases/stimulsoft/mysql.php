@@ -1,5 +1,8 @@
 <?php
 class StiMySqlAdapter {
+	public $version = '2021.4.1';
+	public $checkVersion = true;
+	
 	private $info = null;
 	private $link = null;
 	
@@ -129,32 +132,36 @@ class StiMySqlAdapter {
 	
 	private function getStringType($type) {
 		switch ($type) {
-			case 1:
+			case 1:   // Byte
 				return 'tiny';
 			
-			case 2:
-			case 3:
-			case 8:
-			case 9:
+			case 2:   // Int16
+			case 3:   // Int32
+			case 8:   // Int64
+			case 9:   // Int24
+			case 13:  // Year
 				return 'int';
 			
 			case 16:
 				return 'bit';
 			
-			case 4:
-			case 5:
-			case 246:
+			case 0:   // Decimal
+			case 4:   // Float
+			case 5:   // Double
+			case 246: // NewDecimal
 				return 'decimal';
 			
-			case 7:
-			case 10:
-			case 11:
-			case 12:
-			case 13:
+			case 7:   // Timestamp
+			case 10:  // Date
+			case 12:  // DateTime
+			case 14:  // Newdate
 				return 'datetime';
 			
+			case 11:  // Time
+				return 'time';
+			
 			case 252:
-			case 253:
+			case 253: // VarChar
 				return 'string';
 				
 			case 254:
@@ -211,9 +218,11 @@ class StiMySqlAdapter {
 			case 'date':
 			case 'datetime':
 			case 'timestamp':
-			case 'time':
 			case 'year':
 				return 'datetime';
+				
+			case 'time':
+				return 'time';
 			
 			case 'blob':
 			case 'geometry':
@@ -227,6 +236,22 @@ class StiMySqlAdapter {
 		$result = $this->connect();
 		if ($result->success) $this->disconnect();
 		return $result;
+	}
+	
+	public function getValue($type, $value) {
+		switch ($type) {
+			case 'array':
+				return base64_encode($value);
+			
+			case 'datetime':
+				return date("Y-m-d\TH:i:s.v", strtotime($value));
+			
+			case 'time':
+				$hours = intval($value);
+				return $hours >=0 && $hours <= 23 ? date("H:i:s.v", strtotime($value)) : $value;
+		}
+		
+		return $value;
 	}
 	
 	public function execute($queryString) {
@@ -253,10 +278,7 @@ class StiMySqlAdapter {
 					$row = array();
 					for ($i = 0; $i < $result->count; $i++) {
 						$type = count($result->types) >= $i + 1 ? $result->types[$i] : 'string';
-						
-						if ($type == 'array') $row[] = base64_encode($rowItem[$i]);
-						else if ($type == 'datetime') $row[] = gmdate("Y-m-d\TH:i:s.v\Z", strtotime($rowItem[$i]));
-						else $row[] = $rowItem[$i];
+						$row[] = $this->getValue($type, $rowItem[$i]);
 					}
 					$result->rows[] = $row;
 				}
@@ -271,15 +293,12 @@ class StiMySqlAdapter {
 				
 				if ($query->num_rows > 0) {
 					$isColumnsEmpty = count($result->columns) == 0;
-					while ($rowItem = $query->fetch_assoc()) {
+					while ($rowItem = $isColumnsEmpty ? $query->fetch_assoc() : $query->fetch_row()) {
 						$row = array();
 						foreach ($rowItem as $key => $value) {
 							if ($isColumnsEmpty && count($result->columns) < count($rowItem)) $result->columns[] = $key;
 							$type = count($result->types) >= count($row) + 1 ? $result->types[count($row)] : 'string';
-							
-							if ($type == 'array') $row[] = base64_encode($value);
-							else if ($type == 'datetime') $row[] = gmdate("Y-m-d\TH:i:s.v\Z", strtotime($value));
-							else $row[] = $value;
+							$row[] = $this->getValue($type, $value);
 						}
 						$result->rows[] = $row;
 					}

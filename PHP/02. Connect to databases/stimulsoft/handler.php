@@ -1,5 +1,8 @@
 <?php
 
+$version = '2021.4.1';
+
+
 // Error handlers
 
 function stiErrorHandler($errNo, $errStr, $errFile, $errLine) {
@@ -137,10 +140,14 @@ $request = new StiRequest();
 $result = $request->parse();
 if ($result->success) {
 	$result = getDataAdapter($request);
+	$dataAdapter = $result->object;
 	if ($result->success) {
 		$result = $request->command == 'TestConnection'
-			? $result->object->test()
-			: $result->object->execute($request->queryString);
+			? $dataAdapter->test()
+			: $dataAdapter->execute($request->queryString);
+		$result->handlerVersion = $version;
+		$result->adapterVersion = $dataAdapter->version;
+		$result->checkVersion = $dataAdapter->checkVersion;
 	}
 }
 
