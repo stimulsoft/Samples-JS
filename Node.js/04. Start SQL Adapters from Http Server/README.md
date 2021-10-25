@@ -19,6 +19,11 @@ Run Sample:
 
     $ node index
 
+And on the client side, you need to specify the URL of this host that handles requests:
+```js
+StiOptions.WebServer.url = "http://localhost:9615";
+```
+
 ### Step by step
 
 Loading required modules:
@@ -62,7 +67,6 @@ Setting onProcess callback:
         response.end(JSON.stringify(result));
     }
 
-Starting Server
+Starting DataAdapter
 
-    console.log("The HTTP server run on port 9615");
     http.createServer(accept).listen(9615);

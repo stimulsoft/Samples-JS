@@ -76,4 +76,7 @@ var onProcess = function (result) {
     response.end(JSON.stringify(result));
 }
 
+console.log("The DataAdapter run on port 9615");
+console.log("To use, on the client side, you need to specify the URL of this host that handles requests:");
+console.log("StiOptions.WebServer.url = \"http://localhost:9615\"");
 http.createServer(accept).listen(9615);
