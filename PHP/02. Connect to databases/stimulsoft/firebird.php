@@ -1,6 +1,6 @@
 <?php
 class StiFirebirdAdapter {
-	public $version = '2021.4.1';
+	public $version = '2021.4.2';
 	public $checkVersion = true;
 	
 	private $info = null;
