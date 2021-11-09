@@ -1,6 +1,6 @@
 <?php
 class StiOdbcAdapter {
-	public $version = '2021.4.2';
+	public $version = '2021.4.3';
 	public $checkVersion = true;
 	
 	private $info = null;

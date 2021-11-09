@@ -43,6 +43,8 @@ The following files are considered redistributables under this DLA:
 
 **.NET**  
 Stimulsoft.Base.dll  
+Stimulsoft.Blockly.dll  
+Stimulsoft.BlocklyEditor.Wpf.dll  
 Stimulsoft.Controls.dll  
 Stimulsoft.Controls.Win.dll  
 Stimulsoft.Dashboard.dll  
@@ -55,21 +57,25 @@ Stimulsoft.Database.dll
 Stimulsoft.Design.dll  
 Stimulsoft.Editor.dll  
 Stimulsoft.Map.dll  
+Stimulsoft.MathFX,dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Check.dll  
 Stimulsoft.Report.Design.dll  
 Stimulsoft.Report.Helper.dll  
 Stimulsoft.Report.Web.dll  
 Stimulsoft.Report.Win.dll  
+Stimulsoft.Svg.dll  
 All .xml localization files
 
 **.NET Core**  
 Stimulsoft.Base.dll  
+Stimulsoft.Blockly.dll  
 Stimulsoft.Dashboard.dll  
 Stimulsoft.Dashboard.Drawing.dll  
 Stimulsoft.Dashboard.Export.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Map.dll  
+Stimulsoft.MathFX.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Angular.dll  
 Stimulsoft.Report.Check.dll  
@@ -77,17 +83,20 @@ Stimulsoft.Report.Helper.dll
 Stimulsoft.Report.Mvc.NetCore.dll  
 Stimulsoft.Report.Web.dll  
 Stimulsoft.Report.WebDesign.dll  
+Stimulsoft.Svg.dll  
 Stimulsoft.System.dll  
 Stimulsoft.System.Web.dll  
 All .xml localization files
 
 **ASP.NET, ASP.NET MVC**  
 Stimulsoft.Base.dll  
+Stimulsoft.Blockly.dll  
 Stimulsoft.Dashboard.dll  
 Stimulsoft.Dashboard.Drawing.dll  
 Stimulsoft.Dashboard.Export.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Map.dll  
+Stimulsoft.MathFX.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Angular.dll  
 Stimulsoft.Report.Check.dll  
@@ -95,10 +104,12 @@ Stimulsoft.Report.Helper.dll
 Stimulsoft.Report.Mvc.dll  
 Stimulsoft.Report.Web.dll  
 Stimulsoft.Report.WebDesign.dll  
+Stimulsoft.Svg.dll  
 All .xml localization files
 
 **Blazor**  
 Stimulsoft.Base.dll  
+Stimulsoft.Blockly.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Blazor.dll  
@@ -112,6 +123,8 @@ All .xml localization files
 
 **WPF**  
 Stimulsoft.Base.dll  
+Stimulsoft.Blockly.dll  
+Stimulsoft.BlocklyEditor.Wpf.dll  
 Stimulsoft.Client.Designer.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Database.Wpf.dll  
@@ -119,23 +132,14 @@ Stimulsoft.Dashboard.Drawing.Wpf.dll
 Stimulsoft.Dashboard.Viewer.Wpf.dll  
 Stimulsoft.Editor.Wpf.dll  
 Stimulsoft.Map.dll  
+Stimulsoft.MathFX.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Check.dll  
 Stimulsoft.Report.Helper.dll  
 Stimulsoft.Report.Wpf.dll  
-Stimulsoft.Report.Wpf.BlackTheme.dll  
-Stimulsoft.Report.Wpf.Design.dll  
-Stimulsoft.Report.Wpf.Office2003BlueTheme.dll  
-Stimulsoft.Report.Wpf.Office2003OliveGreenTheme.dll  
-Stimulsoft.Report.Wpf.Office2003SilverTheme.dll  
-Stimulsoft.Report.Wpf.Office2007BlackTheme.dll  
-Stimulsoft.Report.Wpf.Office2007BlueTheme.dll  
-Stimulsoft.Report.Wpf.Office2007SilverTheme.dll  
-Stimulsoft.Report.Wpf.Office2010BlueTheme.dll  
-Stimulsoft.Report.Wpf.Office2010WhiteTheme.dll  
 Stimulsoft.Report.WpfDesign.dll  
 Stimulsoft.Report.WpfDesign.Design.dll  
-Stimulsoft.Report.Xbap.dll  
+Stimulsoft.Svg.dll  
 All .xml localization files
 
 **JS**  
@@ -157,8 +161,10 @@ All .xml localization files
 
 #### Stimulsoft Reports.Web
 Stimulsoft.Base.dll  
+Stimulsoft.Blockly.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Map.dll  
+Stimulsoft.MathFX.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Angular.dll  
 Stimulsoft.Report.Check.dll  
@@ -167,12 +173,35 @@ Stimulsoft.Report.Mvc.dll
 Stimulsoft.Report.Mvc.NetCore.dll  
 Stimulsoft.Report.Web.dll  
 Stimulsoft.Report.WebDesign.dll  
+Stimulsoft.Svg.dll  
 Stimulsoft.System.dll  
 Stimulsoft.System.Web.dll  
 All .xml localization files
 
+#### Stimulsoft Reports.Net
+Stimulsoft.Base.dll  
+Stimulsoft.Blockly.dll  
+Stimulsoft.BlocklyEditor.Wpf.dll  
+Stimulsoft.Controls.dll  
+Stimulsoft.Controls.Win.dll  
+Stimulsoft.Data.dll  
+Stimulsoft.Database.dll  
+Stimulsoft.Map.dll  
+Stimulsoft.MathFX.dll  
+Stimulsoft.Design.dll  
+Stimulsoft.Editor.dll  
+Stimulsoft.Report.dll  
+Stimulsoft.Report.Check.dll  
+Stimulsoft.Report.Design.dll  
+Stimulsoft.Report.Helper.dll  
+Stimulsoft.Report.Web.dll  
+Stimulsoft.Report.Win.dll  
+Stimulsoft.Svg.dll  
+All .xml localization files
+
 #### Stimulsoft Reports.Blazor
 Stimulsoft.Base.dll  
+Stimulsoft.Blockly.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Blazor.dll  
@@ -184,61 +213,23 @@ Stimulsoft.System.dll
 Stimulsoft.System.Web.dll  
 All .xml localization files
 
-#### Stimulsoft Reports.Net
-Stimulsoft.Base.dll  
-Stimulsoft.Controls.dll  
-Stimulsoft.Controls.Win.dll  
-Stimulsoft.Data.dll  
-Stimulsoft.Database.dll  
-Stimulsoft.Map.dll  
-Stimulsoft.Design.dll  
-Stimulsoft.Editor.dll  
-Stimulsoft.Report.dll  
-Stimulsoft.Report.Check.dll  
-Stimulsoft.Report.Design.dll  
-Stimulsoft.Report.Helper.dll  
-Stimulsoft.Report.Web.dll  
-Stimulsoft.Report.Win.dll  
-All .xml localization files
-
 #### Stimulsoft Reports.Wpf
 Stimulsoft.Base.dll  
+Stimulsoft.Blockly.dll  
+Stimulsoft.BlocklyEditor.Wpf.dll  
 Stimulsoft.Client.Designer.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Database.Wpf.dll  
 Stimulsoft.Editor.Wpf.dll  
 Stimulsoft.Map.dll  
+Stimulsoft.MathFX.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Check.dll  
 Stimulsoft.Report.Helper.dll  
 Stimulsoft.Report.Wpf.dll  
-Stimulsoft.Report.Wpf.BlackTheme.dll  
-Stimulsoft.Report.Wpf.Design.dll  
-Stimulsoft.Report.Wpf.Office2003BlueTheme.dll  
-Stimulsoft.Report.Wpf.Office2003OliveGreenTheme.dll  
-Stimulsoft.Report.Wpf.Office2003SilverTheme.dll  
-Stimulsoft.Report.Wpf.Office2007BlackTheme.dll  
-Stimulsoft.Report.Wpf.Office2007BlueTheme.dll  
-Stimulsoft.Report.Wpf.Office2007SilverTheme.dll  
-Stimulsoft.Report.Wpf.Office2010BlueTheme.dll  
-Stimulsoft.Report.Wpf.Office2010WhiteTheme.dll  
 Stimulsoft.Report.WpfDesign.dll  
 Stimulsoft.Report.WpfDesign.Design.dll  
-Stimulsoft.Report.Xbap.dll  
-All .xml localization files
-
-#### Stimulsoft Reports.Silverlight
-Stimulsoft.Base.dll  
-Stimulsoft.Base.SL.dll  
-Stimulsoft.Controls.SL.dll  
-Stimulsoft.Report.dll  
-Stimulsoft.Report.SL.dll  
-Stimulsoft.Report.Check.SL.dll  
-Stimulsoft.Report.Helper.SL.dll  
-Stimulsoft.Report.SLDesign.dll  
-Stimulsoft.Report.Viewer.SL.dll  
-Stimulsoft.Report.WebSL.dll  
-Stimulsoft.Report.WebDesignSL.dll  
+Stimulsoft.Svg.dll  
 All .xml localization files
 
 #### Stimulsoft Reports.UWP
@@ -268,19 +259,15 @@ All stimulsoft.\*.css styles files
 All .php product files  
 All .xml localization files
 
-#### Stimulsoft Dashboards.JS
-All stimulsoft.\*.js scripts files  
-All stimulsoft.\*.ts definitions files  
-All stimulsoft.\*.css styles files  
-All .xml localization files
-
 #### Stimulsoft Dashboards.WEB
 Stimulsoft.Base.dll  
+Stimulsoft.Blockly.dll  
 Stimulsoft.Dashboard.dll  
 Stimulsoft.Dashboard.Drawing.dll  
 Stimulsoft.Dashboard.Export.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Map.dll  
+Stimulsoft.MathFX.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Check.dll  
 Stimulsoft.Report.Helper.dll  
@@ -288,12 +275,15 @@ Stimulsoft.Report.Mvc.dll
 Stimulsoft.Report.Mvc.NetCore.dll  
 Stimulsoft.Report.Web.dll  
 Stimulsoft.Report.WebDesign.dll  
+Stimulsoft.Svg.dll  
 Stimulsoft.System.dll  
 Stimulsoft.System.Web.dll  
 All .xml localization files
 
 #### Stimulsoft Dashboards.WIN
 Stimulsoft.Base.dll  
+Stimulsoft.Blockly.dll  
+Stimulsoft.BlocklyEditor.Wpf.dll  
 Stimulsoft.Controls.dll  
 Stimulsoft.Controls.Win.dll  
 Stimulsoft.Dashboard.dll  
@@ -308,11 +298,27 @@ Stimulsoft.Database.dll
 Stimulsoft.Design.dll  
 Stimulsoft.Editor.dll  
 Stimulsoft.Map.dll  
+Stimulsoft.MathFX.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Check.dll  
 Stimulsoft.Report.Design.dll  
 Stimulsoft.Report.Helper.dll  
 Stimulsoft.Report.Win.dll  
+Stimulsoft.Report.Wpf.dll  
+Stimulsoft.Svg.dll  
+All .xml localization files
+
+#### Stimulsoft Dashboards.JS
+All stimulsoft.\*.js scripts files  
+All stimulsoft.\*.ts definitions files  
+All stimulsoft.\*.css styles files  
+All .xml localization files
+
+#### Stimulsoft Dashboards.PHP
+All stimulsoft.\*.js scripts files  
+All stimulsoft.\*.ts definitions files  
+All stimulsoft.\*.css styles files  
+All .php product files  
 All .xml localization files
 
 YOU ARE NOT AUTHORIZED TO REDISTRIBUTE ANY OTHER FILE CONTAINED IN THE SOFTWARE.
@@ -355,4 +361,4 @@ This license is subject to change without notice in future updates to the SOFTWA
 
 YOU ACKNOWLEDGE THAT YOU HAVE READ THIS AGREEMENT, UNDERSTAND IT AND AGREE TO BE BOUND BY ITS TERMS AND CONDITIONS. YOU FURTHER AGREE THAT IT IS THE COMPLETE AND EXCLUSIVE STATEMENT OF THE AGREEMENT BETWEEN US, WHICH SUPERSEDES ANY PROPOSAL OR PRIOR AGREEMENT, ORAL OR WRITTEN, AND ANY OTHER COMMUNICATIONS BETWEEN US RELATING TO THE SUBJECT MATTER OF THIS AGREEMENT.
 
-#### Copyright (C) 2003-2020 Stimulsoft, All rights reserved.
+#### Copyright (C) 2003-2021 Stimulsoft, All rights reserved.
