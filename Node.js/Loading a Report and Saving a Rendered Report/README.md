@@ -1,4 +1,4 @@
-#01. Load Report and Saving Rendered Report
+# Loading a Report and Saving a Rendered Report
 
 This example illustrates loading of the report, data rendering and storing the result to the mdc-file.
 
