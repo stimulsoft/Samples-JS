@@ -1,4 +1,4 @@
-#06. Load Report from Server Side and send to Client
+# Loading a Report from the Server-Side
 
 ### Installation and running
 Use npm to install requred modules:
