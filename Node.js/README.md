@@ -1,4 +1,4 @@
-#Node.js samples for Stimulsoft Reports.JS
+Node.js samples for Stimulsoft Reports.JS
 
 In this folder are available examples of using Stimulsoft Reports.JS in node.js
 For each example, there is a full set of necessary files (Roboto-Black.ttf to render the report, the test report file SimpleList.mrt etc. )
