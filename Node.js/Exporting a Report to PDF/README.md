@@ -1,4 +1,4 @@
-# 03. Export Rendered Report to PDF-file
+# Exporting a Report to PDF
 
 This example illustrates loading of the report, data rendering and storing the result to the PDF-document.
 
