@@ -1,4 +1,4 @@
-# 02. Export Rendered Report to HTML-file
+# Exporting a Report to HTML
 
 This example illustrates loading of the report, data rendering and storing the result to the HTML-file.
 
