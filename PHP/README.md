@@ -1,6 +1,6 @@
 ## This folder contains examples of integration Stimulsoft Reports.JS with the server-side PHP application.
 
-### [01. Load Report from Server Side] (https://github.com/stimulsoft/Samples-JS/tree/master/PHP/01.%20Load%20Report%20from%20Server%20Side)
+### [Loading a Report from the Server-Side] (https://github.com/stimulsoft/Samples-JS/tree/master/PHP/Loading%20a%20Report%20from%20the%20Server-Side)
 This folder contains simple demo of using Stimulsoft Reports.JS Viewer in the PHP project.
 Some samples of various reports available:
 * Simple List
@@ -11,7 +11,7 @@ Some samples of various reports available:
 * Simple-Group
 * Chart Styles
 
-### [02. Connect to databases] (https://github.com/stimulsoft/Samples-JS/tree/master/PHP/02.%20Connect%20to%20databases)
+### [Connecting to Databases] (https://github.com/stimulsoft/Samples-JS/tree/master/PHP/Connecting%20to%20Databases)
 This folder contains demo of using Stimulsoft Reports.JS Designer in the PHP project.
 
 ### Running samples
