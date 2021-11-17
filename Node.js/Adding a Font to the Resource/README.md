@@ -1,4 +1,4 @@
-#07. Add Font to Resource
+# Adding a Font to the Resource
 
 This example illustrates loading of the report, adding font to resource and storing the result to the mdc-file.
 
