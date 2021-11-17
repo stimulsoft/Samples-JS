@@ -1,4 +1,4 @@
-#01. Load Report and Saving Rendered Report
+# Loading a Report and Rendering it with a JSON Data
 
 This example illustrates loading of the report and load Json-data, data rendering and storing the result to the mdc-file.
 
