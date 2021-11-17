@@ -2,8 +2,8 @@
 
 In this folder are available examples of using Stimulsoft Reports.JS + Angular
 
-[01. Working with report designer](https://github.com/stimulsoft/Samples-JS/tree/master/Angular/01.%20Working%20with%20report%20designer)
+[Integrating the Report Designer into an Application](https://github.com/stimulsoft/Samples-JS/tree/master/Angular/Integrating%20the%20Report%20Designer%20into%20an%20Application)
 This folder contains demo of using Stimulsoft Reports.JS Designer in the Angular project.
 
-[02. Working with report viewer](https://github.com/stimulsoft/Samples-JS/tree/master/Angular/02.%20Working%20with%20report%20viewer)
+[Integrating the Report Viewer into an Application](https://github.com/stimulsoft/Samples-JS/tree/master/Angular/Integrating%20the%20Report%20Viewer%20into%20an%20Application)
 This folder contains demo of using Stimulsoft Reports.JS Viewer in the Angular project.
