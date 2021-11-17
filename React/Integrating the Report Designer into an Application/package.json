@@ -1,0 +1,14 @@
+{
+  "name": "stimulsoft",
+  "description": "A React project",
+  "version": "1.0.0",
+  "author": "stimulsoft",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}

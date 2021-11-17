@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Report.mrt - Viewer</title>
+    <link rel="stylesheet" type="text/css" href="css/stimulsoft.viewer.office2013.whiteblue.css">
+    <script type="text/javascript" src="scripts/stimulsoft.reports.js"></script>
+    <script type="text/javascript" src="scripts/stimulsoft.viewer.js"></script>
+
+    <script type="text/javascript">
+        function Start() {
+            StiOptions.WebServer.url = "JSDataAdapter/";
+            var report = Stimulsoft.Report.StiReport.createNewReport();
+            report.loadFile("reports/Report.mrt");
+
+            // Update connection string
+            // var dbMySQL = report.dictionary.databases.getByName("MySQL");
+            // dbMySQL.connectionString = "Server=localhost; Database=sakila;User=root; Pwd=;";
+
+            var options = new Stimulsoft.Viewer.StiViewerOptions();
+            var viewer = new Stimulsoft.Viewer.StiViewer(options, "StiViewer", false);
+            viewer.report = report;
+            viewer.renderHtml("viewerContent");
+        }
+    </script>
+</head>
+
+<body onload="Start()">
+    <div id="viewerContent"></div>
+</body>
+
+</html>

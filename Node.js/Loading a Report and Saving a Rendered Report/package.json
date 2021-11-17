@@ -1,0 +1,18 @@
+{
+    "name": "01_load_report_and_saving_rendered_report",
+    "version": "1.0.0",
+    "description": "Load Report and Saving Rendered Report",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "author": "Stimulsoft",
+    "license": "MIT",
+    "dependencies": {
+        "stimulsoft-reports-js": "latest"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/01.%20Load%20Report%20and%20Saving%20Rendered%20Report"
+    }
+}

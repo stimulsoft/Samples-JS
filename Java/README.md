@@ -5,7 +5,7 @@
 #Overview
 This repository has some examples (Eclipse Projects) each in different folders:
 
-### [01. Data Adapter](https://github.com/stimulsoft/Samples-JS/tree/master/Java/01.%20Data%20Adapter) - This folder contains demo of using Stimulsoft Reports.JS Viewer in the Java project with Java Database addapter.
+### [Connecting to Databases](https://github.com/stimulsoft/Samples-JS/tree/master/Java/01.%20Data%20Adapter) - This folder contains demo of using Stimulsoft Reports.JS Viewer in the Java project with Java Database addapter.
 
 # Running samples
 In order to start simply open the Eclipse Project file in the IDE Eclipse and run the required project.

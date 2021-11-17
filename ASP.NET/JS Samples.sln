@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01. Load Report from Server Side", "01. Load Report from Server Side\01. Load Report from Server Side.csproj", "{09367FAD-894C-4746-973C-CB15D3FB0C68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loading a Report from the Server-Side", "Loading a Report from the Server-Side\Loading a Report from the Server-Side.csproj", "{09367FAD-894C-4746-973C-CB15D3FB0C68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02. Connect to databases", "02. Connect to databases\02. Connect to databases.csproj", "{F878B97C-B576-4BE5-B0AD-B984B0EB976F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connecting to Databases", "Connecting to Databases\Connecting to Databases.csproj", "{F878B97C-B576-4BE5-B0AD-B984B0EB976F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03. Send Report by Email", "03. Send Report by Email\03. Send Report by Email.csproj", "{76F36A39-4EEB-42ED-9B3E-16D5035C0D6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sending a Report by Email", "Sending a Report by Email\Sending a Report by Email.csproj", "{76F36A39-4EEB-42ED-9B3E-16D5035C0D6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
