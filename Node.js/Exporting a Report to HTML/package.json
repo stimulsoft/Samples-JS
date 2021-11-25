@@ -1,7 +1,7 @@
 {
-  "name": "02_export_rendered_report_to_html-file",
+  "name": "Exporting_a_Report_to_HTML",
   "version": "1.0.0",
-  "description": "Export Rendered Report to HTML-file",
+  "description": "Exporting a Report to HTML",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -11,8 +11,8 @@
   "dependencies": {
     "stimulsoft-reports-js": "latest"
   },
-  "repository": { 
+  "repository": {
     "type": "git",
-    "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/02.%20Export%20Rendered%20Report%20to%20HTML-file"
+    "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Exporting%20a%20Report%20to%20HTML"
   }
 }

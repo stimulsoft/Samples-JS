@@ -1,7 +1,7 @@
 {
-  "name": "06_load_report_from_server_side",
+  "name": "Loading_a_Report_from_the_Server_Side",
   "version": "1.0.0",
-  "description": "Load Report from Server Side and send to Client",
+  "description": "Loading a Report from the Server-Side",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -13,6 +13,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/06.%20Load%20Report%20from%20Server%20Side"
+    "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Loading%20a%20Report%20from%20the%20Server-Side"
   }
 }

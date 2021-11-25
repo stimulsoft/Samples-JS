@@ -1,7 +1,7 @@
 {
-    "name": "nodejsdataadapters",
+    "name": "Starting-SQL-Adapters-from-the-HTTP-Server",
     "version": "0.0.2",
-    "description": "NodejsDataAdapters",
+    "description": "Starting SQL Adapters from the HTTP Server",
     "main": "app.js",
     "author": "Stimulsoft (http://www.stimulsoft.com)",
     "dependencies": {

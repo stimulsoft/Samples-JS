@@ -1,7 +1,7 @@
 {
-  "name": "01_load_report_and_saving_rendered_report",
+  "name": "Loading_a_Report_and_Rendering_it_with_a_JSON_Data",
   "version": "1.0.0",
-  "description": "Load Report and Saving Rendered Report",
+  "description": "Loading a Report and Rendering it with a JSON Data",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
@@ -11,8 +11,8 @@
   "dependencies": {
     "stimulsoft-reports-js": "latest"
   },
-  "repository": { 
+  "repository": {
     "type": "git",
-    "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/01.%20Load%20Report%20and%20Saving%20Rendered%20Report"
+    "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Loading%20a%20Report%20and%20Rendering%20it%20with%20a%20JSON%20Data"
   }
 }
