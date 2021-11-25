@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div>
-      <h2>Stimulsoft Reports.JS Designer</h2>
+      <h2>Stimulsoft Reports.JS Viewer</h2>
       <div id="viewer"></div>
     </div>
   </div>
