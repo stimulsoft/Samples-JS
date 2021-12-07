@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Stimulsoft} from 'stimulsoft-reports-js/Scripts/stimulsoft.blockly.src'
+import {Stimulsoft} from 'stimulsoft-reports-js/Scripts/stimulsoft.blockly'
 
 @Component({
   selector: 'app-root',
