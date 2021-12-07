@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
-import { Http } from '@angular/http';
-import { Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Stimulsoft } from 'stimulsoft-reports-js/Scripts/stimulsoft.viewer'
 
 @Component({
@@ -13,16 +12,16 @@ import { Stimulsoft } from 'stimulsoft-reports-js/Scripts/stimulsoft.viewer'
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
-  viewer: any = new Stimulsoft.Viewer.StiViewer(null, 'StiViewer', false);
-  report: any = new Stimulsoft.Report.StiReport();
+  viewer = new Stimulsoft.Viewer.StiViewer(undefined, 'StiViewer', false);
+  report = new Stimulsoft.Report.StiReport();
 
   ngOnInit() {
     console.log('Loading Viewer view');
 
-    this.http.request('reports/Report.mdc').subscribe((data: Response) => {
+    this.http.get<string>('reports/Report.mdc').subscribe(data => {
 
       console.log('Load report from url');
-      this.report.loadDocument(data.text());
+      this.report.loadDocument(data);
       this.viewer.report = this.report;
 
       console.log('Rendering the viewer to selected element');
@@ -30,7 +29,7 @@ export class AppComponent {
     });
   }
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
 
   }
 }

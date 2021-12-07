@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewEncapsulation } from '@angular/core';
-import { Stimulsoft } from 'stimulsoft-reports-js/Scripts/stimulsoft.blockly'
+import {Stimulsoft} from 'stimulsoft-reports-js/Scripts/stimulsoft.blockly.src'
 
 @Component({
   selector: 'app-root',
@@ -16,7 +15,7 @@ export class AppComponent {
   ngOnInit() {
     console.log('Loading Designer view');
 
-    console.log('Set full screen mode for the designer');
+    console.log('Set full screen mode for the designer');    
     this.options = new Stimulsoft.Designer.StiDesignerOptions();
     this.options.appearance.fullScreenMode = false;
 
