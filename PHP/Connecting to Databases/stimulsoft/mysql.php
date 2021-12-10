@@ -1,6 +1,6 @@
 <?php
 class StiMySqlAdapter {
-	public $version = '2021.4.3';
+	public $version = '2022.1.1';
 	public $checkVersion = true;
 	
 	private $info = null;
@@ -244,9 +244,11 @@ class StiMySqlAdapter {
 				return base64_encode($value);
 			
 			case 'datetime':
+				if (strlen($value) == 0) return null;
 				return date("Y-m-d\TH:i:s.v", strtotime($value));
 			
 			case 'time':
+				if (strlen($value) == 0) return null;
 				$hours = intval($value);
 				return $hours >=0 && $hours <= 23 ? date("H:i:s.v", strtotime($value)) : $value;
 		}
