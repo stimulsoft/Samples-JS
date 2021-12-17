@@ -15,7 +15,7 @@
     <script src="Scripts/stimulsoft.reports.js" type="text/javascript"></script>
     <script src="Scripts/stimulsoft.viewer.js" type="text/javascript"></script>
     <script src="Scripts/stimulsoft.designer.js" type="text/javascript"></script>
-    <script src="Scripts/stimulsoft.blockly.js" type="text/javascript"></script>
+    <script src="Scripts/stimulsoft.blockly.editor.js" type="text/javascript"></script>
 </head>
 <body onload="onLoad()">
     <script type="text/javascript">

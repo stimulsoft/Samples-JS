@@ -16,7 +16,7 @@
 	<script src="scripts/stimulsoft.designer.js" type="text/javascript"></script>
 	
 	<!-- Stimulsoft Blockly editor for JS Designer -->
-	<script src="scripts/stimulsoft.blockly.js" type="text/javascript"></script>
+	<script src="scripts/stimulsoft.blockly.editor.js" type="text/javascript"></script>
 
 	<script type="text/javascript">
 		Stimulsoft.StiOptions.WebServer.url = "stimulsoft/handler.php";
