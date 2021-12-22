@@ -16,6 +16,19 @@
     <script src="Scripts/stimulsoft.viewer.js" type="text/javascript"></script>
 </head>
 <body>
+    <form>
+        <select id="SelectedReport" name="SelectedReport" style="height: 25px; width: 200px" onchange="onSelectReport()">
+            <option value="SimpleList">Simple List</option>
+            <option value="HighlightCondition">Highlight Condition</option>
+            <option value="Images">Images</option>
+            <option value="MasterDetail">Master-Detail</option>
+            <option value="MultiColumnList">Multi - Column List</option>
+            <option value="SimpleGroup">Simple - Group</option>
+            <option value="ChartStyles">Chart Styles</option>
+        </select>
+    </form>
+    <div id="viewer" style="margin-top: 10px"></div>
+
     <script>
         function onSelectReport() {
             var selectedReport = document.getElementById("SelectedReport").value;
@@ -31,19 +44,7 @@
                 viewer.renderHtml("viewer");
             }
         }
+        onSelectReport();
     </script>
-    <form>
-        <select id="SelectedReport" name="SelectedReport" style="height: 25px; width: 200px" onchange="onSelectReport()">
-            <option value=""></option>
-            <option value="SimpleList">Simple List</option>
-            <option value="HighlightCondition">Highlight Condition</option>
-            <option value="Images">Images</option>
-            <option value="MasterDetail">Master-Detail</option>
-            <option value="MultiColumnList">Multi - Column List</option>
-            <option value="SimpleGroup">Simple - Group</option>
-            <option value="ChartStyles">Chart Styles</option>
-        </select>
-    </form>
-    <div id="viewer" style="margin-top: 10px"></div>
 </body>
 </html>
