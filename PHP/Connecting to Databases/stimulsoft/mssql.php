@@ -1,6 +1,6 @@
 <?php
 class StiMsSqlAdapter {
-	public $version = '2022.1.2';
+	public $version = '2022.1.4';
 	public $checkVersion = true;
 	
 	private $info = null;
@@ -272,22 +272,22 @@ class StiMsSqlAdapter {
 	}
 	
 	public function getValue($type, $value) {
+		if (is_null($value) || strlen($value) == 0)
+			return null;
+		
 		switch ($type) {
 			case 'array':
 				return base64_encode($value);
 			
 			case 'datetime':
-				if (strlen($value) == 0) return null;
 				return date("Y-m-d\TH:i:s.v", strtotime($value));
 				
 			case 'datetimeoffset':
-				if (strlen($value) == 0) return null;
 				$offset = substr($value, strpos($value, '+'));
 				$value = substr($value, 0, strpos($value, '+'));
 				return date("Y-m-d\TH:i:s.v", strtotime($value)).$offset;
 			
 			case 'time':
-				if (strlen($value) == 0) return null;
 				return date("H:i:s.v", strtotime($value));
 		}
 		

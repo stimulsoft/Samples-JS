@@ -1,6 +1,6 @@
 <?php
 class StiMySqlAdapter {
-	public $version = '2022.1.2';
+	public $version = '2022.1.4';
 	public $checkVersion = true;
 	
 	private $info = null;
@@ -239,16 +239,17 @@ class StiMySqlAdapter {
 	}
 	
 	public function getValue($type, $value) {
+		if (is_null($value) || strlen($value) == 0)
+			return null;
+		
 		switch ($type) {
 			case 'array':
 				return base64_encode($value);
 			
 			case 'datetime':
-				if (strlen($value) == 0) return null;
 				return date("Y-m-d\TH:i:s.v", strtotime($value));
 			
 			case 'time':
-				if (strlen($value) == 0) return null;
 				$hours = intval($value);
 				return $hours >=0 && $hours <= 23 ? date("H:i:s.v", strtotime($value)) : $value;
 		}

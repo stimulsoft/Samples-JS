@@ -1,6 +1,6 @@
 <?php
 class StiPostgreSqlAdapter {
-	public $version = '2022.1.2';
+	public $version = '2022.1.4';
 	public $checkVersion = true;
 	
 	private $info = null;
@@ -189,17 +189,17 @@ class StiPostgreSqlAdapter {
 	}
 	
 	public function getValue($type, $value) {
+		if (is_null($value) || strlen($value) == 0)
+			return null;
+		
 		switch ($type) {
 			case 'array':
 				return base64_encode($value);
 			
 			case 'datetime':
-				if (strlen($value) == 0) return null;
 				return date("Y-m-d\TH:i:s.v", strtotime($value));
 			
 			case 'datetimeoffset':
-				if (strlen($value) == 0) return null;
-				
 				if (strlen($value) <= 15) {
 					$offset = substr($value, strpos($value, '+'));
 					if (strlen($offset) == 3) $offset = $offset.':00';
@@ -211,7 +211,6 @@ class StiPostgreSqlAdapter {
 				return gmdate("Y-m-d\TH:i:s.v\Z", strtotime($value));
 			
 			case 'time':
-				if (strlen($value) == 0) return null;
 				return date("H:i:s.v", strtotime($value));
 		}
 		

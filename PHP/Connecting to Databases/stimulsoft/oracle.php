@@ -1,6 +1,6 @@
 <?php
 class StiOracleAdapter {
-	public $version = '2022.1.2';
+	public $version = '2022.1.4';
 	public $checkVersion = true;
 	
 	private $info = null;
@@ -190,12 +190,14 @@ class StiOracleAdapter {
 	}
 	
 	public function getValue($type, $value) {
+		if (is_null($value) || strlen($value) == 0)
+			return null;
+		
 		switch ($type) {
 			case 'array':
 				return base64_encode($value);
 			
 			case 'datetime':
-				if (strlen($value) == 0) return null;
 				$timestamp = DateTime::createFromFormat("d#M#y H#i#s*A", $value);
 				return $timestamp !== false ? $timestamp->format("Y-m-d\TH:i:s.v") : date("Y-m-d\TH:i:s.v", strtotime($value));
 		}
