@@ -1,6 +1,6 @@
 <?php
 class StiOracleAdapter {
-	public $version = '2022.1.4';
+	public $version = '2022.1.5';
 	public $checkVersion = true;
 	
 	private $info = null;
