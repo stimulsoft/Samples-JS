@@ -18,8 +18,8 @@
     "stimulsoft-reports-js": "latest"
   },
   "scripts": {
-    "start": "react-scripts --max_old_space_size=4096 start",
-    "build": "react-scripts --max_old_space_size=4096 build",
+    "start": "react-scripts --max_old_space_size=6096 start",
+    "build": "react-scripts --max_old_space_size=6096 build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
