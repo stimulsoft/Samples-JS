@@ -18,20 +18,30 @@ function accept(req, res) {
     });
 
     req.on('end', function () {
-        if (data.indexOf("{") != 0) {
+        if (data && data.indexOf("{") != 0) {
             data = Buffer.from(data.replace(/[A-Za-z]/g, function (c) {
                 return String.fromCharCode(c.charCodeAt(0) + (c.toUpperCase() <= "M" ? 13 : -13));
             }), "base64").toString("ascii");
-
         }
-        command = JSON.parse(data.toString());
-        command.queryString = applyQueryParameters(command.queryString, command.parameters, command.escapeQueryParameters);
+        
+        var command = null;
+        try {
+            command = JSON.parse(data.toString());
+        }
+        catch (e) {
+            console.log(e.message);
+            onProcess({ success: false, notice: e.message });
+        }
+        
+        if (command) {
+            command.queryString = applyQueryParameters(command.queryString, command.parameters, command.escapeQueryParameters);
 
-        if (command.database == "MySQL") MySQLAdapter.process(command, onProcess);
-        else if (command.database == "Firebird") FirebirdAdapter.process(command, onProcess);
-        else if (command.database == "MS SQL") MSSQLAdapter.process(command, onProcess);
-        else if (command.database == "PostgreSQL") PostgreSQLAdapter.process(command, onProcess);
-        else onResult({ success: false, notice: "Database '" + command.database + "' not supported!" });
+            if (command.database == "MySQL") MySQLAdapter.process(command, onProcess);
+            else if (command.database == "Firebird") FirebirdAdapter.process(command, onProcess);
+            else if (command.database == "MS SQL") MSSQLAdapter.process(command, onProcess);
+            else if (command.database == "PostgreSQL") PostgreSQLAdapter.process(command, onProcess);
+            else onProcess({ success: false, notice: "Database '" + command.database + "' not supported!" });
+        }
     });
 }
 
