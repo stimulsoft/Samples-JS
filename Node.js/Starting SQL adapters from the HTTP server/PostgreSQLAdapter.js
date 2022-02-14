@@ -1,8 +1,14 @@
+/*
+Stimulsoft.Reports.JS
+Version: 2022.1.6
+Build date: 2022.02.11
+License: https://www.stimulsoft.com/en/licensing/reports
+*/
 exports.process = function (command, onResult) {
-
     var end = function (result) {
         try {
             if (client) client.end();
+            result.adapterVersion = "2022.1.6";
             onResult(result);
         }
         catch (e) {
@@ -48,16 +54,33 @@ exports.process = function (command, onResult) {
                     case 16: // BOOL
                         types[columnIndex] = "boolean"; break;
 
-                    case 17: // BYTEA
-                    case 18: // CHAR
-                    case 19:
-                        types[columnIndex] = "string"; break;
-
                     case 20: // INT8
                     case 21: // INT2
                     case 23: // INT4
                         types[columnIndex] = "int"; break;
 
+                    case 700: // FLOAT4
+                    case 701: // FLOAT8
+                    case 790: // MONEY
+                        types[columnIndex] = "number"; break;
+
+                    case 702: // ABSTIME
+                    case 1082: // DATE
+                    case 1114: // TIMESTAMP
+                        types[columnIndex] = "datetime"; break;
+
+                    case 1184: // TIMESTAMPTZ
+                        types[columnIndex] = "datetimeZ"; break;
+
+                    case 1083: // TIME
+                        types[columnIndex] = "time"; break;
+
+                    case 1266: // TIMETZ
+                        types[columnIndex] = "timeZ"; break;
+
+                    case 17: // BYTEA
+                    case 18: // CHAR
+                    case 19:
                     case 24: // REGPROC
                     case 25: // TEXT
                     case 26: // OID
@@ -71,37 +94,16 @@ exports.process = function (command, onResult) {
                     case 602: // PATH
                     case 604: // POLYGON
                     case 650: // CIDR
-                        types[columnIndex] = "string"; break;
-
-                    case 700: // FLOAT4
-                    case 701: // FLOAT8
-                        types[columnIndex] = "number"; break;
-
-                    case 702: // ABSTIME
                     case 703: // RELTIME
                     case 704: // TINTERVAL
                     case 718: // CIRCLE
                     case 774: // MACADDR8
-                        types[columnIndex] = "string"; break;
-
-                    case 790: // MONEY
-                        types[columnIndex] = "number"; break;
-
                     case 829: // MACADDR
                     case 869: // INET
                     case 1033: // ACLITEM
                     case 1042: // BPCHAR
                     case 1043: // VARCHAR
-                        types[columnIndex] = "string"; break;
-
-                    case 1082: // DATE
-                    case 1083: // TIME
-                        types[columnIndex] = "datetime"; break;
-
-                    case 1114: // TIMESTAMP
-                    case 1184: // TIMESTAMPTZ
                     case 1186: // INTERVAL
-                    case 1266: // TIMETZ
                     case 1560: // BIT
                     case 1562: // VARBIT
                     case 1700: // NUMERIC
@@ -124,8 +126,6 @@ exports.process = function (command, onResult) {
                     case 3802: // JSONB
                     case 4089: // REGNAMESPACE
                     case 4096: // REGROLE
-                        types[columnIndex] = "string"; break;
-
                     default:
                         types[columnIndex] = "string"; break;
                 }
@@ -136,20 +136,39 @@ exports.process = function (command, onResult) {
                 var row = [];
                 for (var columnName in recordset.rows[recordIndex]) {
                     var columnIndex = columns.indexOf(columnName);
-                    if (types[columnIndex] != "array") types[columnIndex] = typeof recordset.rows[recordIndex][columnName];
                     if (recordset.rows[recordIndex][columnName] instanceof Uint8Array) {
                         types[columnIndex] = "array";
                         recordset.rows[recordIndex][columnName] = Buffer.from(recordset.rows[recordIndex][columnName]).toString('base64');
                     }
 
                     if (recordset.rows[recordIndex][columnName] != null && typeof recordset.rows[recordIndex][columnName].toISOString === "function") {
-                        recordset.rows[recordIndex][columnName] = recordset.rows[recordIndex][columnName].toISOString();
-                        types[columnIndex] = "datetime";
+                        if (types[columnIndex] == "datetimeZ") {
+                            recordset.rows[recordIndex][columnName] = recordset.rows[recordIndex][columnName].toISOString();
+                        }
+                        else {
+                            var dateTime = new Date(recordset.rows[recordIndex][columnName].getTime() - (recordset.rows[recordIndex][columnName].getTimezoneOffset() * 60000)).toISOString();
+                            recordset.rows[recordIndex][columnName] = dateTime.replace("Z", "");
+                            types[columnIndex] = "datetime";
+                        }
+                    }
+
+                    if (recordset.rows[recordIndex][columnName] != null && types[columnIndex] == "timeZ") {
+                        var time = recordset.rows[recordIndex][columnName];
+                        var offset = time.substr(time.indexOf("+"));
+                        if (offset.indexOf(":") == -1) offset += ":00";
+                        time = time.substr(0, time.indexOf("+"));
+                        if (time.indexOf(".") == -1) time += ".000"
+                        recordset.rows[recordIndex][columnName] = "0001-01-01T" + time + offset;
                     }
 
                     row[columnIndex] = recordset.rows[recordIndex][columnName];
                 }
                 rows.push(row);
+            }
+
+            for (var typeIndex in types) {
+                if (types[typeIndex] == "timeZ") types[typeIndex] = "datetimeoffset";
+                if (types[typeIndex] == "datetimeZ") types[typeIndex] = "datetime";
             }
 
             end({ success: true, columns: columns, rows: rows, types: types });

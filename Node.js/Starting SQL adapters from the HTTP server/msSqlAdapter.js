@@ -1,8 +1,14 @@
-﻿exports.process = function (command, onResult) {
-
+/*
+Stimulsoft.Reports.JS
+Version: 2022.1.6
+Build date: 2022.02.11
+License: https://www.stimulsoft.com/en/licensing/reports
+*/
+exports.process = function (command, onResult) {
     var end = function (result) {
         try {
             if (connection) connection.close();
+            result.adapterVersion = "2022.1.6";
             onResult(result);
         }
         catch (e) {
@@ -43,58 +49,46 @@
             var types = [];
             if (recordset.length > 0 && Array.isArray(recordset[0])) recordset = recordset[0];
             for (var columnName in recordset.columns) {
-                var column = recordset.columns[columnName]
-                var columnIndex = column.index;
+                var column = recordset.columns[columnName];
+                var columnIndex = columns.length;
                 columns.push(column.name);
-
+                
                 switch (column.type) {
-                    case sql.Bit:
-                    case sql.SmallInt:
-                    case sql.Int:
+                    case sql.UniqueIdentifier:
                     case sql.BigInt:
+                    case sql.timestamp:
+                    case sql.Int:
+                    case sql.SmallInt:
+                    case sql.TinyInt:
                         types[columnIndex] = "int"; break;
 
                     case sql.Decimal:
-                    case sql.Float:
                     case sql.Money:
-                    case sql.Numeric:
                     case sql.SmallMoney:
+                    case sql.Float:
                     case sql.Real:
                         types[columnIndex] = "number"; break;
 
-                    case sql.TinyInt:
-                        types[columnIndex] = "boolean"; break;
-
-                    case sql.Char:
-                    case sql.NChar:
-                    case sql.Text:
-                    case sql.NText:
-                    case sql.VarChar:
-                    case sql.NVarChar:
-                    case sql.Xml:
-                        types[columnIndex] = "string"; break;
-
-                    case sql.Time:
-                    case sql.Date:
                     case sql.DateTime:
+                    case sql.Date:
                     case sql.DateTime2:
-                    case sql.DateTimeOffset:
                     case sql.SmallDateTime:
                         types[columnIndex] = "datetime"; break;
 
-                    case sql.UniqueIdentifier:
-                        types[columnIndex] = "string"; break;
-                    case sql.Variant:
-                        types[columnIndex] = "string"; break;
+                    case sql.DateTimeOffset:
+                        types[columnIndex] = "datetimeZ"; break;
+
+                    case sql.Time:
+                        types[columnIndex] = "time"; break;
+
+                    case sql.Bit:
+                        types[columnIndex] = "boolean"; break;
 
                     case sql.Binary:
-                    case sql.VarBinary:
                     case sql.Image:
-                        types[columnIndex] = "string"; break;
+                        types[columnIndex] = "array"; break;
 
-                    case sql.UDT:
-                    case sql.Geography:
-                    case sql.Geometry:
+                    default:
                         types[columnIndex] = "string"; break;
                 }
             }
@@ -104,20 +98,44 @@
                 var row = [];
                 for (var columnName in recordset[recordIndex]) {
                     var columnIndex = columns.indexOf(columnName);
-                    if (types[columnIndex] != "array") types[columnIndex] = typeof recordset[recordIndex][columnName];
-                    if (recordset[recordIndex][columnName] instanceof Uint8Array) {
+                    if (recordset[recordIndex][columnName] instanceof Uint8Array ||
+                        recordset[recordIndex][columnName] instanceof Buffer) {
                         types[columnIndex] = "array";
                         recordset[recordIndex][columnName] = Buffer.from(recordset[recordIndex][columnName]).toString('base64');
                     }
 
                     if (recordset[recordIndex][columnName] != null && typeof recordset[recordIndex][columnName].toISOString === "function") {
-                        recordset[recordIndex][columnName] = recordset[recordIndex][columnName].toISOString();
-                        types[columnIndex] = "datetime";
+                        var dateTime = recordset[recordIndex][columnName].toISOString();
+                        if (types[columnIndex] == "time") {
+                            recordset[recordIndex][columnName] = dateTime.substr(dateTime.indexOf("T") + 1).replace("Z", "");
+                        }
+                        else if (types[columnIndex] == "datetimeZ") {
+                            var offset = "+00:00";
+                            recordset[recordIndex][columnName] = dateTime.replace("Z", "") + offset;
+                        }
+                        else {
+                            recordset[recordIndex][columnName] = dateTime.replace("Z", "");
+                            types[columnIndex] = "datetime";
+                        }
                     }
 
-                    row[columnIndex] = recordset[recordIndex][columnName];
+                    if (columnName == "" && Array.isArray(recordset[recordIndex][columnName])) {
+                        for (var i = 0; i < recordset[recordIndex][columnName].length; i++) {
+                            if (columns.length <= columnIndex + i && columns[columnIndex + i] != ""){
+                                columns.splice(columnIndex + i - 1, 0, columns[columnIndex]);
+                                types.splice(columnIndex + i - 1, 0, types[columnIndex]);
+                            }
+                            row[columnIndex + i] = recordset[recordIndex][columnName][i];
+                        }
+                    }
+                    else
+                        row[columnIndex] = recordset[recordIndex][columnName];
                 }
                 rows.push(row);
+            }
+
+            for (var typeIndex in types) {
+                if (types[typeIndex] == "datetimeZ") types[typeIndex] = "datetimeoffset";
             }
 
             end({ success: true, columns: columns, rows: rows, types: types });
@@ -146,7 +164,12 @@
 
         var getConnectionStringConfig = function (connectionString) {
             var config = {
-                options: {}
+                options: {
+                    trustServerCertificate: true,
+                    cryptoCredentialsDetails: {
+                        minVersion: 'TLSv1'
+                    }
+                }
             };
 
             for (var propertyIndex in connectionString.split(";")) {
@@ -187,7 +210,7 @@
                                 break;
 
                             case "encrypt":
-                                config.options["encrypt"] = match[1];
+                                config.options["encrypt"] = !!match[1];
                                 break;
 
                             case "connectiontimeout":
@@ -203,7 +226,7 @@
                                 break;
 
                             case "trustservercertificate":
-                                config.options["trustServerCertificate"] = match[1];
+                                config.options["trustServerCertificate"] = !!match[1];
                                 break;
                         }
                     }

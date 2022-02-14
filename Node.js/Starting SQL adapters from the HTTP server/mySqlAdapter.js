@@ -1,10 +1,16 @@
-﻿exports.process = function (command, onResult) {
-
+/*
+Stimulsoft.Reports.JS
+Version: 2022.1.6
+Build date: 2022.02.11
+License: https://www.stimulsoft.com/en/licensing/reports
+*/
+exports.process = function (command, onResult) {
     var end = function (result) {
         try {
             if (connection) {
                 connection.end();
             }
+            result.adapterVersion = "2022.1.6";
             onResult(result);
         }
         catch (e) {
@@ -43,7 +49,6 @@
             var columns = [];
             var rows = [];
             var types = [];
-            //var isColumnsFill = false;
             if (fields.length > 0 && Array.isArray(fields[0])) fields = fields[0];
 
             for (var columnIndex in fields) {
@@ -51,50 +56,57 @@
                 columns.push(column.name);
 
                 switch (column.type) {
-                    case 0x01: // aka TINYINT, 1 byte
+                    case 16: // Bit
                         types[columnIndex] = "boolean"; break;
 
-                    case 0x02: // aka SMALLINT, 2 bytes
-                    case 0x03: // aka INT, 4 bytes
-                    case 0x05: // aka DOUBLE, 8 bytes
-                    case 0x08: // aka BIGINT, 8 bytes
-                    case 0x09: // aka MEDIUMINT, 3 bytes
-                    case 0x10: // aka BIT, 1-8 byte
+                    case 1:   // Byte
+                    case 2:   // Int16
+                    case 3:   // Int32
+                    case 5:   // Double
+                    case 8:   // Int64
+                    case 9:   // Int24
+                    case 13:  // Year
+                    case 501: // UByte
+                    case 502: // UInt16
+                    case 503: // UInt32
+                    case 508: // UInt64
+                    case 509: // UInt24
                         types[columnIndex] = "int"; break;
 
-                    case 0x00: // aka DECIMAL
-                    case 0xf6: // aka DECIMAL
-                    case 0x04: // aka FLOAT, 4-8 bytes
+                    case 0:   // Decimal
+                    case 4:   // Float
+                    case 246: // NewDecimal
                         types[columnIndex] = "number"; break;
 
-                    case 0x0f: // aka VARCHAR (?)
-                    case 0xfd: // aka VARCHAR, VARBINARY
-                    case 0xfe: // aka CHAR, BINARY
-                        types[columnIndex] = "string"; break;
-
-                    case 0x0a: // aka DATE
-                    case 0x0b: // aka TIME
-                    case 0x13: // aka TIME with fractional seconds
-                    case 0x0c: // aka DATETIME
-                    case 0x12: // aka DATETIME with fractional seconds
-                    case 0x0d: // aka YEAR, 1 byte (don't ask)
-                    case 0x0e: // aka ?
+                    case 7:   // Timestamp
+                    case 10:  // Date
+                    case 12:  // DateTime
+                    case 14:  // Newdate
                         types[columnIndex] = "datetime"; break;
 
-                    case 0x07: // aka TIMESTAMP
-                    case 0x11: // aka TIMESTAMP with fractional seconds
-                    case 0xf5: // aka JSON
-                    case 0x06: // NULL (used for prepared statements, I think)
-                    case 0xf7: // aka ENUM
-                    case 0xf8: // aka SET
-                    case 0xff: // aka GEOMETRY
-                        types[columnIndex] = "string"; break;
+                    case 11:  // Time
+                        types[columnIndex] = "time"; break;
 
-                    /*case 0xf9: // aka TINYBLOB, TINYTEXT
-                    case 0xfa: // aka MEDIUMBLOB, MEDIUMTEXT
-                    case 0xfb: // aka LONGBLOG, LONGTEXT
-                    case 0xfc: // aka BLOB, TEXT
-                        types[columnIndex] = "array"; break;*/
+                    case 15:  // VarString
+                    case 247: // Enum
+                    case 248: // Set
+                    case 249: // TinyBlob
+                    case 250: // MediumBlob
+                    case 251: // LongBlob
+                    case 252: // Blob
+                    case 253: // VarChar
+                    case 254: // String
+                    case 255: // Geometry
+                    case 600: // Binary
+                    case 601: // VarBinary
+                    case 749: // TinyText
+                    case 750: // MediumText
+                    case 751: // LongText
+                    case 752: // Text
+                    case 800: // Guid
+
+                    default:
+                        types[columnIndex] = "string"; break;
                 }
             }
 
@@ -102,22 +114,21 @@
             for (var recordIndex in recordset) {
                 var row = [];
                 for (var columnName in recordset[recordIndex]) {
-                    //if (!isColumnsFill) columns.push(columnName);
                     var columnIndex = columns.indexOf(columnName);
-                    if (types[columnIndex] != "array") types[columnIndex] = typeof recordset[recordIndex][columnName];
-                    if (recordset[recordIndex][columnName] instanceof Uint8Array) {
+                    if (recordset[recordIndex][columnName] instanceof Uint8Array ||
+                        recordset[recordIndex][columnName] instanceof Buffer) {
                         types[columnIndex] = "array";
                         recordset[recordIndex][columnName] = Buffer.from(recordset[recordIndex][columnName]).toString('base64');
                     }
 
                     if (recordset[recordIndex][columnName] != null && typeof recordset[recordIndex][columnName].toISOString === "function") {
-                        recordset[recordIndex][columnName] = recordset[recordIndex][columnName].toISOString();
+                        var dateTime = new Date(recordset[recordIndex][columnName].getTime() - (recordset[recordIndex][columnName].getTimezoneOffset() * 60000)).toISOString();
+                        recordset[recordIndex][columnName] = dateTime.replace("Z", "");
                         types[columnIndex] = "datetime";
                     }
 
                     row[columnIndex] = recordset[recordIndex][columnName];
                 }
-                //isColumnsFill = true;
                 rows.push(row);
             }
 
