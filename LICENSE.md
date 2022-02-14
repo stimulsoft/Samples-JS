@@ -144,7 +144,7 @@ All .xml localization files
 
 **JS**  
 All stimulsoft.\*.js scripts files  
-All stimulsoft.\*.ts definitions files  
+All stimulsoft.\*.d.ts definitions files  
 All stimulsoft.\*.css styles files  
 All .xml localization files
 
@@ -154,7 +154,7 @@ All .xml localization files
 
 **PHP**  
 All stimulsoft.\*.js scripts files  
-All stimulsoft.\*.ts definitions files  
+All stimulsoft.\*.d.ts definitions files  
 All stimulsoft.\*.css styles files  
 All .php product files  
 All .xml localization files
@@ -244,7 +244,7 @@ All .xml localization files
 
 #### Stimulsoft Reports.JS
 All stimulsoft.\*.js scripts files  
-All stimulsoft.\*.ts definitions files  
+All stimulsoft.\*.d.ts definitions files  
 All stimulsoft.\*.css styles files  
 All .xml localization files
 
@@ -254,7 +254,7 @@ All .xml localization files
 
 #### Stimulsoft Reports.PHP
 All stimulsoft.\*.js scripts files  
-All stimulsoft.\*.ts definitions files  
+All stimulsoft.\*.d.ts definitions files  
 All stimulsoft.\*.css styles files  
 All .php product files  
 All .xml localization files
@@ -310,13 +310,13 @@ All .xml localization files
 
 #### Stimulsoft Dashboards.JS
 All stimulsoft.\*.js scripts files  
-All stimulsoft.\*.ts definitions files  
+All stimulsoft.\*.d.ts definitions files  
 All stimulsoft.\*.css styles files  
 All .xml localization files
 
 #### Stimulsoft Dashboards.PHP
 All stimulsoft.\*.js scripts files  
-All stimulsoft.\*.ts definitions files  
+All stimulsoft.\*.d.ts definitions files  
 All stimulsoft.\*.css styles files  
 All .php product files  
 All .xml localization files
