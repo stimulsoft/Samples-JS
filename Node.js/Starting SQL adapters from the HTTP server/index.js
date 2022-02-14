@@ -18,29 +18,40 @@ function accept(req, res) {
     });
 
     req.on('end', function () {
-        if (data && data.indexOf("{") != 0) {
+        var encryptResult = false;
+
+        if (typeof data === "string" && !data.startsWith("{")) {
             data = Buffer.from(data.replace(/[A-Za-z]/g, function (c) {
                 return String.fromCharCode(c.charCodeAt(0) + (c.toUpperCase() <= "M" ? 13 : -13));
             }), "base64").toString("ascii");
+            encryptResult = true;
         }
-        
+
+        var onProcessHandler = onProcess.bind(null, encryptResult);
+
         var command = null;
         try {
             command = JSON.parse(data.toString());
         }
         catch (e) {
             console.log(e.message);
-            onProcess({ success: false, notice: e.message });
+            return onProcessHandler({ success: false, notice: e.message });
         }
-        
-        if (command) {
+
+        if (command.command === "GetSupportedAdapters") {
+            let result = {
+                success: true,
+                types: ["MySQL", "MS SQL", "Firebird", "PostgreSQL"]
+            };
+            onProcessHandler(result);
+        } else {
             command.queryString = applyQueryParameters(command.queryString, command.parameters, command.escapeQueryParameters);
 
-            if (command.database == "MySQL") MySQLAdapter.process(command, onProcess);
-            else if (command.database == "Firebird") FirebirdAdapter.process(command, onProcess);
-            else if (command.database == "MS SQL") MSSQLAdapter.process(command, onProcess);
-            else if (command.database == "PostgreSQL") PostgreSQLAdapter.process(command, onProcess);
-            else onProcess({ success: false, notice: "Database '" + command.database + "' not supported!" });
+            if (command.database == "MySQL") MySQLAdapter.process(command, onProcessHandler);
+            else if (command.database == "Firebird") FirebirdAdapter.process(command, onProcessHandler);
+            else if (command.database == "MS SQL") MSSQLAdapter.process(command, onProcessHandler);
+            else if (command.database == "PostgreSQL") PostgreSQLAdapter.process(command, onProcessHandler);
+            else onProcessHandler({ success: false, notice: "Database '" + command.database + "' not supported!" });
         }
     });
 }
@@ -49,7 +60,7 @@ var applyQueryParameters = function (baseSqlCommand, parameters, escapeQueryPara
     if (baseSqlCommand == null || baseSqlCommand.indexOf("@") < 0) return baseSqlCommand;
 
     var result = "";
-    while (baseSqlCommand.indexOf("@") >= 0 && parameters != null) {
+    while (baseSqlCommand.indexOf("@") >= 0 && parameters != null && parameters.length > 0) {
         result += baseSqlCommand.substring(0, baseSqlCommand.indexOf("@"));
         baseSqlCommand = baseSqlCommand.substring(baseSqlCommand.indexOf("@") + 1);
 
@@ -79,11 +90,18 @@ var applyQueryParameters = function (baseSqlCommand, parameters, escapeQueryPara
             result += "@" + parameterName;
     }
 
-    return result;
+    return result + baseSqlCommand;
 }
 
-var onProcess = function (result) {
-    response.end(JSON.stringify(result));
+var onProcess = function (encryptData, result) {
+    result.handlerVersion = "2022.1.6";
+    result = JSON.stringify(result);
+    if (encryptData) {
+        result = Buffer.from(result).toString("base64").replace(/[A-Za-z]/g, function (c) {
+            return String.fromCharCode(c.charCodeAt(0) + (c.toUpperCase() <= "M" ? 13 : -13));
+        });
+    }
+    response.end(result);
 }
 
 console.log("The DataAdapter run on port 9615");
