@@ -27,7 +27,8 @@ onMounted(() => {
   designer.renderHtml('designer');
 
   console.log('Loading completed successfully!');
-});</script>
+});
+</script>
 
 <template>
   <div id="app">

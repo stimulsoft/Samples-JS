@@ -23,7 +23,8 @@ onMounted(() => {
   viewer.renderHtml('viewer');
 
   console.log('Loading completed successfully!');
-});</script>
+});
+</script>
 
 <template>
   <div id="app">
