@@ -1,6 +1,6 @@
 <?php
 class StiPostgreSqlAdapter {
-	public $version = '2022.1.6';
+	public $version = '2022.2.1';
 	public $checkVersion = true;
 	
 	private $info = null;
@@ -197,7 +197,10 @@ class StiPostgreSqlAdapter {
 				return base64_encode($value);
 			
 			case 'datetime':
-				return date("Y-m-d\TH:i:s.v", strtotime($value));
+				$timestamp = strtotime($value);
+				$format = date("Y-m-d\TH:i:s.v", $timestamp);
+				if (strpos($format, '.v') > 0) $format = date("Y-m-d\TH:i:s.000", $timestamp);
+				return $format;
 			
 			case 'datetimeoffset':
 				if (strlen($value) <= 15) {
@@ -205,13 +208,22 @@ class StiPostgreSqlAdapter {
 					if (strlen($offset) == 3) $offset = $offset.':00';
 					$value = substr($value, 0, strpos($value, '+'));
 					$value = '0001-01-01 '.$value;
-					return date("Y-m-d\TH:i:s.v", strtotime($value)).$offset;
+					$timestamp = strtotime($value);
+					$format = date("Y-m-d\TH:i:s.v", $timestamp);
+					if (strpos($format, '.v') > 0) $format = date("Y-m-d\TH:i:s.000", $timestamp);
+					return $format.$offset;
 				}
 				
-				return gmdate("Y-m-d\TH:i:s.v\Z", strtotime($value));
+				$timestamp = strtotime($value);
+				$format = gmdate("Y-m-d\TH:i:s.v\Z", $timestamp);
+				if (strpos($format, '.v') > 0) $format = gmdate("Y-m-d\TH:i:s.000\Z", $timestamp);
+				return $format;
 			
 			case 'time':
-				return date("H:i:s.v", strtotime($value));
+				$timestamp = strtotime($value);
+				$format = date("H:i:s.v", $timestamp);
+				if (strpos($format, '.v') > 0) $format = date("H:i:s.000", $timestamp);
+				return $format;
 		}
 		
 		return $value;

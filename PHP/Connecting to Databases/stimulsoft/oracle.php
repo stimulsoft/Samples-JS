@@ -1,6 +1,6 @@
 <?php
 class StiOracleAdapter {
-	public $version = '2022.1.6';
+	public $version = '2022.2.1';
 	public $checkVersion = true;
 	
 	private $info = null;
@@ -199,7 +199,10 @@ class StiOracleAdapter {
 			
 			case 'datetime':
 				$timestamp = DateTime::createFromFormat("d#M#y H#i#s*A", $value);
-				return $timestamp !== false ? $timestamp->format("Y-m-d\TH:i:s.v") : date("Y-m-d\TH:i:s.v", strtotime($value));
+				if ($timestamp === false) $timestamp = strtotime($value);
+				$format = date("Y-m-d\TH:i:s.v", $timestamp);
+				if (strpos($format, '.v') > 0) $format = date("Y-m-d\TH:i:s.000", $timestamp);
+				return $format;
 		}
 		
 		return $value;

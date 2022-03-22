@@ -1,6 +1,6 @@
 <?php
 class StiMySqlAdapter {
-	public $version = '2022.1.6';
+	public $version = '2022.2.1';
 	public $checkVersion = true;
 	
 	private $info = null;
@@ -130,48 +130,63 @@ class StiMySqlAdapter {
 		$this->info = $info;
 	}
 	
-	private function getStringType($type) {
-		switch ($type) {
-			case 1:   // Byte
+	private function getStringType($meta) {
+		switch ($meta->type) {
+			case MYSQLI_TYPE_TINY:   // Byte
 				return 'tiny';
 			
-			case 2:   // Int16
-			case 3:   // Int32
-			case 8:   // Int64
-			case 9:   // Int24
-			case 13:  // Year
+			case MYSQLI_TYPE_SHORT:   // Int16
+			case MYSQLI_TYPE_LONG:   // Int32
+			case MYSQLI_TYPE_LONGLONG:   // Int64
+			case MYSQLI_TYPE_INT24:   // Int24
+			case MYSQLI_TYPE_YEAR:  // Year
 				return 'int';
 			
-			case 16:
+			case MYSQLI_TYPE_BIT:
 				return 'bit';
 			
-			case 0:   // Decimal
-			case 4:   // Float
-			case 5:   // Double
-			case 246: // NewDecimal
+			case MYSQLI_TYPE_DECIMAL:   // Decimal
+			case MYSQLI_TYPE_FLOAT:   // Float
+			case MYSQLI_TYPE_DOUBLE:   // Double
+			case MYSQLI_TYPE_NEWDECIMAL: // NewDecimal
 				return 'decimal';
 			
-			case 7:   // Timestamp
-			case 10:  // Date
-			case 12:  // DateTime
-			case 14:  // Newdate
+			case MYSQLI_TYPE_TIMESTAMP:   // Timestamp
+			case MYSQLI_TYPE_DATE:  // Date
+			case MYSQLI_TYPE_DATETIME:  // DateTime
+			case MYSQLI_TYPE_NEWDATE:  // Newdate
 				return 'datetime';
 			
-			case 11:  // Time
+			case MYSQLI_TYPE_TIME:  // Time
 				return 'time';
 			
-			case 252:
-			case 253: // VarChar
-				return 'string';
-				
-			case 254:
-			case 255:
+			#case 252:
+            case MYSQLI_TYPE_STRING:
+                return $this->isBinaryStringType($meta) ? 'blob' : 'string';
+
+			case MYSQLI_TYPE_VAR_STRING: // VarChar
+                return $this->isBinaryStringType($meta) ? 'blob' : 'string';
+
+            case MYSQLI_TYPE_TINY_BLOB:
+            case MYSQLI_TYPE_MEDIUM_BLOB:
+            case MYSQLI_TYPE_LONG_BLOB:
+            case MYSQLI_TYPE_BLOB:
+			#case 254:
+			case MYSQLI_TYPE_GEOMETRY:
 				return 'blob';
 		}
 		
 		return 'string';
 	}
-	
+
+    private function isBinaryStringType($meta) {
+        /*
+        BINARY_ENCODING = 63
+        see https://github.com/sidorares/node-mysql2/blob/ef283413607a5ee6643c238245f3ad4b533f5689/lib/constants/charsets.js#L64
+        */
+        return ($meta->flags & MYSQLI_BINARY_FLAG) && ($meta->charsetnr == 63);
+    }
+
 	private function parseType($meta) {
 		$type = 'string';
 		$binary = false;
@@ -186,8 +201,7 @@ class StiMySqlAdapter {
 			$length = $meta['len'];
 		}
 		else {
-			if ($meta->flags & 128) $binary = true;
-			$type = $this->getStringType($meta->type);
+			$type = $this->getStringType($meta);
 			$length = $meta->length;
 		}
 		
@@ -247,11 +261,19 @@ class StiMySqlAdapter {
 				return base64_encode($value);
 			
 			case 'datetime':
-				return date("Y-m-d\TH:i:s.v", strtotime($value));
+				$timestamp = strtotime($value);
+				$format = date("Y-m-d\TH:i:s.v", $timestamp);
+				if (strpos($format, '.v') > 0) $format = date("Y-m-d\TH:i:s.000", $timestamp);
+				return $format;
 			
 			case 'time':
 				$hours = intval($value);
-				return $hours >=0 && $hours <= 23 ? date("H:i:s.v", strtotime($value)) : $value;
+				if ($hours < 0 || $hours > 23) return $value;
+				
+				$timestamp = strtotime($value);
+				$format = date("H:i:s.v", $timestamp);
+				if (strpos($format, '.v') > 0) $format = date("H:i:s.000", $timestamp);
+				return $format;
 		}
 		
 		return $value;
