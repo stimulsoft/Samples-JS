@@ -4,10 +4,10 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "start": "cross-env NODE_OPTIONS=--max_old_space_size=8048 ng serve",
+    "build": "cross-env NODE_OPTIONS=--max_old_space_size=8048 ng build",
+    "watch": "cross-env NODE_OPTIONS=--max_old_space_size=8048 ng build --watch --configuration development",
+    "test": "cross-env NODE_OPTIONS=--max_old_space_size=8048 ng test"
   },
   "private": true,
   "dependencies": {
@@ -30,6 +30,7 @@
     "@angular/compiler-cli": "~13.0.0",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "cross-env": "^7.0.3",
     "jasmine-core": "~3.10.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
