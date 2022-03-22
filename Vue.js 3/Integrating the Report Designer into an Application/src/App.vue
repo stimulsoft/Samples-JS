@@ -23,7 +23,7 @@ onMounted(() => {
   console.log('Edit report template in the designer');
   designer.report = report;
 
-  console.log('Rendering the viewer to selected element');
+  console.log('Rendering the designer to selected element');
   designer.renderHtml('designer');
 
   console.log('Loading completed successfully!');
