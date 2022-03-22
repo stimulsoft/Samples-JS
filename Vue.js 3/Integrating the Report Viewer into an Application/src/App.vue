@@ -10,7 +10,6 @@ onMounted(() => {
   let viewer = new Stimulsoft.Viewer.StiViewer(undefined, "StiViewer", false);
 
   console.log("Creating a new report instance");
-
   let report = new Stimulsoft.Report.StiReport();
 
   console.log("Load report from url");
