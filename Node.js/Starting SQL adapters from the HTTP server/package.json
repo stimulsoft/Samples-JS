@@ -1,14 +1,11 @@
 {
-    "name": "Starting-SQL-Adapters-from-the-HTTP-Server",
-    "version": "0.0.2",
-    "description": "Starting SQL Adapters from the HTTP Server",
-    "main": "app.js",
+    "name": "nodejsdataadapters",
+    "version": "0.0.4",
+    "description": "NodejsDataAdapters",
+    "main": "index.js",
     "author": "Stimulsoft (http://www.stimulsoft.com)",
     "dependencies": {
-        "mssql": "^4.1.0",
-        "mysql": "^2.15.0",
-        "node-firebird": "^0.8.4",
-        "pg": "^4.5.1"
+        "stimulsoft-data-adapter": "^2022.2.1"
     },
     "maintainers": [
         {
@@ -26,8 +23,8 @@
     ],
     "license": "Closed Source",
     "bugs": {
-        "url": "https://github.com/stimulsoft/Reports.JS/issues"
+        "url": "https://github.com/stimulsoft/Dashboards.JS/issues"
     },
-    "homepage": "https://github.com/stimulsoft/Reports.JS#readme",
+    "homepage": "https://github.com/stimulsoft/Dashboards.JS#readme",
     "devDependencies": {}
 }
