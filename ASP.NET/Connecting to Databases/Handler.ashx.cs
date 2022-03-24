@@ -1,4 +1,10 @@
-﻿using System;
+/*
+Stimulsoft.Reports.JS
+Version: 2022.2.1
+Build date: 2022.03.21
+License: https://www.stimulsoft.com/en/licensing/reports
+*/
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
@@ -33,6 +39,15 @@ namespace AspNetDataAdapters
 
         [DataMember(Name = "types")]
         public string[] Types { get; set; }
+
+        [DataMember(Name = "adapterVersion")]
+        public string AdapterVersion { get; set; }
+
+        [DataMember(Name = "handlerVersion")]
+        public string HandlerVersion { get; set; }
+
+        [DataMember(Name = "checkVersion")]
+        public bool CheckVersion { get; set; }
     }
     #endregion
 
@@ -94,6 +109,7 @@ namespace AspNetDataAdapters
         {
             var inputStream = context.Request.InputStream;
             var result = new Result();
+            var encodeResult = false;
 
             try
             {
@@ -103,22 +119,32 @@ namespace AspNetDataAdapters
                 {
                     var buffer = Convert.FromBase64String(ROT13(inputText));
                     inputStream = new MemoryStream(buffer);
+                    encodeResult = true;
                 }
 
                 inputStream.Position = 0;
 
                 var deserializer = new DataContractJsonSerializer(typeof(CommandJson));
                 var command = (CommandJson)deserializer.ReadObject(inputStream);
-                command.QueryString = ApplyQueryParameters(command.QueryString, command.Parameters, command.EscapeQueryParameters);
-
-                switch (command.Database)
+                
+                if (command.Command == "GetSupportedAdapters")
                 {
-                    case "MySQL": result = SQLAdapter.Process(command, new MySqlConnection(command.ConnectionString)); break;
-                    case "Firebird": result = SQLAdapter.Process(command, new FbConnection(command.ConnectionString)); break;
-                    case "MS SQL": result = SQLAdapter.Process(command, new SqlConnection(command.ConnectionString)); break;
-                    case "PostgreSQL": result = SQLAdapter.Process(command, new NpgsqlConnection(command.ConnectionString)); break;
-                    case "Oracle": result = SQLAdapter.Process(command, new OracleConnection(command.ConnectionString)); break;
-                    default: result.Success = false; result.Notice = $"Unknown database type [{command.Database}]"; break;
+                    result.Success = true;
+                    result.Types = new string[] { "MySQL", "Firebird", "MS SQL", "PostgreSQL", "Oracle" };
+                }
+                else
+                {
+                    command.QueryString = ApplyQueryParameters(command.QueryString, command.Parameters, command.EscapeQueryParameters);
+
+                    switch (command.Database)
+                    {
+                        case "MySQL": result = SQLAdapter.Process(command, new MySqlConnection(command.ConnectionString)); break;
+                        case "Firebird": result = SQLAdapter.Process(command, new FbConnection(command.ConnectionString)); break;
+                        case "MS SQL": result = SQLAdapter.Process(command, new SqlConnection(command.ConnectionString)); break;
+                        case "PostgreSQL": result = SQLAdapter.Process(command, new NpgsqlConnection(command.ConnectionString)); break;
+                        case "Oracle": result = SQLAdapter.Process(command, new OracleConnection(command.ConnectionString)); break;
+                        default: result.Success = false; result.Notice = $"Unknown database type [{command.Database}]"; break;
+                    }
                 }
             }
             catch (Exception e)
@@ -132,14 +158,29 @@ namespace AspNetDataAdapters
                     inputStream.Close();
             }
 
+            result.HandlerVersion = "2022.2.1";
+            result.CheckVersion = true;
+            
             context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
             context.Response.Headers.Add("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Engaged-Auth-Token");
             context.Response.Headers.Add("Cache-Control", "no-cache");
-            context.Response.ContentType = "application/json";
 
             var serializer = new DataContractJsonSerializer(typeof(Result));
-            serializer.WriteObject(context.Response.OutputStream, result);
-
+            if (encodeResult)
+            {
+                context.Response.ContentType = "text/plain";
+                using (var tmpStream = new MemoryStream())
+                {                    
+                    serializer.WriteObject(tmpStream, result);
+                    context.Response.Write(ROT13(Convert.ToBase64String(tmpStream.ToArray())));
+                }
+            }
+            else
+            {
+                context.Response.ContentType = "application/json";
+                serializer.WriteObject(context.Response.OutputStream, result);
+            }
+            
             context.Response.OutputStream.Flush();
             context.Response.End();
         }

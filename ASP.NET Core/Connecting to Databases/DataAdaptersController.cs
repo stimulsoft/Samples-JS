@@ -1,4 +1,10 @@
-﻿using FirebirdSql.Data.FirebirdClient;
+/*
+Stimulsoft.Reports.JS
+Version: 2022.2.1
+Build date: 2022.03.21
+License: https://www.stimulsoft.com/en/licensing/reports
+*/
+using FirebirdSql.Data.FirebirdClient;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -30,6 +36,8 @@ namespace NetCoreDataAdapters
         public string AdapterVersion { get; set; }
 
         public string HandlerVersion { get; set; }
+
+        public bool CheckVersion { get; set; }
     }
 
     public class CommandJson
@@ -75,9 +83,10 @@ namespace NetCoreDataAdapters
         }
 
         private JsonSerializerOptions jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+        private Regex serverCertificateRegex = new Regex(@"Trust\s*Server\s*Certificate\s*=", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         private async Task ProcessRequest()
-        {        
+        {
             var result = new Result { Success = true };
             var encodeResult = false;
 
@@ -97,16 +106,29 @@ namespace NetCoreDataAdapters
                 }
 
                 var command = JsonSerializer.Deserialize<CommandJson>(inputText, jsonOptions);
-                command.QueryString = ApplyQueryParameters(command.QueryString, command.Parameters, command.EscapeQueryParameters);
 
-                switch (command.Database)
+                if (command.Command == "GetSupportedAdapters")
                 {
-                    case "MySQL": result = SQLAdapter.Process(command, new MySqlConnection(command.ConnectionString)); break;
-                    case "Firebird": result = SQLAdapter.Process(command, new FbConnection(command.ConnectionString)); break;
-                    case "MS SQL": result = SQLAdapter.Process(command, new SqlConnection(command.ConnectionString)); break;
-                    case "PostgreSQL": result = SQLAdapter.Process(command, new NpgsqlConnection(command.ConnectionString)); break;
-                    case "Oracle": result = SQLAdapter.Process(command, new OracleConnection(command.ConnectionString)); break;
-                    default: result.Success = false; result.Notice = $"Unknown database type [{command.Database}]"; break;
+                    result.Success = true;
+                    result.Types = new string[] { "MySQL", "Firebird", "MS SQL", "PostgreSQL", "Oracle" };
+                }
+                else
+                {
+                    command.QueryString = ApplyQueryParameters(command.QueryString, command.Parameters, command.EscapeQueryParameters);
+
+                    switch (command.Database)
+                    {
+                        case "MySQL": result = SQLAdapter.Process(command, new MySqlConnection(command.ConnectionString)); break;
+                        case "Firebird": result = SQLAdapter.Process(command, new FbConnection(command.ConnectionString)); break;
+                        case "MS SQL":
+                            if (!serverCertificateRegex.IsMatch(command.ConnectionString))
+                                command.ConnectionString += (command.ConnectionString.TrimEnd().EndsWith(";") ? "" : ";") + "TrustServerCertificate=true;";
+                            result = SQLAdapter.Process(command, new SqlConnection(command.ConnectionString));
+                            break;
+                        case "PostgreSQL": result = SQLAdapter.Process(command, new NpgsqlConnection(command.ConnectionString)); break;
+                        case "Oracle": result = SQLAdapter.Process(command, new OracleConnection(command.ConnectionString)); break;
+                        default: result.Success = false; result.Notice = $"Unknown database type [{command.Database}]"; break;
+                    }
                 }
             }
             catch (Exception e)
@@ -115,7 +137,8 @@ namespace NetCoreDataAdapters
                 result.Notice = e.Message;
             }
 
-            result.HandlerVersion = "2022.1.1";
+            result.HandlerVersion = "2022.2.1";
+            result.CheckVersion = true;
 
             var contentType = "application/json";
             var resultText = JsonSerializer.Serialize(result, jsonOptions);

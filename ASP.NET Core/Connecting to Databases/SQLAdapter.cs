@@ -1,7 +1,7 @@
 /*
 Stimulsoft.Reports.JS
-Version: 2022.1.1
-Build date: 2021.12.07
+Version: 2022.2.1
+Build date: 2022.03.21
 License: https://www.stimulsoft.com/en/licensing/reports
 */
 using FirebirdSql.Data.FirebirdClient;
@@ -24,7 +24,7 @@ namespace NetCoreDataAdapters
 
         private static Result End(Result result)
         {
-            result.AdapterVersion = "2022.1.1";
+            result.AdapterVersion = "2022.2.1";
             try
             {
                 if (reader != null) reader.Close();
@@ -88,6 +88,8 @@ namespace NetCoreDataAdapters
             {
                 var columnName = reader.GetName(index);
                 var columnType = GetType(reader.GetDataTypeName(index));
+                if (columnType == "string" && reader.GetFieldType(index).Equals(typeof(byte[])))
+                    columnType = "array";
 
                 columns.Add(columnName);
                 types.Add(columnType);
@@ -195,6 +197,9 @@ namespace NetCoreDataAdapters
 
                     case "time":
                         return "time";
+
+                    case "blob":
+                        return "array";
                 }
             }
             else if (connection is FbConnection)
@@ -313,7 +318,7 @@ namespace NetCoreDataAdapters
             }
             else if (connection is OracleConnection)
             {
-                switch (dbType.ToLowerInvariant())
+                switch (dbType.ToUpperInvariant())
                 {
                     case "BFILE":
                     case "BLOB":

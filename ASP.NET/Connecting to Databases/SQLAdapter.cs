@@ -1,4 +1,10 @@
-﻿using FirebirdSql.Data.FirebirdClient;
+/*
+Stimulsoft.Reports.JS
+Version: 2022.2.1
+Build date: 2022.03.21
+License: https://www.stimulsoft.com/en/licensing/reports
+*/
+using FirebirdSql.Data.FirebirdClient;
 using MySql.Data.MySqlClient;
 using Npgsql;
 using Oracle.ManagedDataAccess.Client;
@@ -21,6 +27,7 @@ namespace AspNetDataAdapters
 
         private static Result End(Result result)
         {
+            result.AdapterVersion = "2022.2.1";
             try
             {
                 if (reader != null) reader.Close();
@@ -84,6 +91,8 @@ namespace AspNetDataAdapters
             {
                 var columnName = reader.GetName(index);
                 var columnType = GetType(reader.GetDataTypeName(index));
+                if (columnType == "string" && reader.GetFieldType(index).Equals(typeof(byte[])))
+                    columnType = "array";
 
                 columns.Add(columnName);
                 types.Add(columnType);
@@ -191,6 +200,9 @@ namespace AspNetDataAdapters
 
                     case "time":
                         return "time";
+
+                    case "blob":
+                        return "array";
                 }
             }
             else if (connection is FbConnection)
@@ -309,7 +321,7 @@ namespace AspNetDataAdapters
             }
             else if (connection is OracleConnection)
             {
-                switch (dbType.ToLowerInvariant())
+                switch (dbType.ToUpperInvariant())
                 {
                     case "BFILE":
                     case "BLOB":
@@ -344,7 +356,6 @@ namespace AspNetDataAdapters
         {
             SQLAdapter.connection = connection;
             SQLAdapter.command = command;
-            return Connect();
             return Connect();
         }
     }
