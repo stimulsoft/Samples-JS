@@ -12,7 +12,7 @@ This example allows you to download the report, render it and export it to HTML-
 [Exporting a Report to PDF](https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Exporting%20a%20Report%20to%20PDF)
 This example contains code to render a report to a PDF-document.
 
-[Starting a SQL adapters from the HTTP server](https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Starting%20SQL%20adapters%20from%20the%20HTTP%20server)
+[Starting SQL Adapters from the HTTP Server](https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Starting%20SQL%20adapters%20from%20the%20HTTP%20server)
 This example demonstrates the implementation of connections to different databases (MySQL, Firebird, MSSQL and PostgreSQL). Adapters files are in a directory with an example.
 
 [Loading a Report and Rendering it with a JSON Data](https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Loading%20a%20Report%20and%20Rendering%20it%20with%20a%20JSON%20Data)
