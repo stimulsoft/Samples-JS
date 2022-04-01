@@ -20,8 +20,8 @@
         var designer = new Stimulsoft.Designer.StiDesigner(null, "StiDesigner", false);
         var report = new Stimulsoft.Report.StiReport();
 
-        var fileContent = Stimulsoft.System.IO.File.getFile("../reports/Roboto-Black.ttf", true);
-        var resource = new Stimulsoft.Report.Dictionary.StiResource("Roboto-Black", "Roboto-Black", false, Stimulsoft.Report.Dictionary.StiResourceType.FontTtf, fileContent);
+        var fontFileContent = Stimulsoft.System.IO.File.getFile("../reports/Roboto-Black.ttf", true);
+        var resource = new Stimulsoft.Report.Dictionary.StiResource("Roboto-Black", "Roboto-Black", false, Stimulsoft.Report.Dictionary.StiResourceType.FontTtf, fontFileContent);
         report.dictionary.resources.add(resource);
 
         var page = report.pages.getByIndex(0);
