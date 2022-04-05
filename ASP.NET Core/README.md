@@ -21,5 +21,7 @@ They are all combined in a Visual Studio solution (.sln-file).
 
 ### [Sending a Report by Email](https://github.com/stimulsoft/Samples-JS/tree/master/ASP.NET%20Core/Sending%20a%20Report%20by%20Email) - This sample demonstrates how to send a report by Email.
 
+### [Supply Custom Headers for Json Database](https://github.com/stimulsoft/Samples-JS/tree/master/ASP.NET%20Core/Supply%20Custom%20Headers%20for%20Json%20Database) - This sample demonstrate how to supply custom HTTP headers for loading Json database.
+
 # Running samples
 In order to start simply open the Visual Studio solution file in the IDE Visual Studio and run the required project.

@@ -1,0 +1,15 @@
+{
+  "name": "Supply_Custom_Headers_for_Json_Database",
+  "version": "1.0.0",
+  "description": "Supply Custom Headers for Json Database",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently --kill-others \"node index.js\" \"node lib/dummy_server.js\""
+  },
+  "author": "Stimulsoft",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^7.1.0",
+    "stimulsoft-reports-js": "2022.2.2"
+  }
+}

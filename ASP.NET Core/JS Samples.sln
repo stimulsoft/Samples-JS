@@ -9,6 +9,8 @@ Project("{795c1757-6968-4861-9cb1-a46338cbaa73}") = "Connecting to Databases", "
 EndProject
 Project("{795c1757-6968-4861-9cb1-a46338cbaa73}") = "Sending a Report by Email", "Sending a Report by Email\Sending a Report by Email.csproj", "{7c4af70e-e8b2-4f8b-9447-9a318a71a4c3}"
 EndProject
+Project("{795c1757-6968-4861-9cb1-a46338cbaa73}") = "Supply Custom Headers for Json Database", "Supply Custom Headers for Json Database\Supply Custom Headers for Json Database.csproj", "{bc7bf768-8e0b-4711-9d1f-83d5e4574f39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,11 @@ Global
 		{7c4af70e-e8b2-4f8b-9447-9a318a71a4c3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7c4af70e-e8b2-4f8b-9447-9a318a71a4c3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7c4af70e-e8b2-4f8b-9447-9a318a71a4c3}.Release|Any CPU.Build.0 = Release|Any CPU
+
+		{bc7bf768-8e0b-4711-9d1f-83d5e4574f39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{bc7bf768-8e0b-4711-9d1f-83d5e4574f39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{bc7bf768-8e0b-4711-9d1f-83d5e4574f39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{bc7bf768-8e0b-4711-9d1f-83d5e4574f39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,3 +7,6 @@ This folder contains demo of using Stimulsoft Reports.JS Designer in the Angular
 
 [Integrating the Report Viewer into an Application](https://github.com/stimulsoft/Samples-JS/tree/master/Angular/Integrating%20the%20Report%20Viewer%20into%20an%20Application)
 This folder contains demo of using Stimulsoft Reports.JS Viewer in the Angular project.
+
+[Supply Custom Headers for Json Database](https://github.com/stimulsoft/Samples-JS/tree/master/Angular/Support%20Custom%20Headers%20for%20Json%20Database)
+This folder contains demo of using JSON database loaded from another backend and protected with custom HTTP header.
