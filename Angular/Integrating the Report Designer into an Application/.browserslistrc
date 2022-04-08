@@ -13,4 +13,6 @@ last 1 Firefox version
 last 2 Edge major versions
 last 2 Safari major versions
 last 2 iOS major versions
+not ios_saf 15.2-15.3
+not safari 15.2-15.3
 Firefox ESR
