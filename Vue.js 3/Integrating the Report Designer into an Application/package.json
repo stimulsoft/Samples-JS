@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "vue": "^3.2.25",
-    "stimulsoft-reports-js": "^2022.1.6"
+    "stimulsoft-reports-js": "latest"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.2.0",
