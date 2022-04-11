@@ -10,6 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "concurrently": "^7.1.0",
-    "stimulsoft-reports-js": "2022.2.2"
+    "stimulsoft-reports-js": "latest"
   }
 }
