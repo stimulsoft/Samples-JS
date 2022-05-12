@@ -4,7 +4,7 @@
   "description": "Supply Custom Headers for Json Database",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently --kill-others \"node index.js\" \"node lib/dummy_server.js\""
+    "start": "concurrently --kill-others -s first \"node index.js\" \"node lib/dummy_server.js\""
   },
   "author": "Stimulsoft",
   "license": "MIT",
