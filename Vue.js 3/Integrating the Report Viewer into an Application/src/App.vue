@@ -28,7 +28,7 @@ onMounted(() => {
 <template>
   <div id="app">
     <div>
-      <h2>Stimulsoft Reports.JS Viewer</h2>
+      <h2 id="app-title">Stimulsoft Reports.JS Viewer</h2>
       <div id="viewer"></div>
     </div>
   </div>
@@ -38,9 +38,12 @@ onMounted(() => {
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  -moz-osx-font-smoothing: grayscale;  
   color: #2c3e50;
   margin-top: 60px;
+}
+
+#app-title {
+  text-align: center;
 }
 </style>
