@@ -1,7 +1,7 @@
 /*
 Stimulsoft.Reports.JS
-Version: 2022.2.4
-Build date: 2022.04.22
+Version: 2022.2.5
+Build date: 2022.05.13
 License: https://www.stimulsoft.com/en/licensing/reports
 */
 
@@ -27,8 +27,8 @@ import java.util.regex.Pattern;
 
 public class JSDataAdapter {
 
-    public static final String handlerVersion = "2022.2.4";
-    public static final String adapterVersion = "2022.2.4";
+    public static final String handlerVersion = "2022.2.5";
+    public static final String adapterVersion = "2022.2.5";
     public static final boolean checkVersion = true;
 
     private static final List<String> USERS_KEYS = Arrays.asList(
@@ -76,6 +76,7 @@ public class JSDataAdapter {
 
             if ("MySQL".equals(dbName)) {
                 Class.forName("com.mysql.cj.jdbc.Driver");
+                info.setProperty("zeroDateTimeBehavior", "CONVERT_TO_NULL");
                 if (url == null) {
                     url = String.format("jdbc:mysql://%s:%s/%s", getHost(params), getPort(params, "3306"), getDatabase(params));
                 }
@@ -201,7 +202,8 @@ public class JSDataAdapter {
                 if (rs.getString(index) != null) {
                     if ("datetime".equals(columnType)) {
                         if ("MySQL".equals(dbName)) {
-                            value = mysqlDateFormatter.format(rs.getTimestamp(index));
+                            Timestamp dbValue = rs.getTimestamp(index);
+                            value = dbValue == null ? null : mysqlDateFormatter.format(rs.getTimestamp(index));
                         } else {
                             value = dateFormatter.format(rs.getTimestamp(index));
                         }

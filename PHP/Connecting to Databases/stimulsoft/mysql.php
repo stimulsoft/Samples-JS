@@ -1,12 +1,12 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2022.2.4
-# Build date: 2022.04.22
+# Version: 2022.2.5
+# Build date: 2022.05.11
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
 class StiMySqlAdapter {
-	public $version = '2022.2.4';
+	public $version = '2022.2.5';
 	public $checkVersion = true;
 	
 	private $info = null;
@@ -267,6 +267,8 @@ class StiMySqlAdapter {
 				return base64_encode($value);
 			
 			case 'datetime':
+                // Replace invalid dates with NULL
+                if ($value == "0000-00-00 00:00:00") return null;
 				$timestamp = strtotime($value);
 				$format = date("Y-m-d\TH:i:s.v", $timestamp);
 				if (strpos($format, '.v') > 0) $format = date("Y-m-d\TH:i:s.000", $timestamp);
