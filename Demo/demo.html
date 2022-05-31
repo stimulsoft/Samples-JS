@@ -46,7 +46,7 @@
 			options.appearance.scrollbarsMode = true;
 			options.toolbar.showDesignButton = true;
 			options.toolbar.printDestination = Stimulsoft.Viewer.StiPrintDestination.Direct;
-			options.appearance.htmlRenderMode = Stimulsoft.Report.Export.StiHtmlExportMode.Table;
+			options.appearance.reportDisplayMode = Stimulsoft.Report.Export.StiHtmlExportMode.Table;
 
 			// Create an instance of the viewer
 			viewer = new Stimulsoft.Viewer.StiViewer(options, "StiViewer", false);
@@ -65,7 +65,7 @@
 		function createDesigner() {
 			var options = new Stimulsoft.Designer.StiDesignerOptions();
 			options.appearance.fullScreenMode = true;
-			options.appearance.htmlRenderMode = Stimulsoft.Report.Export.StiHtmlExportMode.Table;
+			options.viewerOptions.appearance.reportDisplayMode = Stimulsoft.Report.Export.StiHtmlExportMode.Table;
 
 			// Create an instance of the designer
 			designer = new Stimulsoft.Designer.StiDesigner(options, "StiDesigner", false);
