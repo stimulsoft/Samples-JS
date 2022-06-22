@@ -720,3 +720,46 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+### SixLabors ImageSharp
+ImageSharp is a new, fully featured, fully managed, cross-platform, 2D graphics library. Designed to simplify image processing, ImageSharp brings you an incredibly powerful yet beautifully simple API.
+
+ImageSharp is designed from the ground up to be flexible and extensible. The library provides API endpoints for common image processing operations and the building blocks to allow for the development of additional operations.
+
+**Website:** https://docs.sixlabors.com/articles/imagesharp/index.html
+
+#### License
+Apache License, Version 2.0
+January 2004
+
+https://opensource.org/licenses/Apache-2.0
+
+---
+
+### SixLabors ImageSharp.Drawing
+ImageSharp.Drawing is a library built on top of ImageSharp to providing 2D Drawing extensions.
+
+ImageSharp.Drawing is designed from the ground up to be flexible and extensible. The library provides API endpoints for common vector and text processing operations adding the building blocks for building custom images.
+
+**Website:** https://docs.sixlabors.com/articles/imagesharp.drawing/index.html
+
+#### License
+Apache License, Version 2.0
+January 2004
+
+https://opensource.org/licenses/Apache-2.0
+
+---
+
+### SixLabors Fonts
+Fonts is a font loading and layout library built primarily to provide text drawing support to ImageSharp.Drawing.
+
+**Website:** https://docs.sixlabors.com/articles/fonts/index.html
+
+#### License
+Apache License, Version 2.0
+January 2004
+
+https://opensource.org/licenses/Apache-2.0

@@ -67,7 +67,7 @@ Stimulsoft.Report.Win.dll
 Stimulsoft.Svg.dll  
 All .xml localization files
 
-**.NET Core**  
+**.NET CORE**  
 Stimulsoft.Base.dll  
 Stimulsoft.Blockly.dll  
 Stimulsoft.Dashboard.dll  
@@ -107,10 +107,15 @@ Stimulsoft.Report.WebDesign.dll
 Stimulsoft.Svg.dll  
 All .xml localization files
 
-**Blazor**  
+**BLAZOR**  
 Stimulsoft.Base.dll  
 Stimulsoft.Blockly.dll  
+Stimulsoft.Dashboard.dll  
+Stimulsoft.Dashboard.Drawing.dll  
+Stimulsoft.Dashboard.Export.dll  
 Stimulsoft.Data.dll  
+Stimulsoft.Drawing.dll  
+Stimulsoft.Map.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Blazor.dll  
 Stimulsoft.Report.Check.dll  
@@ -119,6 +124,31 @@ Stimulsoft.Report.Web.dll
 Stimulsoft.Report.WebDesign.dll  
 Stimulsoft.System.dll  
 Stimulsoft.System.Web.dll  
+All .xml localization files
+
+**ANGULAR**  
+Stimulsoft.Base.dll  
+Stimulsoft.Blockly.dll  
+Stimulsoft.Dashboard.dll  
+Stimulsoft.Dashboard.Drawing.dll  
+Stimulsoft.Dashboard.Export.dll  
+Stimulsoft.Data.dll  
+Stimulsoft.Drawing.dll  
+Stimulsoft.Map.dll  
+Stimulsoft.MathFX.dll  
+Stimulsoft.Report.Mvc.dll  
+Stimulsoft.Report.dll  
+Stimulsoft.Report.Angular.dll  
+Stimulsoft.Report.Check.dll  
+Stimulsoft.Report.Helper.dll  
+Stimulsoft.Report.Mvc.NetCore.dll  
+Stimulsoft.Report.Web.dll  
+Stimulsoft.Report.WebDesign.dll  
+Stimulsoft.Svg.dll  
+Stimulsoft.System.dll  
+Stimulsoft.System.Web.dll  
+All files in stimulsoft-viewer-angular folder  
+All files in stimulsoft-designer-angular folder  
 All .xml localization files
 
 **WPF**  
@@ -148,7 +178,7 @@ All stimulsoft.\*.d.ts definitions files
 All stimulsoft.\*.css styles files  
 All .xml localization files
 
-**Java**  
+**JAVA**  
 All stimulsoft-\*.jar product files   
 All .xml localization files
 
@@ -159,7 +189,7 @@ All stimulsoft.\*.css styles files
 All .php product files  
 All .xml localization files
 
-#### Stimulsoft Reports.Web
+#### Stimulsoft Reports.WEB
 Stimulsoft.Base.dll  
 Stimulsoft.Blockly.dll  
 Stimulsoft.Data.dll  
@@ -178,7 +208,7 @@ Stimulsoft.System.dll
 Stimulsoft.System.Web.dll  
 All .xml localization files
 
-#### Stimulsoft Reports.Net
+#### Stimulsoft Reports.NET
 Stimulsoft.Base.dll  
 Stimulsoft.Blockly.dll  
 Stimulsoft.BlocklyEditor.Wpf.dll  
@@ -199,10 +229,12 @@ Stimulsoft.Report.Win.dll
 Stimulsoft.Svg.dll  
 All .xml localization files
 
-#### Stimulsoft Reports.Blazor
+#### Stimulsoft Reports.BLAZOR
 Stimulsoft.Base.dll  
 Stimulsoft.Blockly.dll  
 Stimulsoft.Data.dll  
+Stimulsoft.Drawing.dll  
+Stimulsoft.Map.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Blazor.dll  
 Stimulsoft.Report.Check.dll  
@@ -213,7 +245,32 @@ Stimulsoft.System.dll
 Stimulsoft.System.Web.dll  
 All .xml localization files
 
-#### Stimulsoft Reports.Wpf
+#### Stimulsoft Reports.ANGULAR
+Stimulsoft.Base.dll  
+Stimulsoft.Blockly.dll  
+Stimulsoft.Dashboard.dll  
+Stimulsoft.Dashboard.Drawing.dll  
+Stimulsoft.Dashboard.Export.dll  
+Stimulsoft.Data.dll  
+Stimulsoft.Drawing.dll  
+Stimulsoft.Map.dll  
+Stimulsoft.MathFX.dll  
+Stimulsoft.Report.Mvc.dll  
+Stimulsoft.Report.dll  
+Stimulsoft.Report.Angular.dll  
+Stimulsoft.Report.Check.dll  
+Stimulsoft.Report.Helper.dll  
+Stimulsoft.Report.Mvc.NetCore.dll  
+Stimulsoft.Report.Web.dll  
+Stimulsoft.Report.WebDesign.dll  
+Stimulsoft.Svg.dll  
+Stimulsoft.System.dll  
+Stimulsoft.System.Web.dll  
+All files in stimulsoft-viewer-angular folder  
+All files in stimulsoft-designer-angular folder  
+All .xml localization files
+
+#### Stimulsoft Reports.WPF
 Stimulsoft.Base.dll  
 Stimulsoft.Blockly.dll  
 Stimulsoft.BlocklyEditor.Wpf.dll  
@@ -248,7 +305,7 @@ All stimulsoft.\*.d.ts definitions files
 All stimulsoft.\*.css styles files  
 All .xml localization files
 
-#### Stimulsoft Reports.Java
+#### Stimulsoft Reports.JAVA
 All stimulsoft-\*.jar product files  
 All .xml localization files
 
@@ -319,6 +376,25 @@ All stimulsoft.\*.js scripts files
 All stimulsoft.\*.d.ts definitions files  
 All stimulsoft.\*.css styles files  
 All .php product files  
+All .xml localization files
+
+#### Stimulsoft Dashboards.BLAZOR
+Stimulsoft.Base.dll  
+Stimulsoft.Blockly.dll  
+Stimulsoft.Dashboard.dll  
+Stimulsoft.Dashboard.Drawing.dll  
+Stimulsoft.Dashboard.Export.dll  
+Stimulsoft.Data.dll  
+Stimulsoft.Drawing.dll  
+Stimulsoft.Map.dll  
+Stimulsoft.Report.dll  
+Stimulsoft.Report.Blazor.dll  
+Stimulsoft.Report.Check.dll  
+Stimulsoft.Report.Helper.dll  
+Stimulsoft.Report.Web.dll  
+Stimulsoft.Report.WebDesign.dll  
+Stimulsoft.System.dll  
+Stimulsoft.System.Web.dll  
 All .xml localization files
 
 YOU ARE NOT AUTHORIZED TO REDISTRIBUTE ANY OTHER FILE CONTAINED IN THE SOFTWARE.
