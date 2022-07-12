@@ -15,7 +15,7 @@ function accept(request, response) {
     request.on('end', function () {
         var command = adapter.getCommand(data);
         adapter.process(command, function (result) {
-            var responseData = getResponse(result);
+            var responseData = adapter.getResponse(result);
             response.end(responseData);
         });
     });
