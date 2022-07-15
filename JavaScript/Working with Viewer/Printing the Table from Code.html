@@ -70,7 +70,7 @@
                 //Create text on Data Band
                 var dataText = new Stimulsoft.Report.Components.StiText();
                 dataText.clientRectangle = new Stimulsoft.System.Drawing.Rectangle(pos, 0, columnWidth, 0.5)
-                dataText.text = Stimulsoft.System.StiString.format("{{0}.{1}}", data.tableName, dataColumn.columnName);
+                dataText.text = `{${data.tableName}.${dataColumn.columnName}}`;
                 dataText.name = "DataText" + nameIndex.toString();
                 dataText.border.side = Stimulsoft.Base.Drawing.StiBorderSides.All;
 
