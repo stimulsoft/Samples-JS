@@ -1,7 +1,7 @@
 /*
 Stimulsoft.Reports.JS
-Version: 2022.3.2
-Build date: 2022.06.23
+Version: 2022.3.4
+Build date: 2022.08.02
 License: https://www.stimulsoft.com/en/licensing/reports
 */
 using FirebirdSql.Data.FirebirdClient;
@@ -27,7 +27,7 @@ namespace AspNetDataAdapters
 
         private static Result End(Result result)
         {
-            result.AdapterVersion = "2022.3.2";
+            result.AdapterVersion = "2022.3.4";
             try
             {
                 if (reader != null) reader.Close();
@@ -275,7 +275,7 @@ namespace AspNetDataAdapters
                         return "time";
 
                     case "datetimeoffset":
-                        return "datetime";
+                        return "datetimeoffset";
 
                     case "bit":
                         return "boolean";
