@@ -1,12 +1,12 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2022.3.4
-# Build date: 2022.08.01
+# Version: 2022.3.5
+# Build date: 2022.08.23
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
 class StiOdbcAdapter {
-	public $version = '2022.3.4';
+	public $version = '2022.3.5';
 	public $checkVersion = true;
 	
 	private $info = null;

@@ -1,7 +1,7 @@
 /*
 Stimulsoft.Reports.JS
-Version: 2022.3.4
-Build date: 2022.08.02
+Version: 2022.3.5
+Build date: 2022.08.25
 License: https://www.stimulsoft.com/en/licensing/reports
 */
 
@@ -27,8 +27,8 @@ import java.util.regex.Pattern;
 
 public class JSDataAdapter {
 
-    public static final String handlerVersion = "2022.3.4";
-    public static final String adapterVersion = "2022.3.4";
+    public static final String handlerVersion = "2022.3.5";
+    public static final String adapterVersion = "2022.3.5";
     public static final boolean checkVersion = true;
 
     private static final List<String> USERS_KEYS = Arrays.asList(
@@ -120,8 +120,11 @@ public class JSDataAdapter {
 
     private static String onConnect(JSONObject command, Connection con, String dbName) throws JSONException {
         if (command.has("queryString")) {
-            return query(applyQueryParameters(command.getString("queryString"), command.has("parameters") ? command.getJSONArray("parameters") : null,
-                    command.has("escapeQueryParameters") && command.getBoolean("escapeQueryParameters")), con, dbName);
+            JSONArray params = command.has("parameters") ? command.getJSONArray("parameters") : null;
+            boolean escapeParams = command.has("escapeQueryParameters") && command.getBoolean("escapeQueryParameters");
+
+            String queryText = applyQueryParameters(command.getString("queryString"), params, escapeParams);
+            return query(queryText, con, dbName);
         } else {
             HashMap<String, Object> result = new HashMap<>();
             result.put("success", true);
@@ -132,44 +135,50 @@ public class JSDataAdapter {
         }
     }
 
+    private static final Pattern queryParamRegexp = Pattern.compile("@[a-zA-Z0-9_-]+");
+
     private static String applyQueryParameters(String baseSqlCommand, JSONArray parameters, Boolean escapeQueryParameters) throws JSONException {
         if (baseSqlCommand == null || !baseSqlCommand.contains("@")) {
             return baseSqlCommand;
         }
 
         StringBuilder result = new StringBuilder();
-        while (baseSqlCommand.contains("@") && parameters != null) {
-            result.append(baseSqlCommand, 0, baseSqlCommand.indexOf("@"));
-            baseSqlCommand = baseSqlCommand.substring(baseSqlCommand.indexOf("@") + 1);
 
-            String parameterName = "";
+        Matcher matcher = queryParamRegexp.matcher(baseSqlCommand);
+        int prevStart = 0;
+        while (matcher.find()) {
+            result.append(baseSqlCommand, prevStart, matcher.start());
 
-            while (baseSqlCommand.length() > 0) {
-                String ch = baseSqlCommand.substring(0, 1);
-                if (ch.matches("[a-zA-Z0-9_-]")) {
-                    parameterName += ch;
-                    baseSqlCommand = baseSqlCommand.substring(1);
-                } else
-                    break;
-            }
+            String parameterName = baseSqlCommand.substring(matcher.start() + 1, matcher.end());
 
             JSONObject parameter = null;
             for (int i = 0; i < parameters.length(); i++) {
-                if (parameterName.equalsIgnoreCase(parameters.getJSONObject(i).tryGetString("name"))) {
-                    parameter = parameters.getJSONObject(i);
+                JSONObject currParameter = parameters.getJSONObject(i);
+                if (parameterName.equalsIgnoreCase(currParameter.tryGetString("name"))) {
+                    parameter = currParameter;
+                    break;
                 }
             }
 
-            if (parameter != null) {
+            if (parameter == null) {
+                result.append('@').append(parameterName);
+            } else {
+                String value = parameter.tryGetString("value");
                 if (!parameter.tryGetString("typeGroup").equals("number")) {
-                    if (escapeQueryParameters)
-                        result.append("'").append(parameter.tryGetString("value").replace("\\", "\\\\").replace("'", "\\'").replace("\"", "\\\"")).append("'");
-                    else
-                        result.append("'").append(parameter.tryGetString("value")).append("'");
-                } else
-                    result.append(parameter.tryGetString("value"));
-            } else
-                result.append("@").append(parameterName);
+                    if (escapeQueryParameters) {
+                        value = value.replace("\\", "\\\\").replace("'", "\\'").replace("\"", "\\\"");
+                    }
+                    result.append("'").append(value).append("'");
+                } else {
+                    result.append(value);
+                }
+            }
+
+            prevStart = matcher.end();
+        }
+
+        if (prevStart < baseSqlCommand.length()) {
+            result.append(baseSqlCommand, prevStart, baseSqlCommand.length());
         }
 
         return result.toString();
