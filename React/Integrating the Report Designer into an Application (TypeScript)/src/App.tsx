@@ -1,7 +1,5 @@
 import React from 'react';
 import {Stimulsoft} from 'stimulsoft-reports-js/Scripts/stimulsoft.blockly.editor';
-import 'stimulsoft-reports-js/Css/stimulsoft.designer.office2013.whiteblue.css';
-import 'stimulsoft-reports-js/Css/stimulsoft.viewer.office2013.whiteblue.css';
 import './App.css';
 
 class App extends React.Component {

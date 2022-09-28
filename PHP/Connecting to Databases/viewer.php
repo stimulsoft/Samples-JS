@@ -5,9 +5,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Stimulsoft Reports.JS Viewer</title>
 
-	<!-- Office2013 style -->
-	<link href="css/stimulsoft.viewer.office2013.whiteblue.css" rel="stylesheet">
-
 	<!-- Stimulsoft Reports.JS -->
 	<script src="scripts/stimulsoft.reports.js" type="text/javascript"></script>
 

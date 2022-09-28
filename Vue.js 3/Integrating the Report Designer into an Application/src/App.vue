@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
 import { Stimulsoft } from "stimulsoft-reports-js/Scripts/stimulsoft.blockly.editor";
-import "stimulsoft-reports-js/Css/stimulsoft.designer.office2013.whiteblue.css";
-import "stimulsoft-reports-js/Css/stimulsoft.viewer.office2013.whiteblue.css";
 
 onMounted(() => {
   console.log("Loading Designer view");

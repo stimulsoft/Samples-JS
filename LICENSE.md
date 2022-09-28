@@ -47,6 +47,7 @@ Stimulsoft.Blockly.dll
 Stimulsoft.BlocklyEditor.Wpf.dll  
 Stimulsoft.Controls.dll  
 Stimulsoft.Controls.Win.dll  
+Stimulsoft.Controls.Wpf.dll  
 Stimulsoft.Dashboard.dll  
 Stimulsoft.Dashboard.Design.dll  
 Stimulsoft.Dashboard.Drawing.dll  
@@ -156,6 +157,7 @@ Stimulsoft.Base.dll
 Stimulsoft.Blockly.dll  
 Stimulsoft.BlocklyEditor.Wpf.dll  
 Stimulsoft.Client.Designer.dll  
+Stimulsoft.Controls.Wpf.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Database.Wpf.dll  
 Stimulsoft.Dashboard.Drawing.Wpf.dll  
@@ -214,6 +216,7 @@ Stimulsoft.Blockly.dll
 Stimulsoft.BlocklyEditor.Wpf.dll  
 Stimulsoft.Controls.dll  
 Stimulsoft.Controls.Win.dll  
+Stimulsoft.Controls.Wpf.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Database.dll  
 Stimulsoft.Map.dll  
@@ -275,6 +278,7 @@ Stimulsoft.Base.dll
 Stimulsoft.Blockly.dll  
 Stimulsoft.BlocklyEditor.Wpf.dll  
 Stimulsoft.Client.Designer.dll  
+Stimulsoft.Controls.Wpf.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Database.Wpf.dll  
 Stimulsoft.Editor.Wpf.dll  
@@ -343,6 +347,7 @@ Stimulsoft.Blockly.dll
 Stimulsoft.BlocklyEditor.Wpf.dll  
 Stimulsoft.Controls.dll  
 Stimulsoft.Controls.Win.dll  
+Stimulsoft.Controls.Wpf.dll  
 Stimulsoft.Dashboard.dll  
 Stimulsoft.Dashboard.Design.dll  
 Stimulsoft.Dashboard.Drawing.dll  
