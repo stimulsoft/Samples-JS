@@ -12,11 +12,6 @@ function accept(req, res) {
         res.writeHeader(200, { "Content-Type": "text/html" });
         res.end(fs.readFileSync("index.html"));
     }
-    //Send style.css
-    else if (req.url == "/stimulsoft.viewer.office2013.whiteblue.css") {
-        res.writeHeader(200, { "Content-Type": "text/css" });
-        res.end(fs.readFileSync("node_modules/stimulsoft-reports-js/Css/stimulsoft.viewer.office2013.whiteblue.css"));
-    }
     //Send reports.js
     else if (req.url == "/stimulsoft.reports.js") {
         res.writeHeader(200, { "Content-Type": "text/javascript" });

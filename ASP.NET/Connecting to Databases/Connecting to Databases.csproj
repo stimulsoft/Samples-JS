@@ -112,7 +112,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Css\stimulsoft.viewer.office2013.css" />
     <Content Include="Default.aspx" />
     <Content Include="Scripts\stimulsoft.designer.js" />
     <Content Include="Scripts\stimulsoft.reports.js" />
