@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Stimulsoft Reports.JS - PHP Demo</title>
 
-	<!-- Stimusloft Reports.JS -->
+	<!-- Stimulsoft Reports.JS -->
 	<script src="scripts/stimulsoft.reports.js" type="text/javascript"></script>
 	<script src="scripts/stimulsoft.viewer.js" type="text/javascript"></script>
 </head>

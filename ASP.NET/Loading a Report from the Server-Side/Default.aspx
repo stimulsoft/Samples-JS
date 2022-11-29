@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="favicon.ico" />
     <title>Stimulsoft Reports.JS - ASP.NET Demo</title>
 
-    <!-- Stimusloft Reports.JS -->
+    <!-- Stimulsoft Reports.JS -->
 	<script src="Scripts/stimulsoft.reports.js" type="text/javascript"></script>
 	<script src="Scripts/stimulsoft.viewer.js" type="text/javascript"></script>
 </head>
