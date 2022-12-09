@@ -1,7 +1,7 @@
 /*
 Stimulsoft.Reports.JS
-Version: 2022.4.5
-Build date: 2022.11.17
+Version: 2023.1.1
+Build date: 2022.12.07
 License: https://www.stimulsoft.com/en/licensing/reports
 */
 using FirebirdSql.Data.FirebirdClient;
@@ -14,8 +14,6 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.IO;
-using System.Linq;
-using System.Web;
 
 namespace AspNetDataAdapters
 {
@@ -27,7 +25,7 @@ namespace AspNetDataAdapters
 
         private static Result End(Result result)
         {
-            result.AdapterVersion = "2022.4.5";
+            result.AdapterVersion = "2023.1.1";
             try
             {
                 if (reader != null) reader.Close();
@@ -61,16 +59,29 @@ namespace AspNetDataAdapters
 
         private static Result OnConnect()
         {
-            if (!String.IsNullOrEmpty(command.QueryString)) return Query(command.QueryString);
+            if (!String.IsNullOrEmpty(command.QueryString)) return Query();
             else return End(new Result { Success = true });
         }
 
-        private static Result Query(string queryString)
+        private static Result Query()
         {
             try
             {
                 var sqlCommand = connection.CreateCommand();
-                sqlCommand.CommandText = queryString;
+                sqlCommand.CommandType = command.Command == "Execute" ? CommandType.StoredProcedure : CommandType.Text;
+                sqlCommand.CommandText = command.QueryString;
+
+                foreach (var parameter in command.Parameters)
+                {
+                    var sqlParameter = sqlCommand.CreateParameter();
+                    sqlParameter.ParameterName = parameter.Name;
+                    sqlParameter.DbType = (DbType)parameter.TypeValue;
+                    sqlParameter.Size = parameter.Size;
+                    sqlParameter.Value = parameter.Value;
+                    if (sqlParameter.DbType == DbType.Decimal) sqlParameter.Precision = (byte)parameter.Size;
+                    sqlParameter.Value = GetValue(parameter.Value, parameter.TypeGroup);
+                    sqlCommand.Parameters.Add(sqlParameter);
+                }
 
                 reader = sqlCommand.ExecuteReader();
                 return OnQuery();
@@ -357,6 +368,22 @@ namespace AspNetDataAdapters
             }
 
             return "string";
+        }
+
+        private static object GetValue(object obj, string type)
+        {
+            try
+            {
+                switch (type)
+                {
+                    case "string": return obj.ToString();
+                    case "number": return Decimal.Parse(obj.ToString());
+                }
+            }
+            catch
+            { 
+            }
+            return obj;
         }
 
         public static Result Process(CommandJson command, DbConnection connection)

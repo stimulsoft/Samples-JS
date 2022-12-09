@@ -1,7 +1,7 @@
 /*
 Stimulsoft.Reports.JS
-Version: 2022.4.5
-Build date: 2022.11.17
+Version: 2023.1.1
+Build date: 2022.12.07
 License: https://www.stimulsoft.com/en/licensing/reports
 */
 using FirebirdSql.Data.FirebirdClient;
@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.Data.Common;
 using Microsoft.Data.SqlClient;
 using System.IO;
+using System.Data;
+using System.Text.Json;
 
 namespace NetCoreDataAdapters
 {
@@ -24,7 +26,7 @@ namespace NetCoreDataAdapters
 
         private static Result End(Result result)
         {
-            result.AdapterVersion = "2022.4.5";
+            result.AdapterVersion = "2023.1.1";
             try
             {
                 if (reader != null) reader.Close();
@@ -58,17 +60,28 @@ namespace NetCoreDataAdapters
 
         private static Result OnConnect()
         {
-            if (!String.IsNullOrEmpty(command.QueryString)) return Query(command.QueryString);
+            if (!String.IsNullOrEmpty(command.QueryString)) return Query();
             else return End(new Result { Success = true });
         }
 
-        private static Result Query(string queryString)
+        private static Result Query()
         {
             try
             {
                 var sqlCommand = connection.CreateCommand();
-                sqlCommand.CommandText = queryString;
+                sqlCommand.CommandType = command.Command == "Execute" ? CommandType.StoredProcedure : CommandType.Text;
+                sqlCommand.CommandText = command.QueryString;
 
+                foreach (var parameter in command.Parameters)
+                {
+                    var sqlParameter = sqlCommand.CreateParameter();
+                    sqlParameter.ParameterName = parameter.Name;
+                    sqlParameter.DbType = (DbType)parameter.TypeValue;
+                    sqlParameter.Size = parameter.Size;
+                    if (sqlParameter.DbType == DbType.Decimal) sqlParameter.Precision = (byte)parameter.Size;
+                    sqlParameter.Value = GetValue((JsonElement)parameter.Value, parameter.TypeGroup);
+                    sqlCommand.Parameters.Add(sqlParameter);
+                }
                 reader = sqlCommand.ExecuteReader();
                 return OnQuery();
             }
@@ -108,8 +121,8 @@ namespace NetCoreDataAdapters
                             value = reader.GetValue(index);
                         }
                     }
-                    catch 
-                    { 
+                    catch
+                    {
                         value = null;
                     }
 
@@ -356,6 +369,22 @@ namespace NetCoreDataAdapters
             return "string";
         }
 
+        private static object GetValue(JsonElement json, string type)
+        {
+            try
+            {
+                switch (type)
+                {
+                    case "string": return json.GetString();
+                    case "number": return json.GetDecimal();
+                }
+            }
+            catch
+            {
+            }
+            return json.GetString();
+        }
+        
         public static Result Process(CommandJson command, DbConnection connection)
         {
             SQLAdapter.connection = connection;

@@ -1,7 +1,7 @@
 /*
 Stimulsoft.Reports.JS
-Version: 2022.4.5
-Build date: 2022.11.17
+Version: 2023.1.1
+Build date: 2022.12.07
 License: https://www.stimulsoft.com/en/licensing/reports
 */
 using System;
@@ -85,10 +85,19 @@ namespace AspNetDataAdapters
         public string Name { get; set; }
 
         [DataMember(Name = "value")]
-        public string Value { get; set; }
+        public object Value { get; set; }
 
         [DataMember(Name = "typeGroup")]
         public string TypeGroup { get; set; }
+
+        [DataMember(Name = "typeName")]
+        public string TypeName { get; set; }
+
+        [DataMember(Name = "typeValue")]
+        public int TypeValue { get; set; }
+
+        [DataMember(Name = "size")]
+        public int Size { get; set; }
     }
     #endregion
 
@@ -134,8 +143,6 @@ namespace AspNetDataAdapters
                 }
                 else
                 {
-                    command.QueryString = ApplyQueryParameters(command.QueryString, command.Parameters, command.EscapeQueryParameters);
-
                     switch (command.Database)
                     {
                         case "MySQL": result = SQLAdapter.Process(command, new MySqlConnection(command.ConnectionString)); break;
@@ -158,7 +165,7 @@ namespace AspNetDataAdapters
                     inputStream.Close();
             }
 
-            result.HandlerVersion = "2022.4.5";
+            result.HandlerVersion = "2023.1.1";
             result.CheckVersion = true;
             
             context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
@@ -183,50 +190,6 @@ namespace AspNetDataAdapters
             
             context.Response.OutputStream.Flush();
             context.Response.End();
-        }
-
-        public string ApplyQueryParameters(string baseSqlCommand, ParameterJson[] parameters, bool escapeQueryParameters)
-        {
-            if (baseSqlCommand == null || baseSqlCommand.IndexOf("@") < 0) return baseSqlCommand;
-
-            var result = "";
-            while (baseSqlCommand.IndexOf("@") >= 0 && parameters != null && parameters.Length > 0)
-            {
-                result += baseSqlCommand.Substring(0, baseSqlCommand.IndexOf("@"));
-                baseSqlCommand = baseSqlCommand.Substring(baseSqlCommand.IndexOf("@") + 1);
-
-                var parameterName = "";
-
-                var regex = new Regex(@"[a-zA-Z0-9_-]");
-                while (baseSqlCommand.Length > 0)
-                {
-                    string chr = baseSqlCommand[0].ToString();
-                    if (regex.IsMatch(chr))
-                    {
-                        parameterName += chr;
-                        baseSqlCommand = baseSqlCommand.Substring(1);
-                    }
-                    else break;
-                }
-
-                var parameter = parameters.ToList().Find(p => p.Name.ToLowerInvariant() == parameterName.ToLowerInvariant());
-                if (parameter != null)
-                {
-                    if (parameter.TypeGroup != "number")
-                    {
-                        if (escapeQueryParameters)
-                            result += "'" + parameter.Value.Replace("\\", "\\\\").Replace("'", "\\'").Replace("\"", "\\\"") + "'";
-                        else
-                            result += "'" + parameter.Value + "'";
-                    }
-                    else
-                        result += parameter.Value;
-                }
-                else
-                    result += "@" + parameterName;
-            }
-
-            return result + baseSqlCommand;
         }
 
         public bool IsReusable

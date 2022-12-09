@@ -1,7 +1,7 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2022.4.5
-# Build date: 2022.11.15
+# Version: 2023.1.1
+# Build date: 2022.12.06
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
@@ -14,7 +14,7 @@ use Stimulsoft\StiResult;
 
 class StiMySqlAdapter extends StiDataAdapter
 {
-    public $version = '2022.4.5';
+    public $version = '2023.1.1';
     public $checkVersion = true;
 
     protected $driverName = 'mysql';
@@ -111,12 +111,12 @@ class StiMySqlAdapter extends StiDataAdapter
 
             case MYSQLI_TYPE_STRING:
             case MYSQLI_TYPE_VAR_STRING:
+            case MYSQLI_TYPE_BLOB:
                 return $this->isBinaryStringType($meta) ? 'blob' : 'string';
 
             case MYSQLI_TYPE_TINY_BLOB:
             case MYSQLI_TYPE_MEDIUM_BLOB:
             case MYSQLI_TYPE_LONG_BLOB:
-            case MYSQLI_TYPE_BLOB:
             case MYSQLI_TYPE_GEOMETRY:
                 return 'blob';
         }
@@ -157,6 +157,7 @@ class StiMySqlAdapter extends StiDataAdapter
             case 'bit':
                 return 'int';
 
+            case 'decimal':
             case 'newdecimal':
             case 'float':
             case 'double':

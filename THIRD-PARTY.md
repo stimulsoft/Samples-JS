@@ -113,11 +113,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 ---
 
-### opentype.js
-opentype.js is an OpenType and TrueType font parser and writer.
+### fontkit
+Fontkit is an advanced font engine for Node and the browser, used by PDFKit. It supports many font formats, advanced glyph substitution and layout features, glyph path extraction, color emoji glyphs, font subsetting, and more.
 
 **Using:** JS Product Line  
-**Website:** https://github.com/nodebox/opentype.js
+**Website:** https://github.com/foliojs/fontkit
 
 #### The MIT License
 Copyright (c) 2017 Frederik De Bleser

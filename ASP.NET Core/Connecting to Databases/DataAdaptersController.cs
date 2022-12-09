@@ -1,7 +1,7 @@
 /*
 Stimulsoft.Reports.JS
-Version: 2022.4.5
-Build date: 2022.11.17
+Version: 2023.1.1
+Build date: 2022.12.07
 License: https://www.stimulsoft.com/en/licensing/reports
 */
 using FirebirdSql.Data.FirebirdClient;
@@ -61,9 +61,15 @@ namespace NetCoreDataAdapters
     {
         public string Name { get; set; }
 
-        public string Value { get; set; }
+        public object Value { get; set; }
 
         public string TypeGroup { get; set; }
+
+        public string TypeName { get; set; }
+
+        public int TypeValue { get; set; }
+
+        public int Size { get; set; }
     }
 
     [Route("/DataAdapters")]
@@ -114,8 +120,6 @@ namespace NetCoreDataAdapters
                 }
                 else
                 {
-                    command.QueryString = ApplyQueryParameters(command.QueryString, command.Parameters, command.EscapeQueryParameters);
-
                     switch (command.Database)
                     {
                         case "MySQL": result = SQLAdapter.Process(command, new MySqlConnection(command.ConnectionString)); break;
@@ -137,7 +141,7 @@ namespace NetCoreDataAdapters
                 result.Notice = e.Message;
             }
 
-            result.HandlerVersion = "2022.4.5";
+            result.HandlerVersion = "2023.1.1";
             result.CheckVersion = true;
 
             var contentType = "application/json";
@@ -154,50 +158,6 @@ namespace NetCoreDataAdapters
             Response.ContentType = contentType;
             await Response.WriteAsync(resultText);
             await Response.CompleteAsync();
-        }
-
-        private string ApplyQueryParameters(string baseSqlCommand, ParameterJson[] parameters, bool escapeQueryParameters)
-        {
-            if (baseSqlCommand == null || baseSqlCommand.IndexOf("@") < 0) return baseSqlCommand;
-
-            var result = "";
-            while (baseSqlCommand.IndexOf("@") >= 0 && parameters != null && parameters.Length > 0)
-            {
-                result += baseSqlCommand.Substring(0, baseSqlCommand.IndexOf("@"));
-                baseSqlCommand = baseSqlCommand.Substring(baseSqlCommand.IndexOf("@") + 1);
-
-                var parameterName = "";
-
-                var regex = new Regex(@"[a-zA-Z0-9_-]");
-                while (baseSqlCommand.Length > 0)
-                {
-                    string chr = baseSqlCommand[0].ToString();
-                    if (regex.IsMatch(chr))
-                    {
-                        parameterName += chr;
-                        baseSqlCommand = baseSqlCommand.Substring(1);
-                    }
-                    else break;
-                }
-
-                var parameter = parameters.ToList().Find(p => p.Name.ToLowerInvariant() == parameterName.ToLowerInvariant());
-                if (parameter != null)
-                {
-                    if (parameter.TypeGroup != "number")
-                    {
-                        if (escapeQueryParameters)
-                            result += "'" + parameter.Value.Replace("\\", "\\\\").Replace("'", "\\'").Replace("\"", "\\\"") + "'";
-                        else
-                            result += "'" + parameter.Value + "'";
-                    }
-                    else
-                        result += parameter.Value;
-                }
-                else
-                    result += "@" + parameterName;
-            }
-
-            return result + baseSqlCommand;
         }
 
         private static string ROT13(string input)
