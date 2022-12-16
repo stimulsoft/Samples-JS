@@ -1,7 +1,7 @@
 /*
 Stimulsoft.Reports.JS
-Version: 2023.1.1
-Build date: 2022.12.07
+Version: 2023.1.2
+Build date: 2022.12.15
 License: https://www.stimulsoft.com/en/licensing/reports
 */
 
@@ -27,8 +27,8 @@ import java.util.regex.Pattern;
 
 public class JSDataAdapter {
 
-    public static final String handlerVersion = "2023.1.1";
-    public static final String adapterVersion = "2023.1.1";
+    public static final String handlerVersion = "2023.1.2";
+    public static final String adapterVersion = "2023.1.2";
     public static final boolean checkVersion = true;
 
     private static final List<String> USERS_KEYS = Arrays.asList(
