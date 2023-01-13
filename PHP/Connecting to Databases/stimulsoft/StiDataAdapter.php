@@ -1,19 +1,16 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2023.1.2
-# Build date: 2022.12.15
+# Version: 2023.1.3
+# Build date: 2022.12.27
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
 
 namespace Stimulsoft\Adapters;
 
-use DateTime;
-use PDO;
-use PDOException;
-use Stimulsoft\Enums\StiDatabaseType;
-use Stimulsoft\StiDataResult;
 use Stimulsoft\StiConnectionInfo;
+use Stimulsoft\StiDatabaseType;
+use Stimulsoft\StiDataResult;
 use Stimulsoft\StiResult;
 
 class StiDataAdapter
@@ -40,9 +37,9 @@ class StiDataAdapter
     protected function connect()
     {
         try {
-            $this->link = new PDO($this->info->dsn, $this->info->userId, $this->info->password);
+            $this->link = new \PDO($this->info->dsn, $this->info->userId, $this->info->password);
         }
-        catch (PDOException $e) {
+        catch (\PDOException $e) {
             $code = $e->getCode();
             $message = $e->getMessage();
             return $code == 0 ? StiResult::error($message) : StiResult::error("[$code] $message");
@@ -142,10 +139,10 @@ class StiDataAdapter
             return 'int';
         }
 
-        if (DateTime::createFromFormat('Y-m-d H:i:s', $value) !== false ||
-            DateTime::createFromFormat('Y-m-d', $value) !== false ||
-            DateTime::createFromFormat('Y-M-d', $value) !== false ||
-            DateTime::createFromFormat('H:i:s', $value) !== false)
+        if (\DateTime::createFromFormat('Y-m-d H:i:s', $value) !== false ||
+            \DateTime::createFromFormat('Y-m-d', $value) !== false ||
+            \DateTime::createFromFormat('Y-M-d', $value) !== false ||
+            \DateTime::createFromFormat('H:i:s', $value) !== false)
             return 'datetime';
 
         if (is_string($value))

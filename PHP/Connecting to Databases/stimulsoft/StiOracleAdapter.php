@@ -1,21 +1,19 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2023.1.2
-# Build date: 2022.12.15
+# Version: 2023.1.3
+# Build date: 2022.12.27
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
 
 namespace Stimulsoft\Adapters;
 
-use DateTime;
-use Exception;
 use Stimulsoft\StiDataResult;
 use Stimulsoft\StiResult;
 
 class StiOracleAdapter extends StiDataAdapter
 {
-    public $version = '2023.1.2';
+    public $version = '2023.1.3';
     public $checkVersion = true;
 
     protected $driverName = 'oci';
@@ -141,7 +139,7 @@ class StiOracleAdapter extends StiDataAdapter
                 $data = $value->load();
                 return $type == 'blob' ? base64_encode($data) : $data . "\n";
             }
-            catch (Exception $e) {
+            catch (\Exception $e) {
                 return null;
             }
         }
@@ -154,7 +152,7 @@ class StiOracleAdapter extends StiDataAdapter
                 return base64_encode($value);
 
             case 'datetime':
-                $timestamp = DateTime::createFromFormat("d#M#y H#i#s*A", $value);
+                $timestamp = \DateTime::createFromFormat("d#M#y H#i#s*A", $value);
                 if ($timestamp === false) $timestamp = strtotime($value);
                 $format = date("Y-m-d\TH:i:s.v", $timestamp);
                 if (strpos($format, '.v') > 0) $format = date("Y-m-d\TH:i:s.000", $timestamp);

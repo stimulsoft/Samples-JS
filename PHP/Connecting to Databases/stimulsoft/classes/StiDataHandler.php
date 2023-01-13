@@ -1,20 +1,18 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2023.1.2
-# Build date: 2022.12.15
+# Version: 2023.1.3
+# Build date: 2022.12.27
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
 
 namespace Stimulsoft;
 
-use ReflectionClass;
 use Stimulsoft\Adapters\StiDataAdapter;
-use Stimulsoft\Enums\StiDataCommand;
 
 class StiDataHandler
 {
-    public $version = '2023.1.2';
+    public $version = '2023.1.3';
 
     private function stiErrorHandler($errNo, $errStr, $errFile, $errLine)
     {
@@ -45,7 +43,7 @@ class StiDataHandler
         $result = $request->parse();
         if ($result->success) {
             if ($result->object->command == StiDataCommand::GetSupportedAdapters) {
-                $reflectionClass = new ReflectionClass('\Stimulsoft\Enums\StiDatabaseType');
+                $reflectionClass = new \ReflectionClass('\Stimulsoft\StiDatabaseType');
                 $databases = $reflectionClass->getConstants();
                 $result = array(
                     'success' => true,

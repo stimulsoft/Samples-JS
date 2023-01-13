@@ -1,20 +1,19 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2023.1.2
-# Build date: 2022.12.15
+# Version: 2023.1.3
+# Build date: 2022.12.27
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
 
 namespace Stimulsoft\Adapters;
 
-use mysqli;
 use Stimulsoft\StiDataResult;
 use Stimulsoft\StiResult;
 
 class StiMySqlAdapter extends StiDataAdapter
 {
-    public $version = '2023.1.2';
+    public $version = '2023.1.3';
     public $checkVersion = true;
 
     protected $driverName = 'mysql';
@@ -37,7 +36,7 @@ class StiMySqlAdapter extends StiDataAdapter
         if ($this->driverType == 'PDO')
             return parent::connect();
 
-        $this->link = new mysqli($this->info->host, $this->info->userId, $this->info->password, $this->info->database, $this->info->port);
+        $this->link = new \mysqli($this->info->host, $this->info->userId, $this->info->password, $this->info->database, $this->info->port);
 
         if ($this->link->connect_error)
             return StiResult::error("[{$this->link->connect_errno}] {$this->link->connect_error}");
