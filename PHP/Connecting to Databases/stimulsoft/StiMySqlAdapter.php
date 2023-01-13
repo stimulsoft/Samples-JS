@@ -1,7 +1,7 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2023.1.3
-# Build date: 2022.12.27
+# Version: 2023.1.4
+# Build date: 2023.01.12
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
@@ -13,7 +13,7 @@ use Stimulsoft\StiResult;
 
 class StiMySqlAdapter extends StiDataAdapter
 {
-    public $version = '2023.1.3';
+    public $version = '2023.1.4';
     public $checkVersion = true;
 
     protected $driverName = 'mysql';
