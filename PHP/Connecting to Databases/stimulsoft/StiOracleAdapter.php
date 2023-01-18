@@ -1,7 +1,7 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2023.1.4
-# Build date: 2023.01.12
+# Version: 2023.1.5
+# Build date: 2023.01.17
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
@@ -13,7 +13,7 @@ use Stimulsoft\StiResult;
 
 class StiOracleAdapter extends StiDataAdapter
 {
-    public $version = '2023.1.4';
+    public $version = '2023.1.5';
     public $checkVersion = true;
 
     protected $driverName = 'oci';
