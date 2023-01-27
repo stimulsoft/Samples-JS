@@ -1,7 +1,7 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2023.1.5
-# Build date: 2023.01.17
+# Version: 2023.1.6
+# Build date: 2023.01.25
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
@@ -14,6 +14,7 @@ class StiDataRequest
     public $command;
     public $connectionString;
     public $queryString;
+    public $parameters;
     public $database;
     public $dataSource;
     public $connection;
@@ -60,7 +61,7 @@ class StiDataRequest
         if ($this->command == StiDataCommand::GetSupportedAdapters)
             return StiResult::success(null, $this);
 
-        if ($this->command != StiDataCommand::TestConnection && $this->command != StiDataCommand::ExecuteQuery)
+        if ($this->command != StiDataCommand::TestConnection && $this->command != StiDataCommand::Execute && $this->command != StiDataCommand::ExecuteQuery)
             return StiResult::error('Unknown command [' . $this->command . ']');
 
         return StiResult::success(null, $this);

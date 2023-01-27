@@ -1,7 +1,7 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2023.1.5
-# Build date: 2023.01.17
+# Version: 2023.1.6
+# Build date: 2023.01.25
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
@@ -12,7 +12,7 @@ use Stimulsoft\Adapters\StiDataAdapter;
 
 class StiDataHandler
 {
-    public $version = '2023.1.5';
+    public $version = '2023.1.6';
 
     private function stiErrorHandler($errNo, $errStr, $errFile, $errLine)
     {
@@ -51,16 +51,17 @@ class StiDataHandler
                 );
             }
             else {
-                $result = StiDataAdapter::getDataAdapterResult($request);
+                $dataAdapter = StiDataAdapter::getDataAdapter($request->database);
+                if ($dataAdapter == null)
+                    $result = StiResult::error("Unknown database type [$request->database]");
+                else {
+                    $request->parameters = $this->getParameters($request);
+                    $result = $this->getDataAdapterResult($dataAdapter, $request);
+                    $result->adapterVersion = $dataAdapter->version;
+                    $result->checkVersion = $dataAdapter->checkVersion;
+                }
 
-                /** @var StiDataAdapter $dataAdapter */
-                $dataAdapter = $result->object;
-                $result = $request->command == StiDataCommand::TestConnection
-                    ? $dataAdapter->test()
-                    : $dataAdapter->execute($request->queryString);
                 $result->handlerVersion = $this->version;
-                $result->adapterVersion = $dataAdapter->version;
-                $result->checkVersion = $dataAdapter->checkVersion;
             }
         }
 
@@ -68,6 +69,43 @@ class StiDataHandler
             StiResponse::json($result, $request->encode);
 
         return $result;
+    }
+
+    protected function getParameters($request)
+    {
+        $parameters = array();
+        if (isset($request->queryString) && isset($request->parameters)) {
+            foreach ($request->parameters as $item) {
+                $name = mb_strpos($item->name, '@') === 0 || mb_strpos($item->name, ':') === 0 ? mb_substr($item->name, 1) : $item->name;
+                $parameters[$name] = $item;
+                unset($item->name);
+            }
+        }
+
+        return $parameters;
+    }
+
+    protected function getDataAdapterResult($dataAdapter, $request)
+    {
+        $dataAdapter->parse($request->connectionString);
+
+        if ($request->command == StiDataCommand::TestConnection)
+            return $dataAdapter->test();
+
+        if ($request->command == StiDataCommand::Execute || $request->command == StiDataCommand::ExecuteQuery)
+        {
+            if ($request->command == StiDataCommand::Execute)
+                $request->queryString = $dataAdapter->makeQuery($request->queryString, $request->parameters);
+
+            if (count($request->parameters) > 0) {
+                $escapeQueryParameters = isset($request->escapeQueryParameters) ? $request->escapeQueryParameters : true;
+                $request->queryString = StiDataAdapter::applyQueryParameters($request->queryString, $request->parameters, $escapeQueryParameters);
+            }
+
+            return $dataAdapter->executeQuery($request->queryString);
+        }
+
+        return StiResult::error("Unknown command [$request->command]");
     }
 
     public function __construct($registerErrorHandlers = true)

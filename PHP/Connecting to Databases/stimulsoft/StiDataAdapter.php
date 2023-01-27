@@ -1,7 +1,7 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2023.1.5
-# Build date: 2023.01.17
+# Version: 2023.1.6
+# Build date: 2023.01.25
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
@@ -151,7 +151,20 @@ class StiDataAdapter
         return 'array';
     }
 
-    public function execute($queryString)
+    public function makeQuery($procedure, $parameters)
+    {
+        $paramsString = '';
+        foreach ($parameters as $name => $parameter) {
+            if (strlen($paramsString) > 0)
+                $paramsString .= ', ';
+
+            $paramsString .= "@$name";
+        }
+
+        return $paramsString;
+    }
+
+    public function executeQuery($queryString)
     {
         $result = $this->connect();
         if ($result->success) {
@@ -228,40 +241,73 @@ class StiDataAdapter
         return $result;
     }
 
-    public static function getDataAdapterResult($request)
+    public static function getDataAdapter($database)
     {
-        switch ($request->database) {
+        switch ($database) {
             case StiDatabaseType::MySQL:
-                $dataAdapter = new StiMySqlAdapter();
-                break;
+                return new StiMySqlAdapter();
 
             case StiDatabaseType::MSSQL:
-                $dataAdapter = new StiMsSqlAdapter();
-                break;
+                return new StiMsSqlAdapter();
 
             case StiDatabaseType::Firebird:
-                $dataAdapter = new StiFirebirdAdapter();
-                break;
+                return new StiFirebirdAdapter();
 
             case StiDatabaseType::PostgreSQL:
-                $dataAdapter = new StiPostgreSqlAdapter();
-                break;
+                return new StiPostgreSqlAdapter();
 
             case StiDatabaseType::Oracle:
-                $dataAdapter = new StiOracleAdapter();
-                break;
+                return new StiOracleAdapter();
 
             case StiDatabaseType::ODBC:
-                $dataAdapter = new StiOdbcAdapter();
-                break;
+                return new StiOdbcAdapter();
         }
 
-        if (isset($dataAdapter)) {
-            $dataAdapter->parse($request->connectionString);
-            return StiResult::success(null, $dataAdapter);
+        return null;
+    }
+
+    public static function applyQueryParameters($query, $parameters, $escape)
+    {
+        $result = '';
+
+        while (mb_strpos($query, '@') !== false) {
+            $result .= mb_substr($query, 0, mb_strpos($query, '@'));
+            $query = mb_substr($query, mb_strpos($query, '@') + 1);
+
+            $parameterName = '';
+            while (strlen($query) > 0) {
+                $char = mb_substr($query, 0, 1);
+                if (!preg_match('/[a-zA-Z0-9_-]/', $char)) break;
+
+                $parameterName .= $char;
+                $query = mb_substr($query, 1);
+            }
+
+            $replaced = false;
+            foreach ($parameters as $key => $item) {
+                if (strtolower($key) == strtolower($parameterName)) {
+                    switch ($item->typeGroup) {
+                        case 'number':
+                            $result .= floatval($item->value);
+                            break;
+
+                        case 'datetime':
+                            $result .= "'" . $item->value . "'";
+                            break;
+
+                        default:
+                            $result .= "'" . ($escape ? addcslashes($item->value, "\\\"'") : $item->value) . "'";
+                            break;
+                    }
+
+                    $replaced = true;
+                }
+            }
+
+            if (!$replaced) $result .= '@' . $parameterName;
         }
 
-        return StiResult::error("Unknown database type [$request->database]");
+        return $result . $query;
     }
 
     public function __construct()
