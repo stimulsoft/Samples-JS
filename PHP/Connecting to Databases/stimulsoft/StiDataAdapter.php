@@ -1,7 +1,7 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2023.1.6
-# Build date: 2023.01.25
+# Version: 2023.1.7
+# Build date: 2023.02.10
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
@@ -111,7 +111,7 @@ class StiDataAdapter
 
     protected function parseUnknownParameter($parameter, $name, $value)
     {
-        if ($this->driverType == 'PDO' && mb_strlen($parameter) > 0) {
+        if ($this->driverType == 'PDO' && !is_null($parameter) && mb_strlen($parameter) > 0) {
             if (mb_strlen($this->info->dsn) > 0)
                 $this->info->dsn .= ';';
 

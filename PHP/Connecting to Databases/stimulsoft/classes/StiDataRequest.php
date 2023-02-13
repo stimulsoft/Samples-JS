@@ -1,7 +1,7 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2023.1.6
-# Build date: 2023.01.25
+# Version: 2023.1.7
+# Build date: 2023.02.10
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
@@ -34,7 +34,7 @@ class StiDataRequest
     {
         $input = file_get_contents('php://input');
 
-        if (strlen($input) > 0 && mb_substr($input, 0, 1) != '{') {
+        if (!is_null($input) && strlen($input) > 0 && mb_substr($input, 0, 1) != '{') {
             $input = base64_decode(str_rot13($input));
             $this->encode = true;
         }

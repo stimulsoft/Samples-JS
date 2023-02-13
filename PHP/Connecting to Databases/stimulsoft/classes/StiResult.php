@@ -1,7 +1,7 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2023.1.6
-# Build date: 2023.01.25
+# Version: 2023.1.7
+# Build date: 2023.02.10
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
@@ -17,6 +17,8 @@ class StiResult
     public $success = false;
     public $notice;
     public $object;
+    public $variables;
+    public $report;
 
     public static function success($notice = null, $object = null)
     {

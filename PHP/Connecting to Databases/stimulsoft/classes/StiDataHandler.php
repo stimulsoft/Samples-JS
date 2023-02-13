@@ -1,7 +1,7 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2023.1.6
-# Build date: 2023.01.25
+# Version: 2023.1.7
+# Build date: 2023.02.10
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
@@ -12,15 +12,15 @@ use Stimulsoft\Adapters\StiDataAdapter;
 
 class StiDataHandler
 {
-    public $version = '2023.1.6';
+    public $version = '2023.1.7';
 
-    private function stiErrorHandler($errNo, $errStr, $errFile, $errLine)
+    public function stiErrorHandler($errNo, $errStr, $errFile, $errLine)
     {
         $result = StiResult::error("[$errNo] $errStr ($errFile, Line $errLine)");
         StiResponse::json($result);
     }
 
-    private function stiShutdownFunction()
+    public function stiShutdownFunction()
     {
         $err = error_get_last();
         if ($err != null && (($err['type'] & E_COMPILE_ERROR) || ($err['type'] & E_ERROR) || ($err['type'] & E_CORE_ERROR) || ($err['type'] & E_RECOVERABLE_ERROR))) {
@@ -29,7 +29,7 @@ class StiDataHandler
         }
     }
 
-    private function registerErrorHandlers()
+    public function registerErrorHandlers()
     {
         set_error_handler(array($this, 'stiErrorHandler'));
         register_shutdown_function(array($this, 'stiShutdownFunction'));
