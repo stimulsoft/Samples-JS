@@ -1,17 +1,17 @@
 /*
 Stimulsoft.Reports.JS
-Version: 2023.1.8
-Build date: 2023.02.22
+Version: 2023.2.1
+Build date: 2023.03.22
 License: https://www.stimulsoft.com/en/licensing/reports
 */
 using FirebirdSql.Data.FirebirdClient;
 using MySql.Data.MySqlClient;
 using Npgsql;
-using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Data.OracleClient;
 using System.Data.SqlClient;
 using System.IO;
 
@@ -25,7 +25,7 @@ namespace AspNetDataAdapters
 
         private static Result End(Result result)
         {
-            result.AdapterVersion = "2023.1.8";
+            result.AdapterVersion = "2023.2.1";
             try
             {
                 if (reader != null) reader.Close();
@@ -75,7 +75,7 @@ namespace AspNetDataAdapters
                 {
                     var sqlParameter = sqlCommand.CreateParameter();
                     sqlParameter.ParameterName = parameter.Name;
-                    sqlParameter.DbType = (DbType)parameter.TypeValue;
+                    sqlParameter.DbType = GetDbType(parameter.TypeName);
                     sqlParameter.Size = parameter.Size;
                     sqlParameter.Value = parameter.Value;
                     if (sqlParameter.DbType == DbType.Decimal) sqlParameter.Precision = (byte)parameter.Size;
@@ -378,6 +378,7 @@ namespace AspNetDataAdapters
                 {
                     case "string": return obj.ToString();
                     case "number": return Decimal.Parse(obj.ToString());
+                    case "datetime": return DateTime.Parse(obj.ToString());
                 }
             }
             catch
@@ -386,7 +387,54 @@ namespace AspNetDataAdapters
             return obj;
         }
 
-        public static Result Process(CommandJson command, DbConnection connection)
+		private static DbType GetDbType(string typeName)
+        {
+			if (connection is MySqlConnection)
+			{
+			}
+			else if (connection is FbConnection)
+			{
+			}
+			else if (connection is SqlConnection)
+			{
+				switch (typeName.ToLowerInvariant())
+				{
+					case "bit": return DbType.Boolean;
+					case "float": return DbType.Double;
+					case "tinyint": return DbType.Byte;
+					case "smallint": return DbType.Int16;
+					case "int": return DbType.Int32;
+					case "bigint": return DbType.Int64;
+					case "money": return DbType.Decimal;
+					case "real": return DbType.Single;
+
+					case "nchar": return DbType.String;
+					case "ntext": return DbType.String;
+					case "nvarchar": return DbType.String;
+					case "text": return DbType.String;
+					case "varchar": return DbType.String;
+					case "char": return DbType.StringFixedLength;
+
+					case "uniqueidentifier": return DbType.Guid;
+					case "smalldatetime": return DbType.DateTime;
+					case "smallmoney": return DbType.Decimal;
+				}
+			}
+			else if (connection is NpgsqlConnection)
+			{
+			}
+			else if (connection is OracleConnection)
+			{
+			}
+
+            DbType type;
+            if (Enum.TryParse(typeName, true, out type))
+                return type;
+                
+            return DbType.Object;
+        }
+
+	    public static Result Process(CommandJson command, DbConnection connection)
         {
             SQLAdapter.connection = connection;
             SQLAdapter.command = command;

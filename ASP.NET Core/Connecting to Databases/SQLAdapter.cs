@@ -1,7 +1,7 @@
 /*
 Stimulsoft.Reports.JS
-Version: 2023.1.8
-Build date: 2023.02.22
+Version: 2023.2.1
+Build date: 2023.03.22
 License: https://www.stimulsoft.com/en/licensing/reports
 */
 using FirebirdSql.Data.FirebirdClient;
@@ -26,7 +26,7 @@ namespace NetCoreDataAdapters
 
         private static Result End(Result result)
         {
-            result.AdapterVersion = "2023.1.8";
+            result.AdapterVersion = "2023.2.1";
             try
             {
                 if (reader != null) reader.Close();
@@ -76,7 +76,7 @@ namespace NetCoreDataAdapters
                 {
                     var sqlParameter = sqlCommand.CreateParameter();
                     sqlParameter.ParameterName = parameter.Name;
-                    sqlParameter.DbType = (DbType)parameter.TypeValue;
+                    sqlParameter.DbType = (DbType)parameter.NetType;
                     sqlParameter.Size = parameter.Size;
                     if (sqlParameter.DbType == DbType.Decimal) sqlParameter.Precision = (byte)parameter.Size;
                     sqlParameter.Value = GetValue((JsonElement)parameter.Value, parameter.TypeGroup);
@@ -377,6 +377,7 @@ namespace NetCoreDataAdapters
                 {
                     case "string": return json.GetString();
                     case "number": return json.GetDecimal();
+                    case "datetime": return json.GetDateTime();
                 }
             }
             catch
