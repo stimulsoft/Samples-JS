@@ -58,7 +58,6 @@ Stimulsoft.Database.dll
 Stimulsoft.Design.dll  
 Stimulsoft.Editor.dll  
 Stimulsoft.Map.dll  
-Stimulsoft.MathFX,dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Check.dll  
 Stimulsoft.Report.Design.dll  
@@ -76,7 +75,6 @@ Stimulsoft.Dashboard.Drawing.dll
 Stimulsoft.Dashboard.Export.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Map.dll  
-Stimulsoft.MathFX.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Angular.dll  
 Stimulsoft.Report.Check.dll  
@@ -97,7 +95,6 @@ Stimulsoft.Dashboard.Drawing.dll
 Stimulsoft.Dashboard.Export.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Map.dll  
-Stimulsoft.MathFX.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Angular.dll  
 Stimulsoft.Report.Check.dll  
@@ -136,7 +133,6 @@ Stimulsoft.Dashboard.Export.dll
 Stimulsoft.Data.dll  
 Stimulsoft.Drawing.dll  
 Stimulsoft.Map.dll  
-Stimulsoft.MathFX.dll  
 Stimulsoft.Report.Mvc.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Angular.dll  
@@ -164,7 +160,6 @@ Stimulsoft.Dashboard.Drawing.Wpf.dll
 Stimulsoft.Dashboard.Viewer.Wpf.dll  
 Stimulsoft.Editor.Wpf.dll  
 Stimulsoft.Map.dll  
-Stimulsoft.MathFX.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Check.dll  
 Stimulsoft.Report.Helper.dll  
@@ -196,7 +191,6 @@ Stimulsoft.Base.dll
 Stimulsoft.Blockly.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Map.dll  
-Stimulsoft.MathFX.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Angular.dll  
 Stimulsoft.Report.Check.dll  
@@ -220,7 +214,6 @@ Stimulsoft.Controls.Wpf.dll
 Stimulsoft.Data.dll  
 Stimulsoft.Database.dll  
 Stimulsoft.Map.dll  
-Stimulsoft.MathFX.dll  
 Stimulsoft.Design.dll  
 Stimulsoft.Editor.dll  
 Stimulsoft.Report.dll  
@@ -257,7 +250,6 @@ Stimulsoft.Dashboard.Export.dll
 Stimulsoft.Data.dll  
 Stimulsoft.Drawing.dll  
 Stimulsoft.Map.dll  
-Stimulsoft.MathFX.dll  
 Stimulsoft.Report.Mvc.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Angular.dll  
@@ -283,7 +275,6 @@ Stimulsoft.Data.dll
 Stimulsoft.Database.Wpf.dll  
 Stimulsoft.Editor.Wpf.dll  
 Stimulsoft.Map.dll  
-Stimulsoft.MathFX.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Check.dll  
 Stimulsoft.Report.Helper.dll  
@@ -328,7 +319,6 @@ Stimulsoft.Dashboard.Drawing.dll
 Stimulsoft.Dashboard.Export.dll  
 Stimulsoft.Data.dll  
 Stimulsoft.Map.dll  
-Stimulsoft.MathFX.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Check.dll  
 Stimulsoft.Report.Helper.dll  
@@ -360,7 +350,6 @@ Stimulsoft.Database.dll
 Stimulsoft.Design.dll  
 Stimulsoft.Editor.dll  
 Stimulsoft.Map.dll  
-Stimulsoft.MathFX.dll  
 Stimulsoft.Report.dll  
 Stimulsoft.Report.Check.dll  
 Stimulsoft.Report.Design.dll  
