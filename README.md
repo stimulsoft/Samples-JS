@@ -1,6 +1,6 @@
-## Node.js, React, Vue.js and more samples for Stimulsoft Reports.JS
+# Node.js, React, Vue.js, ASP.NET, Java and more samples for Stimulsoft Reports.JS
 
-This repository contains samples for Reports.JS for Node.js, ASP.NET, ASP.NET Core, React, Vue.js, PHP and Java applications.
+This repository contains samples for Reports.JS components for Node.js, ASP.NET, ASP.NET Core, React, Vue.js, PHP and Java applications.
 
 * [ASP.NET](https://github.com/stimulsoft/Samples-JS-React-Node.js-Vue.js-Reporting-Tools/tree/master/ASP.NET)   
   There you can find examples of using Reports.JS with **ASP.NET** applications.
@@ -24,13 +24,19 @@ This repository contains samples for Reports.JS for Node.js, ASP.NET, ASP.NET Co
 
 * [Vue.js](https://github.com/stimulsoft/Samples-JS-React-Node.js-Vue.js-Reporting-Tools/tree/master/Vue.js)  
   This folder contains examples of integration Reports.JS into simple **Vue.js** project.
+  
+
+* [Java](https://github.com/stimulsoft/Samples-JS-React-Node.js-Vue.js-Reporting-Tools/tree/master/Java)  
+  This folder contains examples of integration Reports.JS into **Java** project.
 
 
-## Angular, AngularJS, and JavaScript samples
+# Angular, AngularJS, and JavaScript samples
 
 Examples for these frameworks can be found in the repositories listed below:
-* [Angular and AngularJS](https://github.com/stimulsoft/Samples-JS-Angular-Report-Generator)
-* [Native HTML / JavaScript](https://github.com/stimulsoft/Samples-JS-Native-Report-Builder)
+
+[Angular and AngularJS](https://github.com/stimulsoft/Samples-JS-Angular-Report-Generator)
+
+[Native HTML / JavaScript](https://github.com/stimulsoft/Samples-JS-Native-Report-Builder)
 
 
 # About Reports.JS product
