@@ -1,7 +1,7 @@
 <?php
 # Stimulsoft.Reports.JS
-# Version: 2023.2.1
-# Build date: 2023.03.22
+# Version: 2023.2.2
+# Build date: 2023.04.05
 # License: https://www.stimulsoft.com/en/licensing/reports
 ?>
 <?php
@@ -12,11 +12,12 @@ use Stimulsoft\Adapters\StiDataAdapter;
 
 class StiDataHandler
 {
-    public $version = '2023.2.1';
+    public $version = '2023.2.2';
 
     public function stiErrorHandler($errNo, $errStr, $errFile, $errLine)
     {
         $result = StiResult::error("[$errNo] $errStr ($errFile, Line $errLine)");
+        $result->handlerVersion = $this->version;
         StiResponse::json($result);
         exit();
     }
