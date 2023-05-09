@@ -1,11 +1,34 @@
 /*
 Stimulsoft.Reports.JS
-Version: 2023.2.2
-Build date: 2023.04.05
+Version: 2023.2.3
+Build date: 2023.05.08
 License: https://www.stimulsoft.com/en/licensing/reports
 */
 
 package com.stimulsoft.js.adapter;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.stimulsoft.base.json.JSONArray;
 import com.stimulsoft.base.json.JSONException;
@@ -14,25 +37,13 @@ import com.stimulsoft.base.system.StiSqlTypes;
 import com.stimulsoft.lib.base64.StiBase64DecoderUtil;
 import com.stimulsoft.lib.base64.StiBase64EncoderUtil;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class JSDataAdapter {
 
-    public static final String handlerVersion = "2023.2.2";
-    public static final String adapterVersion = "2023.2.2";
+    public static final String handlerVersion = "2023.2.3";
+    public static final String adapterVersion = "2023.2.3";
     public static final boolean checkVersion = true;
 
-    private static final List<String> USERS_KEYS = Arrays.asList(
-            "jdbc.username", "username", "uid", "user", "user id", "userid", "connection.username");
+    private static final List<String> USERS_KEYS = Arrays.asList("jdbc.username", "username", "uid", "user", "user id", "userid", "connection.username");
     private static final List<String> PASSWORD_KEYS = Arrays.asList("jdbc.password", "pwd", "password", "connection.password");
     private static final List<String> HOST_KEY = Arrays.asList("host", "server", "location", "data source", "datasource");
     private static final List<String> PORT_KEY = Collections.singletonList("port");
@@ -66,8 +77,8 @@ public class JSDataAdapter {
             Properties info = new Properties();
             info.setProperty("user", getUser(params));
             info.setProperty("password", getPassword(params));
-            if (!(connectionString.contains("Encoding") || connectionString.contains("encoding"))
-                    || params.containsKey("characterencoding") || params.containsKey("charset")) {
+            if (!(connectionString.contains("Encoding") || connectionString.contains("encoding")) || params.containsKey("characterencoding")
+                    || params.containsKey("charset")) {
                 info.setProperty("useUnicode", "true");
                 info.setProperty("characterEncoding", "UTF-8");
             }
@@ -96,7 +107,7 @@ public class JSDataAdapter {
                     url = String.format("jdbc:firebirdsql://%s:%s/%s", getHost(params), getPort(params, "3050"), getDatabase(params));
                 }
                 String charSet = params.get("charset");
-                info.setProperty("encoding", charSet == null? "UTF8": charSet);
+                info.setProperty("encoding", charSet == null ? "UTF8" : charSet);
             } else if ("Oracle".equals(dbName)) {
                 Class.forName("oracle.jdbc.OracleDriver");
                 if (url == null) {
@@ -106,7 +117,7 @@ public class JSDataAdapter {
                     }
                 }
             }
-            //noinspection ConstantConditions
+            // noinspection ConstantConditions
             con = DriverManager.getConnection(url, info);
             return onConnect(command, con, dbName);
         } catch (Exception e) {
@@ -123,7 +134,7 @@ public class JSDataAdapter {
             JSONArray params = command.has("parameters") ? command.getJSONArray("parameters") : null;
             boolean escapeParams = command.has("escapeQueryParameters") && command.getBoolean("escapeQueryParameters");
 
-            String queryText = applyQueryParameters(command.getString("queryString"), params, escapeParams);
+            String queryText = applyQueryParameters(command.getString("queryString"), params, escapeParams, dbName);
             return query(queryText, con, dbName);
         } else {
             HashMap<String, Object> result = new HashMap<>();
@@ -135,16 +146,17 @@ public class JSDataAdapter {
         }
     }
 
-    private static final Pattern queryParamRegexp = Pattern.compile("@[a-zA-Z0-9_-]+");
+    private static final Pattern QueryParamRegexp = Pattern.compile("@[a-zA-Z0-9_-]+");
+    private static final Pattern OracleQueryParamRegexp = Pattern.compile("[@|:][a-zA-Z0-9_-]+");
 
-    private static String applyQueryParameters(String baseSqlCommand, JSONArray parameters, Boolean escapeQueryParameters) throws JSONException {
-        if (baseSqlCommand == null || !baseSqlCommand.contains("@")) {
+    private static String applyQueryParameters(String baseSqlCommand, JSONArray parameters, Boolean escapeQueryParameters, String dbName) throws JSONException {
+        if (baseSqlCommand == null || !(baseSqlCommand.contains("@") || ("Oracle".equals(dbName) && baseSqlCommand.contains(":")))) {
             return baseSqlCommand;
         }
 
         StringBuilder result = new StringBuilder();
 
-        Matcher matcher = queryParamRegexp.matcher(baseSqlCommand);
+        Matcher matcher = ("Oracle".equals(dbName) ? OracleQueryParamRegexp : QueryParamRegexp).matcher(baseSqlCommand);
         int prevStart = 0;
         while (matcher.find()) {
             result.append(baseSqlCommand, prevStart, matcher.start());
@@ -311,9 +323,7 @@ public class JSDataAdapter {
         if (commandData.getString("command").equals("GetSupportedAdapters")) {
             JSONObject resultData = new JSONObject();
             resultData.put("success", true);
-            resultData.put("types", new String[] {
-                "MySQL", "MS SQL", "PostgreSQL", "Oracle", "Firebird"
-            });
+            resultData.put("types", new String[] { "MySQL", "MS SQL", "PostgreSQL", "Oracle", "Firebird" });
             result = resultData.toString();
         } else {
             result = connect(commandData);

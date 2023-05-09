@@ -1,7 +1,7 @@
 /*
 Stimulsoft.Reports.JS
-Version: 2023.2.2
-Build date: 2023.04.05
+Version: 2023.2.3
+Build date: 2023.05.08
 License: https://www.stimulsoft.com/en/licensing/reports
 */
 using System;
@@ -106,6 +106,9 @@ namespace AspNetDataAdapters
     /// </summary>
     public class Handler : IHttpHandler
     {
+        private Regex serverCertificateRegex = new Regex(@"Trust\s*Server\s*Certificate\s*=", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private Regex sslModeRegex = new Regex(@"SSL\s*Mode|SslMode\s*=", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
         #region Helpers
         private static string ROT13(string input)
         {
@@ -145,9 +148,16 @@ namespace AspNetDataAdapters
                 {
                     switch (command.Database)
                     {
-                        case "MySQL": result = SQLAdapter.Process(command, new MySqlConnection(command.ConnectionString)); break;
+                        case "MySQL":
+                            if (!sslModeRegex.IsMatch(command.ConnectionString))
+                                command.ConnectionString += (command.ConnectionString.TrimEnd().EndsWith(";") ? "" : ";") + "SslMode=None;";
+                            result = SQLAdapter.Process(command, new MySqlConnection(command.ConnectionString)); break;
                         case "Firebird": result = SQLAdapter.Process(command, new FbConnection(command.ConnectionString)); break;
-                        case "MS SQL": result = SQLAdapter.Process(command, new SqlConnection(command.ConnectionString)); break;
+                        case "MS SQL":
+                            if (!serverCertificateRegex.IsMatch(command.ConnectionString))
+                                command.ConnectionString += (command.ConnectionString.TrimEnd().EndsWith(";") ? "" : ";") + "TrustServerCertificate=true;";
+                            result = SQLAdapter.Process(command, new SqlConnection(command.ConnectionString));
+                            break;
                         case "PostgreSQL": result = SQLAdapter.Process(command, new NpgsqlConnection(command.ConnectionString)); break;
                         case "Oracle": result = SQLAdapter.Process(command, new OracleConnection(command.ConnectionString)); break;
                         default: result.Success = false; result.Notice = $"Unknown database type [{command.Database}]"; break;
@@ -165,7 +175,7 @@ namespace AspNetDataAdapters
                     inputStream.Close();
             }
 
-            result.HandlerVersion = "2023.2.2";
+            result.HandlerVersion = "2023.2.3";
             result.CheckVersion = true;
             
             context.Response.Headers.Add("Access-Control-Allow-Origin", "*");

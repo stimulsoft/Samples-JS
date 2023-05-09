@@ -1,7 +1,7 @@
 /*
 Stimulsoft.Reports.JS
-Version: 2023.2.2
-Build date: 2023.04.05
+Version: 2023.2.3
+Build date: 2023.05.08
 License: https://www.stimulsoft.com/en/licensing/reports
 */
 using FirebirdSql.Data.FirebirdClient;
@@ -90,6 +90,7 @@ namespace NetCoreDataAdapters
 
         private JsonSerializerOptions jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
         private Regex serverCertificateRegex = new Regex(@"Trust\s*Server\s*Certificate\s*=", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+        private Regex sslModeRegex = new Regex(@"SSL\s*Mode|SslMode\s*=", RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         private async Task ProcessRequest()
         {
@@ -122,7 +123,10 @@ namespace NetCoreDataAdapters
                 {
                     switch (command.Database)
                     {
-                        case "MySQL": result = SQLAdapter.Process(command, new MySqlConnection(command.ConnectionString)); break;
+                        case "MySQL":
+                            if (!sslModeRegex.IsMatch(command.ConnectionString))
+                                command.ConnectionString += (command.ConnectionString.TrimEnd().EndsWith(";") ? "" : ";") + "SslMode=None;";
+                            result = SQLAdapter.Process(command, new MySqlConnection(command.ConnectionString)); break;
                         case "Firebird": result = SQLAdapter.Process(command, new FbConnection(command.ConnectionString)); break;
                         case "MS SQL":
                             if (!serverCertificateRegex.IsMatch(command.ConnectionString))
@@ -141,7 +145,7 @@ namespace NetCoreDataAdapters
                 result.Notice = e.Message;
             }
 
-            result.HandlerVersion = "2023.2.2";
+            result.HandlerVersion = "2023.2.3";
             result.CheckVersion = true;
 
             var contentType = "application/json";
