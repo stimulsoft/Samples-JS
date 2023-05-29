@@ -1,12 +1,5 @@
-# Folders
-/*/.vs/
-/*/.idea/
-/*/packages/
-/*/*/bin/
-/*/*/obj/
-/*/*/node_modules
-/*/*/package-lock.json
-/**/.angular
-
-# Files
-*.csproj.user
+.vs/
+.idea/
+*/node_modules
+*/package-lock.json
+**/.angular

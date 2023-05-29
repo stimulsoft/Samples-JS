@@ -1,34 +1,36 @@
-# Node.js, React, Vue.js, ASP.NET, Java and more samples for Stimulsoft Reports.JS
+# Node.js samples for Stimulsoft Reports.JS
 
-This repository contains samples for Reports.JS components for Node.js, ASP.NET, ASP.NET Core, React, Vue.js, PHP and Java applications.
+In this folder are available examples of using Stimulsoft Reports.JS in node.js
+For each example, there is a full set of necessary files (Roboto-Black.ttf to render the report, the test report file SimpleList.mrt etc. )
 
-* [ASP.NET](https://github.com/stimulsoft/Samples-JS-React-Node.js-Vue.js-Reporting-Tools/tree/master/ASP.NET)   
-  There you can find examples of using Reports.JS with **ASP.NET** applications.
-  
+[Loading a Report and Saving a Rendered Report](https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Loading%20a%20Report%20and%20Saving%20a%20Rendered%20Report)
+This simple example shows the steps to download the report, its rendering and saving in mdc format.
 
-* [ASP.NET Core](https://github.com/stimulsoft/Samples-JS-React-Node.js-Vue.js-Reporting-Tools/tree/master/ASP.NET%20Core)  
-  There you can find examples of using Reports.JS with **ASP.NET Core** applications.
-  
+[Exporting a Report to HTML](https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Exporting%20a%20Report%20to%20HTML)
+This example allows you to download the report, render it and export it to HTML-format.
+ 
+[Exporting a Report to PDF](https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Exporting%20a%20Report%20to%20PDF)
+This example contains code to render a report to a PDF-document.
 
-* [React](https://github.com/stimulsoft/Samples-JS-React-Node.js-Vue.js-Reporting-Tools/tree/master/React)  
-  This folder contains examples of integration Reports.JS into simple **React** project.
-  
+[Starting SQL Adapters from the HTTP Server](https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Starting%20SQL%20adapters%20from%20the%20HTTP%20server)
+This example demonstrates the implementation of connections to different databases (MySQL, Firebird, MSSQL and PostgreSQL). Adapters files are in a directory with an example.
 
-* [Node.js](https://github.com/stimulsoft/Samples-JS-React-Node.js-Vue.js-Reporting-Tools/tree/master/Node.js)  
-  There you can explore examples of using Reports.JS on the server-side with the **Node.js** applications.
-  
+[Loading a Report and Rendering it with a JSON Data](https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Loading%20a%20Report%20and%20Rendering%20it%20with%20a%20JSON%20Data)
+This simple example shows the steps to download the report and json-data, its rendering and saving in mdc format.
 
-* [PHP](https://github.com/stimulsoft/Samples-JS-React-Node.js-Vue.js-Reporting-Tools/tree/master/PHP)  
-  This folder contains examples of integration Reports.JS with the server-side **PHP** application.
-  
+[Loading a Report from the Server-Side](https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Loading%20a%20Report%20from%20the%20Server-Side)
 
-* [Vue.js](https://github.com/stimulsoft/Samples-JS-React-Node.js-Vue.js-Reporting-Tools/tree/master/Vue.js)  
-  This folder contains examples of integration Reports.JS into simple **Vue.js** project.
-  
+[Adding a Font to the Resource](https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Adding%20a%20Font%20to%20the%20Resource)
 
-* [Java](https://github.com/stimulsoft/Samples-JS-React-Node.js-Vue.js-Reporting-Tools/tree/master/Java)  
-  This folder contains examples of integration Reports.JS into **Java** project.
+Use npm to install requred modules:
+```sh
+$ npm install
+```
 
+Run Sample:
+```sh
+$ node index
+```
 
 # Angular, AngularJS, and JavaScript samples
 
