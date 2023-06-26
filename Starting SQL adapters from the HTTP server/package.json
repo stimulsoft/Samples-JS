@@ -4,8 +4,11 @@
     "description": "NodejsDataAdapters",
     "main": "index.js",
     "author": "Stimulsoft (http://www.stimulsoft.com)",
+    "scripts": {
+        "start": "node index.js"
+    },
     "dependencies": {
-        "stimulsoft-data-adapter": "^2022.2.1"
+        "stimulsoft-data-adapter": "2023.2.7"
     },
     "maintainers": [
         {
