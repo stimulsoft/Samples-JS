@@ -8,7 +8,7 @@
         "start": "node index.js"
     },
     "dependencies": {
-        "stimulsoft-data-adapter": "2023.2.7"
+        "stimulsoft-data-adapter": "2023.2.8"
     },
     "maintainers": [
         {
