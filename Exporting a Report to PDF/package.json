@@ -9,7 +9,7 @@
   "author": "Stimulsoft",
   "license": "MIT",
   "dependencies": {
-    "stimulsoft-reports-js": "2023.2.8"
+    "stimulsoft-reports-js": "latest"
   },
   "repository": {
     "type": "git",
