@@ -13,9 +13,9 @@ By installing, copying, or otherwise using the SOFTWARE, you agree to be bound b
 All SOFTWARE is licensed, not sold.
 
 ## RIGHTS
-You may install and use one copy of the SOFTWARE, including any and all source code if provided, or any prior version legally licensed for the same operating system, on a single computer. You acknowledge and agree that the SOFTWARE in source code if provided form remains a confidential trade secret of STIMULSOFT.
+You may install and use 1 (one) copy of the SOFTWARE, including any and all source code if provided, or any prior version legally licensed for the same operating system, on a single computer. You acknowledge and agree that if the SOFTWARE's source code is provided, it remains a confidential trade secret of STIMULSOFT.
 
-You may transfer all of your rights to use the SOFTWARE to another person, provided that you transfer to that person all of the software and documentation provided in this package (including this license agreement), and transfer or destroy all copies in any form. Remember, once you transfer the SOFTWARE, you no longer have any right to use it, and the person to whom it is transferred may use it only in accordance with the copyright law, international treaty, and this license.
+You may transfer all of your rights to use the SOFTWARE to another person (within your company), provided that you transfer to that person all of the software and documentation provided in this package (including this license agreement), and transfer or destroy all copies in any form. Remember, once you transfer the SOFTWARE, you no longer have any right to use it, and the person to whom it is transferred may use it only in accordance with the copyright law, international treaty, and this license.
 
 ## RESTRICTIONS
 You may not rent, lease, lend, copy, modify, sub-license, time-share, electronically transmit or receive the SOFTWARE, except as provided in this license, or as directed by STIMULSOFT. You may alter the source code of the SOFTWARE, excluding file names and copyright inscriptions, for the purpose of your use as authorized by this Agreement, but you may not otherwise translate, reverse engineer, decompile or disassemble or otherwise alter the SOFTWARE or its documentation.
