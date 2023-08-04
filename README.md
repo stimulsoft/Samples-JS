@@ -42,6 +42,7 @@ Since pure JavaScript does not have built-in methods for working with remote dat
 Many examples for other platforms and technologies are collected in separate repositories:
 * [HTML / JS](https://github.com/stimulsoft/Samples-Reports.JS-for-HTML)
 * [Angular / AngularJS](https://github.com/stimulsoft/Samples-Reports.JS-for-Angular)
+* [Python](https://github.com/stimulsoft/Samples-Reports.JS-for-Python)
 * [React](https://github.com/stimulsoft/Samples-Reports.JS-for-React)
 * [Vue.js](https://github.com/stimulsoft/Samples-Reports.JS-for-Vue.js)
 
