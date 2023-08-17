@@ -1,5 +1,5 @@
 {
-  "name": "Supply_Custom_Headers_for_Json_Database",
+  "name": "supply_custom_headers_for_json_database",
   "version": "1.0.0",
   "description": "Supply Custom Headers for Json Database",
   "main": "index.js",
@@ -11,5 +11,9 @@
   "dependencies": {
     "concurrently": "^7.1.0",
     "stimulsoft-reports-js": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Supply%20Custom%20Headers%20for%20Json%20Database"
   }
 }

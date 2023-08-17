@@ -1,33 +1,19 @@
 {
-    "name": "nodejsdataadapters",
-    "version": "0.0.4",
-    "description": "NodejsDataAdapters",
-    "main": "index.js",
-    "author": "Stimulsoft (http://www.stimulsoft.com)",
-    "scripts": {
-        "start": "node index.js"
-    },
-    "dependencies": {
-        "stimulsoft-data-adapter": "latest"
-    },
-    "maintainers": [
-        {
-            "name": "Stimulsoft",
-            "email": "info@stimulsoft.com",
-            "url": "http://www.stimulsoft.com"
-        }
-    ],
-    "contributors": [
-        {
-            "name": "Stimulsoft",
-            "email": "info@stimulsoft.com",
-            "url": "http://www.stimulsoft.com"
-        }
-    ],
-    "license": "Closed Source",
-    "bugs": {
-        "url": "https://github.com/stimulsoft/Dashboards.JS/issues"
-    },
-    "homepage": "https://github.com/stimulsoft/Dashboards.JS#readme",
-    "devDependencies": {}
+  "name": "starting_sql_adapters_from_the_http_server",
+  "version": "0.0.4",
+  "description": "Starting SQL adapters from the HTTP server",
+  "main": "index.js",
+  "author": "Stimulsoft",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "stimulsoft-data-adapter": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Starting%20SQL%20adapters%20from%20the%20HTTP%20server"
+  },
+  "devDependencies": {}
 }

@@ -1,5 +1,5 @@
 {
-  "name": "Adding_a_Font_to_the_Resource",
+  "name": "adding_a_font_to_the_resource",
   "version": "1.0.0",
   "description": "Adding a Font to the Resource",
   "main": "index.js",
@@ -13,6 +13,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Adding%20a%20Font%20to%20the%20Resource"
+    "url": "git+https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Adding%20a%20Font%20to%20the%20Resource"
   }
 }

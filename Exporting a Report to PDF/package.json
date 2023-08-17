@@ -1,5 +1,5 @@
 {
-  "name": "Exporting_a_Report_to_PDF",
+  "name": "exporting_a_report_to_pdf",
   "version": "1.0.0",
   "description": "Exporting a Report to PDF",
   "main": "index.js",
@@ -13,6 +13,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Exporting%20a%20Report%20to%20PDF"
+    "url": "git+https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Exporting%20a%20Report%20to%20PDF"
   }
 }

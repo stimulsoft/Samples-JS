@@ -1,5 +1,5 @@
 {
-  "name": "Loading_a_Report_from_the_Server_Side",
+  "name": "loading_a_report_from_the_server_side",
   "version": "1.0.0",
   "description": "Loading a Report from the Server-Side",
   "main": "index.js",
@@ -13,6 +13,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Loading%20a%20Report%20from%20the%20Server-Side"
+    "url": "git+https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Loading%20a%20Report%20from%20the%20Server-Side"
   }
 }

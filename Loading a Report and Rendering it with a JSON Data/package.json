@@ -1,5 +1,5 @@
 {
-  "name": "Loading_a_Report_and_Rendering_it_with_a_JSON_Data",
+  "name": "loading_a_report_and_rendering_it_with_a_json_data",
   "version": "1.0.0",
   "description": "Loading a Report and Rendering it with a JSON Data",
   "main": "index.js",
@@ -13,6 +13,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stimulsoft/Samples-JS/tree/master/Node.js/Loading%20a%20Report%20and%20Rendering%20it%20with%20a%20JSON%20Data"
+    "url": "git+https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Loading%20a%20Report%20and%20Rendering%20it%20with%20a%20JSON%20Data"
   }
 }
