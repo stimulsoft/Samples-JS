@@ -29,6 +29,9 @@ This example demonstrates the implementation of connections to different databas
 * [Supply Custom Headers for Json Database](https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Supply%20Custom%20Headers%20for%20Json%20Database)  
 This example illustrates loading of the report that uses JSON database from some web-server and accessible only by suppliing custom HTTP header.
 
+* [Using with Express](https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Using%20with%20Express)  
+This example illustrates how to use Stimulsoft Reports.JS in conjunction with the Express framework.
+
 ## Running samples
 To run the examples, open the required folder with the example and run the following commands in the console:
 * use `npm install` to install requred modules;

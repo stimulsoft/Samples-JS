@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Stimulsoft Reports.js Designer</title>
+<script src="stimulsoft.reports.js"></script>
+<script src="stimulsoft.viewer.js"></script>
+<script src="stimulsoft.designer.js"></script>
+</head>
+<body>
+<div id="designer"></div>
+<script>
+    console.log('Set full screen mode for the designer');
+    var options = new Stimulsoft.Designer.StiDesignerOptions();
+    options.appearance.fullScreenMode = true;
+
+    console.log('Create the report designer with specified options');
+    var designer = new Stimulsoft.Designer.StiDesigner(options, 'StiDesigner', false);
+
+    console.log('Render Designer');
+    designer.renderHtml("designer");
+
+    console.log('Create a new report instance');
+    var report = new Stimulsoft.Report.StiReport();
+
+    console.log('Load report from url');
+    report.loadFile('/report');
+
+    console.log('Edit report template in the designer');
+    designer.report = report;
+</script>
+</body>
+</html>

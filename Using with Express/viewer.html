@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stimulsoft Reports.js Viewer</title>
+  <script src="stimulsoft.reports.js"></script>
+  <script src="stimulsoft.viewer.js"></script>
+</head>
+<body>
+  <div id="viewer"></div>
+  <script>
+    console.log('Set full screen mode for the viewer');
+    var options = new Stimulsoft.Viewer.StiViewerOptions();
+    options.appearance.fullScreenMode = true;
+
+    console.log('Create the report viewer with specified options');
+    var viewer = new Stimulsoft.Viewer.StiViewer(options, "StiViewer", false);
+
+    console.log('Render Viewer');
+    viewer.renderHtml("viewer");
+
+    console.log('Create a new report instance');
+    var report = new Stimulsoft.Report.StiReport();
+
+    console.log('Load report from url');
+    report.loadFile('/report');
+
+    console.log('Show report template in the viewer');
+    viewer.report = report;
+  </script>
+</body>
+</html>

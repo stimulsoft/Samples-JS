@@ -1,0 +1,19 @@
+{
+  "name": "using_with_express",
+  "version": "1.0.0",
+  "description": "Using with Express",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Stimulsoft",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "stimulsoft-reports-js": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Using%20with%20Express"
+  }
+}
