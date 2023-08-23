@@ -68,36 +68,37 @@ Add the following code to the HTML file to include the required Stimulsoft Repor
    ```
 
 Add the following code to the HTML file to script tag:
+
 Set full screen mode for the viewer:
-    ```javascript
-    var options = new Stimulsoft.Viewer.StiViewerOptions();
-    options.appearance.fullScreenMode = true;
-    ```
+```javascript
+var options = new Stimulsoft.Viewer.StiViewerOptions();
+options.appearance.fullScreenMode = true;
+```
 
 Create the report viewer with specified options:
-    ```javascript
-    var viewer = new Stimulsoft.Viewer.StiViewer(options, "StiViewer", false);
-    ```
+```javascript
+var viewer = new Stimulsoft.Viewer.StiViewer(options, "StiViewer", false);
+```
 
 Render Viewer:
-    ```javascript    
-    viewer.renderHtml("viewer");
-    ```
+```javascript    
+viewer.renderHtml("viewer");
+```
 
 Create a new report instance:
-    ```javascript
-    var report = new Stimulsoft.Report.StiReport();
-    ```
+```javascript
+var report = new Stimulsoft.Report.StiReport();
+```
 
 Load report from url:
-    ```javascript
-    report.loadFile('/report');
-    ```
+```javascript
+report.loadFile('/report');
+```
 
 Show report template in the viewer:
-    ```javascript
-    viewer.report = report;
-    ```
+```javascript
+viewer.report = report;
+```
 
 ### Step by step Designer page
 Add the following code to the HTML file to include the required Stimulsoft Reports.js libraries and initialize the viewer:
@@ -108,33 +109,34 @@ Add the following code to the HTML file to include the required Stimulsoft Repor
    ```
 
 Add the following code to the HTML file to script tag:
-Set full screen mode for the designer
-    ```javascript
-    var options = new Stimulsoft.Designer.StiDesignerOptions();
-    options.appearance.fullScreenMode = true;
-    ```
+
+Set full screen mode for the designer:
+```javascript
+var options = new Stimulsoft.Designer.StiDesignerOptions();
+options.appearance.fullScreenMode = true;
+```
 
 Create the report viewer with specified options:
-    ```javascript
-    var designer = new Stimulsoft.Designer.StiDesigner(options, 'StiDesigner', false);
-    ```
+```javascript
+var designer = new Stimulsoft.Designer.StiDesigner(options, 'StiDesigner', false);
+```
 
 Render Designer:
-    ```javascript    
-    designer.renderHtml("designer");
-    ```
+```javascript    
+designer.renderHtml("designer");
+```
 
 Create a new report instance:
-    ```javascript
-    var report = new Stimulsoft.Report.StiReport();
-    ```
+```javascript
+var report = new Stimulsoft.Report.StiReport();
+```
 
 Load report from url:
-    ```javascript
-    report.loadFile('/report');
-    ```
+```javascript
+report.loadFile('/report');
+```
 
 Edit report template in the designer:
-    ```javascript
-    designer.report = report;
-    ```
+```javascript
+designer.report = report;
+```
