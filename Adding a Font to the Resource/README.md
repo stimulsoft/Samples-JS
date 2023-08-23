@@ -17,19 +17,24 @@ Stimulsoft Reports.JS module loading:
     var Stimulsoft = require('stimulsoft-reports-js');
 
 Creating a new report:
+
     var report = new Stimulsoft.Report.StiReport();
 
 Font loading:
+
     var fileContent = Stimulsoft.System.IO.File.getFile("Roboto-Black.ttf", true);
 
 Creating a resource with the name, type and data:
+
     var resource = new Stimulsoft.Report.Dictionary.StiResource("Roboto-Black", "Roboto-Black", false, Stimulsoft.Report.Dictionary.StiResourceType.FontTtf, fileContent);
     report.dictionary.resources.add(resource);
 
 Getting a report page:
+
     var page = report.pages.getByIndex(0);
 
 Creating text component:
+
     var dataText = new Stimulsoft.Report.Components.StiText();
     dataText.clientRectangle = new Stimulsoft.System.Drawing.Rectangle(1, 1, 3, 2);
     dataText.text = "Sample Text";
