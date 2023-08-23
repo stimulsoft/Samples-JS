@@ -6,18 +6,15 @@ This example illustrates loading of the report, data rendering and storing the r
 Use npm to install requred modules:
 
     $ npm install
+
 Run Sample:
 
     $ node index
 
 ### Step by step
-Stimulsoft Reports module loading:
+Stimulsoft Reports.JS module loading:
 
     var Stimulsoft = require('stimulsoft-reports-js');
-
-Requered for rendering font loading:
-
-    Stimulsoft.Base.StiFontCollection.addOpentypeFontFile("Roboto-Black.ttf");
 
 Creating new report:
 
@@ -27,23 +24,17 @@ Loading sample report template:
 
     report.loadFile("SimpleList.mrt");
 
-Renreding report:
+Renreding, saving and exporting report:
 
-    report.renderAsync();
+   report.renderAsync(() => {
+    
+        // Export to HTML
+        var htmlString = report.exportDocument(Stimulsoft.Report.StiExportFormat.Html);
 
-Saving rendered report to mdc-file:
+        // File System module
+        var fs = require('fs');
 
-    report.saveDocumentFile("SimpleList.mdc");
-
-Export to HTML
-	
-	var htmlString = report.exportDocument(Stimulsoft.Report.StiExportFormat.Html);
-
-Loading File System module:
-
-    var fs = require('fs');
-
-Saving string with rendered report in HTML form into a file:
-
-    fs.writeFileSync('./SimpleList.html', htmlString);
+        // Saving string with rendered report in HTML into a file
+        fs.writeFileSync('./SimpleList.html', htmlString);
+    });
 
