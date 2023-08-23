@@ -16,6 +16,7 @@ This example demonstrates the implementation of connections to different databas
 Use npm to install requred modules:
 
     $ npm install
+
 Run Sample:
 
     $ node index
@@ -34,19 +35,26 @@ Loading required modules:
 
 Main function for work with adapter, it collect data from responce and run adapter with received command:
 
-    var data = "";
-    request.on('data', function (buffer) {
-        data += buffer;
-    });
+    function accept(request, response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
+        response.setHeader("Cache-Control", "no-cache");
 
-    request.on('end', function () {
-        var command = adapter.getCommand(data);
-        adapter.process(command, function (result) {
-            var responseData = getResponse(result);
-            response.end(responseData);
+        var data = "";
+        request.on('data', function (buffer) {
+            data += buffer;
         });
-    });
 
-Starting DataAdapter
+        request.on('end', function () {
+            var command = adapter.getCommand(data);
+            adapter.process(command, function (result) {
+                var responseData = adapter.getResponse(result);
+                response.end(responseData);
+            });
+        });
+    }
+
+Starting DataAdapter:
 
     http.createServer(accept).listen(9615);
