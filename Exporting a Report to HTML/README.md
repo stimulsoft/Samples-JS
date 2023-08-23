@@ -1,6 +1,6 @@
 # Exporting a Report to HTML
 
-This example illustrates loading of the report, data rendering and storing the result to the HTML-file.
+This example illustrates loading of the report, data rendering and exporting the result to the HTML-file.
 
 ### Installation and running
 Use npm to install requred modules:
@@ -26,7 +26,7 @@ Loading sample report template:
 
 Renreding, saving and exporting report:
 
-   report.renderAsync(() => {
+    report.renderAsync(() => {
     
         // Export to HTML
         var htmlString = report.exportDocument(Stimulsoft.Report.StiExportFormat.Html);
