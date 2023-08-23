@@ -3,8 +3,6 @@ var fs = require('fs');
 
 // Stimulsoft Reports module
 var Stimulsoft = require("stimulsoft-reports-js");
-// Loading fonts
-Stimulsoft.Base.StiFontCollection.addOpentypeFontFile("report/Roboto-Black.ttf");
 
 function accept(req, res) {
     //Send index.html

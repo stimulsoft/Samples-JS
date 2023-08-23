@@ -1,24 +1,21 @@
 # Loading a Report and Saving a Rendered Report
 
-This example illustrates loading of the report, data rendering and storing the result to the mdc-file.
+This example illustrates loading of the report, data rendering and saving the result to the mdc-file.
 
 ### Installation and running
 Use npm to install requred modules:
 
     $ npm install
+
 Run Sample:
 
     $ node index
 
 ### Step by step
 
-Stimulsoft Reports module loading:
+Stimulsoft Reports.JS module loading:
 
     var Stimulsoft = require('stimulsoft-reports-js');
-
-Requered for rendering font loading:
-
-    Stimulsoft.Base.StiFontCollection.addOpentypeFontFile("Roboto-Black.ttf");
 
 Creating new report:
 
@@ -28,10 +25,10 @@ Loading sample report template:
 
     report.loadFile("SimpleList.mrt");
 
-Renreding report:
+Renreding report and saving rendered report to mdc-file:
 
-    report.renderAsync();
-
-Saving rendered report to mdc-file:
-
-    report.saveDocumentFile("SimpleList.mdc");
+    report.renderAsync(function () {
+    
+        // Saving rendered report to file
+        report.saveDocumentFile("SimpleList.mdc");
+    });

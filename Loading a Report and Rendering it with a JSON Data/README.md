@@ -13,7 +13,7 @@ Run Sample:
 
 ### Step by step
 
-Stimulsoft Reports module loading:
+Stimulsoft Reports.JS module loading:
 
     var Stimulsoft = require('stimulsoft-reports-js');
 
