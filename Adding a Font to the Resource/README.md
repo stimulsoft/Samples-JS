@@ -1,6 +1,6 @@
 # Adding a Font to the Resource
 
-This example illustrates loading of the report, adding font to resource and storing the result to the mdc-file.
+This example illustrates loading of the report, adding font to resource and saving the result to the mdc-file.
 
 ### Installation and running
 Use npm to install requred modules:
@@ -12,9 +12,12 @@ Run Sample:
 
 ### Step by step
 
-Stimulsoft Reports module loading:
+Stimulsoft Reports.JS module loading:
 
     var Stimulsoft = require('stimulsoft-reports-js');
+
+Creating a new report:
+    var report = new Stimulsoft.Report.StiReport();
 
 Font loading:
     var fileContent = Stimulsoft.System.IO.File.getFile("Roboto-Black.ttf", true);
@@ -22,6 +25,9 @@ Font loading:
 Creating a resource with the name, type and data:
     var resource = new Stimulsoft.Report.Dictionary.StiResource("Roboto-Black", "Roboto-Black", false, Stimulsoft.Report.Dictionary.StiResourceType.FontTtf, fileContent);
     report.dictionary.resources.add(resource);
+
+Getting a report page:
+    var page = report.pages.getByIndex(0);
 
 Creating text component:
     var dataText = new Stimulsoft.Report.Components.StiText();
@@ -32,10 +38,10 @@ Creating text component:
 
     page.components.add(dataText);
 
-Renreding report:
+Renreding and saving report to file:
 
-    report.renderAsync();
+    report.renderAsync(function () {
 
-Saving rendered report to mdc-file:
-
-    report.saveDocumentFile("Report.mdc");
+        // Saving rendered report to file
+        report.saveDocumentFile("Report.mdc");  
+    });
