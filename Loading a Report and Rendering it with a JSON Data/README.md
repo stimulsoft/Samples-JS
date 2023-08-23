@@ -1,11 +1,12 @@
 # Loading a Report and Rendering it with a JSON Data
 
-This example illustrates loading of the report and load Json-data, data rendering and storing the result to the mdc-file.
+This example illustrates loading of the report and load Json-data, data rendering and saving the result to the mdc-file.
 
 ### Installation and running
 Use npm to install requred modules:
 
     $ npm install
+
 Run Sample:
 
     $ node index
@@ -15,10 +16,6 @@ Run Sample:
 Stimulsoft Reports module loading:
 
     var Stimulsoft = require('stimulsoft-reports-js');
-
-Requered for rendering font loading:
-
-    Stimulsoft.Base.StiFontCollection.addOpentypeFontFile("Roboto-Black.ttf");
 
 Creating new report:
 
@@ -32,26 +29,26 @@ Remove all connections from the report template
 
     report.dictionary.databases.clear();
 
-Create new DataSet object
+Create new DataSet object:
 
     var dataSet = new Stimulsoft.System.Data.DataSet("Demo");
 
-Load JSON data file from specified URL to the DataSet object
+Load JSON data file from specified URL to the DataSet object:
 
     dataSet.readJsonFile("Demo.json");
 
-Remove all connections from the report template
+Remove all connections from the report template:
 
     report.dictionary.databases.clear();
 
-Register DataSet object
+Register DataSet object:
 
     report.regData("Demo", "Demo", dataSet);
 
-Renreding report:
+Renreding report and saving rendered report to mdc-file:
 
-    report.renderAsync();
-
-Saving rendered report to mdc-file:
-
-    report.saveDocumentFile("SimpleList.mdc");
+    report.renderAsync(function () {
+    
+        // Saving rendered report to file
+        report.saveDocumentFile("SimpleList.mdc");
+    });

@@ -2,10 +2,6 @@
 var Stimulsoft = require('stimulsoft-reports-js');
 console.log("Stimulsoft Reports loaded");
 
-// Loading fonts
-Stimulsoft.Base.StiFontCollection.addOpentypeFontFile("Roboto-Black.ttf");
-console.log("Font loaded");
-
 // Creating new report
 var report = new Stimulsoft.Report.StiReport();
 console.log("New report created");
