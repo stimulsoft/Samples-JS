@@ -9,10 +9,9 @@ Use npm to install requred modules:
 
 Run Sample:
 
-    $ node index
+    $ node start
 
 ### Step by step
-
 Stimulsoft Reports.JS module loading:
 
     var Stimulsoft = require('stimulsoft-reports-js');
