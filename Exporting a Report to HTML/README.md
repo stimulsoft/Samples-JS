@@ -9,7 +9,7 @@ Use npm to install requred modules:
 
 Run Sample:
 
-    $ node start
+    $ npm start
 
 ### Step by step
 Stimulsoft Reports.JS module loading:
