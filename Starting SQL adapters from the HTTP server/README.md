@@ -19,7 +19,7 @@ Use npm to install requred modules:
 
 Run Sample:
 
-    $ node start
+    $ npm start
 
 And on the client side, you need to specify the URL of this host that handles requests:
 ```js
