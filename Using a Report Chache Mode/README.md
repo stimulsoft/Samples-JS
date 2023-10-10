@@ -1,4 +1,4 @@
-# Exporting a Report to PDF
+# Using a Report Cache Mode
 
 This example illustrates how you can enable and configure cache settings to resolve lack of memory issues.
 
