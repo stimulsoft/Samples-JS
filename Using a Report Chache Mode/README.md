@@ -42,7 +42,7 @@ Renreding report and saving rendered report to mdc-file:
 report.renderAsync(function () {
     
     // Saving rendered report to file
-    report.saveDocumentFile("SimpleList.mdc");
+    report.saveDocumentFile("Over-2.000-pages.mdc");
 
     // To clear the report cache; otherwise, the cache will not be cleared
     report.dispose();
