@@ -170,6 +170,19 @@ Stimulsoft.Report.WpfDesign.Design.dll
 Stimulsoft.Svg.dll  
 All .xml localization files
 
+**AVALONIA**  
+Stimulsoft.Base.dll  
+Stimulsoft.Blockly.dll  
+Stimulsoft.Data.dll  
+Stimulsoft.Drawing.dll  
+Stimulsoft.Map.dll  
+Stimulsoft.Report.dll  
+Stimulsoft.Report.Check.dll  
+Stimulsoft.Report.Helper.dll  
+Stimulsoft.Report.Viewer.Avalonia.dll  
+Stimulsoft.System.dll  
+All .xml localization files
+
 **JS**  
 All stimulsoft.\*.js scripts files  
 All stimulsoft.\*.d.ts definitions files  
@@ -292,6 +305,19 @@ Stimulsoft.Report.Wpf.dll
 Stimulsoft.Report.WpfDesign.dll  
 Stimulsoft.Report.WpfDesign.Design.dll  
 Stimulsoft.Svg.dll  
+All .xml localization files
+
+### Stimulsoft Reports.AVALONIA
+Stimulsoft.Base.dll  
+Stimulsoft.Blockly.dll  
+Stimulsoft.Data.dll  
+Stimulsoft.Drawing.dll  
+Stimulsoft.Map.dll  
+Stimulsoft.Report.dll  
+Stimulsoft.Report.Check.dll  
+Stimulsoft.Report.Helper.dll  
+Stimulsoft.Report.Viewer.Avalonia.dll  
+Stimulsoft.System.dll  
 All .xml localization files
 
 ### Stimulsoft Reports.UWP

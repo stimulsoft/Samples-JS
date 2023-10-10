@@ -1,0 +1,18 @@
+{
+  "name": "using_a_report_cache_mode",
+  "version": "1.0.0",
+  "description": "Using a Report Cache Mode",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Stimulsoft",
+  "license": "MIT",
+  "dependencies": {
+    "stimulsoft-reports-js": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Using%20a%20Report%20Cache%20Mode"
+  }
+}
