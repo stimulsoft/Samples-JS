@@ -1,6 +1,6 @@
-## STIMULSOFT REPORTS, STIMULSOFT DASHBOARDS, STIMULSOFT DESIGNER, STIMULSOFT DEMO, DEVELOPER LICENSE AGREEMENT
+## STIMULSOFT REPORTS, STIMULSOFT DASHBOARDS, STIMULSOFT FORMS, STIMULSOFT DESIGNER, STIMULSOFT DEMO, DEVELOPER LICENSE AGREEMENT
 
-This Stimulsoft, ("STIMULSOFT") Developer License Agreement ("DLA") is a legal agreement between you, software developer ("DEVELOPER") and STIMULSOFT for STIMULSOFT REPORTS, STIMULSOFT DASHBOARDS, STIMULSOFT DESIGNER and STIMULSOFT DEMO identified above and including components, source code (if provided), demos, intermediate files, media, printed materials, and "online" or electronic documentation ("SOFTWARE") contained in this installation file.
+This Stimulsoft, ("STIMULSOFT") Developer License Agreement ("DLA") is a legal agreement between you, software developer ("DEVELOPER") and STIMULSOFT for STIMULSOFT REPORTS, STIMULSOFT DASHBOARDS, STIMULSOFT FORMS, STIMULSOFT DESIGNER and STIMULSOFT DEMO identified above and including components, source code (if provided), demos, intermediate files, media, printed materials, and "online" or electronic documentation ("SOFTWARE") contained in this installation file.
 
 STIMULSOFT grants to you, a personal, nonexclusive license to install and use the SOFTWARE for the sole purposes of designing, developing, testing, and deploying application programs which you create. If you are an entity, you must designate one individual within your organization to use the SOFTWARE in the manner provided herein.
 
