@@ -200,6 +200,12 @@ All stimulsoft.\*.css styles files
 All .php product files  
 All .xml localization files
 
+**Python**  
+All stimulsoft.\*.js definitions files  
+All stimulsoft.\*.css styles files  
+All .py product files  
+All .xml localization files
+
 **FORMS**  
 Stimulsoft.Base.dll  
 Stimulsoft.Form.dll  
@@ -344,6 +350,12 @@ All stimulsoft.\*.css styles files
 All .php product files  
 All .xml localization files
 
+### Stimulsoft Reports.PYTHON
+All stimulsoft.\*.js scripts files  
+All stimulsoft.\*.css styles files  
+All .py product files  
+All .xml localization files
+
 ### Stimulsoft Dashboards.WEB
 Stimulsoft.Base.dll  
 Stimulsoft.Blockly.dll  
@@ -403,6 +415,12 @@ All stimulsoft.\*.js scripts files
 All stimulsoft.\*.d.ts definitions files  
 All stimulsoft.\*.css styles files  
 All .php product files  
+All .xml localization files
+
+### Stimulsoft Dashboards.PYTHON
+All stimulsoft.\*.js scripts files  
+All stimulsoft.\*.css styles files  
+All .py product files  
 All .xml localization files
 
 ### Stimulsoft Dashboards.BLAZOR
