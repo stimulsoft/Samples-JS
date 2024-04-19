@@ -466,7 +466,7 @@ All files in stimulsoft-viewer-angular folder
 All files in stimulsoft-designer-angular folder  
 All .xml localization files
 
-### Stimulsoft Forms.WEB
+### Stimulsoft PDF Forms
 Stimulsoft.Base.dll  
 Stimulsoft.Form.dll  
 Stimulsoft.Form.Export.dll  
