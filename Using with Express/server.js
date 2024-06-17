@@ -32,7 +32,7 @@ app.get('/stimulsoft.blockly.editor.js', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
-  console.log(`Navigate to http://localhost:${port}/viewer show Viewer`);
-  console.log(`Navigate to http://localhost:${port}/designer show Designer`);
+  console.log(`Navigate to http://localhost:${port}/viewer to show Viewer`);
+  console.log(`Navigate to http://localhost:${port}/designer to show Designer`);
   console.log(`CTRL + C to shutdown`);
 });
