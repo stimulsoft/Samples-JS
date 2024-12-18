@@ -16,7 +16,7 @@ console.log('Report template is loaded');
 
 // Renreding report
 report.renderAsync(() => {
-    console.log('Report is rendered. Pages count: ',report.renderedPages.count);
+    console.log('Report is rendered. Pages count: ', report.renderedPages.count);
 
     //Embedding a Font File into PDF
     var settings = new Stimulsoft.Report.Export.StiPdfExportSettings();
