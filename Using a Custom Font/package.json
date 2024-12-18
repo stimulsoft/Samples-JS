@@ -1,0 +1,21 @@
+{
+  "name": "exporting_a_report_to_pdf",
+  "version": "1.0.0",
+  "description": "Exporting a Report to PDF",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Stimulsoft",
+  "license": "MIT",
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.65",
+    "@xmldom/xmldom": "^0.9.6",
+    "canvg": "^4.0.2",
+    "stimulsoft-reports-js": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Exporting%20a%20Report%20to%20PDF"
+  }
+}
