@@ -29,13 +29,19 @@ This example demonstrates the implementation of connections to different databas
 * [Supply Custom Headers for Json Database](https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Supply%20Custom%20Headers%20for%20Json%20Database)  
 This example illustrates loading of the report that uses JSON database from some web-server and accessible only by suppliing custom HTTP header.
 
+* [Using a Custom Font](https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Using%20a%20Custom%20Font)  
+This example illustrates how to use Stimulsoft Reports.JS in conjunction with the Express framework.
+
+* [Using a Report Cache Mode](https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Using%20a%20Report%20Cache%20Mode)  
+This example illustrates how to use Stimulsoft Reports.JS in conjunction with the Express framework.
+
 * [Using with Express](https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Using%20with%20Express)  
 This example illustrates how to use Stimulsoft Reports.JS in conjunction with the Express framework.
 
 ## Running samples
 To run the examples, open the required folder with the example and run the following commands in the console:
 * use `npm install` to install requred modules;
-* use `node index` to run sample.
+* use `npm start` to run sample.
 
 ## Connect to SQL databases
 Since pure JavaScript does not have built-in methods for working with remote databases, this functionality is implemented using server-side code. Therefore, Stimulsoft Reports.JS product contains server data adapters implemented using PHP, Node.js, ASP.NET, Java, .NET Core technologies.
