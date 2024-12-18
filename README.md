@@ -30,10 +30,10 @@ This example demonstrates the implementation of connections to different databas
 This example illustrates loading of the report that uses JSON database from some web-server and accessible only by suppliing custom HTTP header.
 
 * [Using a Custom Font](https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Using%20a%20Custom%20Font)  
-This example illustrates how to use Stimulsoft Reports.JS in conjunction with the Express framework.
+This example illustrates adding of the custom font, loading of the report, data rendering and exporting the result to the PDF-document.
 
 * [Using a Report Cache Mode](https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Using%20a%20Report%20Cache%20Mode)  
-This example illustrates how to use Stimulsoft Reports.JS in conjunction with the Express framework.
+This example illustrates how you can enable and configure cache settings to resolve lack of memory issues.
 
 * [Using with Express](https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Using%20with%20Express)  
 This example illustrates how to use Stimulsoft Reports.JS in conjunction with the Express framework.
