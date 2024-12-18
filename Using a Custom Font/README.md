@@ -47,6 +47,6 @@ Renreding report:
             // Saving string with rendered report in PDF into a file
             fs.writeFileSync('./SimpleList.pdf', buffer);
             console.log("Rendered report saved into PDF-file.");
-        }, Stimulsoft.Report.StiExportFormat.Pdf);
+        }, Stimulsoft.Report.StiExportFormat.Pdf, null, settings);
     });
     
