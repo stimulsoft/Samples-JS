@@ -101,7 +101,7 @@ viewer.report = report;
 ```
 
 ### Step by step Designer page
-Add the following code to the HTML file to include the required Stimulsoft Reports.js libraries and initialize the viewer:
+Add the following code to the HTML file to include the required Stimulsoft Reports.js libraries and initialize the designer:
    ```html
     <script src="stimulsoft.reports.js"></script>
     <script src="stimulsoft.viewer.js"></script>
