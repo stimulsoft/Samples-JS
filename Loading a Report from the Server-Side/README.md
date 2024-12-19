@@ -1,4 +1,5 @@
 # Loading a Report from the Server-Side
+This example illustrates loading of the report from the server-side and saving the result to the mdc-file. 
 
 ### Installation and running
 Use npm to install requred modules:
