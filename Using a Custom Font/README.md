@@ -1,4 +1,4 @@
-# Exporting a Report to PDF
+# Using a Custom Font
 
 This example demonstrates adding of the custom font, loading of the report, data rendering and exporting the result to the PDF-document.
 
