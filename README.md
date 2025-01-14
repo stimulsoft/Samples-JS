@@ -22,6 +22,9 @@ This simple example shows the steps to download the report, its rendering and sa
   
 * [Loading a Report from the Server-Side](https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Loading%20a%20Report%20from%20the%20Server-Side)  
 This example shows how to use Node.js server side to work with a report.
+
+* [Registering a Fonts Folder](https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Registering%20a%20Fonts%20Folder)  
+This example illustrates registering a fonts folder, loading of the report, data rendering and exporting the result to the PDF-document.
   
 * [Starting SQL Adapters from the HTTP Server](https://github.com/stimulsoft/Samples-Reports.JS-for-Node.js/tree/master/Starting%20SQL%20adapters%20from%20the%20HTTP%20server)  
 This example demonstrates the implementation of connections to different databases (MySQL, Firebird, MSSQL and PostgreSQL). Adapters files are in a directory with an example.
