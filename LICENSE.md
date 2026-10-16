@@ -1,6 +1,6 @@
 ## STIMULSOFT REPORTS, STIMULSOFT DASHBOARDS, STIMULSOFT FORMS, STIMULSOFT SPREADSHEETS, STIMULSOFT APPS, STIMULSOFT DESIGNER, STIMULSOFT DEMO, DEVELOPER LICENSE AGREEMENT
 
-**Last Updated: 2026-10-08**
+**Last Updated: 2026-10-16**
 
 This CloudReports sp. z o.o. (dba Stimulsoft) ("STIMULSOFT") Developer License Agreement ("DLA") is a legal agreement between the software developer ("DEVELOPER") and STIMULSOFT for STIMULSOFT REPORTS, STIMULSOFT DASHBOARDS, STIMULSOFT FORMS, STIMULSOFT SPREADSHEETS, STIMULSOFT APPS, STIMULSOFT DESIGNER, and STIMULSOFT DEMO identified above and including components, source code (if provided), demos, intermediate files, media, printed materials, and online or electronic documentation ("SOFTWARE") contained in this installation file.
 
@@ -39,6 +39,8 @@ For the avoidance of doubt, installation of the SOFTWARE through a package manag
 ## RIGHTS
 DEVELOPER may install and use the SOFTWARE, including any and all source code (if provided), or any prior version legally licensed for the same operating system, on a single computer per individual developer authorized under the license tier purchased by DEVELOPER, as described in the SUBSCRIPTION Section. DEVELOPER acknowledges and agrees that if the SOFTWARE's source code is provided, it remains a confidential trade secret of STIMULSOFT.
 
+DEVELOPER may also install and use the SOFTWARE on build servers, including CI/CD systems, without additional Subscriptions, provided that no development is performed on them and they are used solely for the automated compilation, packaging, testing, and deployment of DEVELOPER's permitted Applications.
+
 DEVELOPER may reassign the licensed developer seat to another individual within DEVELOPER's organization, provided that the previous individual ceases all use of the SOFTWARE, the SOFTWARE is removed from that individual's computer, and the new individual accepts this DLA. Any other assignment, transfer, sublicense, or sharing of the SOFTWARE is prohibited without STIMULSOFT's prior written consent.
 
 ## ACTIVATION
@@ -72,8 +74,6 @@ If DEVELOPER has enabled auto-renewal or has agreed to automatic renewal at the 
 Subscriptions are licensed on a per-developer basis according to the license tier selected by DEVELOPER (Single, Team, Enterprise, Worldwide, or such other tier as STIMULSOFT may offer from time to time). The license tier determines the maximum number of individual developers within DEVELOPER's organization authorized to use the SOFTWARE. DEVELOPER must ensure that the number of such individuals does not at any time exceed the licensed tier.
 
 The Team tier and any higher tier include a White Label entitlement, which permits DEVELOPER to remove or replace STIMULSOFT trademarks, logos, and other branding elements from the user interface of the SOFTWARE as integrated into DEVELOPER's permitted Application, subject to the configuration options provided by the SOFTWARE for that purpose. The White Label entitlement does not extend to STIMULSOFT trademarks, logos, or branding outside of such configurable user-interface elements. Tiers below the Team tier do not include a White Label entitlement.
-
-The Team tier and any higher tier include a build server entitlement, which permits DEVELOPER to install and use the SOFTWARE on build servers solely for automated compilation, packaging, testing, and deployment of DEVELOPER's permitted Applications. The number of build servers covered by the entitlement is one (1) for the Team tier, three (3) for the Enterprise tier, and unlimited for the Worldwide tier and any higher tier. Build servers must be operated by or on behalf of DEVELOPER and must not be made available to any third party. The Single tier does not include a build server entitlement. Build server installations do not count toward the per-developer seat count.
 
 For the purposes of this Section, an "individual developer" means any natural person within DEVELOPER's organization, or any contractor, subcontractor, consultant, agent, or other person acting for or on behalf of DEVELOPER or under DEVELOPER's direction or control, who:
 
